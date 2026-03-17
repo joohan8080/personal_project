@@ -1,0 +1,26 @@
+* { margin: 0; padding: 0; vertical-align: top; }
+body { font-size: 14px; color: #333;
+font-family: "Noto Sans KR", sans-serif;
+max-width: 1920px; margin: 0 auto; min-width: 320px;
+}
+li { list-style: none; }
+a  { text-decoration: none; color: #333; }
+img { border: none; max-width: 100%; }
+
+input {border: none; outline: none;
+border-radius: 0;
+appearance: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+
+
+input[type="radio"] {
+    -webkit-appearance: none; /* WebKit 브라우저 (Chrome, Safari 등) */
+    -moz-appearance: none;   /* Firefox */
+    appearance: none;          /* 일반적인 브라우저 */ }
+
+

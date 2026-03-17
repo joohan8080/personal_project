@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <title>법무법인 OOO01</title>
+        <style>
+            html { scroll-behavior: smooth; }
+* { margin: 0; padding: 0; vertical-align: top; box-sizing: border-box; }
+body { max-width: 800px; min-width: 320px; margin: 0 auto; font-size: 18px; font-family: 'Pretendard-Regular'; }
+li { list-style: none; }
+a { text-decoration: none; color: #333; }
+img { max-width: 100%; border: none; }
+p { color: #333; word-break: keep-all; }
+select { -webkit-appearance: none; appearance: none; color: #333; background-image: url(img/selct_arrow.png);
+background-repeat: no-repeat; background-position: center right 5px;}
+textarea {
+border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
+resize: none; box-sizing: border-box; -webkit-appearance: none; -moz-appearance: none; appearance: none;        
+}
+button { all: unset; cursor: pointer; padding: 0; margin: 0; font: inherit; color: inherit; }
+h1, h2, h3, h4, h5, h6, p { line-height: 120%; letter-spacing: -.05em; color: #fff; }
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-Black';
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Black.woff2') format('woff2'),
+  url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'S-CoreDream';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'S-CoreDream';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'S-CoreDream';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'S-CoreDream';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-7ExtraBold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* top_fix */
+.top_fix { width: 100%; max-width: 800px; min-width: 320px; position: fixed; background: #ffffffea; z-index: 9999;
+display: flex; justify-content: space-between; align-items: center; padding: 20px 10px; box-sizing: border-box; }
+.top_fix p { font-size: 1.5em; letter-spacing: -.05em; font-weight: bolder; color: #333; }
+.top_fix a { display: block; padding: 5px 15px; background: #09008E; color: #fff; 
+border-radius: 30px; font-weight: bolder; letter-spacing: -.05em; font-size: 1.4em; }
+.top_padding { padding-top: 66px; }
+
+/* form */
+.form_wrap p { color: #333; font-size: 1.4em; }
+.form_wrap { padding: 10% 0; background: #fff; }
+.form_tit { text-align: center; margin-bottom: 2.5em; font-size: 2em !important; font-weight: bolder; line-height: 150%; }
+.form_tit .tcolor { color: red; }
+.form_wrap .inner { width: 95%; margin: 0 auto; padding: 0; }
+.form_wrap ul li { margin-bottom: 20px; }
+.form_wrap .form_policy { margin-bottom: 40px; display: flex; flex-wrap: wrap; align-items: center; }
+.form_wrap .form_policy input { margin-right: 5px; cursor: pointer; }
+.form_wrap .form_policy label { cursor: pointer; margin-right: 5px; }
+.form_wrap ul li p:first-child { margin-bottom: 5px; font-size: 18px; font-weight: 600; }
+.form_wrap ul li p:nth-child(2) { font-size: 1em; margin-bottom: 10px; color: #666; }
+.form_wrap ul li input, .form_wrap ul li select { padding: 15px 10px; border-radius: 10px; border: 1px solid #e5e5e5; background-color: #fff; }
+.form_wrap ul li input[type="text"] { width: 100%; box-sizing: border-box; }
+.form_wrap .form_tel input, .form_wrap .form_tel select { width: 32% !important; }
+.form_wrap .form_select02 select { width: 100%; }
+.region_wrap .select_box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1%; }
+.form_wrap .form_text textarea { width: 100%; height: 80px; border-radius: 10px; }
+.form_wrap .form_policy, .form_wrap .form_policy a { font-size: 14px; }
+.phone { display: flex; align-items: center; gap: 5px; }
+.form_wrap button { width: 100%; padding: 1em 0; color: #fff; background: #09008E; text-align: center;
+border-radius: 10em; font-size: 2em; font-weight: bolder; border: none; cursor: pointer; }
+
+input[type="radio"] { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
+.radio_wrap { display: flex; gap: 5px; }
+.radio_box { width: 100%; display: flex; align-items: center; height: 50px; }
+.radio_box input[type="radio"] { width: 100%; position: absolute; left: 50%; transform: translateX(-50%); transition: .3s;
+padding: 0; height: 50px; z-index: -1; cursor: pointer; }
+.radio_box label { position: relative; width: 100%; text-align: center; line-height: 50px; z-index: 1;
+color: #666; cursor: pointer; }
+.radio_box input[type="radio"]:checked { background: #0e00d4; }
+.radio_box input[type="radio"]:checked + span { color: #fff; }
+#show-Box { cursor: pointer; }
+.form_wrap input::placeholder { color: #c5c5c5; }
+.form_btm { width: 95%; margin: 0 auto; text-align: center; padding-top: 2em; font-weight: normal; line-height: 150%; }
+.form_wrap .no_choice { color: #999 !important; }
+
+
+/* main  */
+.main .bg_inner { justify-content: flex-start; padding-top: 10%; }
+.main .bg_inner > img { width: 25%; margin: 0 auto 1em auto; }
+.main .bg_inner .con_tit { margin-bottom: 2.5em; }
+.main .bg_inner .con_tit h3:first-child { font-size: 4em; margin-bottom: .3em; }
+.main .bg_inner .con_tit h3:nth-child(2) { font-size: 1.8em; margin-bottom: .5em; }
+.main .bg_inner .con_tit h2 { font-size: 1.5em; background: #09008E; padding: .5em; display: inline-block; }
+
+
+.main_con img { display: block; margin-bottom: 1.5em; }
+.main_con img:nth-child(1) { width: 33%; }
+.main_con img:nth-child(2) { width: 41%; }
+.main_con img:nth-child(3) { width: 49%; }
+.main_con img:nth-child(4) { width: 54%; }
+
+
+/* con1 */
+.con1 .con_tit h4 { font-size: 3em; margin-bottom: .3em; }
+.con1 .con_tit h3 { font-size: 1.2em; }
+
+
+.con1_contents { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1em; }
+
+
+/* con2 */
+.con2 .bg_inner { padding-left: 2em; }
+.con2_tit:first-child { margin-bottom: 2em; }
+.con2_tit:first-child h5:first-child { font-size: 3em; margin-bottom: .2em; }
+.con2_tit:first-child h5:nth-child(2) { font-size: 2.5em; margin-bottom: .5em; display: inline-block; background: #424242;
+padding: .3em; }
+.con2_tit:first-child h5:nth-child(3) { font-size: 2.8em;  }
+
+.con2_tit:last-child h4 { font-size: 2.5em; border-left: 3px solid #1100FF; padding-left: .5em; }
+.con2_tit:last-child h4 .num { display: inline-block; width: 113.5px; }
+
+
+
+/* con3 */
+.con3 .con_tit h3 { font-size: 2.5em; }
+.con3 .con_tit h2 { font-size: 3em; }
+
+.con3_box { margin-bottom: 1em; border: 2px solid #EEFF00; display: flex; align-items: center; justify-content: space-between; padding: 2em 1.5em; }
+.con3_box:last-child { margin-bottom: 0; }
+
+.con3_tit p { font-size: 1.3em; }
+.con3_tit p:first-child { margin-bottom: 1em; }
+.con3_tit p:nth-child(2) { font-size: 1.5em; margin-bottom: .3em; }
+.con3_tit h5 { font-size: 1.8em; }
+
+.con3_img { position: relative; width: 22%; }
+.con3_img img:first-child { width: 100%; }
+.con3_img img:last-child { width: 90%; position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); }
+
+
+.stamp { opacity: 0; transform: translateX(-50%) translateY(-50%) scale(1.3); }
+
+.stamp.animate { animation: stamp 3s cubic-bezier(0.42, 0, 0, 0.98) forwards; transform: translateX(-50%) translateY(-50%) scale(1.3); }
+.con3_box:nth-child(1) .stamp  { animation-delay: 0s; }
+.con3_box:nth-child(2) .stamp  { animation-delay: 1s; }
+.con3_box:nth-child(3) .stamp { animation-delay: 2s; }
+@keyframes stamp {
+0%   { transform: translateX(-50%) translateY(-50%) scale(1.5);   opacity: 0; }
+30%  { transform: translateX(-50%) translateY(-50%) scale(0.99); opacity: 1; }  /* 뚝 찍히는 느낌 */
+60%  { transform: translateX(-50%) translateY(-50%) scale(1);  opacity: 1; }  /* 튕김 */
+80%  { transform: translateX(-50%) translateY(-50%) scale(0.99); opacity: 1; }  /* 정리되기 시작 */
+100% { transform: translateX(-50%) translateY(-50%) scale(1);    opacity: 1; }  /* 안정된 최종 상태 */
+}
+
+
+
+/* con4 */
+.con4 { background: #1B1B1B; }
+
+.con4 .con_tit h2 { font-size: 2.5em; margin-bottom: .3em; }
+
+.con4_contents { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3em 1em; }
+.con4_box { background: #000; position: relative; padding: 2.5em 1em; text-align: right; border: 2px solid #fff; }
+.con4_box h2 { position: absolute; top: -.5em; left: 50%; transform: translateX(-50%); padding: .1em .8em; background: #fff; color: #000;
+font-size: 1.5em; }
+.con4_box p { text-align: left; }
+.con4_box p:nth-child(2) { font-size: 1.7em; margin-bottom: .3em; }
+.con4_box p:nth-child(3) { font-size: 1.4em; margin-bottom: 2em; }
+
+.con4_box img { width: 40%; text-align: right; }
+
+.con4_box:nth-child(2) p:nth-child(3), .con4_box:nth-child(3) p:nth-child(3) { margin-bottom: 3em; }
+
+.con4_box p:nth-child(2) .tcolor { color: #fff; }
+
+
+/* con5 */
+.con5 { overflow: hidden; }
+
+.con5 .con_tit h2 { font-size: 2.5em; margin-bottom: .3em; }
+.con5 .con_tit h3 { font-size: 2em; }
+.con5_box { margin-bottom: 1em; }
+.con5_box:last-child { margin-bottom: 0; }
+
+
+
+
+
+/* all */
+.con_tit p { font-size: 2em; }
+.bg { width: 100%; position: relative; overflow: hidden; }
+.bg > img { width: 100%; object-fit: contain; }
+.tcolor { color: #EEFF00; }
+.bg_inner { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 1em; }
+.inner { width: 95%; margin: 0 auto; padding: 15% 0; }
+h2 { font-size: 2em; letter-spacing: 0; font-family: 'S-CoreDream'; font-weight: 700; }
+h3 { font-size: 1.5em; letter-spacing: -.05em; font-family: 'S-CoreDream'; font-weight: 400; }
+h4 { font-size: 1.5em; letter-spacing: -.05em; font-family: 'S-CoreDream'; font-weight: 500;  }
+h5 { font-family: 'Pretendard-Black'; font-size: 2em; }
+.con_tit { text-align: center; margin-bottom: 4em; }
+
+
+
+
+/* animation */
+.form_wrap button { animation: form_btn 2s infinite forwards; }
+
+@keyframes form_btn {
+0% { border-bottom: 10px solid #060053; box-sizing: border-box; color: #EEFF00; margin-top: -10px; }
+50% { border-bottom: 10px solid #060053; box-sizing: border-box; color: #EEFF00; margin-top: -10px; }
+50.01% { border-bottom: none; box-sizing: content-box; color: #fff; margin-top: 0; }
+100% { border-bottom: none; box-sizing: content-box; color: #fff; margin-top: 0; }
+}
+
+
+.con4_box { animation: con4_box 4s infinite forwards; }
+.con4_box:nth-child(1) { animation-delay: 0s; }
+.con4_box:nth-child(2) { animation-delay: 1s; }
+.con4_box:nth-child(3) { animation-delay: 2s; }
+.con4_box:nth-child(4) { animation-delay: 3s; }
+
+@keyframes con4_box {
+0% { border: 2px solid #EEFF00; }
+25% { border: 2px solid #EEFF00; }
+25.01% { border: 2px solid #fff; }
+100% { border: 2px solid #fff; }
+
+}
+
+.con4_box p:nth-child(2) .tcolor  { animation: con4_color 4s infinite forwards; }
+.con4_box:nth-child(1) p:nth-child(2) .tcolor { animation-delay: 0s; }
+.con4_box:nth-child(2) p:nth-child(2) .tcolor { animation-delay: 1s; }
+.con4_box:nth-child(3) p:nth-child(2) .tcolor { animation-delay: 2s; }
+.con4_box:nth-child(4) p:nth-child(2) .tcolor { animation-delay: 3s; }
+
+@keyframes con4_color {
+0% { color: #EEFF00; }
+25% { color: #EEFF00; }
+25.01% { color: #fff; }
+100% { color: #fff; }
+
+}
+
+.con4_box h2  { animation: con4_h2 4s infinite forwards; }
+.con4_box:nth-child(1) h2 { animation-delay: 0s; }
+.con4_box:nth-child(2) h2 { animation-delay: 1s; }
+.con4_box:nth-child(3) h2 { animation-delay: 2s; }
+.con4_box:nth-child(4) h2 { animation-delay: 3s; }
+@keyframes con4_h2 {
+0% { background: #EEFF00; }
+25% { background: #EEFF00; }
+25.01% { background: #fff; }
+100% { background: #fff; }
+
+}
+
+.main .bg_inner .con_tit h2 { animation: main_color 2s infinite forwards; }
+@keyframes main_color {
+0% { background: #09008E; }
+50% { background: #09008E; }
+50.01% { background: #000; }
+100% { background: #000; }
+}
+
+.main .bg_inner .con_tit h2 .tcolor { animation: main_tcol 2s infinite forwards; }
+@keyframes main_tcol {
+  0% { color: #EEFF00; }
+  50% { color: #EEFF00; }
+  50.01% { color: #00fff2; }
+  100% { color: #00fff2; }
+}
+
+
+/* media screen */
+
+@media screen and (max-width: 600px) {
+body { font-size: 15px; }
+
+.con2_tit:last-child h4 .num { width: 95px; }
+
+}
+@media screen and (max-width: 480px) {
+body { font-size: 10px; }
+.radio_box span { font-size: 14px; }   
+
+.con2_tit:last-child h4 .num { width: 65px; }
+}
+
+        </style>
+    </head>
+
+    <body>
+        <section class="top_fix">
+            <p>개인회생 법무법인 OOO</p>
+            <a href="#form_wrap-sec">개인회생 무료상담받기</a>
+        </section> <!-----top_fix----->
+        <div class="top_padding"></div>
+
+
+        <section class="main bg">
+            <img src="img/law03/main_bg-01.webp" alt="배경이미지">
+            <div class="bg_inner">
+                <img src="img/law03/logo.png" alt="로고">
+                <div class="con_tit">
+                    <h3><span class="tcolor">“채무로부터</span> 해방”</h3>
+                    <h3><span class="tcolor">법무법인 OOO</span>에서<br>새로운 출발을 도와드리겠습니다</h3>
+                    <h2><span class="tcolor">개인회생, 파산</span>으로부터 믿을 수 있는<br><span class="tcolor">법률 파트너</span>와 함께하세요!</h2>
+                </div>  <!-----con_tit----->
+
+                <div class="main_con">
+                    <img src="img/law03/main_tit01.png" alt="상담" data-aos="zoom-out" data-aos-duration="500" data-aos-delay="400">
+                    <img src="img/law03/main_tit02.png" alt="기각" data-aos="zoom-out" data-aos-duration="500" data-aos-delay="600">
+                    <img src="img/law03/main_tit03.png" alt="수임료" data-aos="zoom-out" data-aos-duration="500" data-aos-delay="800">
+                    <img src="img/law03/main_tit04.png" alt="환불" data-aos="zoom-out" data-aos-duration="500" data-aos-delay="1000">
+                </div>
+            </div> <!-----bg_inner----->
+        </section> <!-----main----->
+
+
+        <section class="con2 bg">
+            <img src="img/law03/con2_bg.webp" alt="배경이미지">
+            <div class="bg_inner">
+                <div class="con2_tit">
+                    <h5>도산전문</h5>
+                    <h5><span class="tcolor">대표변호사 OOO</span></h5>
+                    <h5>직접 검토!</h5>
+                </div>
+
+                <div class="con2_tit">
+                    <h4 class="count">회생/파산<br><span class="num tcolor">2,755</span>건 돌파</h4>
+                </div>
+            </div> <!-----bg_inner----->
+        </section>  <!-----con2----->
+
+
+        <section class="con3 bg">
+            <img src="img/law03/con3_bg.webp" alt="배경이미지">
+            <div class="bg_inner">
+                <div class="con_tit">
+                    <h3>법무법인 OOO</h3>
+                    <h2><span class="tcolor">대표 성공사례</span></h2>
+                </div>
+
+                <div class="con3_contents">
+                    <div class="con3_box">
+                        <div class="con3_tit">
+                            <p>김**님 / 30대, 남성<br>사유: 신용카드 리볼빙 및 대출 반복 이용</p>
+                            <p>총 채무액: 71, 347,000원</p>
+                            <h5><span class="tcolor">탕감 후 원금: 7,843,000원</span></h5>
+                        </div>
+                        <div class="con3_img">
+                            <img src="img/law03/con3_per01.png" alt="사람">
+                            <img src="img/law03/con3_stamp01.png" alt="탕감" class="stamp">
+                        </div>  <!-----con3_img----->
+                    </div> <!-----con3_box----->
+                    <div class="con3_box">
+                        <div class="con3_tit">
+                            <p>정**님 / 20대, 여성<br>사유: 생활비 및 학자금 대출 연체</p>
+                            <p>총 채무액: 58,312,300원</p>
+                            <h5><span class="tcolor">탕감 후 원금: 5,831,230원</span></h5>
+                        </div>
+                        <div class="con3_img">
+                            <img src="img/law03/con3_per02.png" alt="사람">
+                            <img src="img/law03/con3_stamp02.png" alt="탕감" class="stamp">
+                        </div>  <!-----con3_img----->
+                    </div> <!-----con3_box----->
+                    <div class="con3_box">
+                        <div class="con3_tit">
+                            <p>최**님 / 40대, 남성<br>사유: 사업실패로 인한 대출 연체 및 보증채무</p>
+                            <p>총 채무액: 67,345,000원</p>
+                            <h5><span class="tcolor">탕감 후 원금: 8,081,400원</span></h5>
+                        </div>
+                        <div class="con3_img">
+                            <img src="img/law03/con3_per03.png" alt="사람">
+                            <img src="img/law03/con3_stamp03.png" alt="탕감" class="stamp">
+                        </div>  <!-----con3_img----->
+                    </div> <!-----con3_box----->
+                </div> <!-----con3_contents----->
+            </div> <!-----bg_inner----->
+        </section> <!-----con3----->
+
+
+
+        <section class="con1 bg">
+            <img src="img/law03/con1_bg.webp" alt="배경이미지">
+            <div class="bg_inner">
+                <div class="con_tit">
+                    <h4>업무분야</h4>
+                    <h3>대한변호사협회 등록 <span class="tcolor">도산 전문 변호사</span>를 통해<br>회생, 파산 전 분야에 대한 종합적인 서비스를 제공합니다</h3>
+                </div>
+
+                <div class="con1_contents">
+                    <div class="con1_box" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+                        <img src="img/law03/con1_box01.png" alt="사업실패">
+                    </div>
+                    <div class="con1_box" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+                        <img src="img/law03/con1_box02.png" alt="보증채무">
+                    </div>
+                    <div class="con1_box" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400">
+                        <img src="img/law03/con1_box03.png" alt="은행빚">
+                    </div>
+                    <div class="con1_box" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400">
+                        <img src="img/law03/con1_box04.png" alt="병원비">
+                    </div>
+                    <div class="con1_box" data-aos="fade-up" data-aos-duration="500" data-aos-delay="600">
+                        <img src="img/law03/con1_box05.png" alt="생활비">
+                    </div>
+                    <div class="con1_box" data-aos="fade-up" data-aos-duration="500" data-aos-delay="600">
+                        <img src="img/law03/con1_box06.png" alt="학자금대출">
+                    </div>
+                </div> <!-----con1_contents----->
+            </div> <!-----bg_inner----->
+        </section> <!-----con1----->
+
+
+        <section class="con4">
+            <div class="inner">
+                <div class="con_tit">
+                    <h2>법무법인 OOO과<br><span class="tcolor">함께해야 하는 이유</span></h2>
+                    <h3><span class="tcolor">희생, 파산 사건</span>은 저희에게<br>믿고 맡기셔도 됩니다</h3>
+                </div>
+
+                <div class="con4_contents">
+                    <div class="con4_box">
+                        <h2>1</h2>
+                        <p><span class="tcolor">국내 최저 수임료</span></p>
+                        <p>의뢰인의 상황에 맞춰<br>업계 최저 수임료를<br>약속드립니다</p>
+                        <img src="img/law03/con4_ico01.png" alt="저울">
+                    </div> <!-----con4_box----->
+                    <div class="con4_box">
+                        <h2>2</h2>
+                        <p><span class="tcolor">초기 상담 무료</span></p>
+                        <p>개인회생, 파산 무료<br> 상담 진행합니다</p>
+                        <img src="img/law03/con4_ico02.png" alt="변호사">
+                    </div> <!-----con4_box----->
+                    <div class="con4_box">
+                        <h2>3</h2>
+                        <p><span class="tcolor">무방문 접수 가능</span></p>
+                        <p>방문하지 않아도 비대면으로 1:1 맞춤형 진행 가능합니다</p>
+                        <img src="img/law03/con4_ico03.png" alt="서류">
+                    </div> <!-----con4_box----->
+                    <div class="con4_box">
+                        <h2>4</h2>
+                        <p><span class="tcolor">1:1 비밀보장 상담제</span></p>
+                        <p>의뢰인의 모든 상담정보는<br>누구에게도 알려지지<br>않습니다</p>
+                        <img src="img/law03/con4_ico04.png" alt="자물쇠">
+                    </div> <!-----con4_box----->
+                </div>  <!-----con4_contents----->
+            </div>  <!-----inner----->
+        </section> <!-----con4----->
+
+
+        <section class="con5 bg">
+            <img src="img/law03/con5_bg.webp" alt="배경이미지">
+            <div class="bg_inner">
+                <div class="con_tit">
+                    <h2><span class="tcolor">회생, 파산</span> 나도 가능한가?</h2>
+                    <h3><span class="tcolor">무료</span>로 상담해드립니다</h3>
+                </div>
+
+                <div class="con5_contents">
+                    <div class="con5_box" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+                        <img src="img/law03/con5_box01.png" alt="부채">
+                    </div>
+                    <div class="con5_box" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400">
+                        <img src="img/law03/con5_box02.png" alt="천만원">
+                    </div>
+                    <div class="con5_box" data-aos="fade-up" data-aos-duration="500" data-aos-delay="600">
+                        <img src="img/law03/con5_box03.png" alt="면책">
+                    </div>
+                    <div class="con5_box" data-aos="fade-up" data-aos-duration="500" data-aos-delay="800">
+                        <img src="img/law03/con5_box04.png" alt="소득">
+                    </div>
+                    <div class="con5_box" data-aos="fade-up" data-aos-duration="500" data-aos-delay="1000">
+                        <img src="img/law03/con5_box05.png" alt="연체유무">
+                    </div>
+                </div>  <!-----con5_contents----->
+            </div>  <!-----bg_inner----->
+        </section> <!-----con5----->
+
+        <section class="con6 bg">
+            <img src="img/law03/con6_bg.webp" alt="배경이미지">
+        </section>
+
+
+        <section class="form_wrap" id="form_wrap-sec">
+            <!-- <p class="form_tit"></p> -->
+
+            <div class="inner">
+                <form method="post" action="apply.html" id="myModal1" name="page_form">
+                    <ul>
+
+                        <li class="form_name">
+                            <p>성함</p>
+                            <p>입력하신 개인정보는 상담 외 다른 용도로 절대 사용되지 않습니다.</p>
+                            <input type="text" name="name" maxlength="10" placeholder="성함" required/>
+                        </li> <!----form_name------->
+
+                        <li class="form_tel">
+                            <p>연락처</p>
+                            <div class="phone">
+                                <select name="tel1"><option>010</option></select>
+                                <div>-</div> 
+                                <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                <div>-</div>
+                                <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                            </div>
+                        </li> <!----form_tel------->
+
+                        <li class="form_radio">
+                            <p>채무금액</p>
+                            <p>재산이 채무보다 많으면 신청 불가합니다.</p>
+                            <div class="radio_wrap">
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option1" type="radio" value="1천~4천" required> 
+                                        <span>1천~4천</span>
+                                    </label>
+                                </div>
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option1" type="radio" value="4천~1억" required>
+                                        <span>4천~1억</span>
+                                    </label>
+                                </div>
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option1" type="radio" value="1억이상" required> 
+                                        <span>1억 이상</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </li>  <!----form_radio------->
+
+                        <li class="form_select02">
+                            <p>상담 희망시간</p>
+                            <select name="option2" required>
+                                <option value="">-상담 희망시간 선택-</option>
+                                <option value="9시~12시">09:00~12:00</option>
+                                <option value="12시~15시">12:00~15:00</option>
+                                <option value="15시~19시">15:00~19:00</option>
+                                <option value="익일오전중상담진행">이후 시간은 익일 오전중 상담진행</option>
+                            </select> 
+                        </li> <!----form_select02------->
+
+                        <li class="form_radio">
+                            <p>문자/전화 우선선택</p>
+                            <div class="radio_wrap">
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option3" type="radio" value="문자먼저" required> 
+                                        <span>문자 먼저주세요</span>
+                                    </label>
+                                </div>
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option3" type="radio" value="전화먼저" required>
+                                        <span>전화 먼저주세요</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </li>  <!----form_radio------->
+
+                        <li class="form_policy">
+                            <input id="policy" type="checkbox" value="1" checked required> 
+                            <label for="policy">개인정보처리방침 동의</label>
+                            <span id="show-Box">[약관보기]</span>
+                        </li>  <!----form_policy------->
+                    </ul> <!---------ul--------->
+        
+                    <button type="submit">상담 신청하기</button>
+                </form> <!---------form--------->
+            </div> <!---------inner--------->
+            <!-- <p class="form_btm"></p> -->
+        </section> <!---------form_wrap--------->
+
+        <script>
+            AOS.init({
+            once: false,          // 반복 실행
+            startEvent: 'load',   // 시작 타이밍
+            });
+        </script>
+
+        <script>
+            // 팝업 창
+            const openPop = document.getElementById("show-Box");
+            openPop.addEventListener('click', () => {
+                const popup = window.open(
+                    'policy.html', // 조약 내용을 담은 실제 경로
+                    '개인정보이용동의',
+                    'width=800,height=600,scrollbars=yes'
+                );      
+    
+                if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                    alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+                }
+            });
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(function() {
+                // Intersection Observer 설정
+                const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                    const target = parseInt($(entry.target).text().replace(/,/g, ''));
+                    $(entry.target).prop('Counter', 0).animate({
+                        Counter: target
+                    }, {
+                        duration: 1000,
+                        easing: 'swing',
+                        step: function(now) {
+                        $(this).text(Math.ceil(now).toLocaleString());
+                        }
+                    });
+                    }
+                });
+                }, { threshold: 0.5 });
+
+                // .num 요소에 대해 observer 적용
+                $('.num').each((_, el) => observer.observe(el));
+            });
+        </script>
+
+
+
+        <script>
+            document.querySelectorAll('.stamp').forEach(p => {
+                new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (!entry.isIntersecting) return;
+
+                        // 1초 후에 애니메이션 클래스 추가
+                        setTimeout(() => {
+                            entry.target.classList.add('animate');
+                        }, 1000);
+
+                        observer.unobserve(entry.target); // 다시 실행되지 않도록 정지
+                    });
+                }, { threshold: 0.5 }).observe(p);
+            });
+        </script>
+    </body>
+
+
+</html>

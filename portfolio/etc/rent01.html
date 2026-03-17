@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+        <link rel="stylesheet" href="css/web_fonts.css" type="text/css">
+        <title>OO모터스01</title>
+        <style>
+            
+html { scroll-behavior: smooth; }
+* { margin: 0; padding: 0; vertical-align: top; box-sizing: border-box; }
+body { max-width: 800px; min-width: 320px; margin: 0 auto; font-size: 18px; font-family: 'Pretendard-Regular'; }
+li { list-style: none; }
+a { text-decoration: none; color: #fff; font-family: 'Pretendard-Bold'; }
+img { max-width: 100%; border: none; }
+p { color: #333; word-break: keep-all; }
+select { -webkit-appearance: none; appearance: none; color: #333; background-image: url(img/selct_arrow.png);
+background-repeat: no-repeat; background-position: center right 5px;}
+textarea {
+border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
+resize: none; box-sizing: border-box; -webkit-appearance: none; -moz-appearance: none; appearance: none;        
+}
+button { all: unset; cursor: pointer; padding: 0; margin: 0; font: inherit; color: inherit; }
+h1, h2, h3, h4, h5, h6, p { line-height: 120%; letter-spacing: -.05em; color: #333; }
+
+
+
+.main .form_wrap { background: none; }
+#form_wrap-sec .form_tit { width: 95%; margin: 0 auto 1em auto; }
+
+#form_wrap-sec_top { padding: 0 0 5% 0; width: 95%;  }
+#form_wrap-sec_top, #form_wrap-sec_con2, #form_wrap-sec_con1 { display: none; width: 95%; margin: 0 auto; }
+#form_wrap-sec_top { width: 100%; } 
+.form_wrap .form_policy { margin-bottom: 1.5em; }
+.main_btm { text-align: center; }
+.main_btm > button { font-size: 2em; display: block; margin: 0 auto; width: 80%; border-radius: 5em;
+padding: .5em 0; color: #fff; font-family: 'PyeongtaekSemiconductor'; font-weight: 700; background: linear-gradient(90deg, #FFC300, #FF4545, #FF3300 ); }
+
+
+
+/* top_fix */
+.top_fix { width: 100%; max-width: 800px; min-width: 320px; position: fixed; background: #ffffffea; z-index: 9999;
+display: flex; justify-content: space-between; align-items: center; padding: 20px 10px; box-sizing: border-box; }
+.top_fix p { font-size: 1.7em; letter-spacing: -.05em; font-weight: bolder; color: #333; }
+.top_fix a { display: block; padding: 5px 15px; background: #FF6200; color: #fff; 
+border-radius: 30px; font-weight: bolder; letter-spacing: -.05em; font-size: 1.5em; }
+.top_padding { padding-top: 71px; }
+
+
+/* form */
+.form_wrap p { color: #333; font-size: 1.4em; }
+.form_wrap { padding: 10% 0;  }
+.form_tit { text-align: center; margin-bottom: 0; font-size: 2.3em !important; font-weight: bolder; line-height: 150%; background: #000; padding: 1em 0; border-radius: .3em; }
+.form_tit .tcolor { color: red; }
+.form_tit em { font-size: 1.15em; font-style: normal; line-height: 180%; }
+.form_wrap .inner { width: 95%; margin: 0 auto; padding: 0; }
+.form_wrap ul li { margin-bottom: 1em; }
+.form_wrap .form_policy { margin-bottom: 1.5em; display: flex; flex-wrap: wrap; align-items: center; }
+.form_wrap .form_policy input { margin-right: 5px; cursor: pointer; }
+.form_wrap .form_policy label { cursor: pointer; margin-right: 5px; color: #333; }
+.form_wrap ul li p:first-child { margin-bottom: 5px; font-size: 18px; font-weight: 600; text-align: left; }
+.form_wrap ul li p:nth-child(2) { font-size: 1em; margin-bottom: 10px; color: #333; text-align: left; }
+.form_wrap ul li input, .form_wrap ul li select { padding: 15px 10px; border: 1px solid #e5e5e5; background-color: #fff; }
+.form_wrap ul li input[type="text"] { width: 100%; box-sizing: border-box; }
+.form_wrap .form_tel input, .form_wrap .form_tel select { width: 32% !important; }
+.form_wrap .form_select02 select { width: 100%; }
+.region_wrap .select_box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1%; }
+.form_wrap .form_text textarea { width: 100%; height: 80px; }
+.form_wrap .form_policy, .form_wrap .form_policy a { font-size: 14px; color: #333; }
+.phone { display: flex; align-items: center; gap: 5px; }
+.form_wrap button { width: 100%; padding: .5em 0; color: #fff; background: #FF6200; text-align: center; border-radius: 5em;
+ font-size: 2em; font-weight: bolder; border: none; cursor: pointer; }
+
+input[type="radio"] { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
+.radio_wrap { display: flex; gap: 10px; }
+.radio_box { width: 100%; display: flex; align-items: center; height: 50px; }
+.radio_box input[type="radio"] { width: 100%; position: absolute; left: 50%; transform: translateX(-50%); transition: .3s; border-radius: 5em;
+padding: 0; height: 50px; z-index: -1; cursor: pointer; }
+.radio_box label { position: relative; width: 100%; text-align: center; line-height: 50px; z-index: 1;
+color: #666; cursor: pointer; }
+.radio_box input[type="radio"]:checked { background: #FF6200; }
+.radio_box input[type="radio"]:checked + span { color: #fff; }
+#show-Box { cursor: pointer; }
+.form_wrap input::placeholder { color: #c5c5c5; }
+.form_btm { width: 95%; margin: 0 auto; text-align: center; padding: 2em 0; font-weight: normal; line-height: 150%; }
+.form_wrap .no_choice { color: #999 !important; }
+
+.phone > div { color: #333; }
+
+
+
+
+.loading_wrap { text-align: center; margin-bottom: 1.5em; }
+.loading_wrap img { width: 10%; margin-bottom: 1em; }
+.loading_wrap p { font-size: 1.3em; color: #333; }
+.loading_con { display: flex; justify-content: center; align-items: flex-end; gap: .3em; margin-bottom: 1em; }
+.loading_box { width: .7em; height: .7em; border-radius: 5em; background: #FF6200; animation: loadingFade 1s infinite ease-in-out; }
+
+/* 각 막대 애니메이션 딜레이 다르게 적용 */
+.loading_box:nth-child(1) { animation-delay: 0s; }
+.loading_box:nth-child(2) { animation-delay: 0.1s; }
+.loading_box:nth-child(3) { animation-delay: 0.2s; }
+.loading_box:nth-child(4) { animation-delay: 0.3s; }
+.loading_box:nth-child(5) { animation-delay: 0.4s; }
+.loading_box:nth-child(6) { animation-delay: .5s; }
+.loading_box:nth-child(7) { animation-delay: .6s; }
+
+@keyframes loadingFade {
+0%, 100% {
+opacity: 0.5; /* 옅음 */
+}
+50% {
+opacity: 1;   /* 진하게 */
+}
+}
+
+
+
+
+
+/* main */
+.main { background: #F2F2F2; overflow: hidden; }
+.main .inner { padding: 10% 0; width: 95%; }
+
+.main .con_tit { margin-bottom: 2em; }
+.main .con_tit img { width: 25%; margin-bottom: 1.5em;  }
+.main .con_tit h3 { font-size: 2em; margin-bottom: .2em; }
+.main .con_tit h2 { font-size: 3em; }
+
+.main_btm { margin-bottom: 4em; }
+.main_btm h3 { color: #fff; background: #FF6200; display: inline-block; padding: .05em .3em; font-size: 2.5em; margin-bottom: .5em;  }
+.main_btm h2 { font-size: 2.8em; margin-bottom: 1.5em; }
+
+.main_tit { width: 130%; }
+
+/* con1 */
+.con1 { background: #FFF3DE; }
+.con1 .inner { width: 100%; padding-bottom: 0; overflow: hidden; }
+
+.con1 .con_tit { margin-bottom: 5em; }
+.con1 .con_tit h2 { font-size: 2.5em; margin-bottom: .5em; }
+.con1 .con_tit h2 span { font-size: 1.4em; display: inline-block; margin-top: .3em; }
+.con1 .con_tit h3 { font-size: 1.4em; }
+
+.con1_con { position: relative; }
+.con1_con img:first-child { width: 100%; margin-bottom: -25%; }
+.con1_con h2 { display: block; background: #000; color: #fff; text-align: center; width: 90%; margin: 0 auto;
+font-size: 2.4em; position: absolute; z-index: 100; bottom: 10%; left: 50%; transform: translateX(-50%); 
+padding: .1em 0;
+}
+.con1_con h2 span { color: #fff000;  }
+
+
+/* con2 */
+.con2 { background: #F2F2F2; }
+.con2 .con_tit h2 { font-size: 2.3em; }
+
+.con2_con { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1em; margin-bottom: 3.5em; }
+.con2_box { border-radius: .5em; }
+.con2_box a { text-align: center; padding: .5em 0; display: block; background: #FF6200; border-bottom-left-radius: .5em;
+border-bottom-right-radius: .5em;  }
+.con2_box a h3 { color: #fff; }
+.con2_box a h3 span { color: #fff000; }
+
+.con2 .inner > a { text-align: center; display: block; background: linear-gradient(90deg, #FFC300, #FF4545, #FF3300 ); width: 80%; margin: 0 auto;
+padding: .5em 0; border-radius: 5em; }
+.con2 .inner > a h2 { font-size: 2.5em; color: #fff; }
+
+
+
+
+/* con3 */
+.con3 { background: #FFF3DE; }
+.con3 .inner { width: 100%; }
+.con3 .con_tit h3 { font-size: 2.3em; color: #fff; background: #FF6200; display: inline-block; padding: 0 .3em; margin-bottom: .5em; }
+.con3 .con_tit h2 { font-size: 3em; }
+
+/* swiper css */
+.con3_contents_wrap { overflow-x: hidden; overflow-y: hidden; }
+.con3_box { transition: .3s; width: 100%; }
+.con3 .swiper-wrapper { transition-timing-function: ease !important; }
+.con3 .swiper-slide { transition: .3s; }
+.con3 .swiper-slide img { transform: scale(0.9); box-shadow: 2px 2px 5px 3px #00000015; border-radius: .5em; }
+.con3 .swiper-slide { opacity: .5;  }
+.con3 .swiper-slide.active-slide { transform: scale(1.1); opacity: 1; }
+
+
+
+
+/* con4 */
+.con4 { background: #F2F2F2; }
+.con4 .con_tit img { width: 20%; margin-bottom: 1em; }
+.con4 .con_tit h2 { font-size: 3em; }
+
+/* FAQ_tab */
+.faq_wrap { width: 100%; margin: 0 auto; }
+.faq_box { background: #ff6200; padding: 1em .5em; border-radius: .3em; margin-bottom: 1em; cursor: pointer; }
+.faq_box:last-child { margin-bottom: 0; }
+.faq_top { display: flex; align-items: center; justify-content: space-between; }
+.faq_top > div { display: flex; align-items: center; }
+.faq_top > div img { height: 2em; margin-right: .5em; }
+.faq_top > img { width: 5%; transition: 0.3s; object-fit: contain; }
+.faq_top p { font-size: 1.4em; color: #fff; font-family: 'Pretendard-Bold'; }
+
+.faq_btm_wrap { margin-top: 1em; display: none; }
+.faq_btm_wrap p { color: #fff; line-height: 150%; font-size: 1.3em; }
+.faq_btm { position: relative; padding-bottom: 2em;  }
+.faq_btm > img { position: absolute; bottom: -1.5em; right: -1em; width: 10%; }
+
+.faq_box.active { background: #e35800; border-radius: .3em; }
+.faq_box.active .faq_btm_wrap { display: block; }
+.faq_box.active .faq_top img:last-child { transform: rotate(180deg); }
+
+
+
+
+
+
+
+/* col_label */
+.con7 .inner { padding-bottom: 25%; }
+.con7 .con_tit { margin-bottom: 5em; }
+.con7 .con_tit h2 { text-align: center; font-size: 2.5em; letter-spacing: -.05em;  color: #333; }
+.col_label { border-radius: 15px; overflow: hidden; padding: 0 1em; }
+.col_box { width: 100%; height: auto; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #535353;
+padding: 2em 1em; }
+.col_box p { color: #333; font-size: 1.2em; letter-spacing: -.05em; }
+.col_box p:last-child { color: #fff; padding: .5em 1em; background: #FF6200; border-radius: 5em; margin-right: -1em; font-family: 'Pretendard-Bold'; }
+.col_box p:nth-child(2) { margin-left: 1em; }
+
+.con7 .swiper { width: 100%; height: 300px; }
+.con7 .swiper, .con7 .swiper-wrapper { touch-action: auto !important; }
+
+.con7_name { width: 100%; display: flex; justify-content: space-between; padding: 1em 2em; background: #FF6200; font-family: 'Pretendard-Bold'; }
+.con7_name p { font-size: 1.5em; color: #fff; }
+.con7_wid { padding: .5em 1.4em !important;  }
+
+
+
+
+/* all */
+.con_tit p { font-size: 2em; }
+.bg { width: 100%; position: relative; overflow: hidden; }
+.bg > img { width: 100%; object-fit: contain; }
+.tcolor { color: #FF6200; }
+.bg_inner { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 1em; }
+.inner { width: 95%; margin: 0 auto; padding: 15% 0; }
+h2 { font-size: 2em; letter-spacing: -.05em; font-family: 'PyeongtaekSemiconductor'; font-weight: 700; }
+h3 { font-size: 1.5em; letter-spacing: -.05em; font-family: 'PyeongtaekSemiconductor';  font-weight: 400; }
+h4, h5 { font-family: 'Pretendard-Bold'; font-weight: normal; }
+h6 { font-family: 'PyeongtaekSemiconductor'; }
+.con_tit { text-align: center; margin-bottom: 3.5em; }
+.call { font-size: 1.3em; text-align: center; margin: 2em 0; color: #333; }
+
+
+
+/* animation */
+
+.form_wrap button, .main_btm > button, .con2 .inner > a  { animation: main_btn 1s infinite forwards alternate cubic-bezier(0.9, -0.01, 0, 1); }
+
+@keyframes main_btn {
+0% { transform: translateY(-7%); box-shadow: 0 4px 1px 1px #ac4200; color: #ffee00; }
+100% { transform: translateY(0%); }
+
+}
+
+
+.con2_box { animation: con2_box 4s infinite; }
+.con2_box:nth-child(1) { animation-delay: 0s; }
+.con2_box:nth-child(2) { animation-delay: 1s; }
+.con2_box:nth-child(3) { animation-delay: 2s; }
+.con2_box:nth-child(4) { animation-delay: 3s; }
+
+@keyframes con2_box {
+0% { box-shadow: 2px 2px 5px #0000003b; transform: scale(1.05); }
+25% { box-shadow: 2px 2px 5px #0000003b; transform: scale(1.05); }
+25.01% { box-shadow: none; transform: scale(1); }
+100% { box-shadow: none; transform: scale(1); }
+}
+
+
+
+/* media screen */
+
+@media screen and (max-width: 600px) {
+body { font-size: 15px; }
+
+
+}
+@media screen and (max-width: 480px) {
+body { font-size: 10px; }
+.radio_box span { font-size: 15px; }   
+
+
+}
+
+
+
+        </style>
+
+    </head>
+
+    <body>
+        <section class="top_fix">
+            <p>위약금 최대 100% 지원!</p>
+            <a href="#form_wrap-sec">장기렌트/리스 신청하기</a>
+        </section> <!-----top_fix----->
+        <div class="top_padding"></div>
+
+
+                
+        <section class="main">
+            
+            <div class="inner">
+                
+                <div class="con_tit">
+                    <img src="img/rent01/logo.png" alt="로고">
+                    <h3>신차 장기렌트/리스</h3>
+                    <h2><span class="tcolor">OO모터스에서!</span></h2>
+
+                </div>
+                <div class="main_con">
+
+
+                    <div class="main_btm">
+                        <h3>“기존 계약? 걱정 마세요!"</h3>
+                        <h2>위약금 최대 <span class="tcolor">100% 지원!<br> 신차까지</span> 바로 출고!</h2>
+                        <button>신차 장기렌트/리스 신청하기</button>
+
+                        <div class="form_wrap" id="form_wrap-sec_top">
+
+
+                            <div class="inner">
+
+
+                                <div class="loading_wrap">
+                                    <img src="img/rent01/loading.png" alt="방패">
+                                    <div class="loading_con">
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                    </div> <!--loading_con--->
+                                    <p>개인정보는 암호화되어 안전하게 처리됩니다.</p>
+                                    
+
+                                </div> <!--loading_wrap--->
+
+
+
+                                <form method="post" action="apply.html" id="myModal1_top" name="page_form_top">
+                                    <ul>
+
+                                        <li class="form_radio">
+                                            <p>계약 방식</p>
+                                            <div class="radio_wrap">
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option1" type="radio" value="렌트" required> 
+                                                        <span>렌트</span>
+                                                    </label>
+                                                </div>
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option1" type="radio" value="리스" required>
+                                                        <span>리스</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </li>  <!----form_radio------->
+
+                                        <li class="form_name">
+                                            <p>성함</p>
+                                            <p>입력하신 개인정보는 상담 외 다른 용도로 절대 사용되지 않습니다.</p>
+                                            <input type="text" name="name" maxlength="10" placeholder="성함" required/>
+                                        </li> <!----form_name------->
+
+                                        <li class="form_tel">
+                                            <p>연락처</p>
+                                            <div class="phone">
+                                                <select name="tel1"><option>010</option></select>
+                                                <div>-</div> 
+                                                <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                                <div>-</div>
+                                                <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                            </div>
+                                        </li> <!----form_tel------->
+
+                                        <li class="form_radio">
+                                            <p>기존 차량 여부</p>
+                                            <div class="radio_wrap">
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option2" type="radio" value="O" required> 
+                                                        <span>O</span>
+                                                    </label>
+                                                </div>
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option2" type="radio" value="X" required>
+                                                        <span>X</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </li>  <!----form_radio------->
+
+
+                                        <li class="form_name" id="existingCarField" style="display:none;">
+                                            <p>기존차량 / 잔여 개월 수</p>
+                                            <input type="text" id="existingCarInput" name="option5" maxlength="85" placeholder="ex. 아반떼 6개월"/>
+                                        </li> <!----form_name------->
+
+                              
+
+                                        <li class="form_name">
+                                            <p>희망 차종</p>
+                                            <input type="text" name="option3" maxlength="10" placeholder="희망 차종 (없을 시 상담 후 결정)"/>
+                                        </li> <!----form_name------->
+
+                              
+
+
+                                        <li class="form_policy">
+                                            <input id="policy_top" type="checkbox" value="1" checked required> 
+                                            <label for="policy_top">개인정보처리방침 동의</label>
+                                            <span id="show-Box_top">[약관보기]</span>
+                                        </li>  <!----form_policy------->
+                                    </ul> <!---------ul--------->
+                        
+                                    <button type="submit">장기렌트/리스 신청하기</button>
+                                </form> <!---------form--------->
+                            </div> <!---------inner--------->
+
+
+                        </div> <!---------form_wrap--------->
+
+
+                    </div> <!---main_btm---->
+                
+                </div> <!---main_con---->
+
+                <div class="main_tit">
+                    <img src="img/rent01/main_car.webp" alt="그렌저" data-aos="slide-left" data-aos-easing="ease-out-back" data-aos-duration="500" data-aos-delay="300">   
+                </div>
+
+            </div> <!---bg_inner---->
+        </section> <!---main---->
+
+        <section class="con1">
+            <div class="inner">
+                <div class="con_tit">
+                    <h2>기존 장기렌트/리스를<br><span class="tcolor">정리해드립니다</span></h2>
+                    <h3>
+                        기존 차량이 있으신 분들도, 저희가 모두 정리해 드린 후<br>
+                        더 합리적인 가격으로 신차 계약을 도와드립니다
+                    </h3>
+                </div>
+
+                <div class="con1_con">
+                    <img src="img/rent01/con1_car.webp" alt="팰리세이드" data-aos="slide-right" data-aos-easing="ease-out-back" data-aos-duration="1000" data-aos-delay="300">
+                    <img src="img/rent01/con1_btm.webp" alt="도로">
+                    <h2>위약금 최대 <span>80%~100%</span> 감면!</h2>
+                </div><!---con1_con----> 
+
+            </div> <!---inner---->
+        </section> <!---con1---->
+
+
+
+
+        <section class="con2">
+            <div class="inner">
+                <div class="con_tit">
+                    <h2>고객님의 상황에 맞춰<br><span class="tcolor">최저가 견적</span>을 만들어드립니다</h2>
+                </div>
+
+
+                <div class="con2_con">
+                    <div class="con2_box">
+                        <img src="img/rent01/con2_box01.webp" alt="아반떼">
+                        <a href="#form_wrap-sec"><h3>렌트/리스 <span>최저가</span>신청</h3></a>
+                    </div>   <!---con2_box---->
+                    <div class="con2_box">
+                        <img src="img/rent01/con2_box02.webp" alt="카니발">
+                        <a href="#form_wrap-sec"><h3>렌트/리스 <span>최저가</span>신청</h3></a>
+                    </div>   <!---con2_box---->
+                    <div class="con2_box">
+                        <img src="img/rent01/con2_box03.webp" alt="그랜저">
+                        <a href="#form_wrap-sec"><h3>렌트/리스 <span>최저가</span>신청</h3></a>
+                    </div>   <!---con2_box---->
+                    <div class="con2_box">
+                        <img src="img/rent01/con2_box04.webp" alt="레이">
+                        <a href="#form_wrap-sec"><h3>렌트/리스 <span>최저가</span>신청</h3></a>
+                    </div>   <!---con2_box---->
+                </div>  <!---con2_con---->
+
+                <a href="#form_wrap-sec"><h2>다른 신차 종류 더보기</h2></a>
+
+            </div>  <!---inner---->
+        </section>  <!---con2---->
+
+
+
+        <section class="con3">
+            <div class="inner">
+                <div class="con_tit">
+                    <h3>허위견적일시 300% 보상!</h3>
+                    <h2>OO모터스 100% <span class="tcolor">리얼후기</span></h2>
+                </div>
+
+
+                <div class="con3_contents_wrap swiper_con3 mySwiper">
+                    <div class="con3_contents swiper-wrapper">
+                        <div class="con3_box swiper-slide">
+                            <img src="img/rent01/con3_box01edit_01.webp" alt="후기">
+                        </div>
+                        <div class="con3_box swiper-slide">
+                            <img src="img/rent01/con3_box02.webp" alt="후기">
+                        </div>
+                        <div class="con3_box swiper-slide">
+                            <img src="img/rent01/con3_box03.webp" alt="후기">
+                        </div>
+                        <div class="con3_box swiper-slide">
+                            <img src="img/rent01/con3_box04edit.webp" alt="후기">
+                        </div>
+                        <div class="con3_box swiper-slide">
+                            <img src="img/rent01/con3_box05edit.webp" alt="후기">
+                        </div>
+
+                    </div>  <!-----con3_contents----->
+                </div>  <!-----con3_contents_wrap----->
+
+
+
+            </div><!---inner---->
+
+        </section>  <!---con3---->
+
+
+        <section class="con4">
+            <div class="inner">
+                <div class="con_tit">
+                    <img src="img/rent01/qna_ico01.webp" alt="질문">
+                    <h2><span class="tcolor">자주 묻는 질문</span></h2>
+                </div>
+
+
+                <div class="faq_wrap">
+                    <div class="faq_box">
+                        <div class="faq_top">
+                            <div>
+                                <img src="img/rent01/qna_ico02.webp" alt="질문">
+                                <p>이미 렌트리스 이용중인데 차량바꾸고 싶습니다.<br> 계약기간 남아있어도 가능한가요?</p>
+                            </div>
+                            <img src="img/rent01/arrow.png" alt="화살표">
+                        </div>   <!----faq_top----->
+                        <div class="faq_btm_wrap">
+                            <div class="faq_btm">
+ 
+                                <p>기존차량처리부터 신차출고까지<br> 담당 마스터가 1:1로 도와드립니다.</p>
+                                <img src="img/rent01/qna_ico03.webp" alt="답변">
+                            </div>  <!----faq_btm----->
+                        </div>
+                    </div>  <!----faq_box----->
+                    <div class="faq_box">
+                        <div class="faq_top">
+                            <div>
+                                <img src="img/rent01/qna_ico02.webp" alt="질문">
+                                <p>위약금 얼마정도 지원가능한가요?</p>
+                            </div>
+                            <img src="img/rent01/arrow.png" alt="화살표">
+                        </div>   <!----faq_top----->
+                        <div class="faq_btm_wrap">
+                            <div class="faq_btm">
+ 
+                                <p>계약내용 확인후 기존차량 발생하는<br> 위약금 80-100% 감면드립니다.</p>
+                                <img src="img/rent01/qna_ico03.webp" alt="답변">
+                            </div>  <!----faq_btm----->
+                        </div>
+                    </div>  <!----faq_box----->
+                    <div class="faq_box">
+                        <div class="faq_top">
+                            <div>
+                                <img src="img/rent01/qna_ico02.webp" alt="질문">
+                                <p>기존 차없이 신차 출고해도 무슨 혜택이 있나요?</p>
+                            </div>
+                            <img src="img/rent01/arrow.png" alt="화살표">
+                        </div>   <!----faq_top----->
+                        <div class="faq_btm_wrap">
+                            <div class="faq_btm">
+ 
+                                <p> 페이백 지원 가능 차량으로 진행시<br> 페이백 해드립니다.</p>
+                                <img src="img/rent01/qna_ico03.webp" alt="답변">
+                            </div>  <!----faq_btm----->
+                        </div>
+                    </div>  <!----faq_box----->
+
+                </div>
+
+                
+            </div>
+        </section>
+
+
+
+
+        <section class="form_wrap" id="form_wrap-sec">
+
+            <div class="inner">
+
+
+                <div class="loading_wrap">
+                    <img src="img/rent01/loading.png" alt="방패">
+                    <div class="loading_con">
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                    </div> <!--loading_con--->
+                    <p>개인정보는 암호화되어 안전하게 처리됩니다.</p>
+                    
+
+                </div> <!--loading_wrap--->
+
+
+
+                <form method="post" action="apply.html" id="myModal1" name="page_form">
+                    <ul>
+
+                        <li class="form_radio">
+                            <p>계약 방식</p>
+                            <div class="radio_wrap">
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option1" type="radio" value="렌트" required> 
+                                        <span>렌트</span>
+                                    </label>
+                                </div>
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option1" type="radio" value="리스" required>
+                                        <span>리스</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </li>  <!----form_radio------->
+
+                        <li class="form_name">
+                            <p>성함</p>
+                            <p>입력하신 개인정보는 상담 외 다른 용도로 절대 사용되지 않습니다.</p>
+                            <input type="text" name="name" maxlength="10" placeholder="성함" required/>
+                        </li> <!----form_name------->
+
+                        <li class="form_tel">
+                            <p>연락처</p>
+                            <div class="phone">
+                                <select name="tel1"><option>010</option></select>
+                                <div>-</div> 
+                                <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                <div>-</div>
+                                <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                            </div>
+                        </li> <!----form_tel------->
+
+                        <li class="form_radio">
+                            <p>기존 차량 여부</p>
+                            <div class="radio_wrap">
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option2" type="radio" value="O" required> 
+                                        <span>O</span>
+                                    </label>
+                                </div>
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option2" type="radio" value="X" required>
+                                        <span>X</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </li>  <!----form_radio------->
+
+
+                        <li class="form_name" id="existingCarField01" style="display:none;">
+                            <p>기존차량 / 잔여 개월 수</p>
+                            <input type="text" id="existingCarInput01" name="option5" maxlength="85" placeholder="ex. 아반떼 6개월"/>
+                        </li> <!----form_name------->
+
+                
+
+                        <li class="form_name">
+                            <p>희망 차종</p>
+                            <input type="text" name="option3" maxlength="10" placeholder="희망 차종 (없을 시 상담 후 결정)"/>
+                        </li> <!----form_name------->
+
+
+
+
+
+                        <li class="form_policy">
+                            <input id="policy" type="checkbox" value="1" checked required> 
+                            <label for="policy">개인정보처리방침 동의</label>
+                            <span id="show-Box">[약관보기]</span>
+                        </li>  <!----form_policy------->
+                    </ul> <!---------ul--------->
+        
+                    <button type="submit">장기렌트/리스 신청하기</button>
+                </form> <!---------form--------->
+            </div> <!---------inner--------->
+
+            <!-- <p class="form_btm"></p> -->
+
+        </section> <!---------form_wrap--------->
+
+
+
+
+                
+
+
+        <section class="con7">
+            <div class="inner">
+                <div class="con_tit">
+                    <h2>OO모터스 렌트/리스 <span class="tcolor">진행현황</span> </h2>
+                </div>
+
+                <div class="con7_name">
+                    <p>이름</p>
+                    <p>차종</p>
+                    <p>신청현황</p>
+                </div>
+                <div class="col_label swiper mySwiper">
+                    <div class="col_contents swiper-wrapper">
+                        <div class="col_box swiper-slide">
+                            <p>황**</p>
+                            <p>현대 아이오닉6</p>
+                            <p class="con7_wid">상담중</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>김**</p>
+                            <p>현대 캐스퍼</p>
+                            <p>접수완료</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>윤**</p>
+                            <p>기아 카니발</p>
+                            <p class="con7_wid">상담중</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>조**</p>
+                            <p>현대 소나타</p>
+                            <p>접수완료</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>임**</p>
+                            <p>제네시스 G90</p>
+                            <p class="con7_wid">상담중</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>백**</p>
+                            <p>제네시스 GV80</p>
+                            <p class="con7_wid">상담중</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>김**</p>
+                            <p>현대 아반떼</p>
+                            <p>접수완료</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>송**</p>
+                            <p>기아 스포티지</p>
+                            <p class="con7_wid">상담중</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>김**</p>
+                            <p>기아 레이</p>
+                            <p>접수완료</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>남**</p>
+                            <p>기아 K5</p>
+                            <p class="con7_wid">상담중</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> <!----con7------->
+
+
+
+
+        <script>
+            AOS.init({
+            once: false,          // 반복 실행
+            startEvent: 'load',   // 시작 타이밍
+            });
+        </script>
+
+
+        
+
+        <script>
+            // 여러 개 요소 선택
+            const openBtns = document.querySelectorAll("#show-Box, #show-Box_top, #show-Box_con2");
+
+            openBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const popup = window.open(
+                        'policy.html', // 조약 내용을 담은 실제 경로
+                        '개인정보이용동의',
+                        'width=800,height=600,scrollbars=yes'
+                    );      
+
+                    if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                        alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+                    }
+                });
+            });
+        </script>
+
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const buttons = document.querySelectorAll(".main_btm > button");
+
+                buttons.forEach((btn) => {
+                    // 버튼이 속한 가장 가까운 섹션 찾기
+                    const parentSection = btn.closest(".main, .con3, .con2");
+
+                    // 섹션 내 관련 요소 찾기
+                    const formBox = parentSection.querySelector("#form_wrap-sec_top, #form_wrap-sec_con2");
+                    const mainTit = parentSection.querySelectorAll(".main_tit");
+
+                    // 초기 상태: 폼 숨김
+                    if (formBox) formBox.style.display = "none";
+
+                    btn.addEventListener("click", function() {
+                        // 폼이 현재 보이는지 여부 확인
+                        const isVisible = formBox && formBox.style.display === "block";
+
+                        if (isVisible) {
+                            // ✅ 폼이 열려 있을 때 → 닫기
+                            formBox.style.display = "none";
+                            mainTit.forEach(tit => tit.style.display = "block");
+
+                            // 버튼 스타일 원래대로 (선택사항)
+                            btn.style.marginBottom = "";
+                            btn.style.backgroundColor = "";
+                            btn.style.color = "";
+                            
+                            // 섹션 패딩 초기화
+                            parentSection.style.paddingTop = "";
+                            parentSection.style.paddingBottom = "";
+                        } else {
+                            // ✅ 폼이 닫혀 있을 때 → 열기
+
+                            btn.style.display = "block";
+                            btn.style.marginBottom = "1em";
+                            btn.style.color = "#fff000";
+
+
+                            if (formBox) formBox.style.display = "block";
+
+                            if (parentSection.classList.contains("main")) {
+                                const paddingBottom = parentSection.dataset.paddingBottom || "0";
+                                parentSection.style.paddingBottom = paddingBottom;
+
+                            }
+
+                            formBox.scrollIntoView({ behavior: "smooth" });
+                        }
+                    });
+                });
+            });
+        </script>
+
+
+        <!-- Swiper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script>
+            const Swiper_slide = new Swiper('.swiper_con3', {
+            slidesPerView: 1.3,
+            spaceBetween: 0,
+            loop: true,
+            speed: 700,
+            allowTouchMove: true,
+            centeredSlides: true,     // 가운데 정렬
+            autoplay: {
+                delay: 2000,
+                disableOnInteraction: false
+            },
+            slideActiveClass: 'active-slide', // 활성화된 슬라이드에 클래스 추가
+                // ✅ Navigation 추가
+                navigation: {
+                nextEl: '.swiper-next',
+                prevEl: '.swiper-prev'
+                }
+            });
+        </script>
+
+
+        <!-- Initialize Swiper -->
+        <script>
+            var swiper = new Swiper(".col_label", {
+                direction: "vertical",
+                slidesPerView: 5,
+                spaceBetween: 0,
+                allowTouchMove: false,              // 슬라이드 드래그만 막기
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                autoplay: {
+                delay: 1000,
+                disableOnInteraction: false
+            },
+            });
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const option2Radios = document.querySelectorAll('input[name="option2"]');
+                const existingCarFields = document.querySelectorAll('#existingCarField, #existingCarField01');
+                const existingCarInputs = document.querySelectorAll('#existingCarInput, #existingCarInput01');
+
+                option2Radios.forEach(radio => {
+                    radio.addEventListener('change', function() {
+                        // 모든 폼에 동일하게 적용
+                        existingCarFields.forEach((field, i) => {
+                            const input = existingCarInputs[i];
+                            if (this.value === "O") {
+                                field.style.display = "block";
+                                input.required = true;
+                            } else {
+                                field.style.display = "none";
+                                input.required = false;
+                                input.value = "";
+                            }
+                        });
+                    });
+                });
+            });
+        </script>
+
+
+
+
+        <script> // FAQ_TAB 스크립트
+            document.addEventListener('DOMContentLoaded', function() {
+                const faqBoxes = document.querySelectorAll('.faq_box');
+
+                faqBoxes.forEach(function(box) {
+                    box.addEventListener('click', function() {
+                        // 모든 박스 닫기
+                        faqBoxes.forEach(function(otherBox) {
+                            if (otherBox !== box) {
+                                otherBox.classList.remove('active');
+                            }
+                        });
+
+                        // 현재 박스 토글
+                        box.classList.toggle('active');
+                    });
+                });
+            });
+        </script>
+
+
+    </body>
+</html>

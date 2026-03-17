@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+        <link rel="stylesheet" href="css/web_fonts.css" type="text/css">
+        <title>인터넷가입</title>
+        <style>
+            html { scroll-behavior: smooth; }
+* { margin: 0; padding: 0; vertical-align: top; box-sizing: border-box; }
+body { max-width: 800px; min-width: 320px; margin: 0 auto; font-size: 18px; font-family: 'Pretendard-Regular'; }
+li { list-style: none; }
+a { text-decoration: none; color: #333; }
+img { max-width: 100%; border: none; }
+p { color: #333; word-break: keep-all; }
+select { -webkit-appearance: none; appearance: none; color: #333; background-image: url(img/selct_arrow.png);
+background-repeat: no-repeat; background-position: center right 5px;}
+textarea {
+border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
+resize: none; box-sizing: border-box; -webkit-appearance: none; -moz-appearance: none; appearance: none;        
+}
+button { all: unset; cursor: pointer; padding: 0; margin: 0; font: inherit; color: inherit; }
+h1, h2, h3, h4, h5, h6, p { line-height: 120%; letter-spacing: -.05em; color: #333; }
+
+
+
+/* top_fix */
+.top_fix { width: 100%; max-width: 800px; min-width: 320px; position: fixed; background: #ffffffea; z-index: 9999;
+display: flex; justify-content: space-between; align-items: center; padding: 1.5em 1em; box-sizing: border-box; }
+.top_fix p { font-size: 1.1em; letter-spacing: -.05em; font-weight: bolder; color: #333; }
+.top_fix a { display: block; padding: 5px 15px; background: #4D00FF; color: #fff; 
+border-radius: 30px; font-weight: bolder; letter-spacing: -.05em; font-size: 1.1em; }
+.top_padding { padding-top: 59px; }
+
+/* form */
+.form_wrap p { color: #333; font-size: 1.4em; }
+.form_wrap { padding: 5% 0; background: #ffffffc9; border-radius: .5em; }
+.form_tit { text-align: center; margin-bottom: 1em; font-size: 2em !important; font-weight: bolder; line-height: 150%; }
+.form_tit .tcolor { color: red; }
+.form_wrap .inner { width: 95%; margin: 0 auto; padding: 0 .5em; }
+.form_wrap ul li { margin-bottom: 1em; }
+.form_wrap .form_policy { margin-bottom: 1.5em; display: flex; flex-wrap: wrap; align-items: center; }
+.form_wrap .form_policy input { margin-right: 5px; cursor: pointer; }
+.form_wrap .form_policy label { cursor: pointer; margin-right: 5px; }
+.form_wrap ul li p:first-child { margin-bottom: 5px; font-size: 1.3em; font-weight: 600; }
+.form_wrap ul li p:nth-child(2) { font-size: 1em; margin-bottom: 5px; color: #666; }
+.form_wrap ul li input, .form_wrap ul li select { padding: .5em; border-radius: .5em; border: 1px solid #e5e5e5; background-color: #fff; }
+.form_wrap ul li input[type="text"] { width: 100%; box-sizing: border-box; }
+.form_wrap .form_tel input, .form_wrap .form_tel select { width: 32% !important; }
+.form_wrap .form_select02 select { width: 100%; }
+.region_wrap .select_box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1%; }
+.form_wrap .form_text textarea { width: 100%; height: 80px; border-radius: 10px; }
+.form_wrap .form_policy, .form_wrap .form_policy a { font-size: 14px; }
+.phone { display: flex; align-items: center; gap: 5px; }
+.form_wrap button { width: 100%; padding: .5em 0; color: #fff; background: #4D00FF; text-align: center;
+border-radius: .5em; font-size: 1.5em; font-weight: bolder; border: none; cursor: pointer; }
+
+input[type="radio"] { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
+.radio_wrap { display: flex; gap: 5px; }
+.radio_box { width: 100%; display: flex; align-items: center; height: 2.5em; }
+.radio_box input[type="radio"] { width: 100%; position: absolute; left: 50%; transform: translateX(-50%); transition: .3s;
+padding: 0; height: 2.5em; z-index: -1; cursor: pointer; }
+.radio_box label { position: relative; width: 100%; text-align: center; z-index: 1;
+color: #666; cursor: pointer; }
+.radio_box label span { line-height: 2em; }
+.radio_box input[type="radio"]:checked { background: #4D00FF; }
+.radio_box input[type="radio"]:checked + span { color: #fff; }
+#show-Box { cursor: pointer; }
+.form_wrap input::placeholder { color: #c5c5c5; }
+.form_btm { width: 95%; margin: 0 auto; text-align: center; padding: 2em 0; font-weight: normal; line-height: 150%; }
+.form_wrap .no_choice { color: #999 !important; }
+
+
+/* main */
+.main .con_tit { margin-bottom: 7em; }
+.main .con_tit h6 { color: #fff; font-size: 1.9em; letter-spacing: .05em; margin-bottom: 1em; }
+.main .con_tit .tcolor { color: #fff000; }
+.main .con_tit h2 { font-size: 2.8em; margin-bottom: 1.5em; }
+.main .con_tit h2 .tcolor { background: #F54A4A; padding: 0 .2em .2em .2em; }
+.main .con_tit h4 { color: #fff; font-size: 2.4em; margin-bottom: .5em; }
+.main .con_tit h5 { color: #fff; font-size: 1.7em; }
+
+
+/* con1 */
+.con1 { background: #E8E8E8; padding: 15% 0; overflow: hidden; }
+.con1 .con_tit h6 { font-size: 2.5em; margin-bottom: .3em; }
+.con1 .con_tit h4 { font-size: 3em; }
+
+.con1_box { margin-bottom: 1em; width: 95%; }
+.con1_box:nth-child(2) { margin-left: 5%; }
+.con1_box:last-child { margin-bottom: 0; }
+
+/* con2 */
+.con2 { overflow: hidden; }
+
+
+
+
+
+
+
+/* con4 */
+.con4 { background: #E8E8E8; }
+.con4 > .inner { padding-bottom: 10%; }
+.con4 .con_tit h4 { font-size: 1.5em; margin-bottom: .5em; }
+.con4 .con_tit h2 { font-size: 2.5em; }
+
+.con4_top { margin-bottom: 5em; }
+.con4_count_wrap:first-child { margin-bottom: 1.5em; }
+.con4_count_wrap { background: #fff; display: grid; grid-template-columns: repeat(3, 1fr); box-shadow: 2px 2px 8px 1px #00000020; padding: 1.5em 0;
+border-radius: .5em; }
+.con4_count_box { text-align: center; }
+.con4_count_box:nth-child(2) { border-right: 1px solid #4D00FF; border-left: 1px solid #4D00FF; }
+
+.con4_count_box p { margin-bottom: .5em; font-size: 1.5em; }
+.con4_count_box em { font-style: normal; }
+.con4_count_box h2 { font-size: 2.5em; }
+
+
+
+.con4_colwrap { border: 2px solid #4D00FF; border-radius: 1em; margin-bottom: 4em; background: #fff; }
+.col_name { display: flex; justify-content: space-around; border-bottom: 1px solid #4D00FF; padding: 1em 0; }
+.col_name h6 { font-size: 1.8em; }
+.col_name h6:nth-child(2) { padding: 0 1em 0 0em; }
+.col_name h6:nth-child(3) { margin-left: -1em; }
+
+/* col_label */
+.col_label { border-radius: 15px; overflow: hidden; padding: 0 1em;  }
+.col_box { width: 100%; height: auto; display: flex; justify-content: space-between; align-items: center; padding: 2em 1em; }
+.col_box p { color: #333; font-size: 1.4em; letter-spacing: -.05em; }
+.col_box p:last-child { color: #fff; padding: .5em 1em; background: #4D00FF; border-radius: 5em; margin-right: -1em; }
+.col_box p:nth-child(2) { margin-left: -1em; }
+
+.con4 .swiper { width: 100%; height: 200px; }
+.con4 .swiper, .con4 .swiper-wrapper { touch-action: auto !important; }
+
+.con4_wid { padding: .5em 1.4em !important; }
+
+
+
+
+.con4 .form_wrap { box-shadow: 2px 2px 5px 3px #00000011; } 
+
+
+#form_wrap-sec_top .form_tit { font-size: 1.5em !important; }
+
+/* all */
+.con_tit p { font-size: 2em; }
+.bg { width: 100%; position: relative; overflow: hidden; }
+.bg > img { width: 100%; object-fit: contain; }
+.tcolor { color: #4D00FF; }
+.bg_inner { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 1em; }
+.inner { width: 95%; margin: 0 auto; padding: 15% 0; }
+h2 { font-size: 2em; letter-spacing: -.05em; font-family: 'S-CoreDream'; font-weight: 700; }
+h3 { font-size: 1.5em; letter-spacing: -.05em; font-family: 'S-CoreDream'; font-weight: 700; }
+h4, h5 { font-family: 'S-CoreDream'; font-weight: 600; }
+h6 { font-family: 'S-CoreDream'; font-weight: 400; }
+.con_tit { text-align: center; margin-bottom: 3.5em; }
+.call { font-size: 1.3em; text-align: center; margin: 2em 0; color: #333; }
+
+
+
+/* animation */
+.form_wrap button { animation: form_btn 2s infinite forwards; }
+
+@keyframes form_btn {
+0% { border-bottom: 5px solid #000681; box-sizing: border-box; color: #FFFF00; margin-top: -5px; }
+50% { border-bottom: 5px solid #000681; box-sizing: border-box; color: #FFFF00; margin-top: -5px; }
+50.01% { border-bottom: none; box-sizing: content-box; color: #fff; margin-top: 0; }
+100% { border-bottom: none; box-sizing: content-box; color: #fff; margin-top: 0; }
+}
+
+.main .con_tit h2 .tcolor { animation: main_color 1s cubic-bezier(1, 0.05, 0, 0.99) infinite forwards alternate; }
+@keyframes main_color {
+0% { background: #F54A4A }
+100% { background: #ae00ff }
+
+
+}
+
+
+
+/* media screen */
+
+@media screen and (max-width: 600px) {
+body { font-size: 15px; }
+
+
+}
+@media screen and (max-width: 480px) {
+body { font-size: 10px; }
+.radio_box span { font-size: 15px; }   
+
+
+}
+
+     
+        </style>
+
+    </head>
+
+    <body>
+
+        <section class="top_fix">
+            <p>오늘 하루만 가능한 지원금입니다 서두르세요!</p>
+            <a href="#form_wrap-sec">24시간 무료상담</a>
+        </section> <!-----top_fix----->
+        <div class="top_padding"></div>
+
+        <section class="main bg">
+            <img src="img/inter02/main_bg.webp" alt="배경">
+            <div class="bg_inner">
+                <div class="con_tit">
+                    <h6><span class="tcolor">OO</span>만의 인터넷 신규&변경 혜택</h6>
+                    <h2><span class="tcolor">최대 120만원 상당 혜택!</span></h2>
+                    <h4><span class="tcolor">인터넷과 TV</span> 동시가입하면</h4>
+                    <h5><span class="tcolor">당일 설치, 총알 현금지급</span> 보장해드립니다</h5>
+                </div>
+
+                <div class="form_wrap" id="form_wrap-sec_top">
+                    <div class="inner">
+                        <form method="post" action="apply.html" id="myModal1_top" name="page_form_top">
+                            <ul>
+
+                                <li class="form_name">
+                                    <p>성함</p>
+                                    <p>입력하신 개인정보는 상담 외 다른 용도로 절대 사용되지 않습니다.</p>
+                                    <input type="text" name="name" maxlength="10" placeholder="성함" required/>
+                                </li> <!----form_name------->
+
+
+                                <li class="form_tel">
+                                    <p>연락처</p>
+                                    <div class="phone">
+                                        <select name="tel1"><option>010</option></select>
+                                        <div>-</div> 
+                                        <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                        <div>-</div>
+                                        <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                    </div>
+                                </li> <!----form_tel------->
+
+
+
+
+                                <li class="form_radio">
+                                    <p>희망통신사</p>
+                                    <div class="radio_wrap">
+                                        <div class="radio_box">
+                                            <label>
+                                                <input name="option1" type="radio" value="SK" required> 
+                                                <span>SK</span>
+                                            </label>
+                                        </div>
+                                        <div class="radio_box">
+                                            <label>
+                                                <input name="option1" type="radio" value="KT" required>
+                                                <span>KT</span>
+                                            </label>
+                                        </div>
+                                        <div class="radio_box">
+                                            <label>
+                                                <input name="option1" type="radio" value="LG" required>
+                                                <span>LG</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </li>  <!----form_radio------->
+                                            
+
+
+
+                                <li class="form_policy">
+                                    <input id="policy_top" type="checkbox" value="1" checked required> 
+                                    <label for="policy_top">개인정보처리방침 동의</label>
+                                    <span id="show-Box_top">[약관보기]</span>
+                                </li>  <!----form_policy------->
+                            </ul> <!---------ul--------->
+                
+                            <button type="submit">지원금 받으러가기</button>
+                        </form> <!---------form--------->
+                    </div> <!---------inner--------->
+
+                <!-- <p class="form_btm"></p> -->
+
+                </div> <!---------form_wrap--------->
+            </div>
+        </section> <!---------main--------->
+
+        <section class="con1">
+            <div class="con_tit">
+                <h6>OO에서 드리는</h6>
+                <h4>자신있는 약속 <span class="tcolor">3가지</span></h4>
+            </div>
+
+            <div class="con1_con">
+                <div class="con1_box" data-aos="fade-right" data-aos-duration="500" data-aos-delay="200">
+                    <img src="img/inter02/con1_box01.webp" alt="현금지원">
+                </div>
+                <div class="con1_box" data-aos="fade-left" data-aos-duration="500" data-aos-delay="600">
+                    <img src="img/inter02/con1_box02.webp" alt="현금지원">
+                </div>
+                <div class="con1_box" data-aos="fade-right" data-aos-duration="500" data-aos-delay="1000">
+                    <img src="img/inter02/con1_box03.webp" alt="현금지원">
+                </div>
+            </div> <!---------con1_con--------->
+        </section> <!---------con1--------->
+
+        <section class="con2">
+            <img src="img/inter02/con2_bg_edit01.webp" alt="배경" data-aos="zoom-out" data-aos-duration="500" data-aos-delay="300">
+        </section> <!---------con2--------->
+
+        <section class="con3">
+            <div class="inner">
+                <img src="img/inter02/con3_bg.webp" alt="추가지급"  data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+            </div>
+        </section> <!---------con3--------->
+
+
+
+        <section class="con4">
+            <div class="inner">
+                <div class="con_tit">
+                    <h4 id="today-date"></h4>
+                    <h2><span class="tcolor">실시간 상담신청 현황</span></h2>
+                </div>
+
+                <div class="con4_top">
+                    <div class="con4_count_wrap">
+                        <div class="con4_count_box">
+                            <p>실시간지원금 상담</p>
+                            <h2><span class="tcolor num">45</span><em class="tcolor">건</em></h2>
+                        </div> <!---------con4_count_box--------->
+                        <div class="con4_count_box">
+                            <p>누적상담</p>
+                            <h2><span class="tcolor num">5,235</span><em class="tcolor">건</em></h2>
+                        </div> <!---------con4_count_box--------->
+                        <div class="con4_count_box">
+                            <p>설치완료</p>
+                            <h2><span class="tcolor num">3,527</span><em class="tcolor">건</em></h2>
+                        </div> <!---------con4_count_box--------->
+                    </div> <!---------con4_count_wrap--------->
+
+
+                </div> <!---------con4_top--------->
+
+                <div class="con4_colwrap">
+                    <div class="col_name">
+                        <h6><span class="tcolor">이름</span></h4>
+                        <h6><span class="tcolor">연락처</span></h4>
+                        <h6><span class="tcolor">통신사</span></h4>
+                        <h6><span class="tcolor">상태</span></h4>
+                    </div> <!---------col_name--------->
+
+                    <div class="col_label swiper mySwiper">
+                        <div class="col_contents swiper-wrapper">
+                            <div class="col_box swiper-slide">
+                                <p>이*선</p>
+                                <p>010-****-4966</p>
+                                <p>SK</p>
+                                <p class="con4_wid">접수중</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>이*중</p>
+                                <p>010-****-6032</p>
+                                <p>KT</p>
+                                <p>접수완료</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>김*근</p>
+                                <p>010-****-4442</p>
+                                <p>KT</p>
+                                <p class="con4_wid">접수중</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>김*현</p>
+                                <p>010-****-4442</p>
+                                <p>SK</p>
+                                <p>접수완료</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>조*희</p>
+                                <p>010-****-2003</p>
+                                <p>LG</p>
+                                <p class="con4_wid">접수중</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>김*경</p>
+                                <p>010-****-4026</p>
+                                <p>LG</p>
+                                <p class="con4_wid">접수중</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>박*진</p>
+                                <p>010-****-1877</p>
+                                <p>SK</p>
+                                <p>접수완료</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>조*연</p>
+                                <p>010-****-7108</p>
+                                <p>SK</p>
+                                <p class="con4_wid">접수중</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>이*순</p>
+                                <p>010-****-9033</p>
+                                <p>KT</p>
+                                <p>접수완료</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>박*오</p>
+                                <p>010-****-6598</p>
+                                <p>LG</p>
+                                <p class="con4_wid">접수중</p>
+                            </div>
+                        </div>
+                    </div> <!---------col_label--------->
+                </div>  <!---------con4_colwrap--------->
+
+                <div class="form_wrap" id="form_wrap-sec">
+                    <div class="inner">
+                        <form method="post" action="apply.html" id="myModal1" name="page_form">
+                            <ul>
+
+                                <li class="form_name">
+                                    <p>성함</p>
+                                    <p>입력하신 개인정보는 상담 외 다른 용도로 절대 사용되지 않습니다.</p>
+                                    <input type="text" name="name" maxlength="10" placeholder="성함" required/>
+                                </li> <!----form_name------->
+
+
+                                <li class="form_tel">
+                                    <p>연락처</p>
+                                    <div class="phone">
+                                        <select name="tel1"><option>010</option></select>
+                                        <div>-</div> 
+                                        <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                        <div>-</div>
+                                        <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                    </div>
+                                </li> <!----form_tel------->
+
+
+
+
+                                <li class="form_radio">
+                                    <p>희망통신사</p>
+                                    <div class="radio_wrap">
+                                        <div class="radio_box">
+                                            <label>
+                                                <input name="option1" type="radio" value="SK" required> 
+                                                <span>SK</span>
+                                            </label>
+                                        </div>
+                                        <div class="radio_box">
+                                            <label>
+                                                <input name="option1" type="radio" value="KT" required>
+                                                <span>KT</span>
+                                            </label>
+                                        </div>
+                                        <div class="radio_box">
+                                            <label>
+                                                <input name="option1" type="radio" value="LG" required>
+                                                <span>LG</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </li>  <!----form_radio------->
+                                            
+
+
+
+                                <li class="form_policy">
+                                    <input id="policy" type="checkbox" value="1" checked required> 
+                                    <label for="policy">개인정보처리방침 동의</label>
+                                    <span id="show-Box">[약관보기]</span>
+                                </li>  <!----form_policy------->
+                            </ul> <!---------ul--------->
+                
+                            <button type="submit">지원금 받으러가기</button>
+                        </form> <!---------form--------->
+                    </div> <!---------inner--------->
+
+                <!-- <p class="form_btm"></p> -->
+
+                </div> <!---------form_wrap--------->
+
+            </div>  <!---------inner--------->
+
+        </section> <!---------con4--------->
+
+        <!-- <p class="form_btm"></p> -->
+
+
+        <script>
+            AOS.init({
+            once: false,          // 반복 실행
+            startEvent: 'load',   // 시작 타이밍
+            });
+        </script>
+
+        <script>
+            // 여러 개 요소 선택
+            const openBtns = document.querySelectorAll("#show-Box, #show-Box_top");
+
+            openBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const popup = window.open(
+                        'policy.html', // 조약 내용을 담은 실제 경로
+                        '개인정보이용동의',
+                        'width=800,height=600,scrollbars=yes'
+                    );      
+
+                    if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                        alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+                    }
+                });
+            });
+        </script>
+
+
+
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(function () {
+                const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                    const $el = $(entry.target);
+                    const target = Number($el.attr('data-target'));
+
+                    if (!target) return;
+
+                    setTimeout(() => {
+                        $el.prop('Counter', 0).stop().animate({
+                        Counter: target
+                        }, {
+                        duration: 1000,
+                        easing: 'swing',
+                        step: function (now) {
+                            $el.text(Math.ceil(now).toLocaleString());
+                        }
+                        });
+                    }, 1000); // ← 여기서 1초 딜레이 설정 // 
+                    }
+                });
+                }, { threshold: 0.5 });
+
+                // 초기 숫자값을 data-target 속성에 저장
+                $('.num').each((_, el) => {
+                const $el = $(el);
+                const target = Number($el.text().replace(/,/g, '').trim());
+                $el.attr('data-target', target);
+                observer.observe(el);
+                });
+            });
+        </script>
+
+
+        <!-- Swiper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+        <!-- Initialize Swiper -->
+        <script>
+            var swiper = new Swiper(".col_label", {
+                direction: "vertical",
+                slidesPerView: 4,
+                spaceBetween: 0,
+                allowTouchMove: false,              // 슬라이드 드래그만 막기
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                autoplay: {
+                delay: 1000,
+                disableOnInteraction: false
+            },
+            });
+        </script>
+
+        <script>
+            function updateToday() {
+                const today = new Date();
+
+                // yyyy-mm-dd 형식으로 변환
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, "0");
+                const day = String(today.getDate()).padStart(2, "0");
+
+                const formatted = `${year}-${month}-${day} 기준`;
+
+                document.getElementById("today-date").innerText = formatted;
+            }
+
+            updateToday(); // 페이지 로드 시 실행
+        </script>
+    </body>
+</html>

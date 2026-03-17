@@ -1,0 +1,726 @@
+/*      font-family: "Reddit Sans Condensed", sans-serif;         */
+
+
+header {background-color: linear-gradient(to top, rgba(255, 0, 0, 0) 20%, #00000082 100%);  }
+
+/* main text main text main text main text main text main text  */
+.main_wrap {
+    width: 100%; height: 700px;
+    background: url('../img/sub_main.webp');
+    background-position: center; background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+.main_text {color: #fff;  text-align: center; width: 100%; height: 620px; display: flex; 
+flex-wrap: wrap; flex-direction: column; justify-content: center;
+}
+.title1
+{ font-weight: 900; font-family: "Reddit Sans Condensed", sans-serif;
+font-size: 60px; letter-spacing: -1px;  }
+.main_text p { font-size: 18px; letter-spacing: -1px;}
+.main_btn {display: flex; flex-wrap: wrap; width: 100%; justify-content: center;
+text-align: center; margin-top: 20px; }
+.main_btn_name { color: #fff;  border-bottom: 2px solid #999; font-size: 15px; font-weight: 600;
+display: inline-block; }
+.home { margin: 5px 9px 0 0; }
+.bread { height: 15px; margin: 6px 6px 0 0; }
+    /* main text main text main text main text main text main text  */
+
+/* contents contents contents contents contents  */
+
+/* group group group group group group  */
+.group .contents_title br:last-child { display: none; }
+.group {  width: 95%;  max-width: 1824px; display: flex; flex-wrap: wrap; margin: 0 auto; }
+.group_box:first-child { width: 49.73%; margin-right: 0.54%;
+border-radius: 15px; text-align: center; transition: .3s;
+display: flex; flex-wrap: wrap; justify-content: center; 
+align-content: center; color: #fff; background: #020f5a;}
+
+.group_box:nth-child(2) { width: 49.73%; }
+
+.group_box_img { width: 100%; height: 295px;
+position: relative; overflow: hidden;  text-align: center; 
+color: #fff;  border-radius: 15px;  }
+.group_box_img:first-child{ margin-bottom: 10px; }
+
+.group_box_img:first-child p { font-family: "Reddit Sans Condensed", sans-serif; letter-spacing: -.5px; }
+
+.group_box_img .contents_box_img {  
+display: flex; flex-wrap: wrap; flex-direction: column; justify-content: center; 
+}
+
+.group_box_img:first-child .contents_box_img
+{ height: 100%; background: url('../img/group1.webp') center no-repeat; }
+.group_box_img:last-child .contents_box_img
+{ height: 100%; background: url('../img/group2.webp') center no-repeat; }
+
+.group_box_img p { font-size: 23px; font-weight: 600; margin-bottom: 20px; 
+letter-spacing: -1px; }
+.group_btn { width: 110px; height: 35px;
+margin: 0 auto; letter-spacing: -1px; display: block; 
+line-height: 35px; font-weight: 600; font-size: 15px;
+background: none; color: #fff; transition: 0.3s;
+border: 2px solid #fff; border-radius: 20px; }
+
+.group_box_img:hover .group_btn { color: #333; background: #fff;}
+.group_box_img:hover .contents_box_img { transform: scale(1.05); }
+.group_box:first-child:hover { background: #01093b; }
+/* group group group group group group  */
+
+
+
+/*sports sports sports sports sports sports sports sports*/
+
+.sports { width: 100%; max-width: 1400px; margin: 0 auto; 
+text-align: center; }
+.sports_text { margin-bottom: 50px; }
+.sports_text .contents_title { margin-bottom: 15px; }
+.sports_text .contents_title br { display: none; }
+.sports_box_wrap { width: 100%; display: flex; flex-wrap: wrap; justify-content: center; 
+position: relative; }
+.sports_box  { width: 460px;  height: 300px; margin-right: 10px; 
+border-radius: 15px; overflow: hidden; position: relative; }
+
+.sports_box:last-child { margin-right: 0;  }
+.sports_box .contents_box_img { width: 100%; height: 100%; color: #fff;
+display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end;
+padding: 30px; box-sizing: border-box;
+}
+
+.sports_box:first-child .contents_box_img
+{ background: url('../img/sub_sports1.webp') center no-repeat; }
+.sports_box:nth-child(2) .contents_box_img
+{ background: url('../img/sub_sports2.webp') center no-repeat; }
+.sports_box:last-child .contents_box_img
+{ background: url('../img/sub_sports3.webp') center no-repeat; }
+
+.sports_box_text { font-size: 23px; font-weight: 600; letter-spacing: -.5px;
+font-family: "Reddit Sans Condensed", sans-serif }
+.sports_btn { width: 71px; height: 35px; border: 2px solid #fff; border-radius: 17.5px;
+line-height: 35px; display: block; transition: .3s; font-size: 15px; letter-spacing: -1px; font-weight: 500; }
+
+.sports_box:hover .sports_btn { color: #333; background: #fff; }
+.sports_box:hover .contents_box_img { transform: scale(1.1); }
+.sports_box:hover .contents_box_img { padding: 50px; }
+
+/* action action action action action actionaction  action action  */
+
+.action > div { position: relative; }
+.action { width: 95%; margin: 0 auto;
+display: flex; flex-wrap: wrap; color: #fff;
+justify-content: center;}
+.action_box:first-child { width:33.11%; 
+border-radius: 15px; margin-right: 0.54%; position: relative;
+background:#020f5a; transition: .3s;  }
+.action_box:first-child .action_btn { position: absolute; bottom: 50px; right: 50px; 
+border-radius: 20px; width: 105px; height: 35px; color: #fff;
+transition: 0.3s; border: 2px solid #fff;
+line-height: 35px; text-align: center; font-weight: 500; 
+font-size: 15px; font-family: "Reddit Sans Condensed", sans-serif;
+}
+.action_text { position: absolute; top: 0; left: 0; width: 100%; box-sizing: border-box;
+word-break: keep-all; padding: 50px;
+}
+.action_text .contents_article { font-size: 15px; line-height: 160%; }
+
+.action_box:last-child { width:66.33%; 
+border-radius: 15px; overflow: hidden; text-align: center;}
+
+.action_box:last-child .contents_box_img { width: 100%; height: 600px; 
+background: url('../img/action.webp') center no-repeat;
+display: flex; flex-wrap: wrap;
+flex-direction: column; justify-content: center; 
+}
+.action_box:last-child span:first-child { border-bottom: 2px solid #686bfe; }
+.action_box:last-child  span:nth-child(3) { border-bottom: 2px solid #5ee189; }
+.action_box:last-child span:last-child { border-bottom: 2px solid #e6d94d; }
+.action_box:last-child p { font-size: 40px; font-weight: 700; line-height: 150%;
+font-family: "Reddit Sans Condensed", sans-serif; letter-spacing: -1px;
+margin-bottom: 20px; }
+.action_box:last-child .action_btn { width: 112px; height: 35px; transition: 0.3s;
+background: none; color: #fff; border: 2px solid #fff;
+font-weight: 500; margin: 0 auto; line-height: 35px;
+letter-spacing: -.5px; border-radius: 20px; }
+.action_box:hover .action_btn { background: #fff; color: #333; }
+.action_box:hover .contents_box_img { transform: scale(1.05); }
+.action_box:first-child:hover { background: #01093b; }
+/*activities activities activities activities actives activities */
+
+.activities { width: 100%; max-width: 1400px;
+margin: 0 auto; display: flex; flex-wrap: wrap;
+justify-content: center;
+}
+
+.activities > div { overflow: hidden; }
+
+.activities_box:first-child { width: 795px; margin-right: 10px; margin-bottom: 10px; border-radius: 15px; color: #fff; position: relative; background: #020f5a; transition:0.3s;}
+.activities_text { position: absolute; top: 50px;
+left: 50px; } 
+.activities_box:nth-child(2) { width: 595px; 
+border-radius: 15px; margin-bottom: 10px; position: relative; transition: 0.3s; 
+}
+.activities_box:nth-child(3), .activities_box:nth-child(4) 
+{ width: 695px; margin-right: 10px; border-radius: 15px;
+position: relative; transition: 0.3s; }
+.activities_box:last-child { margin-right: 0; }
+.activities_box:nth-child(2) .contents_box_img
+{ height: 345px;
+background: url('../img/activities1.webp') center no-repeat; }
+.activities_box:nth-child(3) .contents_box_img
+{ height: 345px;
+background: url('../img/activities2.webp') center no-repeat; }
+.activities_box:nth-child(4) .contents_box_img
+{ height: 345px;
+background: url('../img/activities3.webp') center no-repeat; }
+
+.activities_box:first-child .activities_btn { 
+position: absolute; bottom: 50px; right: 50px;
+width: 110px; height: 35px; border-radius: 17.5px;
+border: 2px solid #fff; color: #fff; 
+transition: 0.3s; font-size: 15px; font-weight: 500;
+text-align: center; line-height: 35px; letter-spacing: -.5px;
+}
+.activities_box:nth-child(2) .activities_btn,
+.activities_box:nth-child(3) .activities_btn,
+.activities_box:nth-child(4) .activities_btn
+{ position: absolute; text-align: center; line-height: 35px;
+bottom: 50px; right: 50px; width: 71px; height: 35px; 
+border-radius: 17.5px;  letter-spacing: -.5px;
+border: 2px solid #fff; color: #fff; 
+font-size: 15px; font-weight: 500; transition: 0.3s; }
+
+.activities_text .contents_title { margin-bottom: 12px; }
+.activities_text_box p { 
+line-height: 20px; transition: 0.3s;
+margin: 30% 0 0 6.28%; transition: 0.3s; opacity:0;
+}
+
+.activities_box_title
+{ font-size: 23px; color: #fff; line-height: 140%;
+font-weight: 600; letter-spacing: -2px; margin-bottom: 10px; }
+.activities_box_article
+{ font-size: 16px; letter-spacing: -1px; line-height: 130%; color: #fff; margin-top: 90px; opacity: 0; transition: .3s; }
+.activities_box:first-child .activities_box_article
+{ font-size: 18px; }
+
+.activities_box:hover .contents_box_img
+{ transform: scale(1.1); }
+.activities_box:first-child:hover { background: #01093b; }
+
+.activities_box:hover .activities_btn
+{ background: #fff; color: #333; }
+
+.activities_box:hover .activities_box_article
+{ margin-top: 0; opacity: 1; }
+
+
+
+
+
+/*guideline guideline   guideline   guideline   guideline */
+.guideline { width:100%; height: 500px; 
+background: url('../img/guideline.webp') center no-repeat; margin-bottom: 1px; color: #fff; display: flex; flex-wrap: wrap; flex-direction: column;
+justify-content: center; padding-left: 48px; box-sizing: border-box;
+}
+.guideline .contents_article { margin-bottom: 30px; }
+
+.guideline a { width: 245px; height: 35px; display: block;
+border: 2px solid #fff; border-radius: 20px; color: #fff; line-height: 35px; text-align: center; letter-spacing: -.5px;
+font-size: 15px; font-weight: 600; transition: 0.3s;  }
+.guideline a:hover { background: #fff; color: #333; }
+
+
+
+/* all        all           all         all      */
+
+.contents_title { font-size: 40px; font-weight: 700; letter-spacing: -3.5px; line-height: 110%;
+margin-bottom: 20px; }
+
+.contents_article { font-size: 18px; letter-spacing: -1.1px; 
+line-height: 150%; }
+
+.contents_box_img { width: 100%; border-radius: 15px; transition: .3s; }
+.contents_box_blind { position: absolute; width: 100%; height: 100%; z-index: 99;
+top: 0; left: 0; border-radius: 15px;}
+
+.activities, .sports, .group, .action, .guideline { margin-top: 220px; }
+
+
+
+
+
+
+/* mobile mobile mobile mobile mobile mobile mobile*/
+
+
+@media screen and (max-width: 1600px) {     
+    
+/* all      all      all      all      all      all      all       */
+
+/* header      header      header      header      header      header       */
+
+/* main         main         main         main         main         main          */
+
+
+
+/*group     group     group     group     group     group     group     group     group     group       */
+.group_box:first-child  { padding: 20px; box-sizing: border-box; }
+
+/* sports       sports      sports      sports      sports       */
+
+
+
+/*  action        action        action        action        action        action        action       */
+
+
+.action_text { padding: 30px; }
+.action_box:first-child .action_btn { right: 20px; }
+
+/* activities     activities     activities     activities     activities       */
+
+.activities_text { top: 0; left: 0; width: 100%; box-sizing: border-box; word-break: keep-all;
+padding: 30px;
+}
+
+
+/*  guideline        guideline        guideline        guideline        guideline         */
+
+
+
+
+    
+    
+}
+
+
+
+@media screen and (max-width: 1440px) {
+
+/* all      all      all      all      all      all      all       */
+
+/* header      header      header      header      header      header       */
+
+/* main         main         main         main         main         main          */
+
+/*group     group     group     group     group     group     group     group     group     group       */
+
+
+
+/* sports       sports      sports      sports      sports       */
+.sports { width: 95%; }
+.sports_box { width: 32.86%; margin-right: 0.71%; }
+
+
+
+/*  action        action        action        action        action        action        action       */
+
+.action_box:first-child { width: 40%; }
+.action_box:last-child { width: 59%; }
+
+.action_text .contents_article { font-size: 14px; }
+
+/* activities     activities     activities     activities     activities       */
+
+.activities { width: 95%;  }
+.activities_box:first-child { width: 56.78%; margin-right: 0.71%; }
+.activities_box:nth-child(2) { width: 42.5%; }
+.activities_box:nth-child(3), .activities_box:nth-child(4)
+{ width: 49.64%; }
+.activities_box:nth-child(3) { margin-right: 0.71%; }
+
+/*  guideline        guideline        guideline        guideline        guideline         */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+@media screen and (max-width: 1280px) {     
+
+/* all      all      all      all      all      all      all       */
+.contents_title { font-size: 34px; }
+.contents_article { font-size: 17px; }
+.activities, .sports, .group, .action, .guideline
+{ margin-top: 205px; }
+
+
+
+/* header      header      header      header      header      header       */
+
+header { margin-bottom: 0; }
+
+/* main         main         main         main         main         main          */
+.main_wrap { height: 660px; }
+.main_text { height: 590px; }
+.title1 { font-size: 58px; }
+
+
+/*group     group     group     group     group     group     group     group     group     group       */
+
+.group .contents_article br { display: none; }
+
+.group_box_img { height: 256px; }
+.group_box_img p { font-size: 22px; }
+.group .contents_article { width: 85%;}
+
+
+
+
+/* sports       sports      sports      sports      sports       */
+
+
+.sports_box { height: 271px; }
+.sports_box_text { font-size: 22px; }
+
+
+/*  action        action        action        action        action        action        action       */
+
+.action_box:first-child { display: flex; flex-wrap: wrap; flex-direction: column; justify-content: center; align-content: center; }
+.action_box:last-child .contents_box_img { height: 540px; }
+.action_text { position: static; text-align: center; }
+.action_text .contents_article { margin-bottom: 25px; }
+.action_box:first-child .action_btn { position: static; display: block; margin: 0 auto; }
+
+
+/* activities     activities     activities     activities     activities       */
+
+
+.activities_box_title { font-size: 22px; }
+
+/*  guideline        guideline        guideline        guideline        guideline         */
+
+.guideline { height: 450px; }
+    
+    
+    
+    
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 1024px) {     
+    
+/* all      all      all      all      all      all      all       */
+.contents_title { font-size: 30px; }
+.contents_article { font-size: 16px; }
+.activities, .sports, .group, .action, .guideline
+{ margin-top: 190px; }
+
+
+
+/* header      header      header      header      header      header       */
+
+/* main         main         main         main         main         main          */
+
+
+.main_wrap { height: 620px; }
+.main_text { height: 550px; }
+.title1 { font-size: 56px; }
+.main_text p { font-size: 17px; }
+
+/*group     group     group     group     group     group     group     group     group     group       */
+
+.group .contents_title { margin-bottom: 10px; }
+.group .contents_article br { display: block; }
+.group_box:first-child { width: 100%; height: 250px; margin: 0 0 10px 0; }
+.group_box:nth-child(2) { width: 100%; display: flex; flex-wrap: wrap; }
+.group_box_img { width: 49%; height: 217px; }
+.group_box_img:first-child { margin: 0 2% 0 0; }
+.group_box_img p { font-size: 21px; }
+
+
+/* sports       sports      sports      sports      sports       */
+
+.sports_box { height: 242px; }
+.sports_box_text { font-size: 21px; margin-bottom: 10px; text-align: center; }
+.sports_box .contents_box_img { flex-direction: column; justify-content: center;
+align-content: center; padding: 0;
+}
+.sports_btn { margin: 0 auto; }
+
+/*  action        action        action        action        action        action        action       */
+
+.action_box:last-child .contents_box_img { height: 480px; }
+.action_box:first-child { width: 100%; height: 200px; margin-bottom: 10px; }
+.action_box:last-child { width: 100%;  }
+.action_text { padding: 0; }
+.action_text .contents_title { margin-bottom: 10px; } 
+
+/* activities     activities     activities     activities     activities       */
+
+.activities_box:nth-child(1) .activities_btn,
+.activities_box:nth-child(2) .activities_btn,
+ .activities_box:nth-child(3) .activities_btn,
+.activities_box:nth-child(4) .activities_btn
+{ bottom: 30px; right: 20px; }
+
+.activities_box_title { font-size: 21px; }
+.action_text .contents_article { width: 50%; margin: 0 auto 20px auto; }
+/*  guideline        guideline        guideline        guideline        guideline         */
+
+.guideline { height: 400px; }
+    
+    
+    
+    
+}
+
+
+
+
+
+
+@media screen and (max-width: 800px) {     
+    
+/* all      all      all      all      all      all      all       */
+.contents_title { font-size: 28px; letter-spacing: -2.5px; }
+.contents_article { font-size: 15px; }
+.activities, .sports, .group, .action, .guideline
+{ margin-top: 175px; }
+
+
+/* header      header      header      header      header      header       */
+
+/* main         main         main         main         main         main          */
+
+.main_wrap { height: 580px; }
+.main_text { height: 510px; }
+.title1 { font-size: 54px; }
+.main_text p { font-size: 16px; }
+
+/*group     group     group     group     group     group     group     group     group     group       */
+
+.group_box_img { height: 178px; }
+.group_box_img p { font-size: 20px; }
+
+
+/* sports       sports      sports      sports      sports       */
+
+
+.sports_box { height: 213px; }
+.sports_box_text { font-size: 20px; }
+
+
+/*  action        action        action        action        action        action        action       */
+
+.action_box:last-child .contents_box_img { height: 420px; }
+.action_box:last-child .action_btn { 
+width: 90px; height: 30px; font-weight: 600; line-height: 30px;
+}
+.action_text .contents_article span { display: none; }
+.action_text .contents_article { width: 90%; }
+
+.action_box:first-child .action_btn {
+width: 95px; height: 30px;
+line-height: 30px; font-weight: 600; 
+font-size: 14px;
+}
+
+/* activities     activities     activities     activities     activities       */
+
+
+.activities_box:first-child { width: 100%; height: 130px; margin-right: 0; }
+
+.activities_box:nth-child(2),
+.activities_box:nth-child(3), .activities_box:nth-child(4)
+{ width: 100%;  }
+.activities_box:nth-child(3) { margin-right: 0; }
+
+.activities_box:nth-child(2) .contents_box_img,
+.activities_box:nth-child(3) .contents_box_img,
+.activities_box:nth-child(4) .contents_box_img
+{ background-size: cover; height: 150px;  }
+.activities_text .contents_title, .activities_box_title
+{ line-height: 130%; margin-bottom: 0; }
+.activities_box:first-child,
+.activities_box:nth-child(2),
+.activities_box:nth-child(3)
+{ margin-bottom: 5px; }
+
+.activities_box:first-child .activities_box_article { display: none; }
+.activities_box_title { font-size: 20px; }
+
+.activities_text { padding: 25px; }
+.activities_box:first-child .activities_text
+{ box-sizing: border-box; padding: 25px 30px; top: 3px; }
+.activities_box_article { display: none; }
+
+.activities_box:first-child .activities_btn { top: 45px; right: 30px; }
+
+
+
+
+
+
+
+/*  guideline        guideline        guideline        guideline        guideline         */
+.guideline { align-content: center; text-align: center; padding-left: 0;   height: 350px; }
+
+.guideline .contents_title { margin-bottom: 10px; }
+.guideline .contents_article { margin-bottom: 15px; }
+
+
+.guideline a { margin: 0 auto; width: 210px; height: 30px;
+line-height: 30px;
+}
+
+
+}
+
+
+@media screen and (max-width: 600px) {     
+    
+/* all      all      all      all      all      all      all       */
+.contents_title { font-size: 26px; }
+.contents_article { font-size: 14px; }
+.activities, .sports, .group, .action, .guideline
+{ margin-top: 160px; }
+
+
+
+/* header      header      header      header      header      header       */
+
+/* main         main         main         main         main         main          */
+
+.main_wrap { height: 540px; }
+.main_text { height: 470px; }
+.title1 { font-size: 52px; }
+.main_text p { font-size: 15px; }
+
+/*group     group     group     group     group     group     group     group     group     group       */
+.group_box_img { height: 139px; }
+.group_box_img p { font-size: 19px; margin-bottom: 5px; }
+.group_btn { width: 90px; height: 30px; line-height: 30px;
+font-weight: 700; font-size: 12px;
+}
+.group .contents_article br { display: none; }
+/* sports       sports      sports      sports      sports       */
+
+
+.sports_box { height: 184px; }
+.sports_box_text { font-size: 19px; }
+
+/*  action        action        action        action        action        action        action       */
+
+.action_box:last-child .contents_box_img { height: 360px; }
+
+/* activities     activities     activities     activities     activities       */
+
+
+.activities_box_title { font-size: 19px; }
+
+/*  guideline        guideline        guideline        guideline        guideline         */
+
+.guideline { height: 300px; }
+    
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 480px) { 
+
+/* all      all      all      all      all      all      all       */
+.contents_title { font-size: 23px; }
+.activities, .sports, .group, .action, .guideline
+{ margin-top: 145px; }
+
+
+
+/* header      header      header      header      header      header       */
+
+/* main         main         main         main         main         main          */
+
+
+.main_wrap { height: 500px; }
+.main_text { height: 430px; }
+.title1 { font-size: 50px; }
+.main_text p { width: 80%; margin: 0 auto; word-break: keep-all; }
+.main_text p span, .main_text p br  { display: none; }
+.main_btn { margin-top: 30px; }
+
+/*group     group     group     group     group     group     group     group     group     group       */
+.group_box:first-child { height: 150px; }
+.group .contents_title { margin-bottom: 0; line-height: 130%; }
+.group .contents_title br:last-child { display: block; }
+.group .contents_article { display: none; }
+.group_box_img { height: 100px; }
+.group_box_img p { font-size: 18px; }
+
+/* sports       sports      sports      sports      sports       */
+
+.sports_text .contents_title br { display: block; }
+.sports_text .contents_article { width: 90%; margin: 0 auto; word-break: keep-all; }
+.sports_text .contents_article br { display: none; }
+.sports_box { height: 155px; }
+.sports_box_text { font-size: 18px; }
+
+.sports_btn { width: 60px; height: 30px; line-height: 30px; font-size: 14px;
+font-weight: 600; text-shadow: 2px 5px 10px #000;
+}
+
+/*  action        action        action        action        action        action        action       */
+
+.action_box:last-child .contents_box_img { height: 300px; }
+.action_box:last-child p { line-height: 120%; }
+/* activities     activities     activities     activities     activities       */
+
+.activities_box:nth-child(2),
+.activities_box:nth-child(3), .activities_box:nth-child(4)
+{ height: 140px; }
+.activities_box:first-child {
+display: flex; flex-wrap: wrap; justify-content: center;
+align-items: center;}
+
+.activities_box:first-child .activities_text { position: static;  text-align: center; padding: 0; }
+.activities_box_title { font-size: 18px; }
+.activities_box:first-child .activities_btn { display: none; }
+
+.activities_box:nth-child(2) .activities_btn,
+.activities_box:nth-child(3) .activities_btn,
+.activities_box:nth-child(4) .activities_btn
+{ bottom: 25px; left: 20px; }
+
+.activities_box:nth-child(2) .activities_btn, .activities_box:nth-child(3)
+.activities_btn, .activities_box:nth-child(4) .activities_btn {
+line-height: 30px; width: 65px; height: 30px;
+font-size: 14px; font-weight: 600;
+}
+
+.activities_box:nth-child(2) .activities_box_title { line-height: 120%; }
+
+
+/*  guideline        guideline        guideline        guideline        guideline         */
+.guideline { height: 250px; }
+.guideline .contents_article { width: 95%; word-break: keep-all; }
+.guideline .contents_article span { display: none; }
+.guideline .contents_article br { display: none; }
+
+
+
+
+
+}

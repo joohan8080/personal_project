@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <title>리크루팅</title>
+        <style>
+            
+html { scroll-behavior: smooth; }
+* { margin: 0; padding: 0; vertical-align: top; box-sizing: border-box; }
+body { max-width: 800px; min-width: 320px; margin: 0 auto; font-size: 18px; font-family: 'Pretendard-Regular'; }
+li { list-style: none; }
+a { text-decoration: none; color: #333; }
+img { max-width: 100%; border: none; }
+p { color: #333; word-break: keep-all; }
+select { -webkit-appearance: none; appearance: none; color: #333; background-image: url(img/selct_arrow.png);
+background-repeat: no-repeat; background-position: center right 5px;}
+textarea {
+border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
+resize: none; box-sizing: border-box; -webkit-appearance: none; -moz-appearance: none; appearance: none;        
+}
+button { all: unset; cursor: pointer; padding: 0; margin: 0; font: inherit; color: inherit; }
+h1, h2, h3, h4, h5, h6, p { line-height: 120%; letter-spacing: -.05em; color: #333; }
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-Black';
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Black.woff2') format('woff2'),
+  url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+
+
+
+@font-face {
+    font-family: 'Cafe24Ohsquare';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Cafe24Ohsquare.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+/* top_fix */
+.top_fix { width: 100%; max-width: 800px; min-width: 320px; position: fixed; z-index: 9999; bottom: 0; box-sizing: border-box; }
+
+
+/* form */
+.form_wrap { background: #DEFFCD; }
+.form_wrap p { color: #333; font-size: 1.4em; }
+.form_tit { text-align: center; margin-bottom: 50px; font-size: 2em !important; font-weight: bolder; line-height: 150%; }
+.form_tit .tcolor { color: red; }
+.form_wrap .inner { width: 95%; margin: 0 auto; }
+.form_wrap ul li { margin-bottom: 20px; }
+.form_wrap .form_policy { margin-bottom: 40px; display: flex; flex-wrap: wrap; align-items: center; }
+.form_wrap .form_policy input { margin-right: 5px; cursor: pointer; }
+.form_wrap .form_policy label { cursor: pointer; margin-right: 5px; }
+.form_wrap ul li p:first-child { margin-bottom: 5px; font-size: 18px; font-weight: 600; }
+.form_wrap ul li p:nth-child(2) { font-size: 1em; margin-bottom: 10px; color: #666; }
+.form_wrap ul li input, .form_wrap ul li select { padding: 15px 10px; border-radius: 10px; border: 1px solid #e5e5e5; background-color: #fff; }
+.form_wrap ul li input[type="text"] { width: 100%; box-sizing: border-box; }
+.form_wrap .form_tel input, .form_wrap .form_tel select { width: 32% !important; }
+.form_wrap .form_select02 select { width: 100%; }
+.region_wrap .select_box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1%; }
+.form_wrap .form_text textarea { width: 100%; height: 80px; border-radius: 10px; }
+.form_wrap .form_policy, .form_wrap .form_policy a { font-size: 14px; }
+.phone { display: flex; align-items: center; gap: 5px; }
+.form_wrap button { width: 100%; padding: 1em 0; color: #fff; background: #008008; text-align: center;
+border-radius: .5em; font-size: 2em; font-weight: bolder; border: none; cursor: pointer; }
+
+input[type="radio"] { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
+.radio_wrap { display: flex; gap: 10px; }
+.radio_box { width: 100%; display: flex; align-items: center; height: 50px; }
+.radio_box input[type="radio"] { width: 100%; position: absolute; left: 50%; transform: translateX(-50%); transition: .3s;
+padding: 0; height: 50px; z-index: -1; cursor: pointer; }
+.radio_box label { position: relative; width: 100%; text-align: center; line-height: 50px; z-index: 1;
+color: #666; cursor: pointer; }
+.radio_box input[type="radio"]:checked { background: #008008; }
+.radio_box input[type="radio"]:checked + span { color: #fff; }
+#show-Box { cursor: pointer; }
+.form_wrap input::placeholder { color: #c5c5c5; }
+.form_btm { width: 95%; margin: 0 auto; text-align: center; padding: 2em 0; font-weight: normal; line-height: 150%; }
+.form_wrap .no_choice { color: #999 !important; }
+
+
+
+/* main */
+.main { background: #DEFFCD; }
+.main .inner { justify-content: flex-start; padding-top: 10%; }
+
+.main .con_tit { margin-bottom: 1.5em; display: flex; flex-direction: column; flex-wrap: wrap; justify-content: center; align-items: center; }
+.main .con_tit h3 { font-size: 2em; margin-bottom: 1em; }
+.main .con_tit h3 .tcolor { border-bottom: 3px solid #008008; }
+.main .con_tit h4:nth-child(2) { font-size: 2.5em; margin-bottom: .5em; color: #fff; background: #008008; padding: .3em .8em; }
+.main .con_tit h2:last-child { font-size: 4em; }
+
+.main_con { display: grid; grid-template-columns: repeat(2, 1fr); gap: .3em; width: 95%; margin: 0 auto; }
+.main_box { background: #fff; padding: .5em 1em; text-align: right; border: 2px solid #008008; }
+.main_box h4 { text-align: left; font-size: 1.5em; margin-bottom: .5em; }
+.main_box img { width: 15%; }
+
+
+
+
+
+/* count */
+.main_count { display: grid; grid-template-columns: repeat(2, 1fr); }
+.main_count_box { background: #008008; padding: 2em .1em; position: relative; }
+.main_count_box:after { position: absolute; content: ''; width: 1px; height: 100%; background: #fff; top: 50%; right: 0; transform: translateY(-50%); }
+.main_count_box:last-child:after { content: none; }
+.main_count_box .count { text-align: center; font-size: 1.4em; font-family: 'Cafe24Ohsquare'; font-weight: 400; color: #fff; }
+.main_count_box .tcolor { color: #FFFF00; }
+.main_count_box .count .num { display: inline-block; }
+
+.main_count_box:first-child .count { line-height: 170%; }
+.main_count_box:first-child .tcolor { font-size: 1.9em; }
+
+.main_count_box:last-child .count { font-size: 1.9em; }
+
+.main_count_box:nth-child(1) .count .num { width: 60px; }
+
+
+/* con1 */
+.con1 { background: #DEFFCD; }
+.con1 .inner { padding-bottom: 0; }
+.con1 .inner img { margin-bottom: 1em; }
+.con1 .inner img:last-child { margin-bottom: 0; }
+
+.con1 .con_tit h2 em { font-style: normal; border-bottom: 3px solid #333; margin-bottom: .2em; display: inline-block; }
+
+
+/* con3 */
+.con3 .con_tit h3 { font-size: 2em; margin-bottom: 1em; }
+.con3 .con_tit h2 { font-size: 2.5em; }
+.con3 .con_tit h3 .tcolor { border-bottom: 3px solid #008008; }
+
+
+.con3_contents { margin-bottom: 3em; }
+.con3_box { margin-bottom: .5em; }
+.con3_box:last-child { margin-bottom: 0; }
+
+.con3 .bg_inner a { display: block; background: #008008; padding: 1em 0; border-radius: 5em; }
+.con3 .bg_inner a h2 { font-size: 2em; color: #fff; text-align: center; }
+.con3 .bg_inner a h2 .tcolor { color: #FFFF00; }
+/* con4 */
+
+.con4 .con_tit h3 { font-size: 2em; margin-bottom: .5em; }
+
+
+
+
+
+
+
+/* con7 */
+
+/* col_label */
+.con7 { background: #008008; padding-bottom: 10em; }
+.con7 .con_tit { margin-bottom: 5em; }
+.con7 .con_tit h2 { text-align: center; font-size: 2.8em; letter-spacing: -.05em;  color: #fff; }
+.col_label { border-radius: 15px; overflow: hidden; padding: 0 1.5em 0 1em; background: #fff; }
+.col_box { width: 100%; height: auto; display: flex; justify-content: space-between; align-items: center; padding: 2em 1em; }
+.col_box p { color: #333; font-size: 1.5em; letter-spacing: -.05em; }
+.col_box p:last-child { color: #fff; padding: .5em 1em; background: #008008; border-radius: 5em; margin-right: -1em; }
+.col_box p:nth-child(2) { margin-left: 1em; }
+
+.con7 .swiper { width: 100%; height: 300px; }
+.con7 .swiper, .con7 .swiper-wrapper { touch-action: auto !important; }
+
+.con7_wid { padding: .5em 1.4em !important; }
+
+
+
+
+
+/* all */
+.con_tit p { font-size: 2em; }
+.bg { width: 100%; position: relative; overflow: hidden; }
+.bg > img { width: 100%; object-fit: contain; }
+.tcolor { color: #008008; }
+.bg_inner { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 1em; }
+.inner { width: 95%; margin: 0 auto; padding: 15% 0; }
+h2 { font-size: 2.5em; letter-spacing: -.05em; font-family: 'Cafe24Ohsquare'; font-weight: 400; }
+h3 { font-size: 1.5em; letter-spacing: -.05em; font-family: 'Cafe24Ohsquare'; font-weight: 400; }
+h4 { font-family: 'Pretendard-Black'; }
+.con_tit { text-align: center; margin-bottom: 3em; }
+
+
+
+
+/* animation */
+.form_wrap button { animation: form_btn 2s infinite forwards; }
+
+@keyframes form_btn {
+0% { border-bottom: 10px solid #015506; box-sizing: border-box; color: #F6FF00; margin-top: -10px; }
+50% { border-bottom: 10px solid #015506; box-sizing: border-box; color: #F6FF00; margin-top: -10px; }
+50.01% { border-bottom: none; box-sizing: content-box; color: #fff; margin-top: 0; }
+100% { border-bottom: none; box-sizing: content-box; color: #fff; margin-top: 0; }
+}
+
+
+.main .con_tit h2:last-child .tcolor { animation: main_color 2s infinite forwards; }
+@keyframes main_color {
+0% { color: #008008; }
+50% { color: #008008; }
+50.1% { color: #333; }
+100% { color: #333; }
+}
+
+.main_box { animation: main_box 4s infinite forwards; }
+.main_box:nth-child(1) { animation-delay: 0s; }
+.main_box:nth-child(2) { animation-delay: 1s; }
+.main_box:nth-child(3) { animation-delay: 2s; }
+.main_box:nth-child(4) { animation-delay: 3s; }
+
+
+@keyframes main_box {
+0% { background: #FFFF00; }
+25% { background: #FFFF00; }
+25.01% { background: #fff; }
+100% { background: #fff; }
+
+}
+
+
+
+
+.con3 .bg_inner a { animation: con3_link 2s infinite forwards; }
+@keyframes con3_link { 
+0% { background: #008008; }
+50% { background: #008008; }
+50.1% { background: #000; }
+100% { background: #000; }
+
+}
+
+
+
+
+/* media screen */
+
+@media screen and (max-width: 600px) {
+body { font-size: 15px; }
+
+
+.main_count_box:nth-child(1) .count .num { width: 55px; }
+.main_count_box:nth-child(2) .count .num { width: 185px; }
+
+
+}
+
+
+
+
+@media screen and (max-width: 480px) {
+body { font-size: 10px; }
+.radio_box span { font-size: 15px; }   
+
+
+
+.main_count_box:nth-child(1) .count .num { width: 35px; }
+.main_count_box:nth-child(2) .count .num { width: 120px; }
+
+}
+        </style>
+    </head>
+
+    <body>
+        <section class="top_fix">
+            <a href="tel:01090843139">
+                <img src="img/recruit/banner.png" alt="전화연결">
+            </a>
+        </section> <!-----top_fix----->
+
+
+        <section class="main">
+            <div class="inner">
+                <div class="con_tit">
+                    <h3>하반기 한정 <span class="tcolor">프로모션</span> 진행중!</h3>
+                    <h4>2025 하반기</h4>
+                    <h2><span class="tcolor">보험설계사<br>대규모채용</span></h2>
+                </div>
+
+                <div class="main_con">
+                    <div class="main_box">
+                        <h4>온라인DB,대면DB<br><span class="tcolor">무료지원!!</span></h4>
+                        <img src="img/recruit/main_ico.png" alt="아이콘">
+                    </div>  <!-----main_box----->
+                    <div class="main_box">
+                        <h4>수수료+시책+<br>자체시상 <span class="tcolor">추가지급</span></h4>
+                        <img src="img/recruit/main_ico.png" alt="아이콘">
+                    </div>  <!-----main_box----->
+                    <div class="main_box">
+                        <h4>완벽한 업무 및<br><span class="tcolor">교육지원</span></h4>
+                        <img src="img/recruit/main_ico.png" alt="아이콘">
+                    </div>  <!-----main_box----->
+                    <div class="main_box">
+                        <h4>지사장 및 본부장<br><span class="tcolor">승격지원</span></h4>
+                        <img src="img/recruit/main_ico.png" alt="아이콘">
+                    </div>  <!-----main_box----->
+                </div>  <!-----main_con----->
+                
+            </div> <!-----inner----->
+            <img src="img/recruit/main_btm.webp" alt="사람" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+        </section> <!-----main----->
+
+        <section class="main_btm">
+            <div class="main_count">
+                <div class="main_count_box count_con">
+                    <p class="count">현재 지원자<br><span class="num tcolor m_color">62</span><span class="tcolor m_color">명</span></p>
+                </div>
+                <div class="main_count_box">
+                    <p class="count">신입/경력 모두<br><span class="tcolor">환영합니다</span></p>
+                </div>
+            </div>
+        </section> <!-----main_btm----->
+
+        <section class="con1">
+            <div class="inner">
+                <div class="con_tit">
+                    <h2><em>6개월 안에</em><br><span class="tcolor">억대연봉</span> 가능</h2>
+                </div>
+                <img src="img/recruit/con1_item01.png" alt="경력단절">
+                <img src="img/recruit/con1_item02.png" alt="경력단절">
+                <img src="img/recruit/con1_item03.png" alt="경력단절">
+            </div> <!-----inner----->
+        </section> <!-----con1----->
+
+
+
+
+        <section class="form_wrap" id="form_wrap-sec">
+            <div class="inner">
+                <form method="post" action="apply.html" id="myModal1" name="page_form">
+                    <ul>
+
+                        <li class="form_name">
+                            <p>성함</p>
+                            <input type="text" name="name" maxlength="10" placeholder="성함" required/>
+                        </li> <!----form_name------->
+
+                        <li class="form_tel">
+                            <p>연락처</p>
+                            <div class="phone">
+                                <select name="tel1"><option>010</option></select>
+                                <div>-</div> 
+                                <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                <div>-</div>
+                                <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                            </div>
+                        </li> <!----form_tel------->
+
+                        <li class="form_radio">
+                            <p>경력유무</p>
+                            <div class="radio_wrap">
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option1" type="radio" value="경력" required>
+                                        <span>경력</span>
+                                    </label>
+                                </div>
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option1" type="radio" value="신입" required> 
+                                        <span>신입</span>
+                                    </label>
+                                </div>                            
+                            </div>
+                        </li>  <!----form_radio------->
+
+                        <li class="form_policy">
+                            <input id="policy" type="checkbox" value="동의" checked required> 
+                            <label for="policy">개인정보처리방침 동의</label>
+                            <span id="show-Box">[약관보기]</span>
+                        </li>  <!----form_policy------->
+                    </ul> <!---------ul--------->
+        
+                    <button type="submit">2025 하반기 입사지원하기</button>
+                </form> <!---------form--------->
+            </div> <!---------inner--------->
+
+            <!-- <p class="form_btm"></p> -->
+
+        </section> <!---------form_wrap--------->
+
+
+        
+        <section class="con2">
+            <div class="inner">
+                <div class="con_tit">
+                    <h2>초보자, 경력자<br><span class="tcolor">모두 할 수 있습니다!</span></h2>
+                </div>
+                <img src="img/recruit/con2_item.webp" alt="초보자" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
+            </div> 
+        </section>  <!---------con2--------->
+
+        <section class="con3 bg">
+            <img src="img/recruit/con3_bg.webp" alt="배경이미지">
+            <div class="bg_inner">
+                <div class="con_tit">
+                    <h3><span class="tcolor">고민하면 늦어요!</span></h3>
+                    <h2>하반기 입사 한정 <span class="tcolor">프로모션</span></h2>
+                </div>
+                <div class="con3_contents">
+                    <div class="con3_box">
+                        <img src="img/recruit/con3_item01.png" alt="지원" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    </div>
+                    <div class="con3_box">
+                        <img src="img/recruit/con3_item02.png" alt="지원" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                    </div>
+                    <div class="con3_box">
+                        <img src="img/recruit/con3_item03.png" alt="지원" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                    </div>
+                    <div class="con3_box">
+                        <img src="img/recruit/con3_item04.png" alt="지원" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                    </div>
+                </div>  <!---------con3_contnets--------->
+
+                <a href="#form_wrap-sec"><h2>하반기 입사 <span class="tcolor">프로모션</span> 받으러 가기 ></h2></a>
+            </div>  <!---------bg_inner--------->
+        </section> <!---------con3--------->
+
+        <section class="con4 bg">
+            <img src="img/recruit/con4_bg.webp" alt="배경이미지">
+            <div class="bg_inner">
+                <div class="con_tit">
+                    <h3>보험설계사</h3>
+                    <h2>신입/경력 <span class="tcolor">대규모 채용</span></h2>
+                </div>
+                <img src="img/recruit/con4_item01.png" alt="채용정보" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
+            </div> <!---------bg_inner--------->
+        </section> <!---------con4--------->
+
+        <section class="con7">
+            <div class="inner">
+                <div class="con_tit">
+                    <h2>실시간 상담신청 현황</h2>
+                </div>
+
+                <div class="col_label swiper mySwiper">
+                    <div class="col_contents swiper-wrapper">
+                        <div class="col_box swiper-slide">
+                            <p>한**</p>
+                            <p>010-****-7071</p>
+                            <p class="con7_wid">접수중</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>양**</p>
+                            <p>010-****-4625</p>
+                            <p>접수완료</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>강**</p>
+                            <p>010-****-4625</p>
+                            <p class="con7_wid">접수중</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>박**</p>
+                            <p>010-****-8252</p>
+                            <p>접수완료</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>장**</p>
+                            <p>010-****-2040</p>
+                            <p class="con7_wid">접수중</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>안**</p>
+                            <p>010-****-8592</p>
+                            <p class="con7_wid">접수중</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>구**</p>
+                            <p>010-****-9694</p>
+                            <p>접수완료</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>이**</p>
+                            <p>010-****-1133</p>
+                            <p class="con7_wid">접수중</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>이**</p>
+                            <p>010-****-2782</p>
+                            <p>접수완료</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>심**</p>
+                            <p>010-****-3025</p>
+                            <p class="con7_wid">접수중</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> <!----con7------->
+
+        
+        <script>
+            AOS.init({
+            once: false,          // 반복 실행
+            startEvent: 'load',   // 시작 타이밍
+            });
+        </script>
+
+        <!-- Swiper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+        <!-- Initialize Swiper -->
+        <script>
+            var swiper = new Swiper(".col_label", {
+                direction: "vertical",
+                slidesPerView: 5,
+                spaceBetween: 0,
+                allowTouchMove: false,              // 슬라이드 드래그만 막기
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                autoplay: {
+                delay: 1000,
+                disableOnInteraction: false
+            },
+            });
+        </script>
+
+    
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(function () {
+                const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                    const $el = $(entry.target);
+                    const target = Number($el.attr('data-target'));
+
+                    if (!target) return;
+
+                    setTimeout(() => {
+                        $el.prop('Counter', 0).stop().animate({
+                        Counter: target
+                        }, {
+                        duration: 1700,
+                        easing: 'swing',
+                        step: function (now) {
+                            $el.text(Math.ceil(now).toLocaleString());
+                        }
+                        });
+                    }, 500); // ← 여기서 0.5초 딜레이 설정 // ✅ 0.5초(500ms) 딜레이 후 카운트 시작
+                    }
+                });
+                }, { threshold: 0.5 });
+
+                // 초기 숫자값을 data-target 속성에 저장
+                $('.num').each((_, el) => {
+                const $el = $(el);
+                const target = Number($el.text().replace(/,/g, '').trim());
+                $el.attr('data-target', target);
+                observer.observe(el);
+                });
+            });
+        </script>
+
+
+        <script>
+            // 팝업 창
+            const openPop = document.getElementById("show-Box");
+            openPop.addEventListener('click', () => {
+                const popup = window.open(
+                    'policy.html', // 조약 내용을 담은 실제 경로
+                    '개인정보이용동의',
+                    'width=800,height=600,scrollbars=yes'
+                );
+    
+                if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                    alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+                }
+            });
+        </script>
+
+    </body>
+
+
+
+</html>

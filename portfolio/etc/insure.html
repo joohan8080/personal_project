@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <title>간병인보험</title>
+        <style>
+            html { scroll-behavior: smooth; }
+* { margin: 0; padding: 0; vertical-align: top; box-sizing: border-box; }
+body { max-width: 800px; min-width: 320px; margin: 0 auto; font-size: 18px; font-family: 'Pretendard-Regular'; }
+li { list-style: none; }
+a { text-decoration: none; color: #333; }
+img { max-width: 100%; border: none; }
+p { color: #333; word-break: keep-all; }
+select { -webkit-appearance: none; appearance: none; color: #333; background-image: url(img/selct_arrow.png);
+background-repeat: no-repeat; background-position: center right 5px;}
+textarea {
+border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
+resize: none; box-sizing: border-box; -webkit-appearance: none; -moz-appearance: none; appearance: none;        
+}
+button { all: unset; cursor: pointer; padding: 0; margin: 0; font: inherit; color: inherit; }
+h1, h2, h3, h4, h5, h6, p { line-height: 120%; letter-spacing: -.05em; color: #333; }
+label { color: #333; }
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard-Black';
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Black.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Black.woff') format('woff');
+}
+
+/* top_fix */
+.top_fix { width: 100%; max-width: 800px; min-width: 320px; position: fixed; background: #ffffffea; z-index: 9999;
+display: flex; justify-content: space-between; align-items: center; padding: 15px 10px; box-sizing: border-box; }
+.top_fix p { font-size: 1.5em; letter-spacing: -.05em; font-weight: bolder; color: #333; }
+.top_fix a { display: block; padding: 5px 15px; background: #FF5656; color: #fff; 
+border-radius: 30px; font-weight: bolder; letter-spacing: -.05em; font-size: 1.4em; }
+.top_padding { padding-top: 56px; }
+
+/* form */
+.form_wrap p { color: #333; font-size: 1.4em; }
+.form_wrap { padding: 10% 0; background: #fff; }
+.form_tit { text-align: center; margin-bottom: 50px; font-size: 2em !important; font-weight: bolder; line-height: 150%; }
+.form_tit .tcolor { color: red; }
+.form_wrap .inner { width: 95%; margin: 0 auto; padding: 2em 1em; }
+.form_wrap ul li { margin-bottom: 20px; }
+.form_wrap .form_policy { margin-bottom: 40px; display: flex; flex-wrap: wrap; align-items: center; }
+.form_wrap .form_policy input { margin-right: 5px; cursor: pointer; }
+.form_wrap .form_policy label { cursor: pointer; margin-right: 5px; }
+.form_wrap ul li p:first-child { margin-bottom: 5px; font-size: 18px; font-weight: 600; }
+.form_wrap ul li p:nth-child(2) { font-size: 1em; margin-bottom: 10px; color: #666; }
+.form_wrap ul li input, .form_wrap ul li select { padding: 15px 10px; border-radius: 10px; border: 1px solid #e5e5e5; background-color: #fff; }
+.form_wrap ul li input[type="text"] { width: 100%; box-sizing: border-box; }
+.form_wrap .form_tel input, .form_wrap .form_tel select { width: 32% !important; }
+.form_wrap .form_select02 select { width: 100%; }
+.region_wrap .select_box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1%; }
+.form_wrap .form_text textarea { width: 100%; height: 80px; border-radius: 10px; }
+.form_wrap .form_policy, .form_wrap .form_policy a { font-size: 14px; }
+.phone { display: flex; align-items: center; gap: 5px; }
+.form_wrap button { width: 100%; padding: 1em 0; color: #fff; background: #FF5656; text-align: center;
+border-radius: 10em; font-size: 2em; font-weight: bolder; border: none; cursor: pointer; }
+
+input[type="radio"] { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
+.radio_wrap { display: flex; gap: 5px; }
+.radio_box { width: 100%; display: flex; align-items: center; height: 50px; }
+.radio_box input[type="radio"] { width: 100%; position: absolute; left: 50%; transform: translateX(-50%); transition: .3s;
+padding: 0; height: 50px; z-index: -1; cursor: pointer; }
+.radio_box label { position: relative; width: 100%; text-align: center; line-height: 50px; z-index: 1;
+color: #666; cursor: pointer; }
+.radio_box input[type="radio"]:checked { background: #FF007D; }
+.radio_box input[type="radio"]:checked + span { color: #fff; }
+#show-Box { cursor: pointer; }
+.form_wrap input::placeholder { color: #c5c5c5; }
+.form_btm { width: 95%; margin: 0 auto; text-align: center; padding-top: 2em; font-weight: normal; line-height: 150%; }
+.form_wrap .no_choice { color: #999 !important; }
+
+.check_box { border: 2px solid #e5e5e5; margin-bottom: .5em; border-radius: 10px; transition: .3s; cursor: pointer; }
+.check_box span { font-size: 1.2em; color: #333; transition: .3s; }
+.check_box label { display: flex; align-items: center; gap: 5px; cursor: pointer; padding: 1em .5em;  }
+.check_box:last-child { margin-bottom: 0; }
+.check_box input[type="checkbox"] {  -webkit-appearance: none; /* Safari, Chrome */ -moz-appearance: none;    /* Firefox */
+appearance: none; /* 표준 */ margin: 0; padding: 0;  border: none; outline: none; cursor: pointer; transition: .3s;
+width: 20px; aspect-ratio: 1 / 1;   /* 1:1 비율 = 정사각형 */  position: relative; border: 2px solid #e5e5e5;
+} 
+.check_box input[type="checkbox"]:checked::before {
+content: '✔'; font-size: 1em; color: white; position: absolute; top: 50%; left: 50%;
+transform: translateX(-50%) translateY(-50%); }
+.check_box input[type="checkbox"]:checked { background-color: #FF007D; border-color: #FF007D; }
+
+.check_box:has(input[type="checkbox"]:checked) { background: #FF007D; }
+.check_box input[type="checkbox"]:checked + span { color: #fff; }
+input.check_choice:focus { outline: 2px solid #FF007D; }
+
+.check_grid { margin-bottom: .5em; display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+.check_grid {  border-radius: 10px; }
+.check_grid .check_box { margin-bottom: 0; }
+.check_grid .check_box span { font-size: 1em; }
+.check_grid:last-child { margin-bottom: 0; }
+
+.form_bir{ width: 100%; position: relative; }
+.bir-sel{ width: 100%; display: flex; justify-content: space-between; align-items: end;
+position: relative; }
+.bir-sel >div{position: relative;}
+.bir-Y{ width: 40%; }
+.bir-B{ width: 30%; }
+.bir-sel select{ width: 80%; margin-right: 0.3em; text-align: center; }
+.bir-sel label{ position: absolute; bottom: 0.5em; right: 5%; font-size: 1.5em; }
+.birth { grid-template-columns: repeat(3, 1fr) !important; }
+
+/* main */
+.main .bg_inner { justify-content: flex-end; padding-bottom: 110%; }
+.main .con_tit { margin-bottom: 0; }
+.main .con_tit p:first-child { margin-bottom: .6em; font-size: 1.7em; border-bottom: 2px solid #FF5656; display: inline-block; }
+.main .con_tit h2 { margin-bottom: .5em; font-size: 2.7em; }
+/* con1 */
+.con1 .inner { overflow: hidden; }
+.con1 .con_tit h2 { font-size: 3em; }
+.con1_contents { text-align: center; }
+.con1_contents img { margin-bottom: 1.5em; }
+.con1_contents img:last-child { margin-bottom: 0; }
+
+/* con1-1 */
+.con1-1 { background: #FFF3F3; }
+.con1-1 .con_tit { margin-bottom: 4em; }
+.con1-1 .con_tit h2 { font-size: 3em; }
+.con1-1_wrap { padding: 2em; background: #fff; border-radius: .5em; box-shadow: 2px 2px 10px 2px #00000025;  
+-webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
+.con1-1_wrap h3 { text-align: center; font-size: 2em; color: #FF5656; margin-bottom: 1.5em; }
+
+.con1-1_contents { display: flex; align-items: center; justify-content: space-between; }
+
+.con_1-1box:first-child h4 { color: #fff; padding: .1em .5em; display: inline-block; background: #FF5656; text-align: center; margin-bottom: .5em;
+font-size: 1.7em; border-radius: 5em; }
+.con_1-1box:first-child p:nth-child(2) { font-size: 1.2em; margin-bottom: .2em; }
+.con_1-1box:first-child p:nth-child(3) { font-size: .8em; color: #666; }
+
+.con_1-1box:last-child { display: flex; align-items: flex-end; }
+.graph_box { text-align: center; width: 30%; }
+.graph_box:first-child { width: 40%; }
+.graph_box:first-child > h4 { font-size: 1.3em; }
+.graph_box:nth-child(2) { margin-right: .5em; }
+.graph_box h4:first-child { margin-bottom: .5em; color: #666; font-size: 1.3em; }
+.graph_box p { font-size: 1.1em; } 
+
+.box1-1 { position: relative; margin-bottom: .5em; }
+.box1-1 h4 { position: absolute; color: #fff; top: 50%; width: 100%; text-align: center; left: 0; transform: translateY(-65%); font-size: 1.5em; }
+
+.graph_box div:nth-child(2) { width: 2em; height: 5em; background: #999999; border-radius: 5em; margin: 0 auto; margin-bottom: 1em; opacity: 0; }
+.graph_box:first-child div:nth-child(2) { background: #FF5656; height: 7em; }
+.graph_box:nth-child(2) div:nth-child(2) { height: 12em; }
+
+
+
+
+/* con2 */
+.con2 .inner { padding-bottom: 0; }
+.con2 .con_tit { margin-bottom: 15em; }
+
+.con2_contents { text-align: center; position: relative; }
+.con2_contents img:first-child { width: 55%; position: absolute; right: 1em; top: -6em; }
+.con2_contents img:last-child { position: relative; width: 100%; }
+
+/* con3 */
+.con3 { background: #FFF3F3; }
+.con3 .con_tit { margin-bottom: 5em; }
+.con3 .con_tit h2 { font-size: 1.6em; letter-spacing: .1em; margin-bottom: .5em; }
+.con3 .con_tit p:nth-child(2) { font-size: 2em; font-weight: bolder; margin-bottom: .5em; }
+.con3 .con_tit p:nth-child(3) { font-size: 1.3em;  }
+.con3_contents img { margin-bottom: 1.5em; }
+.con3_contents img:last-child { margin-bottom: 0; }
+
+
+/* con4 */
+.con4 .con_tit { margin-bottom: 4em; }
+.con4 .con_tit h2 { font-size: 2.5em; }
+.con4_contents img { margin-bottom: 1.5em; }
+.con4_contents img:last-child { margin-bottom: 0; }
+
+
+/* con5 */
+.con5 .bg_inner { text-align: center; padding-bottom: 0; justify-content: flex-end; }
+.con5 .bg_inner img { width: 100%; margin: 0 auto; }
+.con5 .con_tit { margin-bottom: 1.5em; }
+.con5 .con_tit h2 { margin-bottom: .5em; font-size: 1.9em; }
+.con5 .con_tit p { font-size: 1.3em; }
+
+.con5_btn { display: flex; gap: .5em; justify-content: center; margin-bottom: 3em; }
+.con5_btn p { font-size: 1.4em; padding: .5em 1em; background: #FF5656; color: #fff; border-radius: 5em; }
+
+
+
+/* all */
+.con_tit p { font-size: 1.5em; }
+.bg { width: 100%; position: relative; overflow: hidden; }
+.bg > img { width: 100%; object-fit: contain; }
+.tcolor { color: #FF5656; } 
+.bg_inner { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 1em; }
+.inner { width: 95%; margin: 0 auto; padding: 15% 0; }
+h2 { font-size: 2em; letter-spacing: 0; font-family: 'Pretendard-Black'; }
+h3 { font-size: 1.5em; letter-spacing: -.05em; font-family: 'Pretendard-Black'; }
+h4 { font-family: 'Pretendard-Black'; }
+.con_tit { text-align: center; margin-bottom: 2.5em; }
+
+
+
+
+
+
+
+/* animation */
+.form_wrap button { animation: form_btn 2s infinite forwards; }
+
+@keyframes form_btn {
+0% { border-bottom: 10px solid #c92e2e; box-sizing: border-box; color: #F6FF00; margin-top: -10px; }
+50% { border-bottom: 10px solid #c92e2e; box-sizing: border-box; color: #F6FF00; margin-top: -10px; }
+50.01% { border-bottom: none; box-sizing: content-box; color: #fff; margin-top: 0; }
+100% { border-bottom: none; box-sizing: content-box; color: #fff; margin-top: 0; }
+}
+
+
+.con5_btn p { animation: con5_btn 3s cubic-bezier(0,.900,0,0.99) forwards infinite; }
+.con5_btn p:nth-child(1) { animation-delay: 0s; }
+.con5_btn p:nth-child(2) { animation-delay: 1s; }
+.con5_btn p:nth-child(3) { animation-delay: 2s; }
+@keyframes con5_btn {
+0%   { transform: scale(1); }
+30%  { transform: scale(1.05); box-shadow: 3px 3px 3px 1px #6b59214f; }
+60%  { transform: scale(1); }
+100% { transform: scale(1); }
+}
+
+
+.con2_contents img:first-child { animation: con2_motion 1s linear infinite alternate; }
+
+@keyframes con2_motion {
+0% { transform: translateY(-3%) }
+100% { transform: translateY(3%) }
+}
+
+
+/* media screen */
+
+@media screen and (max-width: 600px) {
+body { font-size: 15px; }
+
+}
+@media screen and (max-width: 480px) {
+body { font-size: 10px; }
+.radio_box span { font-size: 15px; }   
+
+
+.box1-1 img { width: 80%; }
+
+}
+
+
+
+.scale-in-ver-bottom {
+	-webkit-animation: scale-in-ver-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: scale-in-ver-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+
+.graph_box:nth-child(1) .scale-in-ver-bottom { animation-delay: 0s; }
+.graph_box:nth-child(2) .scale-in-ver-bottom { animation-delay: 1s; }
+.graph_box:nth-child(3) .scale-in-ver-bottom { animation-delay: 2s; }
+
+
+
+
+/**
+ * ----------------------------------------
+ * animation scale-in-ver-bottom
+ * ----------------------------------------
+ */
+@-webkit-keyframes scale-in-ver-bottom {
+  0% {
+    -webkit-transform: scaleY(0);
+            transform: scaleY(0);
+    -webkit-transform-origin: 0% 100%;
+            transform-origin: 0% 100%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+    -webkit-transform-origin: 0% 100%;
+            transform-origin: 0% 100%;
+    opacity: 1;
+  }
+}
+@keyframes scale-in-ver-bottom {
+  0% {
+    -webkit-transform: scaleY(0);
+            transform: scaleY(0);
+    -webkit-transform-origin: 0% 100%;
+            transform-origin: 0% 100%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+    -webkit-transform-origin: 0% 100%;
+            transform-origin: 0% 100%;
+    opacity: 1;
+  }
+}
+
+        </style>
+    </head>
+
+    <body>
+        <section class="top_fix">
+            <p>여러분에게 꼭 필요한 간병인보험!</p>
+            <a href="#form_wrap-sec">상담 신청하기</a>
+        </section> <!-----top_fix----->
+        <div class="top_padding"></div>
+
+        <section class="main bg">
+            <img src="img/insure/main_bg.webp" alt="배경이미지">
+            <div class="bg_inner">
+                <div class="con_tit">
+                    <p>빠르고 간편한 <span class="tcolor">보험료 비교견적</span> 서비스</p>
+                    <h2><span class="tcolor">간병인 보험비교 한번에!</span></h2>
+                    <p>정보입력 후 보험료 계산까지<br><span class="tcolor">쉽고, 빠르게</span> 결과를 비교해보세요!</p>
+                </div>
+            </div>
+        </section>  <!-----main----->
+
+        <section class="con1">
+            <div class="inner">
+                <div class="con_tit">
+                    <h2><span class="tcolor">간병보험</span>, 왜 필요할까?</h2>
+                </div>
+
+                <div class="con1_contents">
+                    <img src="img/insure/con1_item01.png" alt="부담" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
+                    <img src="img/insure/con1_item02.png" alt="증가" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400">
+                    <img src="img/insure/con1_item03.png" alt="감소" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="600">
+                </div>
+            </div>
+        </section> <!-----con1----->
+
+        <section class="con1-1">
+            <div class="inner">
+                <div class="con_tit">
+                    <h2><span class="tcolor">간병비 준비,</span><br>어떻게 하고 계신가요?</h2>
+                </div>
+
+                <div class="con1-1_wrap">
+                    <h3>감당하기 어려운 간병비!</h3>
+                    <div class="con1-1_contents">
+                        <div class="con_1-1box">
+                            <h4>간병비지옥</h4>
+                            <p>간병비 월평균 <span class="tcolor">370만원<br>자녀소득 60%</span> 쓴다</p>
+                            <p>*단위: 원</p>
+                        </div>  <!-----con_1-1box----->
+
+                        <div class="con_1-1box">
+                            <div class="graph_box">
+                                <div class="box1-1">
+                                    <img src="img/insure/con1-1_tbox.png" alt="말풍선">
+                                    <h4>370만</h4>
+                                </div>
+                                <div class="scale-target"></div>
+                                <h4><span class="tcolor">월평균<br>간병비</span></h4>
+                            </div>  <!-----graph_box----->
+
+                            <div class="graph_box">
+                                <h4>588만</h4>
+                                <div class="scale-target"></div>
+                                <p>40대<br>가구</p>
+                            </div>  <!-----graph_box----->
+
+                            <div class="graph_box">
+                                <h4>224만</h4>
+                                <div class="scale-target"></div>
+                                <p>65세<br>이상 가구</p>
+                            </div>  <!-----graph_box----->
+                        </div> <!-----con_1-1box----->
+
+                    </div> <!-----con1-1_contents----->
+                    
+                </div>  <!-----con1-1_wrap----->
+            </div>  <!-----bg_inner----->
+        </section> <!-----con1-1----->
+
+        <section class="con2">
+            <div class="inner">
+                <div class="con_tit">
+                    <h2><span class="tcolor">가족경제</span>에 어려움을 줄 수 있는 <span class="tcolor">간병</span></h2>
+                </div>
+
+            </div>   <!-----inner----->
+            <div class="con2_contents">
+                <img src="img/insure/con2_tit.png" alt="말풍선">
+                <img src="img/insure/con2_per.png" alt="사람">
+            </div>  <!-----con2_contents----->
+        </section>  <!-----con2----->
+
+        <section class="con3">
+            <div class="inner">
+                <div class="con_tit">
+                    <h2><span class="tcolor">걱정하지 마세요!</span></h2>
+                    <p>고민되는 <span class="tcolor">간병보험</span><br>내 상황에 맞는 보장을 추천해드립니다.</p>
+                    <p>나에게 맞는 <span class="tcolor">맞춤 보험설계</span>를 통해 보험료를 한눈에 비교하세요</p>
+                </div>
+
+                <div class="con3_contents">
+                    <img src="img/insure/con3_item01.png" alt="보험사">
+                    <img src="img/insure/con3_item02.png" alt="보험사">
+                    <img src="img/insure/con3_item03.png" alt="보험사">
+                </div>
+            </div>
+        </section>  <!-----con3----->
+
+        <section class="con4">
+            <div class="inner">
+                <div class="con_tit">
+                    <h2>간병보험 <span class="tcolor">보장항목</span> 핵심</h2>
+                </div>
+
+                <div class="con4_contents">
+                    <img src="img/insure/con4_item01.png" alt="간병지원" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
+                    <img src="img/insure/con4_item02.png" alt="재가급여" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400">
+                    <img src="img/insure/con4_item03.png" alt="생활자금" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="600">
+                </div> <!-----con4_contents----->
+            </div> <!-----inner----->
+        </section> <!-----con4----->
+
+        <section class="con5 bg">
+            <img src="img/insure/con5_bg.webp" alt="배경이미지">
+            <div class="bg_inner">
+                <div class="con_tit">
+                    <h2>부담되는 간병인 사용비용 든든하게 <span class="tcolor">보장</span></h2>
+                    <p>복잡한 간병보험 찾기부터 가입까지 <span class="tcolor">한꺼번에 확인</span>해보세요!</p>
+                </div>
+                <div class="con5_btn">
+                    <p>보험료 확인</p>
+                    <p>보험 혜택</p>
+                    <p>보험 비교</p>
+                </div>
+                <img src="img/insure/con5_per.webp" alt="사람">
+            </div>
+        </section> <!-----con5----->
+
+
+        <section class="form_wrap" id="form_wrap-sec">
+            <div class="inner">
+                <form method="post" action="apply.html" id="myModal1" name="page_form">
+                    <ul>
+                        <li class="form_name">
+                            <p>성함</p>
+                            <input type="text" name="name" maxlength="10" placeholder="성함" required/>
+                        </li> <!----form_name------->
+
+                        <li class="form_tel">
+                            <p>연락처</p>
+                            <div class="phone">
+                                <select name="tel1"><option>010</option></select>
+                                <div>-</div> 
+                                <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                <div>-</div>
+                                <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                            </div>
+                        </li> <!----form_tel------->
+
+                        <li class="form_select01 region_wrap">
+                            <p>지역</p>
+                            <div class="select_box">
+                                <select id="region1" name="option6[]" required>
+                                    <option value="">지역</option>
+                                    <option value="서울특별시">서울특별시</option>
+                                    <option value="부산광역시">부산광역시</option>
+                                    <option value="인천광역시">인천광역시</option>
+                                    <option value="대구광역시">대구광역시</option>
+                                    <option value="광주광역시">광주광역시</option>
+                                    <option value="대전광역시">대전광역시</option>
+                                    <option value="울산광역시">울산광역시</option>
+                                    <option value="세종특별자치시">세종특별자치시</option>
+                                    <option value="경기도">경기도</option>
+                                    <option value="강원도">강원도</option>
+                                    <option value="충청북도">충청북도</option>
+                                    <option value="충청남도">충청남도</option>
+                                    <option value="경상북도">경상북도</option>
+                                    <option value="경상남도">경상남도</option>
+                                    <option value="전라북도">전라북도</option>
+                                    <option value="전라남도">전라남도</option>
+                                    <option value="제주특별자치도">제주특별자치도</option>
+                                </select>
+
+                                <select id="region2" name="option6[]" required>
+                                    <option value="">시/도/군</option>
+                                </select>
+                            </div>
+                        </li> <!----form_select01------->
+
+                        <li class="form_select01 region_wrap">
+                            <p>생년월일</p>
+                            <div class="select_box birth">
+                                <select id="dob-year" name="option1" required>
+                                    <option value="">연도</option>
+                                </select>
+
+                                <select id="dob-month" name="option2" required>
+                                    <option value="">월</option>
+                                </select>
+                                <select id="dob-day" name="option3" required>
+                                    <option value="">일</option>
+                                </select>
+                            </div>
+                        </li> <!----form_select01------->
+
+                        
+                        <li class="form_policy">
+                            <input id="policy" type="checkbox" value="1" checked required> 
+                            <label for="policy">개인정보처리방침 동의</label>
+                            <span id="show-Box">[약관보기]</span>
+                        </li>  <!----form_policy------->
+                    </ul> <!---------ul--------->
+        
+                    <button type="submit">문의하기</button>
+                </form> <!---------form--------->
+            </div> <!---------inner--------->
+        </section> <!---------form_wrap--------->
+
+        <script>
+            AOS.init({
+                once: false,          // 반복 실행
+                startEvent: 'load',   // 시작 타이밍
+            });
+        </script>
+
+        <script>
+                // 팝업 창
+            const openPop = document.getElementById("show-Box");
+            openPop.addEventListener('click', () => {
+                const popup = window.open(
+                    'policy.html', // 조약 내용을 담은 실제 경로
+                    '개인정보이용동의',
+                    'width=800,height=600,scrollbars=yes'
+                );      
+
+                if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                    alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+                }
+            });
+        </script>
+
+        <script>
+            const regionData = {
+            '서울특별시': ['강남구', '강동구', '강북구', '강서구', '관악구', '광진구', '구로구', '금천구', '노원구', '도봉구', '동대문구', '동작구', '마포구', '서대문구', '서초구', '성동구', '성북구', '송파구', '양천구', '영등포구', '용산구', '은평구', '종로구', '중구', '중랑구'],
+            '부산광역시': ['강서구', '금정구', '기장군', '남구', '동구', '동래구', '부산진구', '북구', '사상구', '사하구', '서구', '수영구', '연제구', '영도구', '중구', '해운대구'],
+            '인천광역시': ['강화군', '계양구', '남동구', '동구', '미추홀구', '부평구', '서구', '연수구', '옹진군', '중구'],
+            '대구광역시': ['남구', '달서구', '달성군', '동구', '북구', '서구', '수성구', '중구'],
+            '광주광역시': ['광산구', '남구', '동구', '북구', '서구'],
+            '대전광역시': ['대덕구', '동구', '서구', '유성구', '중구'],
+            '울산광역시': ['남구', '동구', '북구', '울주군', '중구'],
+            '세종특별자치시': ['세종시'],
+            '경기도': ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시', '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시', '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시', '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시'],
+            '강원도': ['강릉시', '고성군', '동해시', '삼척시', '속초시', '양구군', '양양군', '영월군', '원주시', '인제군', '정선군', '철원군', '춘천시', '태백시', '평창군', '홍천군', '화천군', '횡성군'],
+            '충청북도': ['괴산군', '단양군', '보은군', '영동군', '옥천군', '음성군', '제천시', '진천군', '청주시', '충주시'],
+            '충청남도': ['계룡시', '공주시', '금산군', '논산시', '당진시', '보령시', '부여군', '서산시', '서천군', '아산시', '예산군', '천안시', '청양군', '태안군', '홍성군'],
+            '경상북도': ['경산시', '경주시', '고령군', '구미시', '군위군', '김천시', '문경시', '봉화군', '상주시', '성주군', '안동시', '영덕군', '영양군', '영주시', '영천시', '예천군', '울릉군', '울진군', '의성군', '청도군', '청송군', '칠곡군', '포항시'],
+            '경상남도': ['거제시', '거창군', '고성군', '김해시', '남해군', '밀양시', '사천시', '산청군', '양산시', '의령군', '진주시', '창녕군', '창원시', '통영시', '하동군', '함안군', '함양군', '합천군'],
+            '전라북도': ['고창군', '군산시', '김제시', '남원시', '무주군', '부안군', '순창군', '완주군', '익산시', '임실군', '장수군', '전주시', '정읍시', '진안군'],
+            '전라남도': ['강진군', '고흥군', '곡성군', '광양시', '구례군', '나주시', '담양군', '목포시', '무안군', '보성군', '순천시', '신안군', '여수시', '영광군', '영암군', '완도군', '장성군', '장흥군', '진도군', '함평군', '해남군', '화순군'],
+            '제주특별자치도': ['서귀포시', '제주시']
+            };
+
+            const region1 = document.getElementById('region1');
+            const region2 = document.getElementById('region2');
+
+            region1.addEventListener('change', function () {
+                const selectedRegion = this.value;
+                const subRegions = regionData[selectedRegion] || [];
+
+                // 초기화
+                region2.innerHTML = '<option value="">시/도/구</option>';
+
+                // 하위 지역 추가
+                subRegions.forEach(function (region) {
+                const option = document.createElement('option');
+                option.value = region;
+                option.textContent = region;
+                region2.appendChild(option);
+                });
+            });
+        </script>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const targets = document.querySelectorAll('.scale-target');
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // 1초 후 애니메이션 클래스 추가
+                    setTimeout(() => {
+                    entry.target.classList.add('scale-in-ver-bottom');
+
+                    // 각 .graph_box 순서를 기준으로 delay 지정
+                    const graphBox = entry.target.closest('.graph_box');
+                    const graphIndex = Array.from(graphBox.parentNode.children).indexOf(graphBox);
+                    entry.target.style.animationDelay = `${graphIndex}s`;
+                    }, 1000); // ← 여기서 1초 딜레이
+
+                    observer.unobserve(entry.target); // 한 번만 실행
+                }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            targets.forEach(target => observer.observe(target));
+            });
+        </script>
+
+
+
+        <script>
+            const $year = document.getElementById('dob-year');
+            const $month = document.getElementById('dob-month');
+            const $day = document.getElementById('dob-day');
+
+            // 연도 채우기 (1900~올해)
+            const thisYear = new Date().getFullYear();
+            for (let y = thisYear; y >= 1951; y--) {
+            $year.add(new Option(y, y));
+            }
+            // 월 채우기 (1~12)
+            for (let m = 1; m <= 12; m++) {
+            $month.add(new Option(m, m));
+            }
+
+            // 해당 월의 말일 계산
+            function daysInMonth(y, m) {
+            return new Date(y, m, 0).getDate();
+            }
+
+            // 연도/월 바뀌면 일 채우기
+            function refreshDays() {
+            const y = parseInt($year.value, 10);
+            const m = parseInt($month.value, 10);
+            if (!y || !m) {
+                $day.innerHTML = '<option value="">일</option>';
+                $day.disabled = true;
+                return;
+            }
+            const last = daysInMonth(y, m);
+            $day.innerHTML = '<option value="">일</option>';
+            for (let d = 1; d <= last; d++) {
+                $day.add(new Option(d, d));
+            }
+            $day.disabled = false;
+            }
+
+            $year.addEventListener('change', refreshDays);
+            $month.addEventListener('change', refreshDays);
+        </script>
+
+
+
+    </body>
+
+
+</html>

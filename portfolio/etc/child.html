@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/web_fonts.css" type="text/css">
+        <title>어린이보험</title>
+        <style>
+            
+html { scroll-behavior: smooth; }
+* { margin: 0; padding: 0; vertical-align: top; box-sizing: border-box; }
+body { max-width: 800px; min-width: 320px; margin: 0 auto; font-size: 18px; font-family: 'Pretendard-Regular'; }
+li { list-style: none; }
+a { text-decoration: none; color: #fff; font-family: 'Pretendard-Bold'; }
+img { max-width: 100%; border: none; }
+p { color: #333; word-break: keep-all; }
+select { -webkit-appearance: none; appearance: none; color: #333; background-image: url(img/selct_arrow.png);
+background-repeat: no-repeat; background-position: center right 5px;}
+textarea {
+border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
+resize: none; box-sizing: border-box; -webkit-appearance: none; -moz-appearance: none; appearance: none;        
+}
+button { all: unset; cursor: pointer; padding: 0; margin: 0; font: inherit; color: inherit; }
+h1, h2, h3, h4, h5, h6, p { line-height: 120%; letter-spacing: -.05em; color: #333; }
+
+
+.form_wrap { border: 2px solid #FF9500; border-radius: .5em; background: #fff; width: 95%; margin: 0 auto; }
+
+
+#form_wrap-sec_top { padding: 5% .5em;  }
+#form_wrap-sec_top, #form_wrap-sec_con2, #form_wrap-sec_con1 { display: none; margin: 0 auto; }
+.form_wrap .form_policy { margin-bottom: 1.5em; }
+.main_btm { text-align: center; }
+.main_btm > button { font-size: 3em; display: block; margin: 0 auto; width: 80%; border-radius: .3em;
+padding: .2em 0; color: #fff; font-family: 'Juache'; background: #FF9500; }
+
+
+
+/* top_fix */
+.top_fix { width: 100%; max-width: 800px; min-width: 320px; position: fixed; background: #fffbbee5; z-index: 9999;
+display: flex; justify-content: space-between; align-items: center; padding: 20px 10px; box-sizing: border-box; }
+.top_fix p { font-size: 1.6em; letter-spacing: -.05em; color: #333; font-family: 'Juache'; }
+.top_fix a { display: block; padding: 5px 15px; background: #FF9500; color: #fff; font-family: 'Juache';
+border-radius: 30px;  letter-spacing: -.05em; font-size: 1.3em; }
+.top_padding { padding-top: 64px; }
+
+
+/* form */
+.form_wrap p { color: #333; font-size: 1.4em; }
+.form_wrap { padding: 10% 0;  }
+.form_tit { text-align: center; margin-bottom: 1em; font-size: 1.5em !important; line-height: 150%; font-family: 'Juache'; }
+.form_tit .tcolor { color: red; font-size: 1.3em; }
+.form_tit em { font-size: 1.3em; font-style: normal; }
+.form_wrap .inner { width: 95%; margin: 0 auto; padding: 0; }
+.form_wrap ul li { margin-bottom: 1em; }
+.form_wrap .form_policy { margin-bottom: 1.5em; display: flex; flex-wrap: wrap; align-items: center; }
+.form_wrap .form_policy input { margin-right: 5px; cursor: pointer; }
+.form_wrap .form_policy label { cursor: pointer; margin-right: 5px; color: #333; }
+.form_wrap ul li p:first-child { margin-bottom: 5px; font-size: 18px; font-weight: 600; text-align: left; }
+.form_wrap ul li p:nth-child(2) { font-size: 1em; margin-bottom: 10px; color: #333; text-align: left; }
+.form_wrap ul li input, .form_wrap ul li select { padding: 15px 10px; border: 1px solid #e5e5e5; background-color: #fff; border-radius: .5em; }
+.form_wrap ul li input[type="text"] { width: 100%; box-sizing: border-box; }
+.form_wrap .form_tel input, .form_wrap .form_tel select { width: 32% !important; }
+.form_wrap .form_select02 select { width: 100%; }
+.region_wrap .select_box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1%; }
+.form_wrap .form_text textarea { width: 100%; height: 80px; }
+.form_wrap .form_policy, .form_wrap .form_policy a { font-size: 14px; color: #333; }
+.phone { display: flex; align-items: center; gap: 5px; }
+.form_wrap button { width: 100%; padding: .5em 0; color: #fff; background: #FF9500; text-align: center; border-radius: .5em;
+ font-size: 2em; font-weight: bolder; border: none; cursor: pointer; font-family: 'Pretendard-Bold'; }
+
+input[type="radio"] { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
+.radio_wrap { display: flex; gap: 10px; }
+.radio_box { width: 100%; display: flex; align-items: center; height: 50px; }
+.radio_box input[type="radio"] { width: 100%; position: absolute; left: 50%; transform: translateX(-50%); transition: .3s; border-radius: .5em;
+padding: 0; height: 50px; z-index: -1; cursor: pointer; }
+.radio_box label { position: relative; width: 100%; text-align: center; line-height: 50px; z-index: 1;
+color: #666; cursor: pointer; }
+.radio_box input[type="radio"]:checked { background: #FF9500; }
+.radio_box input[type="radio"]:checked + span { color: #fff; }
+#show-Box { cursor: pointer; }
+.form_wrap input::placeholder { color: #c5c5c5; }
+.form_btm { width: 95%; margin: 0 auto; text-align: center; padding: 2em 0; font-weight: normal; line-height: 150%; }
+.form_wrap .no_choice { color: #999 !important; }
+
+.phone > div { color: #333; }
+
+
+
+
+.loading_wrap { text-align: center; margin-bottom: 1.5em; }
+.loading_wrap img { width: 20%; margin-bottom: 1em; }
+.loading_wrap p { font-size: 1.3em; color: #333; }
+.loading_con { display: flex; justify-content: center; align-items: flex-end; gap: .3em; margin-bottom: 1em; }
+.loading_box { width: .5em; height: 1em; border-radius: 5em; background: #FF9500; animation: loadingFade 1s infinite ease-in-out; }
+
+/* 각 막대 애니메이션 딜레이 다르게 적용 */
+.loading_box:nth-child(1) { animation-delay: 0s; }
+.loading_box:nth-child(2) { animation-delay: 0.1s; }
+.loading_box:nth-child(3) { animation-delay: 0.2s; }
+.loading_box:nth-child(4) { animation-delay: 0.3s; }
+.loading_box:nth-child(5) { animation-delay: 0.4s; }
+.loading_box:nth-child(6) { animation-delay: .5s; }
+.loading_box:nth-child(7) { animation-delay: .6s; }
+
+@keyframes loadingFade {
+0%, 100% {
+opacity: 0.5; /* 옅음 */
+}
+50% {
+opacity: 1;   /* 진하게 */
+}
+}
+
+.form_wrap ul li p:first-child span { color: #666; font-size: .7em; }
+
+
+
+
+/* main */
+.main { background-image: url('img/child/main_bg.webp'); background-size: 80%; }
+.main { overflow: hidden; margin-bottom: -95%; }
+.main .bg_inner { justify-content: flex-start; padding-top: 5%; }
+.main .con_tit img:first-child { width: 80%; margin-bottom: 1em; }
+.main .con_tit img:last-child { width: 90%; }
+.main .bg_inner > img { display: block; margin-bottom: 3.5em; }
+
+
+/* con1 */
+.con1 .con_tit img { width: 40%; margin-bottom: 1.5em; }
+.con1 .con_tit h2 { font-size: 3em; }
+
+.con1 .bg_inner > img:nth-child(2) { width: 85%; }
+.con1 .bg_inner > img:nth-child(3) { margin-top: -8%; width: 55%; margin-left: 45%; }
+
+/* con2 */
+
+.con2 .con_tit img { width: 20%; margin-bottom: 1em; }
+.con2 .con_tit h2 { font-size: 3em; }
+.con2_box { margin-bottom: 1.5em; }
+.con2_box:last-child { margin-bottom: 0; }
+
+
+/* con3 */
+.con3 { overflow: hidden; background: #e9e9e9; }
+
+
+
+#form_wrap-sec { width: 100%; border: none; }
+#form_wrap-sec .inner { width: 90%; }
+
+
+
+
+
+/* con5 */
+
+.con5 > .inner { width: 100%; padding: 0 0 10% 0; }
+.con5 .con_tit h4 { font-size: 1.5em; margin-bottom: .5em; color: #333; }
+.con5 .con_tit h2 { margin-bottom: .2em; font-size: 2.8em; }
+.con5 .con_tit h3 { font-size: 2.5em; color: #333; }
+
+.con5_top { margin-bottom: 5em; width: 95%; margin: 0 auto; }
+
+
+
+.con5_colwrap { border: 2px solid #FF9500; border-radius: 1em; background: #FFFAB2;  width: 95%; margin: 0 auto;}
+.col_name { display: flex; justify-content: space-between; border-bottom: 1px solid #FF9500; padding: 1em 3em 1em 2em; }
+.col_name h6 { font-size: 1.8em; }
+
+/* col_label */
+.col_label { border-radius: 15px; overflow: hidden; padding: .5em 1em;  }
+.col_box { width: 100%; height: auto; display: flex; justify-content: space-between; align-items: center; padding: 2em 1em; }
+.col_box p { color: #333; font-size: 1.4em; letter-spacing: -.05em; }
+.col_box p:last-child { color: #fff; padding: .5em 1em; background: #FF9500; border-radius: 5em; margin-right: -1em; font-weight: bold; }
+.col_box p:nth-child(2) { transform: translateX(15%); }
+ 
+
+.con5 .swiper { width: 100%; height: 200px; padding-bottom: 2em; }
+.con5 .swiper, .con5 .swiper-wrapper { touch-action: auto !important; }
+
+.con5_wid { padding: .5em 1.4em !important; }
+
+
+
+
+
+
+/* all */
+.con_tit p { font-size: 2em; }
+.bg { width: 100%; position: relative; overflow: hidden; }
+.bg > img { width: 100%; object-fit: contain; }
+.tcolor { color: #FF9500; }
+.bg_inner { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 1em; }
+.inner { width: 95%; margin: 0 auto; padding: 15% 0; }
+h2 { font-size: 2em; letter-spacing: -.05em; font-family: 'Juache'; font-weight: 100; }
+h3 { font-size: 1.5em; letter-spacing: -.05em; font-family: 'Juache'; font-weight: 100; }
+h4, h5 { font-family: 'Pretendard-Bold'; }
+h6 { font-family: 'Juache'; font-weight: 100; }
+.con_tit { text-align: center; margin-bottom: 3.5em; }
+.call { font-size: 1.3em; text-align: center; margin: 2em 0; color: #333; }
+
+
+
+/* animation */
+
+.form_wrap button, .main_btm > button  { animation: main_btn 1s infinite forwards alternate cubic-bezier(0.9, -0.01, 0, 1); }
+
+@keyframes main_btn {
+0% { transform: translateY(-7%); box-shadow: 0 4px 1px 1px #bb6d00; color: #ffee00; }
+100% { transform: translateY(0%); }
+
+}
+
+
+.con2 .con_tit img  { animation: con2_ico 1s infinite forwards alternate; }
+@keyframes con2_ico {
+    0% { opacity: .5; transform: scale(.9) rotate(5deg); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* media screen */
+
+@media screen and (max-width: 600px) {
+body { font-size: 15px; }
+
+
+}
+@media screen and (max-width: 480px) {
+body { font-size: 10px; }
+.radio_box span { font-size: 15px; }   
+
+
+}
+
+
+        </style>
+    </head>
+
+    <body>
+        <section class="top_fix">
+            <p>우리아이 어린이보험 성인까지 보장!</p>
+            <a href="#form_wrap-sec">보험료 비교하기</a>
+        </section> <!-----top_fix----->
+        <div class="top_padding"></div>
+
+        <section class="main bg">
+            <img src="img/child/main_bg.webp" alt="배경">
+            <div class="bg_inner">
+
+                
+                <div class="con_tit">
+                    <img src="img/child/main_tit01.png" alt="혼합설계">
+                    <img src="img/child/main_tit02.png" alt="받아보기" data-aos="zoom-in" data-aos-duration="500" data-aos-delay="100">
+                </div>
+                
+                <img src="img/child/main_per.webp" alt="어린이" data-aos="slide-left" data-aos-duration="500" data-aos-delay="300">
+
+                <div class="main_con">
+
+                    <div class="main_btm">
+
+                        <button>월 보험료 계산하기</button>
+
+                        <div class="form_wrap" id="form_wrap-sec_top">
+
+                            <div class="inner">
+
+
+                                <div class="loading_wrap">
+                                    <img src="img/child/loading.png" alt="방패">
+                                    <div class="loading_con">
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                    </div> <!--loading_con--->
+                                    <p>개인정보는 암호화되어 안전하게 처리됩니다.</p>
+                                    
+
+                                </div> <!--loading_wrap--->
+
+
+
+                                <form method="post" action="apply.html" id="myModal1_top" name="page_form_top">
+                                    <ul>
+
+
+
+
+                                        <li class="form_name">
+                                            <p>보호자 이름</p>
+                                            <p>입력하신 개인정보는 상담 외 다른 용도로 절대 사용되지 않습니다.</p>
+                                            <input type="text" name="name" maxlength="10" placeholder="보호자 이름" required/>
+                                        </li> <!----form_name------->
+
+                                        
+                                        <li class="form_name">
+                                            <p>자녀 생년월일</p>
+                                            <input type="text" name="option1" maxlength="10" placeholder="20150315" required/>
+                                        </li> <!----form_name------->
+
+                              
+
+                                        <li class="form_tel">
+                                            <p>연락처</p>
+                                            <div class="phone">
+                                                <select name="tel1"><option>010</option></select>
+                                                <div>-</div> 
+                                                <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                                <div>-</div>
+                                                <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                            </div>
+                                        </li> <!----form_tel------->
+
+
+
+
+                                        <li class="form_policy">
+                                            <input id="policy_top" type="checkbox" value="1" checked required> 
+                                            <label for="policy_top">개인정보처리방침 동의</label>
+                                            <span id="show-Box_top">[약관보기]</span>
+                                        </li>  <!----form_policy------->
+                                    </ul> <!---------ul--------->
+                        
+                                    <button type="submit">월 보험료 계산하기</button>
+                                </form> <!---------form--------->
+                            </div> <!---------inner--------->
+
+
+                        </div> <!---------form_wrap--------->
+
+
+                    </div> <!---main_btm---->
+                </div> <!---main_con---->
+
+
+            </div> <!---bg_inner---->
+        </section> <!---main---->
+
+        <section class="con1 bg">
+            <img src="img/child/con1_bg.png" alt="배경">
+            <div class="bg_inner">
+                <div class="con_tit">
+                    <img src="img/child/con1_tit.png" alt="어린이보험" data-aos="zoom-in" data-aos-duration="500" data-aos-delay="200">
+                    <h2>0세부터 15세까지<br>가입 가능한 <span class="tcolor">종합보험입니다</span></h2>
+                </div>
+
+                <img src="img/child/con1_tbox.png" alt="여러분" data-aos="slide-right" data-aos-duration="500" data-aos-delay="400">
+                <img src="img/child/con1_per.webp" alt="어린이" data-aos="slide-left" data-aos-duration="500" data-aos-delay="600">
+            </div> <!---bg_inner---->
+        </section>  <!---con1---->
+
+
+        <section class="con2 bg">
+            <img src="img/child/con2_bg.webp" alt="배경">
+            <div class="bg_inner">
+                <div class="con_tit">
+                    <img src="img/child/con2_ico.png" alt="사이렌">
+                    <h2>왜 성인보험 보다는<br><span class="tcolor">어린이보험</span>이 좋을까요?</h2>
+                </div>
+
+                <div class="con2_con">
+                    <div class="con2_box" data-aos="slide-up" data-aos-duration="500" data-aos-delay="200"><img src="img/child/con2_box01.webp" alt="납입면제"></div>
+                    <div class="con2_box" data-aos="slide-up" data-aos-duration="500" data-aos-delay="400"><img src="img/child/con2_box02.webp" alt="보험료"></div>
+                    <div class="con2_box" data-aos="slide-up" data-aos-duration="500" data-aos-delay="600"><img src="img/child/con2_box03.webp" alt="면책기간"></div>
+                </div> <!---con2_con---->
+
+            </div> <!---bg_inner---->
+        </section> <!---con2---->
+        
+        <section class="con3">
+            <img src="img/child/con3_bg.webp" alt="비교견적" data-aos="slide-left" data-aos-duration="500" data-aos-delay="200">
+        </section>
+
+
+
+        <div class="form_wrap" id="form_wrap-sec">
+
+            <div class="inner">
+
+
+                <div class="loading_wrap">
+                    <img src="img/child/loading.png" alt="방패">
+                    <div class="loading_con">
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                    </div> <!--loading_con--->
+                    <p>개인정보는 암호화되어 안전하게 처리됩니다.</p>
+                    
+
+                </div> <!--loading_wrap--->
+
+
+
+                <form method="post" action="apply.html" id="myModal1" name="page_form">
+                    <ul>
+
+
+
+
+                        <li class="form_name">
+                            <p>보호자 이름</p>
+                            <p>입력하신 개인정보는 상담 외 다른 용도로 절대 사용되지 않습니다.</p>
+                            <input type="text" name="name" maxlength="10" placeholder="보호자 이름" required/>
+                        </li> <!----form_name------->
+
+                        
+                        <li class="form_name">
+                            <p>자녀 생년월일</p>
+                            <input type="text" name="option1" maxlength="10" placeholder="20150315" required/>
+                        </li> <!----form_name------->
+
+                
+
+                        <li class="form_tel">
+                            <p>연락처</p>
+                            <div class="phone">
+                                <select name="tel1"><option>010</option></select>
+                                <div>-</div> 
+                                <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                <div>-</div>
+                                <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                            </div>
+                        </li> <!----form_tel------->
+
+
+
+
+                        <li class="form_policy">
+                            <input id="policy" type="checkbox" value="1" checked required> 
+                            <label for="policy">개인정보처리방침 동의</label>
+                            <span id="show-Box">[약관보기]</span>
+                        </li>  <!----form_policy------->
+                    </ul> <!---------ul--------->
+        
+                    <button type="submit">월 보험료 계산하기</button>
+                </form> <!---------form--------->
+            </div> <!---------inner--------->
+
+
+        </div> <!---------form_wrap--------->
+
+
+
+        <section class="con5">
+            <div class="inner">
+                <div class="con_tit">
+                    <h4 id="today-date"></h4>
+                    <h2>11월 30일 마감!</h2>
+                    <h3>실시간 상담신청 현황</h3>
+                </div>
+
+
+                <div class="con5_colwrap">
+                    <div class="col_name">
+                        <h6><span class="tcolor">이름</span></h4>
+                        <h6><span class="tcolor">연락처</span></h4>
+                        <h6><span class="tcolor">상태</span></h4>
+                    </div> <!---------col_name--------->
+
+                    <div class="col_label swiper mySwiper">
+                        <div class="col_contents swiper-wrapper">
+                            <div class="col_box swiper-slide">
+                                <p>정**</p>
+                                <p>010-****-7789</p>
+
+                                <p class="con5_wid">접수중</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>천**</p>
+                                <p>010-****-0517</p>
+
+                                <p>접수완료</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>박**</p>
+                                <p>010-****-0995</p>
+
+                                <p class="con5_wid">접수중</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>권**</p>
+                                <p>010-****-8683</p>
+
+                                <p>접수완료</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>조**</p>
+                                <p>010-****-2003</p>
+
+                                <p class="con5_wid">접수중</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>유**</p>
+                                <p>010-****-5457</p>
+
+                                <p class="con5_wid">접수중</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>박**</p>
+                                <p>010-****-1877</p>
+
+                                <p>접수완료</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>최**</p>
+                                <p>010-****-1950</p>
+
+                                <p class="con5_wid">접수중</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>이**</p>
+                                <p>010-****-9033</p>
+
+                                <p>접수완료</p>
+                            </div>
+                            <div class="col_box swiper-slide">
+                                <p>박**</p>
+                                <p>010-****-6598</p>
+
+                                <p class="con5_wid">접수중</p>
+                            </div>
+                        </div>
+                    </div> <!---------col_label--------->
+                </div>  <!---------con5_colwrap--------->
+
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+            AOS.init({
+            once: false,          // 반복 실행
+            startEvent: 'load',   // 시작 타이밍
+            });
+        </script>
+        
+
+        <script>
+            // 여러 개 요소 선택
+            const openBtns = document.querySelectorAll("#show-Box, #show-Box_top");
+
+            openBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const popup = window.open(
+                        'policy.html', // 조약 내용을 담은 실제 경로
+                        '개인정보이용동의',
+                        'width=800,height=600,scrollbars=yes'
+                    );      
+
+                    if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                        alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+                    }
+                });
+            });
+        </script>
+
+
+
+
+        
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const buttons = document.querySelectorAll(".main_btm > button");
+
+                buttons.forEach((btn) => {
+                    // 버튼이 속한 가장 가까운 섹션 찾기
+                    const parentSection = btn.closest(".main");
+
+                    // 섹션 내 관련 요소 찾기
+                    const formBox = parentSection.querySelector("#form_wrap-sec_top");
+                    const mainTit = parentSection.querySelectorAll(".main_tit");
+
+                    // 초기 상태: 폼 숨김
+                    if (formBox) formBox.style.display = "none";
+
+                    btn.addEventListener("click", function() {
+                        // 폼이 현재 보이는지 여부 확인
+                        const isVisible = formBox && formBox.style.display === "block";
+
+                        if (isVisible) {
+                            // ✅ 폼이 열려 있을 때 → 닫기
+                            formBox.style.display = "none";
+                            mainTit.forEach(tit => tit.style.display = "block");
+
+                            // 버튼 스타일 원래대로 (선택사항)
+                            btn.style.marginBottom = "";
+                            btn.style.backgroundColor = "";
+                            btn.style.color = "";
+                            
+                            // 섹션 패딩 초기화
+                            parentSection.style.paddingTop = "";
+                            parentSection.style.paddingBottom = "";
+                        } else {
+                            // ✅ 폼이 닫혀 있을 때 → 열기
+
+                            btn.style.display = "block";
+                            btn.style.marginBottom = "1em";
+                            btn.style.color = "#fff000";
+
+
+                            if (formBox) formBox.style.display = "block";
+
+                            if (parentSection.classList.contains("main")) {
+                                const paddingBottom = parentSection.dataset.paddingBottom || "177%";
+                                parentSection.style.paddingBottom = paddingBottom;
+                            }
+                            formBox.scrollIntoView({ behavior: "smooth" });
+                        }
+                    });
+                });
+            });
+        </script>
+
+
+
+
+
+
+        <!-- Swiper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+        <!-- Initialize Swiper -->
+        <script>
+            var swiper = new Swiper(".col_label", {
+                direction: "vertical",
+                slidesPerView: 4,
+                spaceBetween: 0,
+                allowTouchMove: false,              // 슬라이드 드래그만 막기
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                autoplay: {
+                delay: 1000,
+                disableOnInteraction: false
+            },
+            });
+        </script>
+
+        <script>
+            function updateToday() {
+                const today = new Date();
+
+                // yyyy-mm-dd 형식으로 변환
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, "0");
+                const day = String(today.getDate()).padStart(2, "0");
+
+                const formatted = `${year}-${month}-${day} 기준`;
+
+                document.getElementById("today-date").innerText = formatted;
+            }
+
+            updateToday(); // 페이지 로드 시 실행
+        </script>
+
+
+
+
+
+
+
+
+
+    </body>
+</html>

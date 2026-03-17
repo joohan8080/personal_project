@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="img/favicon.png">
+        <title>💘애정도 테스트!💘</title>
+        <link rel="stylesheet" href="css/index.css">
+    </head>
+
+    <body>
+        <div class="wrap">
+            <h2>당신의 애정도는?</h2>
+            <div class="con">
+                <div class="con_tit">
+                    <h3>나에게 관심 있습니까?</h3>
+                </div> <!---con_tit----->
+
+                <div class="box">
+                    <button>예👍</button>
+                    <button>아니오😞</button>
+                </div>  <!---box----->
+
+            </div>  <!---con----->
+        </div> <!---wrap----->
+
+        <div class="wrap result">
+            <h2>축하합니다!</h2>
+            <div class="con">
+                <div class="con_tit">
+                    <h3>당신은 "나"에게<br>빠졌습니다</h3>
+                </div> <!---con_tit----->
+
+                <div class="box">
+                    <button>나 보러가기⭐</button>
+                </div>  <!---box----->
+
+            </div>  <!---con----->
+        </div> <!---wrap----->
+
+
+
+
+        <div class="img_modal">
+            <div class="img_inner">
+                <img src="img/profile.webp" alt="프로필">
+            </div>
+        </div>
+
+
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const box = document.querySelector('.box');
+                const yesBtn = box.querySelector('button:first-child');
+                const noBtn = box.querySelector('button:last-child');
+
+                noBtn.addEventListener('click', () => {
+                    noBtn.classList.add('hide');
+
+                    setTimeout(() => {
+                        noBtn.remove();
+                        yesBtn.style.width = '100%';
+                    }, 300); // CSS transition 시간과 동일
+                });
+            });
+
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const firstWrap = document.querySelector('.wrap:not(.result)');
+                const resultWrap = document.querySelector('.result');
+                const yesBtn = document.querySelector('.box button:first-child');
+
+                yesBtn.addEventListener('click', () => {
+                    // 기존 화면 페이드아웃
+                    firstWrap.classList.add('fade-out');
+
+                    // 결과 화면 슬라이드 인
+                    resultWrap.classList.add('active');
+
+                    // 완전 제거 (선택)
+                    setTimeout(() => {
+                        firstWrap.style.display = 'none';
+                    }, 400);
+                });
+            });
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const openBtn = document.querySelector('.result .box button');
+                const modal = document.querySelector('.img_modal');
+
+                openBtn.addEventListener('click', () => {
+                    modal.classList.add('active');
+                });
+
+                // 배경 클릭 시 닫기
+                modal.addEventListener('click', () => {
+                    modal.classList.remove('active');
+                });
+            });
+
+        </script>
+
+    </body>
+</html>

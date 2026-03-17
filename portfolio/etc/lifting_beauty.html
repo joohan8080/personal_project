@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/web_fonts.css" type="text/css">
+        <title>병/의원</title>
+        <style>
+            
+html { scroll-behavior: smooth; }
+* { margin: 0; padding: 0; vertical-align: top; box-sizing: border-box; }
+body { max-width: 800px; min-width: 320px; margin: 0 auto; font-size: 18px; font-family: 'Pretendard-Regular'; font-weight: 500; }
+li { list-style: none; }
+a { text-decoration: none; color: #333; }
+img { max-width: 100%; border: none; }
+p { color: #333; word-break: keep-all; }
+select { -webkit-appearance: none; appearance: none; color: #333; background-image: url(img/selct_arrow.png);
+background-repeat: no-repeat; background-position: center right 5px;}
+textarea {
+border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
+resize: none; box-sizing: border-box; -webkit-appearance: none; -moz-appearance: none; appearance: none;        
+}
+button { all: unset; cursor: pointer; padding: 0; margin: 0; font: inherit; color: inherit; }
+h1, h2, h3, h4, h5, h6, p { line-height: 120%; letter-spacing: -.05em; color: #333; }
+
+
+
+/* top_fix */
+.top_fix { width: 100%; max-width: 800px; min-width: 320px; position: fixed; bottom: 0; background: #003CFFde; z-index: 9999;
+display: flex; justify-content: space-between; align-items: center; padding: 1.5em 1em; box-sizing: border-box; }
+.top_fix img { width: 20%; margin-top: .5em; }
+.top_fix a { display: block; width: 100%; height: 100%; position: absolute; left: 0; }
+.top_fix h2 { font-size: 2em; color: #fff; }
+
+/* form */
+.form_wrap { padding: 10% 0 25% 0; background: #fff; }
+.form_wrap p { color: #333; font-size: 1.4em; }
+.form_tit { text-align: center; margin-bottom: 1.5em; font-size: 2em !important;  line-height: 150%; }
+.form_tit .tcolor { color: red; }
+.form_wrap .inner { width: 95%; margin: 0 auto; padding: 0; }
+.form_wrap ul li { margin-bottom: 1.2em; }
+.form_wrap .form_policy { margin-bottom: 2em; display: flex; flex-wrap: wrap; align-items: center; }
+.form_wrap .form_policy input { margin-right: 5px; cursor: pointer; }
+.form_wrap .form_policy label { cursor: pointer; margin-right: 5px; }
+.form_wrap ul li p:first-child { margin-bottom: 5px; font-size: 1.4em; font-weight: 600; }
+.form_wrap ul li p:nth-child(2) { font-size: 1.1em; margin-bottom: .7em; color: #666; }
+.form_wrap ul li input, .form_wrap ul li select { padding: 1em .5em; border-radius: .3em; border: 1px solid #e5e5e5; background-color: #fff; font-size: 1.2em; }
+.form_wrap ul li input[type="text"] { width: 100%; box-sizing: border-box; }
+.form_wrap .form_tel input, .form_wrap .form_tel select { width: 32% !important; }
+.form_wrap .form_select02 select { width: 100%; }
+.region_wrap .select_box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1%; }
+.form_wrap .form_text textarea { width: 100%; height: 80px; border-radius: .3em; }
+.form_wrap .form_policy, .form_wrap .form_policy a { font-size: 1.2em; color: #333; }
+.phone { display: flex; align-items: center; gap: 5px; }
+.form_wrap button { width: 100%; padding: .7em 0; color: #fff; background: #003CFF; text-align: center; font-family: 'Pretendard-Bold';
+border-radius: 10em; font-size: 2em;  border: none; cursor: pointer; }
+input[type="radio"] { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
+.radio_wrap { display: flex; gap: 5px; }
+.radio_box { width: 100%; display: flex; align-items: center; height: 3em; }
+.radio_box input[type="radio"] { width: 100%; position: absolute; left: 50%; transform: translateX(-50%); transition: .3s;
+padding: 0; height: 3em; z-index: -1; cursor: pointer; }
+.radio_box label { position: relative; width: 100%; text-align: center; line-height: 3em; z-index: 1;
+color: #666; cursor: pointer; }
+.radio_box input[type="radio"]:checked { background: #003CFF; }
+.radio_box input[type="radio"]:checked + span { color: #fff; }
+#show-Box { cursor: pointer; }
+.form_wrap input::placeholder { color: #c5c5c5; }
+.form_btm { width: 95%; margin: 0 auto; text-align: center; padding-top: 2em; font-weight: normal; line-height: 150%; }
+.form_wrap .no_choice { color: #999 !important; }
+
+.check_box { border: 2px solid #e5e5e5; margin-bottom: .5em; border-radius: .3em; transition: .3s; cursor: pointer; }
+.check_box span { font-size: 1em; color: #333; transition: .3s; }
+.check_box label { display: flex; align-items: center; gap: 5px; cursor: pointer; padding: 1em .5em;  }
+.check_box:last-child { margin-bottom: 0; }
+.check_box input[type="checkbox"] {  -webkit-appearance: none; /* Safari, Chrome */ -moz-appearance: none;    /* Firefox */
+appearance: none; /* 표준 */ margin: 0; padding: 0;  border: none; outline: none; cursor: pointer; transition: .3s;
+width: 1em; height: 1em; aspect-ratio: 1 / 1;   /* 1:1 비율 = 정사각형 */  position: relative; border: 2px solid #e5e5e5;
+border-radius: 10em;
+} 
+.check_box input[type="checkbox"]:checked::before {
+content: '✔'; font-size: 1em; color: white; position: absolute; top: 50%; left: 50%;
+transform: translateX(-50%) translateY(-50%); }
+.check_box input[type="checkbox"]:checked { background-color: #003CFF; border-color: #003CFF; }
+
+.check_box:has(input[type="checkbox"]:checked) { background: #003CFF; }
+.check_box input[type="checkbox"]:checked + span { color: #fff; }
+input.check_choice:focus { outline: 2px solid #003CFF; }
+
+.main_loading { text-align: center; margin-bottom: 2em; }
+.main_loading img { width: 6%; margin-bottom: 1.5em; }
+.main_loading p { font-size: 1.2em; color: #003CFF; }
+
+/* dot 로딩css */
+.dot_wrap { display: flex; justify-content: center; margin-bottom: 1.5em; }
+.dot { width: 1em; aspect-ratio: 1 / 1;  margin-right: .5em; border-radius: 1em; background-color: #003CFF; animation: pulse 1.5s infinite ease-in-out; }
+.dot:last-child { margin-right: 0; }
+.dot:nth-child(1) { animation-delay: -0.3s; }
+.dot:nth-child(2) { animation-delay: -0.1s; }
+.dot:nth-child(3) { animation-delay: 0.1s; }
+
+@keyframes pulse {
+0% {
+transform: scale(0.8);
+background-color: #003CFF;
+box-shadow: 0 0 0 0 rgba(178, 222, 252, 0.7);
+}
+
+50% {
+transform: scale(1.2);
+background-color: #003CFF;
+box-shadow: 0 0 0 10px rgba(252, 247, 178, 0.027);
+}
+
+100% {
+transform: scale(0.8);
+background-color: #003CFF;
+box-shadow: 0 0 0 0 rgba(178, 235, 252, 0.7);
+}
+}
+
+
+.main .bg_inner { justify-content: space-between; padding: 5% 1em 10% 1em; }
+.main .bg_inner > img { width: 43%; backdrop-filter: blur(2px); }
+
+.main_tit em { font-style: normal; }
+.tit_top { display: flex; flex-direction: column; align-items: flex-end; margin-bottom: 2em; }
+.tit_top h6:first-child { margin-right: 7.5em; color: #E9E9E9; text-decoration: line-through; }
+.tit_top h6:last-child { font-size: 6em; }
+
+.tit_btm { display: flex; align-items: flex-start; }
+.tit_btm h6 { font-size: 5em; color: #fff; }
+.tit_btm h6 .tcolor { font-size: 1.4em; }
+.tit_btm img { width: 5%; margin-top: -.5em; }
+.tit_btm em { position: relative; }
+.tit_btm em::after { position: absolute; content: ''; width: .15em; height: .15em; background: #003CFF; border-radius: 5em; top: 0; left: 50%;  }
+
+
+/* con1 */
+.con1 { background: #F3F3F3; }
+.con1 .inner { overflow: hidden; }
+.con_tit img { width: 23%; margin-bottom: 2em; }
+.con1 .con_tit h2 { font-size: 3em; margin-bottom: .5em; }
+.con1 .con_tit p { font-size: 1.2em; line-height: 140%; }
+
+
+
+
+
+
+
+/* con2 */
+.con2 .con_tit h2 { font-size: 3.3em; }
+
+.con2_top { margin-bottom: 3em; }
+.con2_top em { font-style: normal; color: #999; }
+.con2_top h3 { font-size: 1.7em; margin-bottom: 1em; border-bottom: 1px solid #333; display: inline-block; padding-bottom: .2em; }
+.con2_top h3:last-child { margin-bottom: 0; }
+
+.con2_btm img { margin-bottom: 1em; }
+.con2_btm img:last-child { margin-bottom: 0; }
+
+
+/* con3 */
+.con3 { overflow: hidden; }
+.con3 .con_tit h2 { font-size:3em; }
+.con3_con { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1em .5em; align-items: center; }
+
+.con3_con img:nth-child(2n) { transform: scale(1.05); }
+
+
+/* con4 */
+.con4 { background: #F3F3F3; }
+.con4 .inner { width: 100%; overflow: hidden; }
+.con4 .con_tit { text-align: center; }
+.con4 .con_tit h2 { font-size: 3em; }
+
+.con4_con { text-align: center; }
+.con4_con img:first-child { width: 37%; margin-left: 55%; }
+.con4_con img:nth-child(2) { width: 70%; margin: -20% auto 0 auto; position: relative; }
+
+.con4_con img:nth-child(3) { width: 90%; margin: -5% 10% 1% 0; }
+.con4_con img:nth-child(4) { width: 85%; margin: 0 0 5% 15%; }
+
+.con4 .inner > img { display: block; width: 90%; margin: 0 auto; }
+
+
+/* con5 */
+
+
+
+
+
+
+
+
+
+
+/* all */
+.con_tit p { font-size: 2.5em; }
+.bg { width: 100%; position: relative; overflow: hidden; }
+.bg > img { width: 100%; object-fit: contain; }
+.tcolor { color: #003CFF; }
+.bg_inner { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 1em; }
+.inner { width: 95%; margin: 0 auto; padding: 15% 0; }
+h2 { font-size: 2em; letter-spacing: -.05em; font-family: 'LeeSunSinDotum'; font-weight: 500; }
+h3 { font-size: 2em; letter-spacing: -.05em; font-family: 'LeeSunSinDotum'; font-weight: 300; }
+h4, h5 { font-size: 2em; font-family: 'LeeSunSinDotum'; font-weight: 300; }
+h6 { font-size: 2em; font-family: 'Pretendard-Bold'; font-weight: 700; }
+.con_tit { margin-bottom: 3.5em; }
+
+
+
+/* animation */
+.form_wrap button { animation: form_btn 2s infinite forwards; }
+
+@keyframes form_btn {
+0% { border-bottom: 5px solid #020072; box-sizing: border-box; color: #FFFF00; margin-top: -5px; }
+50% { border-bottom: 5px solid #020072; box-sizing: border-box; color: #FFFF00; margin-top: -5px; }
+50.01% { border-bottom: none; box-sizing: content-box; color: #fff; margin-top: 0; }
+100% { border-bottom: none; box-sizing: content-box; color: #fff; margin-top: 0; }
+}
+
+.top_fix h2 { animation: top_fix 2s infinite forwards; }
+
+@keyframes top_fix {
+0% { color: #fff000; }
+50% { color: #fff000; }
+50.01% { color: #fff; }
+100% { color: #fff; }
+}
+
+
+.tit_btm h6 .tcolor { animation: tit_btm 1.5s infinite forwards alternate; }
+@keyframes tit_btm {
+    0% { color: #3888ff; }
+    100% { color: #003CFF; }
+}
+
+.tit_btm em::after { animation: tit_btm_af 1.5s infinite forwards alternate; }
+@keyframes tit_btm_af {
+    0% { background: #3888ff; }
+    100% { background: #003CFF; }
+}
+
+.con2_top h3 { animation: con2_top 5s infinite; }
+
+.con2_top h3:nth-child(1) { animation-delay: 0s; }
+.con2_top h3:nth-child(2) { animation-delay: 1s; }
+.con2_top h3:nth-child(3) { animation-delay: 2s; }
+.con2_top h3:nth-child(4) { animation-delay: 3s; }
+.con2_top h3:nth-child(6) { animation-delay: 4s; }
+
+
+@keyframes con2_top {
+    0% { border-bottom-color: #003CFF; color: #003CFF; }
+    20% { border-bottom-color: #003CFF; color: #003CFF; }
+    20.01% { border-bottom-color: #333; color: #333; }
+    100% { border-bottom-color: #333; color: #333; }
+
+}
+
+.con3_con img:nth-child(2n) { animation: con3_con 5s infinite cubic-bezier(0.49, -0.13, 0.03, 1.09); }
+.con3_con img:nth-child(2) { animation-delay: 0s; } 
+.con3_con img:nth-child(4) { animation-delay: 1s; } 
+.con3_con img:nth-child(6) { animation-delay: 2s; } 
+.con3_con img:nth-child(8) { animation-delay: 3s; } 
+.con3_con img:nth-child(10) { animation-delay: 4s; } 
+
+
+
+@keyframes con3_con {
+0% { transform: scale(1.09); }
+20% { transform: scale(1.09); }
+20.01% { transform: scale(1); }
+100% { transform: scale(1); }
+}
+
+
+/* media screen */
+
+@media screen and (max-width: 600px) {
+body { font-size: 15px; }
+
+
+}
+@media screen and (max-width: 480px) {
+body { font-size: 10px; }
+.radio_box span { font-size: 15px; }   
+
+
+}
+
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <section class="top_fix">
+            <img src="img/lifting_beauty/logo.png" alt="로고">
+            <h2>민트실 리프팅 상담신청</h2>
+            <a href="#form_wrap-sec"></a>
+        </section> <!-----top_fix----->
+
+        <section class="main bg">
+            <img src="img/lifting_beauty/main_bg.webp" alt="배경">
+            <div class="bg_inner">
+                <img src="img/lifting_beauty/main_tit01.png" alt="민트실리프팅" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="300">
+                <div class="main_tit">
+                    <div class="tit_top">
+                        <h6>85,000원</h6>
+                        <h6><span class="tcolor"><em class="num">43,000</em>원</span></h6>
+                    </div>
+
+                    <div class="tit_btm">
+                        <h6><span class="tcolor"><em>4</em><em>9</em></span><span class="tcolor">%</span>할인</h6>
+                        <img src="img/lifting_beauty/main_ico.png" alt="플러스">
+                    </div>
+                </div>  <!-----main_tit----->
+            </div>  <!-----bg_inner----->
+        </section> <!-----main----->
+
+        <section class="con1">
+            <div class="inner">
+                <div class="con_tit">
+                    
+                    <h2><span class="tcolor">민트실 리프팅이란?</span></h2>
+                    <p>
+                        민트실 리프팅은 KFDA, GMP, CE 인증을 받은 녹는 PDO실을<br>
+                        사용한 시술로, <span class="tcolor">불륨이 부족하거나 탄력이 저하된 부위에 적용</span>됩니다.<br>
+                        SMAS층(표층근막층)까지 당겨 리프팅 효과의 <span class="tcolor">유지력을 높이며,</span><br>
+                        시술 부위에 콜라겐 생성을 유도해 <span class="tcolor">더욱 탄력 있고 선명한<br>
+                        얼굴선을 완성합니다.</span>
+                    </p>
+                </div>
+
+                <img src="img/lifting_beauty/con1_box.webp" alt="모델사진" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+            </div> <!-----con1----->
+        </section> <!-----con1----->
+
+        <section class="con2 bg">
+            <img src="img/lifting_beauty/con2_bg.webp" alt="배경">
+            <div class="bg_inner">
+                <div class="con_tit">
+                    
+                    <h2>이런 분들께 추천해요</h2>
+                </div>
+
+                <div class="con2_top">
+                    <h3><span class="tcolor">1</span> <em>|</em> 레이저, 리프팅 시술 효과가 아쉬웠던 분</h3>
+                    <h3><span class="tcolor">2</span> <em>|</em> 처진 피부로 입체감이 사라진 얼굴이 고민인 분</h3>
+                    <h3><span class="tcolor">3</span> <em>|</em> 턱선, 불독살, 팔자주름이 신경 쓰이는 분</h3>
+                    <h3><span class="tcolor">4</span> <em>|</em> 점점 무너지는 얼굴 탄력이 걱정인 분</h3><br>
+                    <h3><span class="tcolor">5</span> <em>|</em> 수술 없이 리프팅 효과를 원하시는 분</h3>
+                </div> <!-----con2_top----->
+
+                <div class="con2_btm">
+                    <img src="img/lifting_beauty/con2_box01.png" alt="빠른시간" data-aos="fade-in" data-aos-duration="500" data-aos-delay="500">
+                    <img src="img/lifting_beauty/con2_box02.png" alt="흉터없음" data-aos="fade-in" data-aos-duration="500" data-aos-delay="900">
+                    <img src="img/lifting_beauty/con2_box03.png" alt="빠른일상복귀" data-aos="fade-in" data-aos-duration="500" data-aos-delay="1300">
+                </div> <!-----con2_btm----->
+
+            </div> <!-----bg_inner----->
+        </section> <!-----con2----->
+
+
+        <section class="con3">
+            <div class="inner">
+                <div class="con_tit">
+                    
+                    <h2><span class="tcolor">민트실 리프팅</span>으로<br>탄력은 <span class="tcolor">오래가게,</span><br>얼굴선은 <span class="tcolor">또렷하게!</span></h2>
+                </div>
+
+                <div class="con3_con">
+                    <img src="img/lifting_beauty/con3_img01.webp" alt="시술전">
+                    <img src="img/lifting_beauty/con3_img02.webp" alt="시술후" >
+                    <img src="img/lifting_beauty/con3_img03.webp" alt="시술전">
+                    <img src="img/lifting_beauty/con3_img04.webp" alt="시술후" >
+                    <img src="img/lifting_beauty/con3_img05.webp" alt="시술전">
+                    <img src="img/lifting_beauty/con3_img06.webp" alt="시술후" >
+                    <img src="img/lifting_beauty/con3_img07.webp" alt="시술전">
+                    <img src="img/lifting_beauty/con3_img08.webp" alt="시술후" >
+                    <img src="img/lifting_beauty/con3_img09.webp" alt="시술전">
+                    <img src="img/lifting_beauty/con3_img10.webp" alt="시술후" >
+                </div>  <!-----con3_con----->
+
+            </div> <!-----inner----->
+        </section> <!-----con3----->
+
+
+        <section class="con4">
+            <div class="inner">
+                <div class="con_tit"><h2><span class="tcolor">OOO, 왜 특별할까요?</span></h2></div>
+                <div class="con4_con">
+                    <img src="img/lifting_beauty/con4_tit01.png" alt="원장" data-aos="fade-left" data-aos-duration="500" data-aos-delay="200">
+                    <img src="img/lifting_beauty/con4_per.webp" alt="원장">
+                    <img src="img/lifting_beauty/con4_tit02.png" alt="리더십" data-aos="fade-right" data-aos-duration="500" data-aos-delay="400">
+                    <img src="img/lifting_beauty/con4_tit03.png" alt="노하우" data-aos="fade-left" data-aos-duration="500" data-aos-delay="1000">
+                </div> <!-----con4_con----->
+                <img src="img/lifting_beauty/con4_tit04.png" alt="아름다움">
+            </div> <!-----inner----->
+
+        </section>  <!-----con4----->
+
+        <section class="con5">
+            <img src="img/lifting_beauty/con5_bg.webp" alt="배경">
+        </section>
+
+
+
+
+
+        <section class="form_wrap" id="form_wrap-sec">
+
+            <!-- <p class="form_tit"></p> -->
+             
+            <div class="inner">
+                <div class="main_loading">
+                    <img src="img/lifting_beauty/form_ico.png" alt="자물쇠">
+                    <div class="dot_wrap">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                    <p>입력하신 개인정보는 암호화되어 안전하게 처리됩니다</p> 
+                </div> <!------main_loading------->
+
+                <form method="post" action="apply.html" id="myModal1" name="page_form">
+                    <ul>
+
+                        <li class="form_name">
+                            <p>성함</p>
+                            <p>입력하신 개인정보는 상담 외 다른 용도로 절대 사용되지 않습니다.</p>
+                            <input type="text" name="name" maxlength="10" placeholder="성함" required/>
+                        </li> <!----form_name------->
+
+
+                        <li class="form_tel">
+                            <p>연락처</p>
+                            <div class="phone">
+                                <select name="tel1"><option>010</option></select>
+                                <div>-</div> 
+                                <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                <div>-</div>
+                                <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                            </div>
+                        </li> <!----form_tel------->
+
+
+                        <li class="form_select02">
+                            <p>희망 상담시간</p>
+                            <select name="option1" required>
+                                <option value="" disabled="" selected="">-희망 상담시간 선택-</option>
+                                <option value="10시~11시">10:00 ~ 11:00</option>
+                                <option value="11시~12시">11:00 ~ 12:00</option>
+                                <option value="13시~14시">13:00 ~ 14:00</option>
+                                <option value="15시~16시">15:00 ~ 16:00</option>
+                                <option value="16시~17시">16:00 ~ 17:00</option>
+                                <option value="17시~18시">17:00 ~ 18:00</option>
+                                <option value="익일오전중 진행">그 외 시간은 익일오전중 상담진행</option>
+                            </select> 
+                        </li> <!----form_select02------->
+
+                                    
+
+
+
+                        <li class="form_policy">
+                            <input id="policy" type="checkbox" value="1" checked required> 
+                            <label for="policy">개인정보처리방침 동의</label>
+                            <span id="show-Box">[약관보기]</span>
+                        </li>  <!----form_policy------->
+                    </ul> <!---------ul--------->
+
+                    <button type="submit">빠른 상담 신청하기</button>
+                </form> <!---------form--------->
+            </div> <!---------inner--------->
+
+            <!-- <p class="form_btm"></p> -->
+
+        </section> <!---------form_wrap--------->
+
+
+
+        <script>
+            AOS.init({
+            once: false,          // 반복 실행
+            startEvent: 'load',   // 시작 타이밍
+            });
+        </script>
+
+
+
+        <script>
+            // 여러 개 요소 선택
+            const openBtns = document.querySelectorAll("#show-Box, #show-Box_top");
+
+            openBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const popup = window.open(
+                        'policy.html', // 조약 내용을 담은 실제 경로
+                        '개인정보이용동의',
+                        'width=800,height=600,scrollbars=yes'
+                    );      
+
+                    if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                        alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+                    }
+                });
+            });
+        </script>
+
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(function () {
+                const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                    const $el = $(entry.target);
+                    const target = Number($el.attr('data-target'));
+
+                    if (!target) return;
+
+                    setTimeout(() => {
+                        $el.prop('Counter', 0).stop().animate({
+                        Counter: target
+                        }, {
+                        duration: 1000,
+                        easing: 'swing',
+                        step: function (now) {
+                            $(this).html(Math.ceil(now).toLocaleString());
+                        }
+                        });
+                    }, 1000); // ← 여기서 1초 딜레이 설정 // 
+                    }
+                });
+                }, { threshold: 0.5 });
+
+                // 초기 숫자값을 data-target 속성에 저장
+                $('.num').each((_, el) => {
+                const $el = $(el);
+                const target = Number($el.text().replace(/,/g, '').trim());
+                $el.attr('data-target', target);
+                observer.observe(el);
+                });
+            });
+        </script>
+
+        
+    </body>
+</html>

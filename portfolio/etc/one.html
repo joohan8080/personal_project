@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/web_fonts.css" type="text/css">
+        <title>종신보험</title>
+        <style>
+            
+html { scroll-behavior: smooth; }
+* { margin: 0; padding: 0; vertical-align: top; box-sizing: border-box; }
+body { max-width: 800px; min-width: 320px; margin: 0 auto; font-size: 18px; font-family: 'Pretendard-Regular'; }
+li { list-style: none; }
+a { text-decoration: none; color: #fff; font-family: 'Pretendard-Bold'; }
+img { max-width: 100%; border: none; }
+p { color: #333; word-break: keep-all; }
+select { -webkit-appearance: none; appearance: none; color: #333; background-image: url(img/selct_arrow.png);
+background-repeat: no-repeat; background-position: center right 5px;}
+textarea {
+border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
+resize: none; box-sizing: border-box; -webkit-appearance: none; -moz-appearance: none; appearance: none;        
+}
+button { all: unset; cursor: pointer; padding: 0; margin: 0; font: inherit; color: inherit; }
+h1, h2, h3, h4, h5, h6, p { line-height: 120%; letter-spacing: -.05em; color: #333; }
+
+
+.form_wrap { border: 2px solid #00AFA1; border-radius: .5em; background: #fff; width: 95%; margin: 0 auto; }
+#form_wrap-sec .form_tit { margin-bottom: 1em; }
+
+#form_wrap-sec_top { padding: 5% .5em;  }
+#form_wrap-sec_top, #form_wrap-sec_con2, #form_wrap-sec_con1 { display: none; margin: 0 auto; }
+.form_wrap .form_policy { margin-bottom: 1.5em; }
+.main_btm { text-align: center; }
+.main_btm > button { font-size: 3em; display: block; margin: 0 auto; width: 80%; border-radius: .3em;
+padding: 0; color: #fff; font-family: 'GMarketSans'; font-weight: 700; background: #00AFA1; }
+
+
+
+/* top_fix */
+.top_fix { width: 100%; max-width: 800px; min-width: 320px; position: fixed; background: #ffffffea; z-index: 9999;
+display: flex; justify-content: space-between; align-items: center; padding: 20px 10px; box-sizing: border-box; }
+.top_fix p { font-size: 1.7em; letter-spacing: -.05em; font-weight: bolder; color: #333; }
+.top_fix a { display: block; padding: 5px 15px; background: #00AFA1; color: #fff; 
+border-radius: 30px; font-weight: bolder; letter-spacing: -.05em; font-size: 1.5em; }
+.top_padding { padding-top: 71px; }
+
+
+/* form */
+.form_wrap p { color: #333; font-size: 1.4em; }
+.form_wrap { padding: 10% 0;  }
+.form_tit { text-align: center; margin-bottom: 1em; font-size: 1.5em !important; font-weight: bolder; line-height: 150%; }
+.form_tit .tcolor { color: 00AFA1; font-size: 1.3em; }
+.form_tit em { font-size: 1.3em; font-style: normal; }
+.form_wrap .inner { width: 95%; margin: 0 auto; padding: 0; }
+.form_wrap ul li { margin-bottom: 1em; }
+.form_wrap .form_policy { margin-bottom: 1.5em; display: flex; flex-wrap: wrap; align-items: center; }
+.form_wrap .form_policy input { margin-right: 5px; cursor: pointer; }
+.form_wrap .form_policy label { cursor: pointer; margin-right: 5px; color: #333; }
+.form_wrap ul li p:first-child { margin-bottom: 5px; font-size: 18px; font-weight: 600; text-align: left; }
+.form_wrap ul li p:nth-child(2) { font-size: 1em; margin-bottom: 10px; color: #333; text-align: left; }
+.form_wrap ul li input, .form_wrap ul li select { padding: 15px 10px; border: 1px solid #e5e5e5; background-color: #fff; border-radius: .5em; }
+.form_wrap ul li input[type="text"] { width: 100%; box-sizing: border-box; }
+.form_wrap .form_tel input, .form_wrap .form_tel select { width: 32% !important; }
+.form_wrap .form_select02 select { width: 100%; }
+.region_wrap .select_box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1%; }
+.form_wrap .form_text textarea { width: 100%; height: 80px; }
+.form_wrap .form_policy, .form_wrap .form_policy a { font-size: 14px; color: #333; }
+.phone { display: flex; align-items: center; gap: 5px; }
+.form_wrap button { width: 100%; padding: .5em 0; color: #fff; background: #00AFA1; text-align: center; border-radius: .5em;
+ font-size: 2em; font-weight: bolder; border: none; cursor: pointer; font-family: 'Pretendard-Bold'; }
+
+input[type="radio"] { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
+.radio_wrap { display: flex; gap: 10px; }
+.radio_box { width: 100%; display: flex; align-items: center; height: 50px; }
+.radio_box input[type="radio"] { width: 100%; position: absolute; left: 50%; transform: translateX(-50%); transition: .3s; border-radius: .5em;
+padding: 0; height: 50px; z-index: -1; cursor: pointer; }
+.radio_box label { position: relative; width: 100%; text-align: center; line-height: 50px; z-index: 1;
+color: #666; cursor: pointer; }
+.radio_box input[type="radio"]:checked { background: #00AFA1; }
+.radio_box input[type="radio"]:checked + span { color: #fff; }
+#show-Box { cursor: pointer; }
+.form_wrap input::placeholder { color: #c5c5c5; }
+.form_btm { width: 95%; margin: 0 auto; text-align: center; padding: 2em 0; font-weight: normal; line-height: 150%; }
+.form_wrap .no_choice { color: #999 !important; }
+
+.phone > div { color: #333; }
+
+
+
+
+.loading_wrap { text-align: center; margin-bottom: 1.5em; }
+.loading_wrap img { width: 20%; margin-bottom: 1em; }
+.loading_wrap p { font-size: 1.3em; color: #333; }
+.loading_con { display: flex; justify-content: center; align-items: flex-end; gap: .3em; margin-bottom: 1em; }
+.loading_box { width: .7em; height: 1em; border-radius: 0; background: #00AFA1; animation: loadingFade 1s infinite ease-in-out; }
+
+/* 각 막대 애니메이션 딜레이 다르게 적용 */
+.loading_box:nth-child(1) { animation-delay: 0s; }
+.loading_box:nth-child(2) { animation-delay: 0.1s; }
+.loading_box:nth-child(3) { animation-delay: 0.2s; }
+.loading_box:nth-child(4) { animation-delay: 0.3s; }
+.loading_box:nth-child(5) { animation-delay: 0.4s; }
+.loading_box:nth-child(6) { animation-delay: .5s; }
+.loading_box:nth-child(7) { animation-delay: .6s; }
+
+@keyframes loadingFade {
+0%, 100% {
+opacity: 0.5; /* 옅음 */
+}
+50% {
+opacity: 1;   /* 진하게 */
+}
+}
+
+.form_wrap ul li p:first-child span { color: #666; font-size: .7em; }
+
+
+
+
+/* main */
+.main { background: linear-gradient(#EBEBEB 0%, #C7C7C7 100%); overflow: hidden; }
+.main > .inner { padding: 10% 0; width: 100%; position: relative; }
+
+.main .con_tit { margin-bottom: 30em; position: relative; }
+.main .con_tit img { width: 25%; margin-bottom: 1.5em;  }
+.main .con_tit h3 { font-size: 2.5em; margin-bottom: .2em; }
+.main .con_tit h2 { font-size: 3.5em; margin-bottom: .4em; }
+.main .con_tit h2 span { border-bottom: 5px solid #00AFA1; }
+.main .con_tit h3:last-child { margin-bottom: 0; }
+
+
+.main_img img { position: absolute; }
+.main_img img:nth-child(1) { top: 17em; left: 50%; transform: translateX(-50%); width: 70%; z-index: 10;  }
+.main_img img:nth-child(2) { top: 2%; right: -10%; z-index: 1; width: 35%; }
+.main_img img:nth-child(3) { top: 0; left: -5%; z-index: 1; width: 23%; }
+
+.main_con { position: relative; }
+
+
+/* con1 */
+.con1 { overflow: hidden; position: relative; background: #444; }
+.con1_con { display: flex; }
+.con1_con img { width: 50%; }
+.con1 > img { position: absolute; width: 60%; top: 10%; left: 50%; transform: translateX(-50%);  z-index: 10; }
+
+
+/* con2 */
+.con2 { background: #e9e9e9; overflow: hidden; }
+
+.con2_con { text-align: center; }
+.con2_con > img:first-child { width: 90%; margin-bottom: 1.5em; }
+.con2_con > img:nth-child(2) { width: 85%; margin-bottom: 3.5em; }
+.con2_box { width: 90%; margin-bottom: 2em; }
+.con2_box:nth-child(3), .con2_box:nth-child(5) { margin-left: -5%; }
+.con2_box:nth-child(4), .con2_box:nth-child(6) { margin-left: 14%; }
+.con2_box:nth-child(6) { margin-bottom: 5em; }
+.con2_con > img:nth-child(7) { width: 85%; }
+
+/* con3 */
+
+.con3 { background: #e9e9e9; }
+.con3 .con_tit h2 { font-size: 2.5em; }
+.con3 .con_tit h2 span { font-size: 1.4em; }
+
+.con3_box { margin-bottom: 1em; }
+
+
+
+/* con4 */
+
+.con4 { background: #F4FFFC; }
+
+.con4_top { width: 95%; margin-bottom: 3.5em; }
+
+.con4_mid { margin-bottom: 2em; overflow: hidden; }
+
+.con4_mid img { margin-bottom: .5em; }
+
+.con4 .inner h3 { text-align: center; font-size: 1.3em; color: #666; margin-bottom: 2em; }
+
+.con4 button { font-size: 2.1em; width: 90%; }
+
+
+
+.notice { margin-bottom: 1em !important; color: #333 !important; font-size: 1.5em !important; font-weight: 500; }
+.notice .tcolor { color: red; }
+
+/* all */
+.con_tit p { font-size: 2em; }
+.bg { width: 100%; position: relative; overflow: hidden; }
+.bg > img { width: 100%; object-fit: contain; }
+.tcolor { color: #00AFA1; }
+.bg_inner { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 1em; }
+.inner { width: 95%; margin: 0 auto; padding: 15% 0; }
+h2 { font-size: 2em; letter-spacing: -.05em; font-family: 'GMarketSans'; font-weight: 700; }
+h3 { font-size: 1.5em; letter-spacing: -.05em; font-family: 'GMarketSans';  font-weight: 400; }
+h4, h5 { font-family: 'Pretendard-Bold'; font-weight: normal; }
+h6 { font-family: 'GMarketSans'; }
+.con_tit { text-align: center; margin-bottom: 3.5em; }
+.call { font-size: 1.3em; text-align: center; margin: 2em 0; color: #333; }
+
+
+
+/* animation */
+
+.form_wrap button, .main_btm > button, .con4 .inner > button  { animation: main_btn 1s infinite forwards alternate cubic-bezier(0.9, -0.01, 0, 1); }
+
+@keyframes main_btn {
+0% { transform: translateY(-7%); box-shadow: 0 4px 1px 1px #006e65; color: #ffee00; }
+100% { transform: translateY(0%); }
+
+}
+
+
+.main_img img:nth-child(1)  { animation: main_c 1s infinite forwards alternate; }
+@keyframes main_c {
+0% { transform:  translateX(-50%) scale(1.05); }   
+100% { transform: translateX(-50%) scale(1); opacity: .8; }   
+}
+
+.main_img img:nth-child(3)  { animation: main_left 1s infinite forwards alternate; }
+@keyframes main_left {
+0% { transform: rotate(5deg); }   
+100% { transform: rotate(0); }   
+}
+
+.main_img img:nth-child(2)  { animation: main_right 1s infinite forwards alternate; }
+@keyframes main_right {
+0% { transform: rotate(-5deg); }   
+100% { transform: rotate(0); }   
+}
+
+
+
+/* media screen */
+
+@media screen and (max-width: 600px) {
+body { font-size: 15px; }
+
+
+}
+@media screen and (max-width: 480px) {
+body { font-size: 10px; }
+.radio_box span { font-size: 15px; }   
+
+
+}
+
+
+
+        </style>
+    </head>
+
+    <body>
+        <section class="top_fix">
+            <p>5년 납입으로 평생 보장!</p>
+            <a href="#con4_btn">환급금 계산하기</a>
+        </section> <!-----top_fix----->
+        <div class="top_padding"></div>
+
+        <section class="main">
+            
+            <div class="inner">
+
+                
+                <div class="con_tit">
+                    <h3>5년 납입으로 평생 보장!</h3>
+                    <h2><span class="tcolor">단기납 종신보험!</span></h2>
+                    <h3>왜 주목받을까?</h3>
+                </div>
+
+                <div class="main_img">
+                    <img src="img/one/main_center.webp" alt="현금다발">
+                    <img src="img/one/main_right.webp" alt="배경">
+                    <img src="img/one/main_left.webp" alt="배경">
+                </div>
+
+                <div class="main_con">
+
+                    <div class="main_btm">
+
+                        <button>환급금 계산하기</button>
+
+                        <div class="form_wrap" id="form_wrap-sec_top">
+                            <p class="form_tit">    
+                                <span class="tcolor">✅환급금 계산하기</span><br>
+                                간단한 정보 입력으로 예상 환급금을 확인하세요
+                            </p>
+
+
+
+                            <div class="inner">
+
+
+                                <div class="loading_wrap">
+                                    <img src="img/one/loading.png" alt="방패">
+                                    <div class="loading_con">
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                    </div> <!--loading_con--->
+                                    <p>개인정보는 암호화되어 안전하게 처리됩니다.</p>
+                                    
+
+                                </div> <!--loading_wrap--->
+
+
+
+                                <form method="post" action="apply.html" id="myModal1_top" name="page_form_top">
+                                    <ul>
+                                        <li class="form_radio">
+                                            <p>성별</p>
+                                            <div class="radio_wrap">
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option1" type="radio" value="남자" required> 
+                                                        <span>남자</span>
+                                                    </label>
+                                                </div>
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option1" type="radio" value="여자" required>
+                                                        <span>여자</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </li>  <!----form_radio------->
+
+
+
+                                        <li class="form_name">
+                                            <p>성함</p>
+                                            <p>입력하신 개인정보는 상담 외 다른 용도로 절대 사용되지 않습니다.</p>
+                                            <input type="text" name="name" maxlength="10" placeholder="성함" required/>
+                                        </li> <!----form_name------->
+
+                                        <li class="form_tel">
+                                            <p>연락처</p>
+                                            <div class="phone">
+                                                <select name="tel1"><option>010</option></select>
+                                                <div>-</div> 
+                                                <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                                <div>-</div>
+                                                <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                            </div>
+                                        </li> <!----form_tel------->
+
+                                        
+                                        <li class="form_name">
+                                            <p>생년월일</p>
+                                            <input type="text" name="option2" maxlength="10" placeholder="19790319" required/>
+                                        </li> <!----form_name------->
+
+                              
+
+                                        <li class="form_radio">
+                                            <p>납입기간 <span>(선택)</span></p>
+                                            <div class="radio_wrap">
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option3" type="radio" value="5년"> 
+                                                        <span>5년</span>
+                                                    </label>
+                                                </div>
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option3" type="radio" value="7년">
+                                                        <span>7년</span>
+                                                    </label>
+                                                </div>
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option3" type="radio" value="10년">
+                                                        <span>10년</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </li>  <!----form_radio------->
+
+                                        <li class="form_radio">
+                                            <p>월 납입금액 <span>(선택)</span></p>
+                                            <div class="radio_wrap">
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option4" type="radio" value="30만원"> 
+                                                        <span>30만원</span>
+                                                    </label>
+                                                </div>
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option4" type="radio" value="50만원">
+                                                        <span>50만원</span>
+                                                    </label>
+                                                </div>
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option4" type="radio" value="100만원">
+                                                        <span>100만원</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </li>  <!----form_radio------->
+
+
+
+
+
+                                        <li class="form_policy">
+                                            <input id="policy_top" type="checkbox" value="1" checked required> 
+                                            <label for="policy_top">개인정보처리방침 동의</label>
+                                            <span id="show-Box_top">[약관보기]</span>
+                                        </li>  <!----form_policy------->
+                                    </ul> <!---------ul--------->
+                        
+                                    <button type="submit">환급금 확인하기</button>
+                                </form> <!---------form--------->
+                            </div> <!---------inner--------->
+
+
+                        </div> <!---------form_wrap--------->
+
+
+                    </div> <!---main_btm---->
+                </div> <!---main_con---->
+
+
+            </div> <!---bg_inner---->
+        </section> <!---main---->
+
+
+        <section class="con1">
+            <img src="img/one/con1_ico.png" alt="vs">
+            <div class="con1_con">
+                <img src="img/one/con1_box01.png" alt="기존종신"  data-aos="slide-right" data-aos-duration="500" data-aos-delay="300">
+                <img src="img/one//con1_box02edit.png" alt="단기납종신"  data-aos="slide-left" data-aos-duration="500" data-aos-delay="300">
+            </div> <!---con1_con---->
+        </section>  <!---con1---->
+
+
+
+        <section class="con2">
+            <img src="img/one/con2_top.png" alt="모형">
+
+            <div class="con2_con">
+                <img src="img/one/con2_tit01.png" alt="납입기간">
+                <img src="img/one/con2_tit02.png" alt="단기납" data-aos="zoom-in" data-aos-duration="500" data-aos-delay="500">
+
+                <div class="con2_box" data-aos="zoom-out" data-aos-duration="500" data-aos-delay="200"><img src="img/one/con2_box01.png" alt="연금"></div>
+                <div class="con2_box" data-aos="zoom-out" data-aos-duration="500" data-aos-delay="400"><img src="img/one/con2_box02.png" alt="연금"></div>
+                <div class="con2_box" data-aos="zoom-out" data-aos-duration="500" data-aos-delay="600"><img src="img/one/con2_box03.png" alt="연금"></div>
+                <div class="con2_box" data-aos="zoom-out" data-aos-duration="500" data-aos-delay="800"><img src="img/one/con2_box04.png" alt="연금"></div>
+
+                <img src="img/one/con2_btm_t.png" alt="전액환급">
+            </div><!---con2_con---->
+
+            <img src="img/one/con2_btm.png" alt="모형">
+        </section>  <!---con2---->
+
+
+        <section class="con3">
+            <div class="inner">
+                <div class="con_tit"><h2>이런분들에게 <span class="tcolor">추천</span>드려요!</h2></div>
+
+                <div class="con3_con">
+                    <div class="con3_box" data-aos="zoom-in" data-aos-easing="ease-out-back" data-aos-duration="500" data-aos-delay="200"><img src="img/one/con3_box01.png" alt="납입"></div>
+                    <div class="con3_box" data-aos="zoom-in" data-aos-easing="ease-out-back" data-aos-duration="500" data-aos-delay="400"><img src="img/one/con3_box02.png" alt="장기간"></div>
+                    <div class="con3_box" data-aos="zoom-in" data-aos-easing="ease-out-back" data-aos-duration="500" data-aos-delay="600"><img src="img/one/con3_box03.png" alt="안정성"></div>
+                </div>  <!---con3_con--->
+
+            </div> <!---inner---->
+        </section> <!---con3---->
+
+
+        <section class="con4">
+            <div class="inner">
+                <div class="con4_top">
+                    <img src="img/one/con4_tit.png" alt="보증">
+                </div>
+
+                <div class="con4_mid">
+                    <img src="img/one/con4_box01.webp" alt="환급률"  data-aos="slide-up" data-aos-easing="ease-out-back" data-aos-duration="500" data-aos-delay="200">
+                    <img src="img/one/con4_box02.webp" alt="환급률" data-aos="slide-up" data-aos-easing="ease-out-back" data-aos-duration="500" data-aos-delay="400">
+                    <img src="img/one/con4_box03.webp" alt="적립액" data-aos="slide-up" data-aos-easing="ease-out-back" data-aos-duration="500" data-aos-delay="600">
+                </div>
+                <h3>*상품마다 상이할 수 있으므로 꼼꼼히 상담 받아보세요</h3>
+
+
+                <div class="main_con">
+
+                    <div class="main_btm">
+
+                        <button id="con4_btn">단기납 종신보험 상담받기</button>
+
+                        <div class="form_wrap" id="form_wrap-sec">
+                            <p class="form_tit">    
+                                <span class="tcolor">✅환급금 계산하기</span><br>
+                                간단한 정보 입력으로 예상 환급금을 확인하세요
+                            </p>
+
+
+                            <div class="inner">
+
+
+                                <div class="loading_wrap">
+                                    <img src="img/one/loading.png" alt="방패">
+                                    <div class="loading_con">
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                    </div> <!--loading_con--->
+                                    <p>개인정보는 암호화되어 안전하게 처리됩니다.</p>
+                                    
+
+                                </div> <!--loading_wrap--->
+
+
+
+                                <form method="post" action="apply.html" id="myModal1" name="page_form">
+                                    <ul>
+                                        <li class="form_radio">
+                                            <p>성별</p>
+                                            <div class="radio_wrap">
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option1" type="radio" value="남자" required> 
+                                                        <span>남자</span>
+                                                    </label>
+                                                </div>
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option1" type="radio" value="여자" required>
+                                                        <span>여자</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </li>  <!----form_radio------->
+
+
+
+                                        <li class="form_name">
+                                            <p>성함</p>
+                                            <p>입력하신 개인정보는 상담 외 다른 용도로 절대 사용되지 않습니다.</p>
+                                            <input type="text" name="name" maxlength="10" placeholder="성함" required/>
+                                        </li> <!----form_name------->
+
+                                        <li class="form_tel">
+                                            <p>연락처</p>
+                                            <div class="phone">
+                                                <select name="tel1"><option>010</option></select>
+                                                <div>-</div> 
+                                                <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                                <div>-</div>
+                                                <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                            </div>
+                                        </li> <!----form_tel------->
+
+                                        
+                                        <li class="form_name">
+                                            <p>생년월일</p>
+                                            <input type="text" name="option2" maxlength="10" placeholder="19790319" required/>
+                                        </li> <!----form_name------->
+
+                              
+
+                                        <li class="form_radio">
+                                            <p>납입기간 <span>(선택)</span></p>
+                                            <div class="radio_wrap">
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option3" type="radio" value="5년"> 
+                                                        <span>5년</span>
+                                                    </label>
+                                                </div>
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option3" type="radio" value="7년">
+                                                        <span>7년</span>
+                                                    </label>
+                                                </div>
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option3" type="radio" value="10년">
+                                                        <span>10년</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </li>  <!----form_radio------->
+
+                                        <li class="form_radio">
+                                            <p>월 납입금액 <span>(선택)</span></p>
+                                            <div class="radio_wrap">
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option4" type="radio" value="30만원"> 
+                                                        <span>30만원</span>
+                                                    </label>
+                                                </div>
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option4" type="radio" value="50만원">
+                                                        <span>50만원</span>
+                                                    </label>
+                                                </div>
+                                                <div class="radio_box">
+                                                    <label>
+                                                        <input name="option4" type="radio" value="100만원">
+                                                        <span>100만원</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </li>  <!----form_radio------->
+
+
+
+                              
+
+
+                                        <li class="form_policy">
+                                            <input id="policy" type="checkbox" value="1" checked required> 
+                                            <label for="policy">개인정보처리방침 동의</label>
+                                            <span id="show-Box">[약관보기]</span>
+                                        </li>  <!----form_policy------->
+                                    </ul> <!---------ul--------->
+                        
+                                    <button type="submit">환급금 확인하기</button>
+                                </form> <!---------form--------->
+                            </div> <!---------inner--------->
+
+
+                        </div> <!---------form_wrap--------->
+
+
+                    </div> <!---main_btm---->
+                </div> <!---main_con---->
+
+
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+            AOS.init({
+            once: false,          // 반복 실행
+            startEvent: 'load',   // 시작 타이밍
+            });
+        </script>
+
+        
+
+        <script>
+            // 여러 개 요소 선택
+            const openBtns = document.querySelectorAll("#show-Box, #show-Box_top, #show-Box_con4");
+
+            openBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const popup = window.open(
+                        'policy.html', // 조약 내용을 담은 실제 경로
+                        '개인정보이용동의',
+                        'width=800,height=600,scrollbars=yes'
+                    );      
+
+                    if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                        alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+                    }
+                });
+            });
+        </script>
+
+
+
+
+        
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const buttons = document.querySelectorAll(".main_btm > button");
+
+                buttons.forEach((btn) => {
+                    // 버튼이 속한 가장 가까운 섹션 찾기
+                    const parentSection = btn.closest(".main, .con3, .con4");
+
+                    // 섹션 내 관련 요소 찾기
+                    const formBox = parentSection.querySelector("#form_wrap-sec_top, #form_wrap-sec");
+                    const mainTit = parentSection.querySelectorAll(".main_tit");
+
+                    // 초기 상태: 폼 숨김
+                    if (formBox) formBox.style.display = "none";
+
+                    btn.addEventListener("click", function() {
+                        // 폼이 현재 보이는지 여부 확인
+                        const isVisible = formBox && formBox.style.display === "block";
+
+                        if (isVisible) {
+                            // ✅ 폼이 열려 있을 때 → 닫기
+                            formBox.style.display = "none";
+                            mainTit.forEach(tit => tit.style.display = "block");
+
+                            // 버튼 스타일 원래대로 (선택사항)
+                            btn.style.marginBottom = "";
+                            btn.style.backgroundColor = "";
+                            btn.style.color = "";
+                            
+                            // 섹션 패딩 초기화
+                            parentSection.style.paddingTop = "";
+                            parentSection.style.paddingBottom = "";
+                        } else {
+                            // ✅ 폼이 닫혀 있을 때 → 열기
+
+                            btn.style.display = "block";
+                            btn.style.marginBottom = "1em";
+                            btn.style.color = "#fff000";
+
+
+                            if (formBox) formBox.style.display = "block";
+
+                            if (parentSection.classList.contains("main")) {
+                                const paddingBottom = parentSection.dataset.paddingBottom || "0";
+                                parentSection.style.paddingBottom = paddingBottom;
+
+                            }
+
+                            formBox.scrollIntoView({ behavior: "smooth" });
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

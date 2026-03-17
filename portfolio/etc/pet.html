@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/web_fonts.css" type="text/css">
+        <title>펫보험01</title>
+        <style>
+        html { scroll-behavior: smooth; }
+* { margin: 0; padding: 0; vertical-align: top; box-sizing: border-box; }
+body { max-width: 800px; min-width: 320px; margin: 0 auto; font-size: 18px; font-family: 'Pretendard-Regular'; }
+li { list-style: none; }
+a { text-decoration: none; color: #333; }
+img { max-width: 100%; border: none; }
+p { color: #333; word-break: keep-all; }
+select { -webkit-appearance: none; appearance: none; color: #333; background-image: url(img/selct_arrow.png);
+background-repeat: no-repeat; background-position: center right 5px;}
+textarea {
+border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
+resize: none; box-sizing: border-box; -webkit-appearance: none; -moz-appearance: none; appearance: none;        
+}
+button { all: unset; cursor: pointer; padding: 0; margin: 0; font: inherit; color: inherit; }
+h1, h2, h3, h4, h5, h6, p { line-height: 120%; letter-spacing: -.05em; color: #333; }
+
+
+
+
+
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* top_fix */
+.top_fix { width: 100%; max-width: 800px; min-width: 320px; position: fixed; z-index: 9999; bottom: 0; box-sizing: border-box; }
+
+
+/* form */
+.form_wrap p { color: #333; font-size: 1.4em; }
+.form_wrap { padding: 10% 0; background: #fff; }
+.form_tit { text-align: center; margin-bottom: 50px; font-size: 2em !important; font-weight: bolder; line-height: 150%; }
+.form_tit .tcolor { color: red; }
+.form_wrap .inner { width: 95%; margin: 0 auto; padding: 0; }
+.form_wrap ul li { margin-bottom: 20px; }
+.form_wrap .form_policy { margin-bottom: 40px; display: flex; flex-wrap: wrap; align-items: center; }
+.form_wrap .form_policy input { margin-right: 5px; cursor: pointer; }
+.form_wrap .form_policy label { cursor: pointer; margin-right: 5px; }
+.form_wrap ul li p:first-child { margin-bottom: 5px; font-size: 18px; font-weight: 600; }
+.form_wrap ul li p:nth-child(2) { font-size: 1em; margin-bottom: 10px; color: #666; }
+.form_wrap ul li input, .form_wrap ul li select { padding: 15px 10px; border-radius: 10px; border: 1px solid #e5e5e5; background-color: #fff; }
+.form_wrap ul li input[type="text"] { width: 100%; box-sizing: border-box; }
+.form_wrap .form_tel input, .form_wrap .form_tel select { width: 32% !important; }
+.form_wrap .form_select02 select { width: 100%; }
+.region_wrap .select_box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1%; }
+.form_wrap .form_text textarea { width: 100%; height: 80px; border-radius: 10px; }
+.form_wrap .form_policy, .form_wrap .form_policy a { font-size: 14px; }
+.phone { display: flex; align-items: center; gap: 5px; }
+.form_wrap button { width: 100%; padding: 1em 0; color: #fff; background: #00B90C; text-align: center;
+border-radius: 10em; font-size: 2em; font-weight: bolder; border: none; cursor: pointer; }
+
+input[type="radio"] { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
+.radio_wrap { display: flex; gap: 5px; }
+.radio_box { width: 100%; display: flex; align-items: center; height: 50px; }
+.radio_box input[type="radio"] { width: 100%; position: absolute; left: 50%; transform: translateX(-50%); transition: .3s;
+padding: 0; height: 50px; z-index: -1; cursor: pointer; }
+.radio_box label { position: relative; width: 100%; text-align: center; line-height: 50px; z-index: 1;
+color: #666; cursor: pointer; }
+.radio_box input[type="radio"]:checked { background: #00B90C; }
+.radio_box input[type="radio"]:checked + span { color: #fff; }
+#show-Box { cursor: pointer; }
+.form_wrap input::placeholder { color: #c5c5c5; }
+.form_btm { width: 95%; margin: 0 auto; text-align: center; padding-top: 2em; font-weight: normal; line-height: 150%; }
+.form_wrap .no_choice { color: #999 !important; }
+
+.check_box { border: 2px solid #e5e5e5; margin-bottom: .5em; border-radius: 10px; transition: .3s; cursor: pointer; }
+.check_box span { font-size: 1.2em; color: #333; transition: .3s; }
+.check_box label { display: flex; align-items: center; gap: 5px; cursor: pointer; padding: 1em 0 1em .2em;  }
+.check_box:last-child { margin-bottom: 0; }
+.check_box input[type="checkbox"] {  -webkit-appearance: none; /* Safari, Chrome */ -moz-appearance: none;    /* Firefox */
+appearance: none; /* 표준 */ margin: 0; padding: 0;  border: none; outline: none; cursor: pointer; transition: .3s;
+width: 1em; height: 1em; aspect-ratio: 1 / 1;   /* 1:1 비율 = 정사각형 */  position: relative; border: 2px solid #e5e5e5;
+} 
+.check_box input[type="checkbox"]:checked::before {
+content: '✔'; font-size: 1em; color: white; position: absolute; top: 50%; left: 50%;
+transform: translateX(-50%) translateY(-50%); }
+.check_box input[type="checkbox"]:checked { background-color: #00B90C; border-color: #00B90C; }
+
+.check_box:has(input[type="checkbox"]:checked) { background: #00B90C; }
+.check_box input[type="checkbox"]:checked + span { color: #fff; }
+input.check_choice:focus { outline: 2px solid #00B90C; }
+
+.check_grid { margin-bottom: .5em; display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+.check_grid {  border-radius: 10px; }
+.check_grid .check_box { margin-bottom: 0; }
+.check_grid .check_box span { font-size: 1em; letter-spacing: -.05em; }
+.check_grid:last-child { margin-bottom: 0; }
+.check_grid_two { grid-template-columns: repeat(2, 1fr); }
+
+
+
+
+
+
+
+
+
+/* main */
+
+.main .con_tit { margin-bottom: 4em; }
+.main .con_tit > img { display: block; margin: 0 auto 2em auto; width: 50%; }
+.main .con_tit h3 { font-size: 4em; color: #fff; display: inline-block; background: #00B90C; border-radius: 5em; padding: .2em 1em .05em 1em;
+margin-bottom: 1em;  }
+.main .con_tit h2 { font-size: 4.2em; } 
+.main .con_tit h2 .tcolor { font-size: 1.5em; line-height: 60%; }
+
+.main .inner > img { display: block; width: 90%; margin: 0 auto -2em auto; }
+
+.main .form_wrap { padding: 2.5em 1em 1.5em 1em; border-radius: .5em; background: #fff; }
+.main .form_wrap .check_box label { padding: .5em .2em; }
+.main .form_wrap .check_grid .check_box span { font-size: .8em; }
+.main .form_wrap ul li { margin-bottom: 1em; }
+.main .form_wrap button { font-size: 1.5em; padding: .5em 0; border-radius: .5em; }
+.main .form_wrap ul li p:first-child { font-size: 1.2em; }
+.main .form_wrap ul li input, .main .form_wrap ul li select { padding: .5em .3em; border-radius: .3em; font-size: 1em; }
+.main .check_grid .check_box { background: #fff; border-radius: .3em; border: none; }
+.main .check_box input[type="checkbox"] { padding: 0 !important; border-width: 1px; border-radius: 3em; }
+.main .form_wrap .form_policy, .main .form_wrap .form_policy a { font-size: 1em; }
+
+
+
+/* con1 */
+.con1 .con_tit h2, .con2 .con_tit h2, .con3 .con_tit h2, .con4 .con_tit h2, .con6 .con_tit h2 { font-size: 2.5em; }
+
+/* con2 */
+.con2_con { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1em; }
+.con2_box { background: #fff; display: flex; justify-content: center; align-items: center; border: 2px solid #E8FFD2;
+padding: 1.5em .5em; border-radius: .5em; }
+.con2_box h4 { font-size: 1.4em; }
+.con2_box img { width: 10%; margin-right: .3em; }
+
+
+/* con3 */
+.con3_box { margin-bottom: 1em; }
+.con3_box:last-child { margin-bottom: 0; }
+
+/* con4 */
+.con4 .inner { overflow: hidden; }
+.con4 .con_tit p { background: #00B90C; display: inline-block; color: #fff; padding: .3em 1em; border-radius: 5em; margin-bottom: 1em; }
+
+.con4_box { margin-bottom: 2em; }
+.con4_box:last-child { margin-bottom: 0; }
+
+/* con5 */
+.con5 .con_tit h2 { font-size: 1.8em; margin-bottom: .3em; }
+.con5 .con_tit p { font-size: 1.5em; }
+
+
+
+.con5_con { background: #E8FFD2; border-radius: 5em; padding: 2.5em 0; }
+.con5_top { margin-bottom: 2em; } 
+.con5 .marquee-wrap { overflow-x: hidden; }
+.con5 .js-marquee { margin-right: 0 !important; display: flex; align-items: center; }
+.con5_box img { margin-right: 4em; height: 40px; }
+.con5_contents:nth-child(2) { margin-bottom: 1em; }
+
+
+
+
+
+
+/* con6 */
+.con6 { padding-bottom: 10%; }
+.con6 .inner { width: 100%; }
+.con6 .inner > img { width: 100%; }
+.con6 .con_tit { margin-bottom: 0; padding: 2.5em 0; background: #E8FFD2; }
+
+.con6 .con_tit h2 { margin-bottom: .3em; }
+.con6 .con_tit p { font-size: 2.1em; background: #00B90C; display: inline-block; color: #fff; padding: .3em .5em; }
+
+.main, .con1, .con2, .con3, .con4 { background: #E8FFD2; }
+
+
+/* all */
+.con_tit p { font-size: 2em; }
+.bg { width: 100%; position: relative; overflow: hidden; }
+.bg > img { width: 100%; object-fit: contain; }
+.tcolor { color: #00B90C; } 
+.bg_inner { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 1em; }
+.inner { width: 95%; margin: 0 auto; padding: 15% 0; }
+h2 { font-size: 2em; letter-spacing: 0; font-family: 'GmarketSansBold'; }
+h3 { font-size: 1.5em; letter-spacing: -.05em; font-family: 'GmarketSansBold'; }
+h4 { font-family: 'Pretendard-Black'; }
+.con_tit { text-align: center; margin-bottom: 4em; }
+
+
+
+
+/* animation */
+.form_wrap button { animation: form_btn 2s infinite forwards; }
+
+@keyframes form_btn {
+0% { border-bottom: 5px solid #008609; box-sizing: border-box; color: #EEFF00; margin-top: -5px; }
+50% { border-bottom: 5px solid #008609; box-sizing: border-box; color: #EEFF00; margin-top: -5px; }
+50.01% { border-bottom: none; box-sizing: content-box; color: #fff; margin-top: 0; }
+100% { border-bottom: none; box-sizing: content-box; color: #fff; margin-top: 0; }
+}
+
+.con2_box { animation: con2_box 4s infinite; }
+
+.con2_box:nth-child(1) { animation-delay: 0s; }
+.con2_box:nth-child(2) { animation-delay: 1s; }
+.con2_box:nth-child(3) { animation-delay: 2s; }
+.con2_box:nth-child(4) { animation-delay: 3s; }
+
+@keyframes con2_box {
+0% { border: 2px solid #00B90C; }
+25% { border: 2px solid #00B90C;  }
+25.01% { border: 2px solid #E8FFD2;  }
+100% { border: 2px solid #E8FFD2; }
+}
+
+
+.con2_box h4 { animation: con2_h4 4s infinite; }
+
+.con2_box:nth-child(1) h4 { animation-delay: 0s; }
+.con2_box:nth-child(2) h4 { animation-delay: 1s; }
+.con2_box:nth-child(3) h4 { animation-delay: 2s; }
+.con2_box:nth-child(4) h4 { animation-delay: 3s; }
+
+@keyframes con2_h4 {
+0% { color: #00B90C; }
+25% { color: #00B90C; }
+25.01% { color: #333; }
+100% { color: #333; }
+
+}
+
+
+
+
+/* media screen */
+
+@media screen and (max-width: 600px) {
+body { font-size: 15px; }
+
+.con5_box img { height: 30px; }
+
+}
+
+
+
+
+
+@media screen and (max-width: 480px) {
+body { font-size: 10px; }
+.radio_box span { font-size: 15px; }   
+
+
+
+
+.con5_box img { height: 20px; }
+
+}
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <section class="top_fix">
+            <a href="#form_wrap-sec">
+                <img src="img/pet/banner.png" alt="전화연결">
+            </a>
+        </section> <!-----top_fix----->
+
+
+        <section class="main" id="form_wrap-sec">
+
+            <div class="inner">
+                <div class="con_tit">
+                    <img src="img/pet/main_tit.png" alt="지켜주는">
+                    <h3>댕댕냥냥</h3>
+                    <h2><span class="tcolor">‘펫’</span>  보험</h2>
+                </div>
+            
+                <img src="img/pet/main_item.webp" alt="강아지">
+
+
+
+
+                <div class="form_wrap" >                
+                    <form method="post" action="apply.html" id="myModal1" name="page_form">
+                        <ul>
+    
+                            <li class="form_name">
+                                <p>성함</p>
+                                <input type="text" name="name" maxlength="10" placeholder="성함" required/>
+                            </li> <!----form_name------->
+    
+                            <li class="form_tel">
+                                <p>휴대폰번호</p>
+                                <div class="phone">
+                                    <select name="tel1"><option>010</option></select>
+                                    <div>-</div> 
+                                    <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                    <div>-</div>
+                                    <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                </div>
+                            </li> <!----form_tel------->
+
+                            <li class="form_select01 region_wrap">
+                                <p>지역</p>
+                                <div class="select_box">
+                                    <select id="region1" name="option6[]" required>
+                                        <option value="">지역</option>
+                                        <option value="서울특별시">서울특별시</option>
+                                        <option value="부산광역시">부산광역시</option>
+                                        <option value="인천광역시">인천광역시</option>
+                                        <option value="대구광역시">대구광역시</option>
+                                        <option value="광주광역시">광주광역시</option>
+                                        <option value="대전광역시">대전광역시</option>
+                                        <option value="울산광역시">울산광역시</option>
+                                        <option value="세종특별자치시">세종특별자치시</option>
+                                        <option value="경기도">경기도</option>
+                                        <option value="강원도">강원도</option>
+                                        <option value="충청북도">충청북도</option>
+                                        <option value="충청남도">충청남도</option>
+                                        <option value="경상북도">경상북도</option>
+                                        <option value="경상남도">경상남도</option>
+                                        <option value="전라북도">전라북도</option>
+                                        <option value="전라남도">전라남도</option>
+                                        <option value="제주특별자치도">제주특별자치도</option>
+                                    </select>
+                                    <select id="region2" name="option6[]" required>
+                                        <option value="">시/도/군</option>
+                                    </select>
+                                </div>
+                            </li> <!----form_select01------->
+
+    
+                            <li class="form_policy">
+                                <input id="policy" type="checkbox" value="1" checked required> 
+                                <label for="policy">개인정보처리방침 동의</label>
+                                <span id="show-Box">[약관보기]</span>
+                            </li>  <!----form_policy------->
+                        </ul> <!---------ul--------->
+            
+                        <button type="submit">문의하기</button>
+                    </form> <!---------form--------->
+                </div> <!---------form_wrap--------->
+
+
+            </div> <!---------inner--------->
+        </section> <!---------main--------->
+
+        <section class="con1">
+            <div class="inner">
+                <div class="con_tit">
+                    <h2>행복한 <span class="tcolor">반려견</span><br>행복한 <span class="tcolor">우리 가족</span>을 위해</h2>
+                </div>
+                <img src="img/pet/con1_tit.png" alt="펫보험">
+            </div>
+        </section>  <!---------con1--------->
+
+        <section class="con2">
+            <div class="inner">
+                <div class="con_tit">
+                    <h2>국내 모든 펫보험을<br><span class="tcolor">철저히 분석했습니다</span></h2>
+                </div>
+
+                <div class="con2_con">
+                    <div class="con2_box">
+                        <img src="img/pet/con2_ico.png" alt="발자국">
+                        <h4>보장 범위가 넓은지</h4>
+                    </div>
+                    <div class="con2_box">
+                        <img src="img/pet/con2_ico.png" alt="발자국">
+                        <h4>보상에는 문제가 없는지</h4>
+                    </div>
+                    <div class="con2_box">
+                        <img src="img/pet/con2_ico.png" alt="발자국">
+                        <h4>보장 금액이 높은지</h4>
+                    </div>
+                    <div class="con2_box">
+                        <img src="img/pet/con2_ico.png" alt="발자국">
+                        <h4>보험료는 합리적인지</h4>
+                    </div>
+                </div> <!---------con2_con--------->
+            </div>  <!---------inner--------->
+        </section>  <!---------con2--------->
+
+
+        <section class="con3">
+            <div class="inner">
+                <div class="con_tit">
+                    <h2>보상하지 않는 손해<br>가입 전 꼭 <span class="tcolor">체크하세요</span></h2>
+                </div>
+
+                <div class="con3_con">
+                    <div class="con3_box"  data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                        <img src="img/pet/con3_item01.png" alt="상해">
+                    </div>
+                    <div class="con3_box"  data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                        <img src="img/pet/con3_item02.png" alt="비용">
+                    </div>
+                    <div class="con3_box"  data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                        <img src="img/pet/con3_item03.png" alt="치료">
+                    </div>
+                </div> <!---------con3_con--------->
+            </div>  <!---------inner--------->
+        </section> <!---------con3--------->
+
+        <section class="con4">
+            <div class="inner">
+                <div class="con_tit">
+                    <p>소중한 우리 아이를 위해</p>
+                    <h2>펫보험의 <span class="tcolor">주요 보장</span> 내용</h2>
+                </div>
+
+                <div class="con4_con">
+                    <div class="con4_box" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                        <img src="img/pet/con4_item01.png" alt="상해">
+                    </div>
+                    <div class="con4_box" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                        <img src="img/pet/con4_item02.png" alt="비용">
+                    </div>
+                    <div class="con4_box" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                        <img src="img/pet/con4_item03.png" alt="치료">
+                    </div>
+                </div> <!---------con4_con--------->
+            </div>  <!---------inner--------->
+        </section> <!---------con4--------->
+
+        <section class="con5">
+            <div class="inner">
+                <div class="con_tit">
+                    <h2><span class="tcolor">고민되는</span> 펫보험<br>내 상황에 맞는 보장을 <span class="tcolor">추천 드립니다</span></h2>
+                    <p>맞춤 보험 설계를 통해 보험료를 <span class="tcolor">한눈에</span> 비교하세요</p>
+                </div>
+
+                <div class="con5_con con5_top marquee-wrap">
+                    <div class="con5_box marquee">
+                        <img src="img/pet/con5_item01.png" alt="로고">
+                        <img src="img/pet/con5_item02.png" alt="로고">
+                        <img src="img/pet/con5_item03.png" alt="로고">
+                        <img src="img/pet/con5_item04.png" alt="로고">
+                        <img src="img/pet/con5_item05.png" alt="로고">
+                        <img src="img/pet/con5_item06.png" alt="로고">
+                        <img src="img/pet/con5_item07.png" alt="로고">
+                    </div> <!---------con5_top--------->
+                </div>  <!---------con5_con--------->
+
+                <div class="con5_con con5_btm marquee-wrap">
+                    <div class="con5_box marquee">
+                        <img src="img/pet/con5_item08.png" alt="로고">
+                        <img src="img/pet/con5_item09.png" alt="로고">
+                        <img src="img/pet/con5_item10.png" alt="로고">
+                        <img src="img/pet/con5_item11.png" alt="로고">
+                        <img src="img/pet/con5_item12.png" alt="로고">
+                        <img src="img/pet/con5_item13.png" alt="로고">
+                        <img src="img/pet/con5_item14.png" alt="로고">
+                    </div>  <!---------con5_btm--------->
+                </div> <!---------con5_con--------->
+
+
+            </div> <!---------inner--------->
+        </section> <!---------con5--------->
+
+
+
+        <section class="con6">
+            <div class="inner">
+                <img src="img/pet/con6_item.webp" alt="강아지">
+                <div class="con_tit">
+                    <h2><span class="tcolor">내게 맞는</span> 펫보험 찾아줌!</h2>
+                    <p>전 보험자 펫보험 무료 통합 조회<br>비교 견적 및 반려동물 맞춤 설계</p>
+                </div>
+            </div>  <!---------inner--------->
+        </section>  <!---------con6--------->
+
+
+
+
+
+
+        <script>
+            // 팝업 창
+            const openPop = document.getElementById("show-Box");
+            openPop.addEventListener('click', () => {
+                const popup = window.open(
+                    'policy.html', // 조약 내용을 담은 실제 경로
+                    '개인정보이용동의',
+                    'width=800,height=600,scrollbars=yes'
+                );      
+    
+                if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                    alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+                }
+            });
+        </script>
+
+        <script>
+            const regionData = {
+            '서울특별시': ['강남구', '강동구', '강북구', '강서구', '관악구', '광진구', '구로구', '금천구', '노원구', '도봉구', '동대문구', '동작구', '마포구', '서대문구', '서초구', '성동구', '성북구', '송파구', '양천구', '영등포구', '용산구', '은평구', '종로구', '중구', '중랑구'],
+            '부산광역시': ['강서구', '금정구', '기장군', '남구', '동구', '동래구', '부산진구', '북구', '사상구', '사하구', '서구', '수영구', '연제구', '영도구', '중구', '해운대구'],
+            '인천광역시': ['강화군', '계양구', '남동구', '동구', '미추홀구', '부평구', '서구', '연수구', '옹진군', '중구'],
+            '대구광역시': ['남구', '달서구', '달성군', '동구', '북구', '서구', '수성구', '중구'],
+            '광주광역시': ['광산구', '남구', '동구', '북구', '서구'],
+            '대전광역시': ['대덕구', '동구', '서구', '유성구', '중구'],
+            '울산광역시': ['남구', '동구', '북구', '울주군', '중구'],
+            '세종특별자치시': ['세종시'],
+            '경기도': ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시', '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시', '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시', '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시'],
+            '강원도': ['강릉시', '고성군', '동해시', '삼척시', '속초시', '양구군', '양양군', '영월군', '원주시', '인제군', '정선군', '철원군', '춘천시', '태백시', '평창군', '홍천군', '화천군', '횡성군'],
+            '충청북도': ['괴산군', '단양군', '보은군', '영동군', '옥천군', '음성군', '제천시', '진천군', '청주시', '충주시'],
+            '충청남도': ['계룡시', '공주시', '금산군', '논산시', '당진시', '보령시', '부여군', '서산시', '서천군', '아산시', '예산군', '천안시', '청양군', '태안군', '홍성군'],
+            '경상북도': ['경산시', '경주시', '고령군', '구미시', '군위군', '김천시', '문경시', '봉화군', '상주시', '성주군', '안동시', '영덕군', '영양군', '영주시', '영천시', '예천군', '울릉군', '울진군', '의성군', '청도군', '청송군', '칠곡군', '포항시'],
+            '경상남도': ['거제시', '거창군', '고성군', '김해시', '남해군', '밀양시', '사천시', '산청군', '양산시', '의령군', '진주시', '창녕군', '창원시', '통영시', '하동군', '함안군', '함양군', '합천군'],
+            '전라북도': ['고창군', '군산시', '김제시', '남원시', '무주군', '부안군', '순창군', '완주군', '익산시', '임실군', '장수군', '전주시', '정읍시', '진안군'],
+            '전라남도': ['강진군', '고흥군', '곡성군', '광양시', '구례군', '나주시', '담양군', '목포시', '무안군', '보성군', '순천시', '신안군', '여수시', '영광군', '영암군', '완도군', '장성군', '장흥군', '진도군', '함평군', '해남군', '화순군'],
+            '제주특별자치도': ['서귀포시', '제주시']
+            };
+
+            const region1 = document.getElementById('region1');
+            const region2 = document.getElementById('region2');
+
+            region1.addEventListener('change', function () {
+                const selectedRegion = this.value;
+                const subRegions = regionData[selectedRegion] || [];
+
+                // 초기화
+                region2.innerHTML = '<option value="">시/도/구</option>';
+
+                // 하위 지역 추가
+                subRegions.forEach(function (region) {
+                const option = document.createElement('option');
+                option.value = region;
+                option.textContent = region;
+                region2.appendChild(option);
+                });
+            });
+        </script>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery.marquee@1.5.0/jquery.marquee.min.js"></script>
+        <script>
+            $(window).on('load', function () {
+                //상단 marquee
+                $('.con5_top .marquee').marquee({
+                    duration: 15000,
+                    delayBeforeStart: 0,
+                    direction: 'left', //왼 <-
+                    duplicated: true,
+                    startVisible: true,
+                    pauseOnHover: false,
+                    loop: true
+                });
+
+                //하단 marquee
+                $('.con5_btm .marquee').marquee({
+                    duration: 15000,
+                    delayBeforeStart: 0,
+                    direction: 'right', //오른쪽->
+                    duplicated: true,
+                    startVisible: true,
+                    pauseOnHover: false,
+                    loop: true
+                });
+            });
+        </script>
+
+        <script>
+            AOS.init({
+            once: false,          // 반복 실행
+            startEvent: 'load',   // 시작 타이밍
+            });
+        </script>
+    </body>
+</html>

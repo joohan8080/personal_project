@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <link rel="icon" href="img/favicon.png" type="image/x-icon" />
+        <link rel="stylesheet" href="css/default.css" />
+        <link rel="stylesheet" href="css/header_footer.css" />
+        <link rel="stylesheet" href="css/join_sub.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Reddit+Sans+Condensed:wght@200..900&display=swap" rel="stylesheet" />
+        <script src="js/all.js"></script>
+        <meta name="format-detection" content="telephone=no" />
+        <title>Paragonia</title>
+    </head>
+
+    <body>
+      <div class="accordion_wrap">
+        <div class="accordion_top_box">
+          <a href="join_sub.html">로그인</a>
+          <a href="join_sub.html">회원가입</a>
+        </div>
+        <div class="accordion_btm_box">
+          <input type="text" placeholder="상품을 입력해 주세요."
+          onfocus="this.placeholder=''" onblur="this.placeholder='상품을 입력해 주세요.'" required=""  />
+          <button type="submit"></button>
+        </div>
+        <div class="accordion">
+          <h3>Shop</h3>
+          <div>
+              <ul>
+                  <li><a href="product_sub.html">Men’s</a></li>
+                  <li><a href="product_sub.html">Women’s</a></li>
+                  <li><a href="product_sub.html">Kids’ & Baby</a></li>
+                  <li><a href="product_sub.html">Packs & Gear</a></li>
+                  <li><a href="product_sub.html">Collections</a></li>
+              </ul>
+          </div>
+  
+          <h3>Activism</h3>
+          <div>
+              <ul>
+                  <li><a href="activism_sub.html">Action Works</a></li>
+                  <li><a href="activism_sub.html">1% for the Planet</a></li>
+                  <li><a href="activism_sub.html">Our Footprint</a></li>
+              </ul>
+          </div>
+  
+          <h3>Sports</h3>
+          <div>
+              <ul>
+                  <li><a href="#">Snow</a></li>
+                  <li><a href="#">Surfing</a></li>
+                  <li><a href="#">Mountain Biking</a></li>
+                  <li><a href="#">Trail Running</a></li>
+                  <li><a href="#">Fly Fishing</a></li>
+                  <li><a href="#">Climbing</a></li>
+              </ul>
+          </div>
+  
+          <h3 class="h3_last">Stories</h3>
+          <div>
+              <ul>
+                  <li><a href="#">All Films</a></li>
+                  <li><a href="#">All Stories</a></li>
+              </ul>
+          </div>
+      </div> <!--accordion--->
+    </div> <!--accordion_wrap--->
+    <div class="accordion_bg"></div>
+    <div class="wrap">
+      <header class="black_header">
+        <h1 class="logo"><a href="index.html"></a></h1>
+  
+        <nav class="gnb" id="gnb">
+          <ul>
+            <li><a href="product_sub.html">Shop</a>
+                <ul class="subnav">
+                    <li><a href="#">Men’s</a></li>
+                    <li><a href="#">Women’s</a></li>
+                    <li><a href="#">Kids’ & Baby</a></li>
+                    <li><a href="#">Packs & Gear</a></li>
+                    <li><a href="#">Collections</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="activism_sub.html">Activism</a>
+                <ul class="subnav">
+                    <li><a href="#">Action Works</a></li>
+                    <li><a href="#">1% for the Planet</a>
+                    </li>
+                    <li><a href="#">Our Footprint</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Sports</a>
+                <ul class="subnav">
+                    <li><a href="#">Snow</a></li>
+                    <li><a href="#">Surfing</a></li>
+                    <li><a href="#">Mountain Biking</a></li>
+                    <li><a href="#">Trail Running</a></li>
+                    <li><a href="#">Fly Fishing </a></li>
+                    <li><a href="#">Climbing</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Stories</a>
+                <ul class="subnav">
+                    <li><a href="#">All Films</a></li>
+                    <li><a href="#">All Stories</a></li>
+                </ul>
+            </li>
+          </ul> <!-------nav-------->
+        </nav>
+  
+        <nav class="menu">
+          <ul>
+            <li>
+              <button onclick="openPopup()" class="open_btn">
+                <span class="material-symbols-outlined">search</span>
+              </button>
+              <div class="search_hidden" id="popup" style='display: none;'>
+                <div class="search">
+                  <input type="text" placeholder="상품을 입력해 주세요."
+                onfocus="this.placeholder=''" onblur="this.placeholder='상품을 입력해 주세요.'" required=""  />
+                  <button type="submit"></button>
+                </div>
+                <button onclick="closePopup()" class="close">
+                </button>
+              </div>
+            </li>
+            <li><a href="join_sub.html">
+              <span class="material-symbols-outlined">person</span>
+            </a></li>
+            <li><a href="#">
+              <span class="material-symbols-outlined">favorite</span>
+            </a></li>
+            <li><a href="#">
+              <span class="material-symbols-outlined">shopping_bag</span>
+            </a></li>
+            <li>
+              <a href="#">
+                <span class="material-symbols-outlined">drag_handle</span>
+              </a>
+          </li>
+          </ul>
+        </nav>
+      </header> <!-----header------>
+      <div class="nav_bg"></div>
+
+
+          <div class="join">
+            <div class="join_text">
+                <p class="join_title">회원가입</p>
+                <p class="join_article">
+                    ㈜파타고니아코리아의 회원으로 가입하시면 다양한 혜택을 누리실 수 있습니다.  
+                </p>
+                <a href="#">[회원혜택 보기]</a>
+                <p class="join_article">
+                    회원가입시 본인 인증 후 매장 가입 내역 및 구매 내역을 자동으로 통합하여 업데이트 합니다.
+                </p>
+                <p class="join_article">
+                    회원가입 후 [마이페이지>회원정보 수정] 페이지에서 SNS계정을 연동하시면
+                    간편로그인을 사용하실 수 있습니다.
+                </p>
+            </div>  <!-----join_title------>
+
+            <div class="join_phone">
+                <p class="join_sub_title">본인 인증</p>
+                <p class="join_article">14세 이상 본인명의 휴대폰 번호로 인증해주세요.</p>
+                <button type="button">휴대폰 인증</button>
+            </div>  <!-----join_phone------>
+
+            <div class="join_agree">
+                <label for="all">
+                  <input type="checkbox" id="all" name="join_agree" value="agree" />
+                  모든 약관 동의
+                </label>
+                  <label for="use">
+                    <input type="checkbox" id="use" name="join_agree" value="agree" />
+                    <span>&#91;필수&#93;</span> 이용 약관에 대한 동의
+                  </label>
+                  <label for="private">
+                    <input type="checkbox" id="private" name="join_agree" value="agree" />
+                    <span>&#91;필수&#93;</span> 개인정보 수집 및 이용에 관한 동의
+                  </label>
+                  <div class="marketing_box">
+                    <label for="marketing">
+                      <input type="checkbox" id="marketing" name="join_agree" value="agree" />
+                      &#91;선택&#93; 마케팅 활용 전체 동의
+                    </label>
+                    <label for="sms">
+                      <input type="checkbox" id="sms" name="join_agree" value="agree" />
+                      SMS 수신
+                    </label>
+                    <label for="mail">
+                      <input type="checkbox" id="mail" name="join_agree" value="agree" />
+                      E-mail 수신
+                    </label>
+                  </div>
+            </div>  <!-----join_agree------>
+
+            <div class="join_write">
+              <p class="join_sub_title">필수입력 정보</p>
+              <p class="join_article">
+                회원가입을 위해
+                아래 필수 회원정보를 입력해주세요.
+              </p>
+              <form action="index.html" method="post">
+                <input type="email" placeholder="이메일" onfocus="this.placeholder=''" onblur="this.placeholder='이메일'" required />
+                <input type="password" placeholder="비밀번호" onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호'" required />
+                <input type="password" placeholder="비밀번호 확인" onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호 확인'" required />
+                <label>
+                  <input type="text" placeholder="주소" onfocus="this.placeholder=''" onblur="this.placeholder='주소'" required />
+                  <button type="search" class="join_write_search">검색</button>
+                </label>
+                <div class="join_write_btn">
+                  <button type="submit">취소</button>
+                  <button type="submit">다음</button>
+                </div>
+              </form>
+            </div>  <!-----join_write------>
+          </div> <!-----join------>
+
+
+
+          <div class="foonter_wrap">
+            <footer>
+              <div class="footer_top">
+                <nav class="footprint">
+                  <ul>
+                    <li>
+                      <div class="footprint_img"></div>
+                      <div class="footprint_text">
+                        <p class="footprint_title">
+                          환경단체를 지원합니다
+                        </p>
+                        <a href="#">액션웍스</a>
+                      </div>
+                    </li>
+        
+                    <li>
+                      <div class="footprint_img"></div>
+                      <div class="footprint_text">
+                        <p class="footprint_title">
+                          사회와 환경에 책임을 다합니다
+                        </p>
+                        <a href="#">환경발자국</a>
+                      </div>
+                    </li>
+        
+                    <li>
+                      <div class="footprint_img"></div>
+                      <div class="footprint_text">
+                        <p class="footprint_title">
+                          모든 제품을 보증합니다
+                        </p>
+                        <a href="#">철갑보증</a>
+                      </div>
+                    </li>
+        
+                    <li>
+                      <div class="footprint_img"></div>
+                      <div class="footprint_text">
+                        <p class="footprint_title">
+                          수익을 지구에 바칩니다
+                        </p>
+                        <a href="#">쉬나드의 편지</a>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="footprint_img"></div>
+                      <div class="footprint_text">
+                        <p class="footprint_title">
+                          제품을 오래 쓸 수 있습니다
+                        </p>
+                        <a href="#">원웨어</a>
+                      </div>
+                    </li>
+                  </ul>
+                </nav> <!---- footprint--->
+                <div class="help">
+                  <p class="footer_title">Need Help?</p>
+                  <ul>
+                    <li><a href="#">고객센터</a></li>
+                    <li><a href="#">1:1문의</a></li>
+                    <li><a href="#">사이즈 & 핏 가이드</a></li>
+                    <li><a href="#">수선 안내 및 조회</a></li>
+                    <li><a href="#">로그인</a></li>
+                    <li><a href="#">마이페이지</a></li>
+                    <li><a href="#">반품/환불 안내</a></li>
+                  </ul>
+                </div>
+        
+                <div class="call">
+                  <p class="footer_title">대표전화 1544-1876</p>
+                  <p class="call_article">
+                    (평일 오전 9시 반 ~ 오후 5시 / 점심시간 오후 12시 반 ~ 오후 1시 반)
+                    주말 및 공휴일 휴무
+                  </p>
+        
+                </div>
+              </div> <!---- footer_top--->
+        
+              <div class="footer_btm">
+                <address>
+                  <span>(주)파타고니아코리아</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                  서울 강남구 삼성로122길 25 (삼성동) 파타고니아코리아
+                </address>
+                <p>
+                  대표번호 : 1544-1876 (AS문의:내선번호2번/온라인쇼핑몰문의:내선번호3번)
+                  대표 : 브레멘볼프강슈멜츠 &nbsp;개인정보보호책임자 : 최종필<br />
+                  사업자등록번호 : 220-88-66550  &nbsp;  개인정보처리방침   &nbsp;
+                  통신판매업신고 : 2016-서울강남-03669 [사업자정보확인]<br />
+                  KG이니시스 구매안전 서비스 [서비스가입사실확인]  &nbsp;&nbsp;&nbsp;
+                  patagoniakorea@patagonia.kr<br />
+                  © 2024 Patagonia, Inc. All Rights Reserved.
+                </p>
+              </div> <!---- footer_btm--->
+            </footer> <!---- footer--->
+          </div> <!---- foonter_wrap--->
+    </div>
+    </body>
+</html>

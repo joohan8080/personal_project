@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>정책자금</title>
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <style>
+            html { scroll-behavior: smooth; }
+* { margin: 0; padding: 0; vertical-align: top; box-sizing: border-box; }
+body { max-width: 800px; min-width: 320px; margin: 0 auto; font-size: 18px; font-family: 'Pretendard-Regular'; }
+li { list-style: none; }
+a { text-decoration: none; color: #333; }
+img { max-width: 100%; border: none; }
+p { color: #333; word-break: keep-all; }
+select { -webkit-appearance: none; appearance: none; color: #333; background-image: url(img/selct_arrow.png);
+background-repeat: no-repeat; background-position: center right 5px;}
+textarea {
+border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
+resize: none; box-sizing: border-box; -webkit-appearance: none; -moz-appearance: none; appearance: none;        
+}
+button { all: unset; cursor: pointer; padding: 0; margin: 0; font: inherit; color: inherit; }
+h1, h2, h3, h4, h5, h6, p { line-height: 120%; letter-spacing: -.05em; color: #333; }
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-Black';
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Black.woff2') format('woff2'),
+  url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+
+
+/* top_fix */
+.top_fix { width: 100%; max-width: 800px; min-width: 320px; position: fixed; background: #ffffffea; z-index: 9999;
+display: flex; justify-content: space-between; align-items: center; padding: 20px 10px; box-sizing: border-box; }
+.top_fix p { font-size: 1.4em; letter-spacing: -.05em; font-weight: bolder; color: #333; }
+.top_fix a { display: block; padding: 5px 15px; background: #3AA600; color: #fff; 
+border-radius: 30px; font-weight: bolder; letter-spacing: -.05em; font-size: 1.4em; }
+.top_padding { padding-top: 66px; }
+
+/* form */
+.form_wrap p { color: #333; font-size: 1.4em; }
+.form_wrap { padding: 15% 0 10% 0; background: #ffffff; }
+.form_tit { text-align: center; margin-bottom: 50px; font-size: 1.8em !important; font-weight: bolder; line-height: 150%; }
+.form_tit .tcolor { color: red; }
+.form_wrap .inner { width: 95%; margin: 0 auto; padding: 0; }
+.form_wrap ul li { margin-bottom: 20px; }
+.form_wrap .form_policy { margin-bottom: 40px; display: flex; flex-wrap: wrap; align-items: center; }
+.form_wrap .form_policy input { margin-right: 5px; cursor: pointer; }
+.form_wrap .form_policy label { cursor: pointer; margin-right: 5px; }
+.form_wrap ul li p:first-child { margin-bottom: 5px; font-size: 18px; font-weight: 600; }
+.form_wrap ul li p:nth-child(2) { font-size: 1em; margin-bottom: 10px; color: #666; }
+.form_wrap ul li input, .form_wrap ul li select { padding: 15px 10px; border-radius: 10px; border: 1px solid #e5e5e5; background-color: #fff; }
+.form_wrap ul li input[type="text"] { width: 100%; box-sizing: border-box; }
+.form_wrap .form_tel input, .form_wrap .form_tel select { width: 32% !important; }
+.form_wrap .form_select02 select { width: 100%; }
+.region_wrap .select_box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1%; }
+.form_wrap .form_text textarea { width: 100%; height: 80px; border-radius: 10px; }
+.form_wrap .form_policy, .form_wrap .form_policy a { font-size: 14px; }
+.phone { display: flex; align-items: center; gap: 5px; }
+.form_wrap button { width: 100%; padding: 1em 0; color: #fff; background: #3AA600; text-align: center;
+border-radius: 10em; font-size: 2em; font-weight: bolder; border: none; cursor: pointer; }
+
+input[type="radio"] { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
+.radio_wrap { display: flex; gap: 5px; }
+.radio_box { width: 100%; display: flex; align-items: center; height: 50px; }
+.radio_box input[type="radio"] { width: 100%; position: absolute; left: 50%; transform: translateX(-50%); transition: .3s;
+padding: 0; height: 50px; z-index: -1; cursor: pointer; }
+.radio_box label { position: relative; width: 100%; text-align: center; line-height: 50px; z-index: 1;
+color: #666; cursor: pointer; }
+.radio_box input[type="radio"]:checked { background: #3AA600; }
+.radio_box input[type="radio"]:checked + span { color: #fff; }
+#show-Box { cursor: pointer; }
+.form_wrap input::placeholder { color: #c5c5c5; }
+.form_btm { width: 95%; margin: 0 auto; text-align: center; padding-top: 2em; font-weight: normal; line-height: 150%; }
+.form_wrap .no_choice { color: #999 !important; }
+
+/* main */
+.main .bg_inner { text-align: center; padding-top: 3%; }
+.main .bg_inner > img:first-child { margin-bottom: 3em; width: 11%; margin: 0 auto 1em auto; }
+.main .bg_inner .con_tit { margin-bottom: 4em; }
+.main .bg_inner .con_tit p, .main .bg_inner .con_tit h2 { color: #333; }
+.main .bg_inner .con_tit p { font-size: 1.5em; margin-bottom: 1em; background: #fff; border-radius: 5em; display: inline-block; padding: .2em .5em; }
+.main .bg_inner .con_tit h2 { font-size: 4em; }
+
+.main_contents { display: grid; grid-template-columns: repeat(3, 1fr); gap: .2em; }
+.main_box { background: #00000070; box-sizing: border-box; border-radius: .3em; }
+.main_box img { filter: brightness(.5); margin-bottom: 1em; height: 6em; }
+
+
+
+.main_text { padding: 2em .1em; }
+.main_text p { color: #fff; font-size: 1.5em; margin-bottom: .5em; }
+.main_text h4 { color: #fff; font-size: 2.5em; }
+
+/* con2 */
+
+/* main_count */
+.main_count_box { background: #3AA600; padding: 1em .1em; overflow: hidden; display: grid; grid-template-columns: repeat(2, 1fr); }
+.main_count_box .count { text-align: center; color: #fff; font-size: 2em; }
+.main_count_box .count { font-size: 1.4em; line-height: 250%; }
+.main_count_box .count .num { display: inline-block; font-size: 1.8em; line-height: 50%; }
+.smallnum { font-size: 1em !important; }
+.main_count_box .count em { font-style: normal; font-size: 1.8em; line-height: 50%; }
+.main_count_box .tcolor { color: #59FF00; }
+
+.main_count_box .count:first-child::after { content: ''; width: 1px; height: 450%; background: #fff; position: absolute; top: -2em; right: 0; }
+.main_count_box .count:first-child { position: relative; }
+
+.num { font-family: 'Pretendard-Black'; }
+.main_count_box .count:last-child .num, .main_count_box .count:last-child em { font-size: 1.3em; }
+.main_count_box .count:last-child .tcolor { display: inline-block; margin-bottom: .2em; }
+
+/* con3 */
+.con3 .con_tit { margin-bottom: 3em; }
+.con3 .con_tit p { margin-bottom: .5em; }
+.con3 .con_tit h2 { font-size: 3.2em; }
+
+.con3_contents { display: grid; grid-template-columns: repeat(2, 1fr); gap: .5em; }
+.con3_box { text-align: center; background: #ffffff75; padding: 1.5em 0; border-radius: .3em; border: 2px solid #3AA600; }
+.con3_box img { width: 23%; margin-bottom: 1.5em; }
+.con3_box h4 { font-size: 1.5em; color: #333; }
+.con3 .bg_inner > h4 { font-size: 1.7em; text-align: center; }
+
+
+
+
+
+
+
+/* con4 */
+
+.con4 { padding: 15% 0; background: #E1FFED; }
+.con4 .con_tit { margin-bottom: 5em; }
+.con4 .con_tit h2 { font-size: 3em; }
+.con4_contents_wrap { overflow-x: hidden; overflow-y: hidden; }
+.con4_box { transition: .3s; width: 100%; }
+
+/* swiper css */
+.con4 .swiper-wrapper { transition-timing-function: ease !important; }
+.con4 .swiper-slide img { transform: scale(0.9); }
+.con4 .swiper-slide.active-slide { transform: scale(1.1); }
+
+
+
+/* con5 */
+.con5 { background: #E1FFED; }
+.con5 .inner { width: 100%; }
+.con5 .con_tit { margin-bottom: 4em; }
+.con5 .con_tit p { font-size: 2em; margin-bottom: .5em; color: #333; }
+.con5 .con_tit h2 { font-size: 2.5em; color: #333; }
+
+.con5 .marquee-wrap { overflow-x: hidden; }
+.con5 .js-marquee { margin-right: 0 !important; }
+.con5_box img { margin-right: 1em; }
+.con5_contents:nth-child(2) { margin-bottom: 1em; }
+ 
+.con5_contents { position: relative; }
+.con5_contents:after {position: absolute; top: 0;
+left: -3.5em; content: ''; display: block; width: 8em; height: 100%; background: linear-gradient(to left, #ffffff00 14%, #E1FFED 76%);
+z-index: 1; backdrop-filter: blur(1px); } 
+
+.con5_contents:before {position: absolute; top: 0;
+right: 0; content: ''; display: block; width: 8em; height: 100%; background: linear-gradient(to right, #ffffff00 14%, #E1FFED 76%);
+z-index: 1; backdrop-filter: blur(1px); } 
+
+
+
+/* con6 */
+.con6 .bg_inner { justify-content: flex-end; padding: 0; }
+.con6 .bg_inner img { width: 70%; margin: 0 auto; }
+
+.con6 .con_tit { margin-bottom: 3em; }
+.con6 .con_tit p { font-size: 1.5em; font-weight: 100; }
+.con6 .con_tit h4 { font-size: 1.7em;  margin-bottom: .5em; }
+
+
+/* con7 */
+
+/* col_label */
+.con7 .con_tit { margin-bottom: 5em; }
+.con7 .con_tit h2 { text-align: center; font-size: 2.5em; letter-spacing: -.05em; }
+.col_label { border-radius: 15px; overflow: hidden; padding: 0 1em; }
+.col_box { width: 100%; height: auto; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #535353;
+padding: 2em 0 2em 1em; }
+.col_box p { color: #333; font-size: 1.2em; letter-spacing: -.05em; }
+.col_box p:last-child { color: #fff; padding: .5em 1em; background: #3AA600; border-radius: 5em; }
+
+.con7 .swiper { width: 100%; height: 300px; }
+.con7 .swiper, .con7 .swiper-wrapper { touch-action: auto !important; }
+
+.con7_name { width: 100%; display: flex; justify-content: space-between; padding: 1em 2em; background: #3AA600; }
+.con7_name p { font-size: 1.5em; color: #fff; }
+.con7_wid { padding: .5em 1.4em !important; }
+
+.col_box p:nth-child(2), .col_box p:nth-child(3),
+.con7_name p:nth-child(2), .con7_name p:nth-child(3)
+{ width: 25%; text-align: center; }
+
+
+
+
+
+
+/* all */
+.con_tit p { font-size: 2em; }
+.bg { width: 100%; position: relative; overflow: hidden; }
+.bg > img { width: 100%; object-fit: contain; }
+.tcolor { color: #3AA600; }
+.bg_inner { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 1em; }
+.inner { width: 95%; margin: 0 auto; padding: 15% 0; }
+h2 { font-size: 2em; letter-spacing: 0; font-family: 'Pretendard-Black'; font-weight: 100; }
+h3 { font-size: 1.5em; letter-spacing: -.05em; font-family: 'Pretendard-Black'; font-weight: 100; }
+h4 { font-family: 'Pretendard-Black'; }
+.con_tit { text-align: center; margin-bottom: 2.5em; }
+.call { font-size: 1.3em; text-align: center; margin: 2em 0; color: #333; }
+
+
+
+/* animation */
+.form_wrap button { animation: form_btn 2s infinite forwards; }
+
+@keyframes form_btn {
+0% { border-bottom: 10px solid #2b7c00; box-sizing: border-box; color: #FFFF00; margin-top: -10px; }
+50% { border-bottom: 10px solid #2b7c00; box-sizing: border-box; color: #FFFF00; margin-top: -10px; }
+50.01% { border-bottom: none; box-sizing: content-box; color: #fff; margin-top: 0; }
+100% { border-bottom: none; box-sizing: content-box; color: #fff; margin-top: 0; }
+}
+
+
+.main_box img { animation: main_box_bright 3s infinite forwards; }
+.main_box:nth-child(1) img { animation-delay: 0s; }
+.main_box:nth-child(2) img { animation-delay: 1s; }
+.main_box:nth-child(3) img { animation-delay: 2s; }
+
+@keyframes main_box_bright { 
+0% { filter: brightness(1); }
+33% { filter: brightness(1); }
+33.33% { filter: brightness(0.5); }
+100% { filter: brightness(0.5); }
+}
+
+.main_text h4 { animation: main_text 3s infinite forwards; }
+.main_box:nth-child(1) .main_text h4 { animation-delay: 0s; }
+.main_box:nth-child(2) .main_text h4 { animation-delay: 1s; }
+.main_box:nth-child(3) .main_text h4 { animation-delay: 2s; }
+
+@keyframes main_text { 
+0% { color: #59FF00; }
+33% { color: #59FF00; }
+33.33% { color: #fff; }
+100% { color: #fff; }
+}
+
+
+.con3_box { animation: con3_box 6s infinite; }
+
+.con3_box:nth-child(1) { animation-delay: 0s; }
+.con3_box:nth-child(2) { animation-delay: 1s; }
+.con3_box:nth-child(3) { animation-delay: 2s; }
+.con3_box:nth-child(4) { animation-delay: 3s; }
+.con3_box:nth-child(5) { animation-delay: 4s; }
+.con3_box:nth-child(6) { animation-delay: 5s; }
+
+@keyframes con3_box { 
+0% { background: #fff; }
+16% { background: #fff; }
+16.01% { background: #ffffff75; }
+100% { background: #ffffff75; }
+}
+
+.con3_box .tcolor { animation: con3_box_tc 6s infinite; }
+
+.con3_box:nth-child(1) .tcolor { animation-delay: 0s; }
+.con3_box:nth-child(2) .tcolor { animation-delay: 1s; }
+.con3_box:nth-child(3) .tcolor { animation-delay: 2s; }
+.con3_box:nth-child(4) .tcolor { animation-delay: 3s; }
+.con3_box:nth-child(5) .tcolor { animation-delay: 4s; }
+.con3_box:nth-child(6) .tcolor { animation-delay: 5s; }
+
+@keyframes con3_box_tc { 
+0% { color: #FF0000; }
+16% { color: #FF0000; }
+16.01% { color: #3AA600; }
+100% { color: #3AA600; }
+}
+
+
+
+
+
+/* media screen */
+
+@media screen and (max-width: 600px) {
+body { font-size: 15px; }
+.con2_contents { height: 350px; }
+.con5_box img { height: 150px; }
+
+
+
+
+
+}
+
+
+
+@media screen and (max-width: 480px) {
+body { font-size: 10px; }
+.radio_box span { font-size: 15px; }   
+.con2_contents { height: 250px; }
+.con5_box img { height: 100px; }
+
+}
+
+        </style>
+    </head>
+
+    <body>
+
+        <section class="top_fix">
+            <p>정부정책자금 모조리 받아내드립니다</p>
+            <a href="#form_wrap-sec">상담 신청하기</a>
+        </section> <!-----top_fix----->
+        <div class="top_padding"></div>
+
+        <section class="main bg">
+            <img src="img/loan/main_bg.webp" alt="배경이미지">
+            <div class="bg_inner">
+                <div class="con_tit">
+                    <p>사라지는 <span class="tcolor">정책 자금</span>과 <span class="tcolor">정부지원금</span></p>
+                    <h2><span class="tcolor">잡을 수 있습니다!</span></h2>
+                </div>
+                <div class="main_contents">
+                    <div class="main_box">
+                        <div class="main_text">
+                            <img src="img/loan/main_item01.png" alt="현금">
+                            <p>없어지는 정부<br>지원금 예산</p>
+                            <h4>3조 6천</h4>
+                        </div> <!-----main_text----->
+                    </div>  <!-----main_box----->
+                    <div class="main_box">
+                        <div class="main_text">
+                            <img src="img/loan/main_item02.png" alt="현금">
+                            <p>사라지는<br>정책 자금</p>
+                            <h4>8조 7천</h4>
+                        </div> <!-----main_text----->
+                    </div>  <!-----main_box----->
+                    <div class="main_box">
+                        <div class="main_text">
+                            <img src="img/loan/main_item03.png" alt="계산">
+                            <p>정책자금<br>정부지원금 종류</p>
+                            <h4>300여개</h4>
+                        </div> <!-----main_text----->
+                    </div>  <!-----main_box----->
+                </div> <!-----main_contents----->
+            </div> <!-----inner----->
+        </section> <!-----main----->
+
+        <section class="con2">
+            <div class="main_count">
+                <div class="main_count_box count_con">
+                    <p class="count"><span class="tcolor">누적 상담진행건</span><br> <span class="num">18,265</span> <em>+</em></p>
+                    <p class="count"><span class="tcolor">누적 집행 자금</span><br> <span class="num">96,478,000,000</span><em>+</em></p>
+                </div>
+            </div>
+        </section> <!-----con2----->
+
+        <section class="con3 bg">
+            <img src="img/loan/con3_bg.webp" alt="배경이미지">
+            <div class="bg_inner">
+                <div class="con_tit">
+                    <p><span class="tcolor">자금 마련</span> 컨설팅</p>
+                    <h2>이러한 대표님들께<br><span class="tcolor">추천드립니다!</span></h2>
+                </div>  <!-----con_tit----->
+
+                <div class="con3_contents">
+                    <div class="con3_box">
+                        <img src="img/loan/con2_ico01.png" alt="금리">
+                        <h4>7% 이상의 <span class="tcolor">높은 금리</span>를<br>사용하고 계신 대표님</h4>
+                    </div> <!-----con3_box----->
+                    <div class="con3_box">
+                        <img src="img/loan/con2_ico02_01.png" alt="운영자금">
+                        <h4>당장 <span class="tcolor">운영자금</span>이<br>필요하신 대표님</h4>
+                    </div> <!-----con3_box----->
+                    <div class="con3_box">
+                        <img src="img/loan/con2_ico03.png" alt="구매자금">
+                        <h4>기계, 설비 등 <span class="tcolor">구매<br>자금</span>이 필요한 대표님</h4>
+                    </div> <!-----con3_box----->
+                    <div class="con3_box">
+                        <img src="img/loan/con2_ico04.png" alt="대출">
+                        <h4><span class="tcolor">은행권의 대출</span>을<br>다 쓰신 대표님</h4>
+                    </div> <!-----con3_box----->
+                    <div class="con3_box">
+                        <img src="img/loan/con2_ico05.png" alt="신청거절">
+                        <h4>정책자금 <span class="tcolor">신청</span>이<br><span class="tcolor">거절</span>된 대표님</h4>
+                    </div> <!-----con3_box----->
+                    <div class="con3_box">
+                        <img src="img/loan/con2_ico06.png" alt="매출확장">
+                        <h4>매출확장, 하락 등으로<br><span class="tcolor">자금이 필요하신</span> 대표님</h4>
+                    </div> <!-----con3_box----->
+                </div>   <!-----con3_contents----->
+
+            </div>  <!-----bg_inner----->
+        </section> <!-----con3----->
+        
+
+        <section class="con4">
+            <div class="con_tit">
+                <h2><span class="tcolor">정부정책자금</span> 지원<br>실제 업종별 <span class="tcolor">승인 후기</span></h2>
+            </div> <!-----con_tit----->
+
+            <div class="con4_contents_wrap swiper_con4 mySwiper">
+                <div class="con4_contents swiper-wrapper">
+                    <div class="con4_box swiper-slide">
+                        <img src="img/loan/swipe_img01.webp" alt="후기">
+                    </div>
+                    <div class="con4_box swiper-slide">
+                        <img src="img/loan/swipe_img02.webp" alt="후기">
+                    </div>
+                    <div class="con4_box swiper-slide">
+                        <img src="img/loan/swipe_img03.webp" alt="후기">
+                    </div>
+                    <div class="con4_box swiper-slide">
+                        <img src="img/loan/swipe_img04.webp" alt="후기">
+                    </div>
+                    <div class="con4_box swiper-slide">
+                        <img src="img/loan/swipe_img05.webp" alt="후기">
+                    </div>
+                    <div class="con4_box swiper-slide">
+                        <img src="img/loan/swipe_img06.webp" alt="후기">
+                    </div>
+                </div>
+                <div class="swiper-prev"></div>
+                <div class="swiper-next"></div>
+            </div>  <!-----con4_contents_wrap----->
+        </section> <!-----con4----->
+
+
+        <section class="con5">
+            <div class="inner">
+                <div class="con_tit">
+                    <p>신청자 10명 중, <span class="tcolor">8명</span>은 대상자</p>
+                    <h2>이페이지를 <span class="tcolor">보게된다면</span><br>당신은 <span class="tcolor">대상자</span>가 되신겁니다</h2>
+                </div>
+
+                <div class="con5_contents con5_top marquee-wrap">
+                    <div class="con5_box marquee">
+                        <img src="img/loan/con5_ico01.png" alt="금리">
+                        <img src="img/loan/con5_ico02.png" alt="성장">
+                        <img src="img/loan/con5_ico03.png" alt="신용점수">
+                        <img src="img/loan/con5_ico04.png" alt="채용">
+                        <img src="img/loan/con5_ico05.png" alt="매출">
+                        <img src="img/loan/con5_ico06.png" alt="신규">
+                    </div>
+                </div>
+
+                <div class="con5_contents con5_btm marquee-wrap">
+                    <div class="con5_box marquee">
+                        <img src="img/loan/con5_ico06.png" alt="신규">
+                        <img src="img/loan/con5_ico05.png" alt="매출">
+                        <img src="img/loan/con5_ico04.png" alt="채용">
+                        <img src="img/loan/con5_ico03.png" alt="신용점수">
+                        <img src="img/loan/con5_ico02.png" alt="성장">
+                        <img src="img/loan/con5_ico01.png" alt="금리">
+                    </div>
+                </div>
+            </div>
+        </section> <!-----con5----->
+
+
+
+        <section class="con6 bg">
+            <img src="img/loan/con4_bg.webp" alt="배경이미지">
+            <div class="bg_inner">
+                <div class="con_tit">
+                    <h4>
+                        저희는 중소기업, 소상공인분들이<br>
+                        정부 정책자금을 최대한 활용할 수 있도록<br>
+                        지원하는 <span class="tcolor">전문 경영 컨설팅</span> 회사입니다
+                    </h4>
+                    <p>저희 회사라 생각하고 <span class="tcolor">최선을 다하겠습니다</span></p>
+                </div> <!-----con_tit----->
+               <img src="img/loan/con4_per.webp" alt="휴대폰" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+
+            </div> <!-----inner----->
+        </section> <!-----con6----->
+
+
+        <section class="form_wrap" id="form_wrap-sec">
+
+            <div class="inner">
+                <form method="post" action="apply.html" id="myModal1" name="page_form">
+                    <ul>
+
+                        <li class="form_name">
+                            <p>사업자명</p>
+                            <input type="text" name="option1" maxlength="10" placeholder="사업자명" required/>
+                        </li> <!----form_name------->
+
+                        <li class="form_name">
+                            <p>대표자명</p>
+                            <input type="text" name="name" maxlength="10" placeholder="대표자명" required/>
+                        </li> <!----form_name------->
+
+                        <li class="form_tel">
+                            <p>휴대폰번호</p>
+                            <div class="phone">
+                                <select name="tel1"><option>010</option></select>
+                                <div>-</div> 
+                                <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                <div>-</div>
+                                <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                            </div>
+                        </li> <!----form_tel------->
+
+                        <li class="form_select01 region_wrap">
+                            <p>지역</p>
+                            <div class="select_box">
+                                <select id="region1" name="option6[]" required>
+                                    <option value="">지역</option>
+                                    <option value="서울특별시">서울특별시</option>
+                                    <option value="부산광역시">부산광역시</option>
+                                    <option value="인천광역시">인천광역시</option>
+                                    <option value="대구광역시">대구광역시</option>
+                                    <option value="광주광역시">광주광역시</option>
+                                    <option value="대전광역시">대전광역시</option>
+                                    <option value="울산광역시">울산광역시</option>
+                                    <option value="세종특별자치시">세종특별자치시</option>
+                                    <option value="경기도">경기도</option>
+                                    <option value="강원도">강원도</option>
+                                    <option value="충청북도">충청북도</option>
+                                    <option value="충청남도">충청남도</option>
+                                    <option value="경상북도">경상북도</option>
+                                    <option value="경상남도">경상남도</option>
+                                    <option value="전라북도">전라북도</option>
+                                    <option value="전라남도">전라남도</option>
+                                    <option value="제주특별자치도">제주특별자치도</option>
+                                </select>
+                                <select id="region2" name="option6[]" required>
+                                    <option value="">시/도/군</option>
+                                </select>
+                            </div>
+                        </li> <!----form_select01------->
+
+                        <li class="form_radio">
+                            <p>업종</p>
+                            <div class="radio_wrap">
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option2" type="radio" value="제조업" required> 
+                                        <span>제조업</span>
+                                    </label>
+                                </div>
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option2" type="radio" value="도,소매업" required>
+                                        <span>도,소매업</span>
+                                    </label>
+                                </div>
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option2" type="radio" value="서비스업" required> 
+                                        <span>서비스업</span>
+                                    </label>
+                                </div>
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option2" type="radio" value="요식업" required> 
+                                        <span>요식업</span>
+                                    </label>
+                                </div>
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option2" type="radio" value="기타" required> 
+                                        <span>기타</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </li>  <!----form_radio------->
+
+                        <li class="form_name">
+                            <p>필요자금</p>
+                            <input type="text" name="option3" maxlength="10" placeholder="필수항목 아님"/>
+                        </li> <!----form_name------->
+
+                        <li class="form_policy">
+                            <input id="policy" type="checkbox" value="1" checked required> 
+                            <label for="policy">개인정보처리방침 동의</label>
+                            <span id="show-Box">[약관보기]</span>
+                        </li>  <!----form_policy------->
+                    </ul> <!---------ul--------->
+        
+                    <button type="submit">문의하기</button>
+                </form> <!---------form--------->
+            </div> <!---------inner--------->
+
+            <!-- <p class="form_btm"></p> -->
+
+        </section> <!---------form_wrap--------->
+
+        
+        <section class="con7">
+            <div class="inner">
+                <div class="con_tit">
+                    <h2>실시간 <span class="tcolor">상담 신청</span> 현황</h2>
+                </div>
+
+                <div class="con7_name">
+                    <p>이름</p>
+                    <p>사업장</p>
+                    <p>업종</p>
+                    <p>신청현황</p>
+                </div>
+                <div class="col_label swiper mySwiper">
+                    <div class="col_contents swiper-wrapper">
+                        <div class="col_box swiper-slide">
+                            <p>이*복</p>
+                            <p>법인사업자</p>
+                            <p>도소매업</p>
+                            <p class="con7_wid">상담중</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>유*희</p>
+                            <p>개인사업자</p>
+                            <p>기타</p>
+                            <p>신청완료</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>국*호</p>
+                            <p>법인사업자</p>
+                            <p>기타</p>
+                            <p class="con7_wid">상담중</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>최*경</p>
+                            <p>개인사업자</p>
+                            <p>서비스업</p>
+                            <p>신청완료</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>정*진</p>
+                            <p>법인사업자</p>
+                            <p>기타</p>
+                            <p class="con7_wid">상담중</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>최*선</p>
+                            <p>법인사업자</p>
+                            <p>기타</p>
+                            <p class="con7_wid">상담중</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>최*식</p>
+                            <p>개인사업자</p>
+                            <p>제조업</p>
+                            <p>신청완료</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>이*석</p>
+                            <p>법인사업자</p>
+                            <p>음식점업</p>
+                            <p class="con7_wid">상담중</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>함*우</p>
+                            <p>개인사업자</p>
+                            <p>기타</p>
+                            <p>신청완료</p>
+                        </div>
+                        <div class="col_box swiper-slide">
+                            <p>이*진</p>
+                            <p>법인사업자</p>
+                            <p>기타</p>
+                            <p class="con7_wid">상담중</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> <!-----con7----->
+
+
+            
+        <!-- Swiper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery.marquee@1.5.0/jquery.marquee.min.js"></script>
+        <script>
+            $(window).on('load', function () {
+                //상단 marquee
+                $('.con5_top .marquee').marquee({
+                    duration: 15000,
+                    delayBeforeStart: 0,
+                    direction: 'left', //왼 <-
+                    duplicated: true,
+                    startVisible: true,
+                    pauseOnHover: false,
+                    loop: true
+                });
+
+                //하단 marquee
+                $('.con5_btm .marquee').marquee({
+                    duration: 15000,
+                    delayBeforeStart: 0,
+                    direction: 'right', //오른쪽->
+                    duplicated: true,
+                    startVisible: true,
+                    pauseOnHover: false,
+                    loop: true
+                });
+            });
+        </script>
+
+
+        <script>
+            AOS.init({
+            once: false,          // 반복 실행
+            startEvent: 'load',   // 시작 타이밍
+            });
+        </script>
+
+        <script>
+            // 팝업 창
+            const openPop = document.getElementById("show-Box");
+            openPop.addEventListener('click', () => {
+                const popup = window.open(
+                    'policy.html', // 조약 내용을 담은 실제 경로
+                    '개인정보이용동의',
+                    'width=800,height=600,scrollbars=yes'
+                );      
+    
+                if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                    alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+                }
+            });
+        </script>
+
+        <script>
+            const regionData = {
+            '서울특별시': ['강남구', '강동구', '강북구', '강서구', '관악구', '광진구', '구로구', '금천구', '노원구', '도봉구', '동대문구', '동작구', '마포구', '서대문구', '서초구', '성동구', '성북구', '송파구', '양천구', '영등포구', '용산구', '은평구', '종로구', '중구', '중랑구'],
+            '부산광역시': ['강서구', '금정구', '기장군', '남구', '동구', '동래구', '부산진구', '북구', '사상구', '사하구', '서구', '수영구', '연제구', '영도구', '중구', '해운대구'],
+            '인천광역시': ['강화군', '계양구', '남동구', '동구', '미추홀구', '부평구', '서구', '연수구', '옹진군', '중구'],
+            '대구광역시': ['남구', '달서구', '달성군', '동구', '북구', '서구', '수성구', '중구'],
+            '광주광역시': ['광산구', '남구', '동구', '북구', '서구'],
+            '대전광역시': ['대덕구', '동구', '서구', '유성구', '중구'],
+            '울산광역시': ['남구', '동구', '북구', '울주군', '중구'],
+            '세종특별자치시': ['세종시'],
+            '경기도': ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시', '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시', '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시', '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시'],
+            '강원도': ['강릉시', '고성군', '동해시', '삼척시', '속초시', '양구군', '양양군', '영월군', '원주시', '인제군', '정선군', '철원군', '춘천시', '태백시', '평창군', '홍천군', '화천군', '횡성군'],
+            '충청북도': ['괴산군', '단양군', '보은군', '영동군', '옥천군', '음성군', '제천시', '진천군', '청주시', '충주시'],
+            '충청남도': ['계룡시', '공주시', '금산군', '논산시', '당진시', '보령시', '부여군', '서산시', '서천군', '아산시', '예산군', '천안시', '청양군', '태안군', '홍성군'],
+            '경상북도': ['경산시', '경주시', '고령군', '구미시', '군위군', '김천시', '문경시', '봉화군', '상주시', '성주군', '안동시', '영덕군', '영양군', '영주시', '영천시', '예천군', '울릉군', '울진군', '의성군', '청도군', '청송군', '칠곡군', '포항시'],
+            '경상남도': ['거제시', '거창군', '고성군', '김해시', '남해군', '밀양시', '사천시', '산청군', '양산시', '의령군', '진주시', '창녕군', '창원시', '통영시', '하동군', '함안군', '함양군', '합천군'],
+            '전라북도': ['고창군', '군산시', '김제시', '남원시', '무주군', '부안군', '순창군', '완주군', '익산시', '임실군', '장수군', '전주시', '정읍시', '진안군'],
+            '전라남도': ['강진군', '고흥군', '곡성군', '광양시', '구례군', '나주시', '담양군', '목포시', '무안군', '보성군', '순천시', '신안군', '여수시', '영광군', '영암군', '완도군', '장성군', '장흥군', '진도군', '함평군', '해남군', '화순군'],
+            '제주특별자치도': ['서귀포시', '제주시']
+            };
+
+            const region1 = document.getElementById('region1');
+            const region2 = document.getElementById('region2');
+
+            region1.addEventListener('change', function () {
+                const selectedRegion = this.value;
+                const subRegions = regionData[selectedRegion] || [];
+
+                // 초기화
+                region2.innerHTML = '<option value="">시/도/군</option>';
+
+                // 하위 지역 추가
+                subRegions.forEach(function (region) {
+                const option = document.createElement('option');
+                option.value = region;
+                option.textContent = region;
+                region2.appendChild(option);
+                });
+            });
+        </script>
+
+
+        <script>
+            $(function () {
+                const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                    const $el = $(entry.target);
+                    const target = Number($el.attr('data-target'));
+
+                    if (!target) return;
+
+                    setTimeout(() => {
+                        $el.prop('Counter', 0).stop().animate({
+                        Counter: target
+                        }, {
+                        duration: 1500,
+                        easing: 'swing',
+                        step: function (now) {
+                            $el.text(Math.ceil(now).toLocaleString());
+                        }
+                        });
+                    }, 1000); // ← 여기서 1초 딜레이 설정 // 
+                    }
+                });
+                }, { threshold: 0.5 });
+
+                // 초기 숫자값을 data-target 속성에 저장
+                $('.num').each((_, el) => {
+                const $el = $(el);
+                const target = Number($el.text().replace(/,/g, '').trim());
+                $el.attr('data-target', target);
+                observer.observe(el);
+                });
+            });
+        </script>
+
+        <!-- Initialize Swiper -->
+        <script>
+            var swiper = new Swiper(".col_label", {
+                direction: "vertical",
+                slidesPerView: 5,
+                spaceBetween: 0,
+                allowTouchMove: false,              // 슬라이드 드래그만 막기
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                autoplay: {
+                delay: 1000,
+                disableOnInteraction: false
+                },
+            });
+        </script>
+
+        
+        <!-- Swiper JS -->
+        <script>
+            const Swiper_slide = new Swiper('.swiper_con4', {
+            slidesPerView: 1.5,
+            spaceBetween: 0,
+            loop: true,
+            speed: 500,
+            allowTouchMove: true,
+            centeredSlides: true,     // 가운데 정렬
+            autoplay: {
+                delay: 1000,
+                disableOnInteraction: false
+            },
+            slideActiveClass: 'active-slide', // 활성화된 슬라이드에 클래스 추가
+                // ✅ Navigation 추가
+                navigation: {
+                nextEl: '.swiper-next',
+                prevEl: '.swiper-prev'
+                }
+            });
+        </script>
+
+        
+    </body>
+
+</html>

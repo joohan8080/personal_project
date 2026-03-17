@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
+        <script src="js/owl.carousel.js"></script>
+        <script src="js/all.js"></script>
+        <link rel="icon" href="img/favicon.png" type="image/x-icon">
+        <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"> 
+        <link rel="stylesheet" href="css/default.css">
+        <link rel="stylesheet" href="css/header_footer.css">
+        <link rel="stylesheet" href="css/activism_sub.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Reddit+Sans+Condensed:wght@200..900&display=swap" rel="stylesheet">
+        <meta name="format-detection" content="telephone=no" />
+        <title>Paragonia</title>
+    </head>
+
+    <body>
+      <div class="accordion_wrap">
+        <div class="accordion_top_box">
+          <a href="join_sub.html">로그인</a>
+          <a href="join_sub.html">회원가입</a>
+        </div>
+        <div class="accordion_btm_box">
+          <input type="text" placeholder="상품을 입력해 주세요."
+          onfocus="this.placeholder=''" onblur="this.placeholder='상품을 입력해 주세요.'" required=""  />
+          <button type="submit"></button>
+        </div>
+        <div class="accordion">
+          <h3>Shop</h3>
+          <div>
+              <ul>
+                  <li><a href="product_sub.html">Men’s</a></li>
+                  <li><a href="product_sub.html">Women’s</a></li>
+                  <li><a href="product_sub.html">Kids’ & Baby</a></li>
+                  <li><a href="product_sub.html">Packs & Gear</a></li>
+                  <li><a href="product_sub.html">Collections</a></li>
+              </ul>
+          </div>
+  
+          <h3>Activism</h3>
+          <div>
+              <ul>
+                  <li><a href="activism_sub.html">Action Works</a></li>
+                  <li><a href="activism_sub.html">1% for the Planet</a></li>
+                  <li><a href="activism_sub.html">Our Footprint</a></li>
+              </ul>
+          </div>
+  
+          <h3>Sports</h3>
+          <div>
+              <ul>
+                  <li><a href="#">Snow</a></li>
+                  <li><a href="#">Surfing</a></li>
+                  <li><a href="#">Mountain Biking</a></li>
+                  <li><a href="#">Trail Running</a></li>
+                  <li><a href="#">Fly Fishing</a></li>
+                  <li><a href="#">Climbing</a></li>
+              </ul>
+          </div>
+  
+          <h3 class="h3_last">Stories</h3>
+          <div>
+              <ul>
+                  <li><a href="#">All Films</a></li>
+                  <li><a href="#">All Stories</a></li>
+              </ul>
+          </div>
+        </div> <!--accordion--->
+      </div> <!--accordion_wrap--->
+      <div class="accordion_bg"></div>
+
+      <div class="wrap">
+        <div class=main_wrap>
+          <header id="header">
+            <h1 class="logo"><a href="index.html"></a></h1>
+      
+            <nav class="gnb" id="gnb">
+              <ul>
+                <li><a href="product_sub.html">Shop</a>
+                    <ul class="subnav">
+                        <li><a href="#">Men’s</a></li>
+                        <li><a href="#">Women’s</a></li>
+                        <li><a href="#">Kids’ & Baby</a></li>
+                        <li><a href="#">Packs & Gear</a></li>
+                        <li><a href="#">Collections</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="activism_sub.html">Activism</a>
+                    <ul class="subnav">
+                        <li><a href="#">Action Works</a></li>
+                        <li><a href="#">1% for the Planet</a>
+                        </li>
+                        <li><a href="#">Our Footprint</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Sports</a>
+                    <ul class="subnav">
+                        <li><a href="#">Snow</a></li>
+                        <li><a href="#">Surfing</a></li>
+                        <li><a href="#">Mountain Biking</a></li>
+                        <li><a href="#">Trail Running</a></li>
+                        <li><a href="#">Fly Fishing </a></li>
+                        <li><a href="#">Climbing</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Stories</a>
+                    <ul class="subnav">
+                        <li><a href="#">All Films</a></li>
+                        <li><a href="#">All Stories</a></li>
+                    </ul>
+                </li>
+              </ul> <!-------nav-------->
+            </nav>
+      
+            <nav class="menu">
+              <ul>
+                <li>
+                  <button onclick="openPopup()" class="open_btn">
+                    <span class="material-symbols-outlined">search</span>
+                  </button>
+                  <div class="search_hidden" id="popup" style='display: none;'>
+                    <div class="search">
+                      <input type="text" placeholder="상품을 입력해 주세요."
+                  onfocus="this.placeholder=''" onblur="this.placeholder='상품을 입력해 주세요.'" required=""  />
+                      <button type="submit"></button>
+                    </div>
+                    <button onclick="closePopup()" class="close">
+                    </button>
+                  </div>
+                </li>
+                <li><a href="join_sub.html">
+                  <span class="material-symbols-outlined">person</span>
+                </a></li>
+                <li><a href="#">
+                  <span class="material-symbols-outlined">favorite</span>
+                </a></li>
+                <li><a href="#">
+                  <span class="material-symbols-outlined">shopping_bag</span>
+                </a></li>
+                <li>
+                  <a href="#">
+                    <span class="material-symbols-outlined">drag_handle</span>
+                  </a>
+              </li>
+              </ul>
+            </nav>
+          </header> <!-----header------>
+          <div class="nav_bg"></div>
+              
+            <div class="main_text">
+              <h2 data-aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-delay="100" data-aos-duration="1500" class="title1">ACTIVISM</h2>
+              <p data-aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-delay="200" data-aos-duration="1500">파타고니아는 기후 위기 문제를 해결하기 
+                  위해 기업으로서 우리가 가진 자원<br />
+                  <span>(비즈니스 전략, 커뮤니티 활동, 메시지 확산)</span>을 활용하고 있습니다
+              </p>
+              <ul data-aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-delay="300" data-aos-duration="1500" class="main_btn">
+                <li>
+                  <a href="#" class="main_btn_home">
+                    <img class="home" src="img/home.png" alt="홈버튼" />
+                  </a>  
+                </li>
+                <li>
+                  <img class="bread" src="img/breadcrumb.png" alt="다음아이콘" />
+
+                </li>
+                <li>
+                  <a href="#" class="main_btn_name">ACTIVISM</a>
+                </li>
+              </ul>  <!----main_btn-------->
+          </div>  <!----main_text-------->
+        </div> <!----main_wrap-------->
+
+        <div data-aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-delay="100" data-aos-duration="1000" class="group">
+            <div class="group_box">
+              <p class="contents_title">
+                파타고니아는 매년 매출의 1%를<br />
+                  환경 단체들을 지원하는데  <br />사용합니다.
+              </p>
+              <p class="contents_article">내부적으로 ‘지구세’ 라고도 부르는 
+                  &#60;1% FOR THE PLANET&#62;	 지원금을 통해 <br />
+                  전 세계의 자연을 되살리기 위해 일하는 비영리 환경 단체들을
+                  지원합니다.
+              </p>
+            </div>
+            <div class="group_box">
+              <div class="group_box_img">
+                <a href="#" class="contents_box_blind"></a>
+                <div class="contents_box_img">
+                  <p>1% FOR THE PLANET</p>
+                  <a href="#" class="group_btn">더 알아보기 </a>
+                </div>
+              </div>
+                <div class="group_box_img">
+                  <a href="#" class="contents_box_blind"></a>
+                  <div class="contents_box_img">
+                    <p>우리가 지원하는단체 </p>
+                    <a href="#" class="group_btn">더 알아보기 </a>
+                  </div>
+                </div>
+            </div>
+          </div> <!--------------group-------------------------->
+
+        <div data-aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-delay="100" data-aos-duration="1000" class="sports">
+            <div class="sports_text">
+                <p data-aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-delay="100" data-aos-duration="1000" 
+                class="contents_title">파타고니아는 스포츠와<br /> 액티비즘을 연결합니다</p>
+                <p data-aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-delay="500" data-aos-duration="1000" 
+                class="contents_article">파타고니아의 글로벌 스포츠 액티비스트들은
+                    스포츠 커뮤니티 안에서 <br /> 사회적 환경적 변화를
+                    이끌기 위해 적극적으로 활동합니다.
+                </p>
+            </div>
+            <div class=sports_box_wrap>
+                <div class="sports_box">
+                    <a href="#" class="contents_box_blind"></a>
+                    <div class="contents_box_img">
+                        <p class="sports_box_text">Belinda Baggs</p>
+                        <a href="#" class="sports_btn">보기</a>
+                    </div>
+                </div>
+
+                <div class="sports_box">
+                    <a href="#" class="contents_box_blind"></a>
+                    <div class="contents_box_img">
+                        <p class="sports_box_text">Clare gallagher</p>
+                        <a href="#" class="sports_btn">보기</a>
+                    </div>
+                </div>
+
+                <div class="sports_box">
+                    <a href="#" class="contents_box_blind"></a>
+                    <div class="contents_box_img">
+                        <p class="sports_box_text">Greg Long</p>
+                        <a href="#" class="sports_btn">보기</a>
+                    </div>
+                </div>
+            </div>
+        </div> <!--------------sports-------------------------->
+        <div data-aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-delay="100" data-aos-duration="1000" class="action">
+          <div class="action_box">
+            <a href="#" class="contents_box_blind"></a>
+            <div class="action_text">
+              <p class="contents_title">환경 단체와 시민들의 연결</p>
+              <p class="contents_article">
+                  파타고니아는 <span>전국에서 발생하고 있는 환경 
+                  문제들을 해결하기 위한 활동을
+                  널리 알리고</span> 일반 시민들과 환경 단체들이
+                  만날 수 있도록 노력하고 있습니다.
+              </p>
+            </div>
+            <a href="#" class="action_btn">ACT NOW</a>
+          </div>
+          <div class="action_box">
+            <a href="#" class="contents_box_blind"></a>
+            <div class="contents_box_img">
+              <p>
+                  <span>Patagonia</span> <br />
+                  <span>Action</span> <br />
+                  <span>Works</span>
+              </p>
+              <a href="#" class="action_btn">더 알아보기</a>
+            </div>
+          </div>
+        </div><!--------------action-------------------------->
+        <div data-aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-delay="100" data-aos-duration="1000" class="activities">
+          <div class="activities_box">
+            <a href="#" class="contents_box_blind"></a>
+            <div class="activities_text">
+              <p class="contents_title">
+                  지구를 되살리기 위한 <br />
+                  다양한 활동들을 만나 보세요.</p>
+              <p class="activities_box_article">
+                전 세계에서 진행되고 있는 다양한 환경 보호 <br />
+                활동들의 이야기를 보실 수 있습니다.
+            </p>
+            </div>
+            <a href="#" class="activities_btn">자세히 보기</a>
+          </div>
+          <div class="activities_box">
+            <a href="#" class="contents_box_blind"></a>
+            <div class="contents_box_img"></div>
+            <div class="activities_text">
+              <p class="activities_box_title">
+                미세 섬유 문제 해결을 위한 <br />
+                파타고니아와 삼성전자의 여정
+              </p>
+              <p class="activities_box_article">
+                지난 3년 동안 파타고니아는 가정용 세탁기의 미세 섬유 저감 기술 개발을 <br />
+                위해 삼성전자와 매우 가깝게 그리고 생산적으로 함께 일해 왔습니다.
+              </p>
+            </div>
+            <a href="#" class="activities_btn">보기</a>
+          </div>
+          <div  data-aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-delay="200" data-aos-duration="1000"  class="activities_box">
+            <a href="#" class="contents_box_blind"></a>
+            <div class="contents_box_img"></div>
+            <div class="activities_text">
+              <p class="activities_box_title">
+                기업에 강력한 환경부가 꼭 필요한 이유
+              </p>
+              <p class="activities_box_article">
+                최근에 트럼프 대통령이 오클라호마 주의 법무부 장관이었던<br />
+                스콧 프루이트를 환경부 장관으로 임명 했다는 소식을 들었습니다.
+              </p>
+            </div>
+            <a href="#" class="activities_btn">보기</a>
+          </div>
+          <div  data-aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-delay="200" data-aos-duration="1000"  class="activities_box">
+            <a href="#" class="contents_box_blind"></a>
+            <div class="contents_box_img"></div>
+            <div class="activities_text">
+              <p class="activities_box_title">
+                도움이 다급한 지구를 위한 선물
+              </p>
+              <p class="activities_box_article">
+                지난해 미국 행정부의  무책임한 기업감세 정책 덕분에 파타고니아는<br />
+                올해 1,000만 달러(약 110억원)의 세금을 덜 내게 되었습니다.
+              </p>
+            </div>
+            <a href="#" class="activities_btn">보기</a>
+          </div>
+        </div> <!--------------activities-------------------------->
+        
+        <div class="guideline">
+          <p data-aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-delay="100" data-aos-duration="1000" class="contents_title">환경 단체에서 일하고 계신가요?</p>
+          <p data-aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-delay="200" data-aos-duration="1000" class="contents_article">
+              파타고니아는 <span>환경 문제 해결을 위해 직접 행동하고 대담하게 대응하며,</span><br /> 
+              변화를 위해 장기적으로 접근하는 환경 단체들을 지원합니다.  
+          </p>
+          <a data-aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-delay="300" data-aos-duration="1000" href="#">환경 단체 지원 가이드라인 보기</a>
+        </div>
+
+
+        <div class="foonter_wrap">
+          <footer>
+            <div class="footer_top">
+              <nav class="footprint">
+                <ul>
+                  <li>
+                    <div class="footprint_img"></div>
+                    <div class="footprint_text">
+                      <p class="footprint_title">
+                        환경단체를 지원합니다
+                      </p>
+                      <a href="#">액션웍스</a>
+                    </div>
+                  </li>
+      
+                  <li>
+                    <div class="footprint_img"></div>
+                    <div class="footprint_text">
+                      <p class="footprint_title">
+                        사회와 환경에 책임을 다합니다
+                      </p>
+                      <a href="#">환경발자국</a>
+                    </div>
+                  </li>
+      
+                  <li>
+                    <div class="footprint_img"></div>
+                    <div class="footprint_text">
+                      <p class="footprint_title">
+                        모든 제품을 보증합니다
+                      </p>
+                      <a href="#">철갑보증</a>
+                    </div>
+                  </li>
+      
+                  <li>
+                    <div class="footprint_img"></div>
+                    <div class="footprint_text">
+                      <p class="footprint_title">
+                        수익을 지구에 바칩니다
+                      </p>
+                      <a href="#">쉬나드의 편지</a>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="footprint_img"></div>
+                    <div class="footprint_text">
+                      <p class="footprint_title">
+                        제품을 오래 쓸 수 있습니다
+                      </p>
+                      <a href="#">원웨어</a>
+                    </div>
+                  </li>
+                </ul>
+              </nav> <!---- footprint--->
+              <div class="help">
+                <p class="footer_title">Need Help?</p>
+                <ul>
+                  <li><a href="#">고객센터</a></li>
+                  <li><a href="#">1:1문의</a></li>
+                  <li><a href="#">사이즈 & 핏 가이드</a></li>
+                  <li><a href="#">수선 안내 및 조회</a></li>
+                  <li><a href="#">로그인</a></li>
+                  <li><a href="#">마이페이지</a></li>
+                  <li><a href="#">반품/환불 안내</a></li>
+                </ul>
+              </div>
+      
+              <div class="call">
+                <p class="footer_title">대표전화 1544-1876</p>
+                <p class="call_article">
+                  (평일 오전 9시 반 ~ 오후 5시 / 점심시간 오후 12시 반 ~ 오후 1시 반)
+                  주말 및 공휴일 휴무
+                </p>
+      
+              </div>
+            </div> <!---- footer_top--->
+      
+            <div class="footer_btm">
+              <address>
+                <span>(주)파타고니아코리아</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                서울 강남구 삼성로122길 25 (삼성동) 파타고니아코리아
+              </address>
+              <p>
+                대표번호 : 1544-1876 (AS문의:내선번호2번/온라인쇼핑몰문의:내선번호3번)
+                대표 : 브레멘볼프강슈멜츠 &nbsp;개인정보보호책임자 : 최종필<br />
+                사업자등록번호 : 220-88-66550  &nbsp;  개인정보처리방침   &nbsp;
+                통신판매업신고 : 2016-서울강남-03669 [사업자정보확인]<br />
+                KG이니시스 구매안전 서비스 [서비스가입사실확인]  &nbsp;&nbsp;&nbsp;
+                patagoniakorea@patagonia.kr<br />
+                © 2024 Patagonia, Inc. All Rights Reserved.
+              </p>
+            </div> <!---- footer_btm--->
+          </footer> <!---- footer--->
+        </div> <!---- foonter_wrap--->
+      </div>
+    </body>
+    <script> AOS.init(); </script>
+</html>

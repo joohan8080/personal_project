@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+        <link rel="stylesheet" href="css/web_fonts.css" type="text/css">
+        <title>렌트01</title>
+        <style>
+            
+html { scroll-behavior: smooth; }
+* { margin: 0; padding: 0; vertical-align: top; box-sizing: border-box; }
+body { max-width: 800px; min-width: 320px; margin: 0 auto; font-size: 18px; font-family: 'Pretendard-Regular'; }
+li { list-style: none; }
+a { text-decoration: none; color: #fff; font-family: 'Pretendard-Bold'; }
+img { max-width: 100%; border: none; }
+p { color: #333; word-break: keep-all; }
+select { -webkit-appearance: none; appearance: none; color: #333; background-image: url(img/selct_arrow.png);
+background-repeat: no-repeat; background-position: center right 5px;}
+textarea {
+border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
+resize: none; box-sizing: border-box; -webkit-appearance: none; -moz-appearance: none; appearance: none;        
+}
+button { all: unset; cursor: pointer; padding: 0; margin: 0; font: inherit; color: inherit; }
+h1, h2, h3, h4, h5, h6, p { line-height: 120%; letter-spacing: -.05em; color: #333; }
+
+
+
+video {
+  image-rendering: auto;  
+  image-rendering: optimizeQuality;
+  filter: contrast(1.1) brightness(1.05) saturate(1.1);
+}
+
+
+
+
+.main .form_wrap { background: none; }
+/* .con2 .form_wrap, .con3 .form_wrap { background: none; } */
+
+#form_wrap-sec_top { background: #ffffff1e; }
+#form_wrap-sec_top { padding: 5% .5em;  }
+#form_wrap-sec_top, #form_wrap-sec_con2, #form_wrap-sec_con3 { display: none; width: 95%; margin: 0 auto; }
+#form_wrap-sec_top { width: 100%; } 
+.form_wrap .form_policy { margin-bottom: 1.5em; }
+.main_btm { text-align: center; }
+.main_btm button { font-size: 2em; display: block; border: 1.5px solid #fff;
+padding: .2em .5em; color: #fff;  }
+
+
+
+/* top_fix */
+.top_fix { width: 100%; max-width: 800px; min-width: 320px; position: fixed; background: #ffffffea; z-index: 9999;
+display: flex; justify-content: space-between; align-items: center; padding: 20px 10px; box-sizing: border-box; }
+.top_fix p { font-size: 1.7em; letter-spacing: -.05em; font-weight: bolder; color: #333; }
+.top_fix a { display: block; padding: 5px 15px; background: #0022FF; color: #fff; 
+border-radius: 30px; font-weight: bolder; letter-spacing: -.05em; font-size: 1.5em; }
+.top_padding { padding-top: 71px; }
+
+
+/* form */
+.form_wrap p { color: #fff; font-size: 1.4em; }
+.form_wrap { padding: 10% 0; background: #333; }
+.form_tit { text-align: center; margin-bottom: 50px; font-size: 2em !important; font-weight: bolder; line-height: 150%; }
+.form_tit .tcolor { color: red; }
+.form_wrap .inner { width: 95%; margin: 0 auto; padding: 0; }
+.form_wrap ul li { margin-bottom: 1em; }
+.form_wrap .form_policy { margin-bottom: 1.5em; display: flex; flex-wrap: wrap; align-items: center; }
+.form_wrap .form_policy input { margin-right: 5px; cursor: pointer; }
+.form_wrap .form_policy label { cursor: pointer; margin-right: 5px; color: #fff; }
+.form_wrap ul li p:first-child { margin-bottom: 5px; font-size: 18px; font-weight: 600; text-align: left; }
+.form_wrap ul li p:nth-child(2) { font-size: 1em; margin-bottom: 10px; color: #999; text-align: left; }
+.form_wrap ul li input, .form_wrap ul li select { padding: 15px 10px; border: 1px solid #e5e5e5; background-color: #fff; }
+.form_wrap ul li input[type="text"] { width: 100%; box-sizing: border-box; }
+.form_wrap .form_tel input, .form_wrap .form_tel select { width: 32% !important; }
+.form_wrap .form_select02 select { width: 100%; }
+.region_wrap .select_box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1%; }
+.form_wrap .form_text textarea { width: 100%; height: 80px; }
+.form_wrap .form_policy, .form_wrap .form_policy a { font-size: 14px; color: #fff; }
+.phone { display: flex; align-items: center; gap: 5px; }
+.form_wrap button { width: 100%; padding: .5em 0; color: #fff; background: #666; text-align: center;
+ font-size: 2em; font-weight: bolder; border: none; cursor: pointer; }
+
+input[type="radio"] { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
+.radio_wrap { display: flex; gap: 5px; }
+.radio_box { width: 100%; display: flex; align-items: center; height: 50px; }
+.radio_box input[type="radio"] { width: 100%; position: absolute; left: 50%; transform: translateX(-50%); transition: .3s;
+padding: 0; height: 50px; z-index: -1; cursor: pointer; }
+.radio_box label { position: relative; width: 100%; text-align: center; line-height: 50px; z-index: 1;
+color: #666; cursor: pointer; }
+.radio_box input[type="radio"]:checked { background: #333; }
+.radio_box input[type="radio"]:checked + span { color: #fff; }
+#show-Box { cursor: pointer; }
+.form_wrap input::placeholder { color: #c5c5c5; }
+.form_btm { width: 95%; margin: 0 auto; text-align: center; padding: 2em 0; font-weight: normal; line-height: 150%; }
+.form_wrap .no_choice { color: #999 !important; }
+
+.loading_wrap { text-align: center; margin-bottom: 1em; }
+.loading_wrap img { width: 13%; margin-bottom: 1em; }
+.loading_wrap p { font-size: 1.3em; color: #fff; }
+.loading_con { display: flex; justify-content: center; align-items: flex-end; gap: .5em; margin-bottom: 1em; }
+.loading_box { width: .7em; height: 1.5em; background: rgb(172, 172, 172); animation: loadingFade 1.4s infinite ease-in-out; }
+.loading_wrap p:nth-child(3) { margin-bottom: .3em; font-family: 'SourceHanSerif'; }
+.loading_wrap p:nth-child(4) { color: #ccc; } 
+
+/* 각 막대 애니메이션 딜레이 다르게 적용 */
+.loading_box:nth-child(1) { animation-delay: 0s; }
+.loading_box:nth-child(2) { animation-delay: 0.2s; }
+.loading_box:nth-child(3) { animation-delay: 0.4s; }
+.loading_box:nth-child(4) { animation-delay: 0.6s; }
+.loading_box:nth-child(5) { animation-delay: 0.8s; }
+.loading_box:nth-child(6) { animation-delay: 1.0s; }
+.loading_box:nth-child(7) { animation-delay: 1.2s; }
+
+@keyframes loadingFade {
+0%, 100% {
+opacity: 0.2; /* 옅음 */
+}
+50% {
+opacity: 1;   /* 진하게 */
+}
+}
+
+
+
+
+/* main_bg */
+.main { background: #000; padding-top: 10em; }
+.main .bg_inner { justify-content: space-between; padding: 10% 1.5em 5% 1.5em; }
+.main_bg { width: 100%;  }
+.main_bg source { width: 100%; }
+
+.main .con_tit { text-align: left; width: 90%; margin-bottom: 2.5em; }
+.main .bg_inner > img { width: 85%; }
+
+
+
+
+/* con1 */
+.con1 .con_tit { width: 75%; margin: 0 auto 3em auto; }
+.con1_con { display: flex; gap: .5em; align-items: center; }
+.con1_box { position: relative; }
+.con1_box:nth-child(1) img:last-child, .con1_box:nth-child(3) img:last-child { position: absolute; top: 0; left: 0; z-index: 1; }
+
+
+
+
+
+/* con2 */
+.con2 .con_tit { width: 99%; padding-left: 1.5em; text-align: left; }
+.con3 .con_tit { width: 75%; padding-left: 1.5em; text-align: left; }
+.con2 .bg_inner { padding: 0; }
+.con2 { background: #666; }
+.con_vdo { width: 95%; margin: 0 auto 2em auto; border: 1px solid #ccc; }
+
+
+.con2 .bg_inner .main_btm > button { margin: 0 auto; }
+
+.con2_top, .con2_middle { margin-bottom: 2em; } 
+
+.con2_top { padding-left: 5%; }
+.con2_middle  { padding-right: 5%; }
+
+
+/* con3 */
+
+.con3 { background: #7b7b7b; }
+
+
+
+
+
+
+/* con4 */
+
+.con4 .con_tit { text-align: left; }
+.con4 .con_tit img { width: 95%; }
+
+.con4_con { margin-bottom: 3em; }
+.con4_box { margin-bottom: 1em; }
+.con4_box:last-child { margin-bottom: 0; }
+.con4 .con2_top { padding-left: 0; }
+.con4 .con2_top .con2_topbox { margin-left: .5em; }
+
+
+
+
+/* all */
+.con_tit p { font-size: 2em; }
+.bg { width: 100%; position: relative; overflow: hidden; }
+.bg > img { width: 100%; object-fit: contain; }
+.tcolor { color: #0022FF; }
+.bg_inner { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 1em; }
+.inner { width: 95%; margin: 0 auto; padding: 15% 0; }
+h2 { font-size: 2em; letter-spacing: -.05em; font-family: 'SourceHanSerif'; font-weight: 700; }
+h3 { font-size: 1.5em; letter-spacing: -.05em; font-family: 'SourceHanSerif'; }
+h4, h5 { font-family: 'Pretendard-Bold'; font-weight: normal; }
+h6 { font-family: 'SourceHanSerifAir'; }
+.con_tit { text-align: center; margin-bottom: 3.5em; }
+.call { font-size: 1.3em; text-align: center; margin: 2em 0; color: #333; }
+
+
+
+/* animation */
+
+.form_wrap button  { animation: main_btn 1s infinite forwards alternate cubic-bezier(0.9, -0.01, 0, 1); }
+
+@keyframes main_btn {
+0% { transform: translateY(-7%); box-shadow: 0 4px 1px 1px #000000; color: #ffee00; }
+100% { transform: translateY(0%); }
+
+}
+
+.con1_box:nth-child(1) img:last-child, .con1_box:nth-child(3) img:last-child { animation: con1_box 5s infinite alternate; animation-delay: 3s; }
+@keyframes con1_box {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+
+
+
+
+
+/* media screen */
+
+@media screen and (max-width: 600px) {
+body { font-size: 15px; }
+
+
+}
+@media screen and (max-width: 480px) {
+body { font-size: 10px; }
+.radio_box span { font-size: 15px; }   
+
+
+}
+
+
+
+        </style>
+    </head>
+
+    <body>
+        
+        <section class="main bg">
+            <video class="main_bg"  autoplay muted loop playsinline preload="auto" poster="img/limousine/main_thum02.png">
+                <source src="img/limousine/main_clean01.mp4" type="video/mp4">
+            </video>
+            <div class="bg_inner">
+
+                <div class="main_con">
+                    <div class="con_tit">
+                        <img src="img/limousine/main_tit.png" alt="당신의공간이새로워집니다">
+                    </div>
+
+                    <div class="main_btm">
+
+
+                        <button>하이리무진 상담받기</button>
+
+                        <div class="form_wrap" id="form_wrap-sec_top">
+                            <!-- <p class="form_tit"></p> -->
+                            <div class="inner">
+
+
+                                <div class="loading_wrap">
+                                    <img src="img/limousine/loading.png" alt="방패">
+                                    <div class="loading_con">
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                    </div> <!--loading_con--->
+                                    <p>개인정보는 암호화되어 안전하게 처리됩니다.</p>
+
+                                </div> <!--loading_wrap--->
+
+
+
+                                <form method="post" action="apply.html" id="myModal1_top" name="page_form">
+                                    <ul>
+
+                                        <li class="form_name">
+                                            <p>성함</p>
+                                            <p>입력하신 개인정보는 상담 외 다른 용도로 절대 사용되지 않습니다.</p>
+                                            <input type="text" name="name" maxlength="10" placeholder="성함" required/>
+                                        </li> <!----form_name------->
+
+                                        <li class="form_tel">
+                                            <p>연락처</p>
+                                            <div class="phone">
+                                                <select name="tel1"><option>010</option></select>
+                                                <div>-</div> 
+                                                <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                                <div>-</div>
+                                                <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                            </div>
+                                        </li> <!----form_tel------->
+
+
+                                        <li class="form_select01 region_wrap">
+                                            <p>지역</p>
+                                            <div class="select_box">
+                                                <select class="region1" name="option6[]" required>
+                                                    <option value="">지역</option>
+                                                    <option value="서울특별시">서울특별시</option>
+                                                    <option value="부산광역시">부산광역시</option>
+                                                    <option value="인천광역시">인천광역시</option>
+                                                    <option value="대구광역시">대구광역시</option>
+                                                    <option value="광주광역시">광주광역시</option>
+                                                    <option value="대전광역시">대전광역시</option>
+                                                    <option value="울산광역시">울산광역시</option>
+                                                    <option value="세종특별자치시">세종특별자치시</option>
+                                                    <option value="경기도">경기도</option>
+                                                    <option value="강원도">강원도</option>
+                                                    <option value="충청북도">충청북도</option>
+                                                    <option value="충청남도">충청남도</option>
+                                                    <option value="경상북도">경상북도</option>
+                                                    <option value="경상남도">경상남도</option>
+                                                    <option value="전라북도">전라북도</option>
+                                                    <option value="전라남도">전라남도</option>
+                                                    <option value="제주특별자치도">제주특별자치도</option>
+                                                </select>
+                                                <select class="region2" name="option6[]" required>
+                                                    <option value="">시/도/군</option>
+                                                </select>
+                                            </div>
+                                        </li> <!----form_select01------->
+
+                                        <li class="form_name">
+                                            <p>예산</p>
+                                            <p>예산이 부족하신 분들을 위해 예산대 조율이 가능합니다.</p>
+                                            <input type="text" name="option1" maxlength="10" placeholder="예산" required/>
+                                        </li> <!----form_name------->
+
+                              
+
+
+                                        <li class="form_policy">
+                                            <input id="policy_top" type="checkbox" value="1" checked required> 
+                                            <label for="policy_top">개인정보처리방침 동의</label>
+                                            <span id="show-Box_top">[약관보기]</span>
+                                        </li>  <!----form_policy------->
+                                    </ul> <!---------ul--------->
+                        
+                                    <button type="submit">하이리무진 상담받기</button>
+                                </form> <!---------form--------->
+                            </div> <!---------inner--------->
+
+                            <!-- <p class="form_btm"></p> -->
+
+                        </div> <!---------form_wrap--------->
+
+
+                    </div> <!---main_btm---->
+                
+                </div> <!---main_con---->
+
+                <img src="img/limousine/main_btm.webp" alt="리무진">  
+
+            </div> <!---bg_inner---->
+        </section> <!---main---->
+
+
+        <section class="con1 bg">
+            <img src="img/limousine/con1_bg.webp" alt="배경">
+            <div class="bg_inner">
+                <div class="con_tit"><img src="img/limousine/con1_tit_edit.webp" alt="제조부터특장까지"></div>
+
+                <div class="con1_con">
+                    <div class="con1_box" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
+                        <img src="img/limousine/con1_doc02.webp" alt="서류">
+                        <img src="img/limousine/con1_doc03.webp" alt="서류">
+                    </div>
+                    <div class="con1_box" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
+                        <img src="img/limousine/con1_doc01.webp" alt="서류">
+                    </div>
+                    <div class="con1_box" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="800">
+                        <img src="img/limousine/con1_doc04.webp" alt="서류">
+                        <img src="img/limousine/con1_doc05.webp" alt="서류">
+                    </div>
+                </div>  <!---con1_con---->
+
+            </div> <!---bg_inner---->
+
+        </section> <!---con1---->
+
+        <section class="con2 bg" data-padding-bottom="70em">
+            <img src="img/limousine/con2_bg.webp" alt="배경">
+            <div class="bg_inner">
+                <div class="con_tit"><img src="img/limousine/con2_tit01.webp" alt="하이리무진"></div>
+    
+                <div class="con2_con">
+                    <div class="con2_top swiper_con2top mySwiper">
+                        <div class="con2_topcon swiper-wrapper">
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box01.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box02.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box03.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box04.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box05.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box06.webp" alt="차량">
+                            </div>
+
+                        </div>  <!-----con3_contents----->
+                    </div> <!---con2_top---->
+
+                    <div class="con2_middle swiper_con2middle mySwiper">
+                        <div class="con2_topcon swiper-wrapper">
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box07.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box08.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box09.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box10.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box11.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box12.webp" alt="차량">
+                            </div>
+
+                        </div>  <!-----con3_contents----->
+                    </div> <!---con2_top---->
+
+                    <div class="con2_top swiper_con2btm mySwiper">
+                        <div class="con2_topcon swiper-wrapper">
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box13.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box14.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box15.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box16.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box17.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con2_box18.webp" alt="차량">
+                            </div>
+
+                        </div>  <!-----con3_contents----->
+                    </div> <!---con2_top---->
+
+
+
+
+                </div>
+    
+                <video class="con_vdo" autoplay muted loop playsinline preload="auto"  poster="img/limousine/con2_thum.webp">
+                    <source src="img/limousine/3.0.mp4" type="video/mp4">
+                </video>
+
+                <div class="main_con">
+                    <div class="main_btm">
+
+
+                        <button>3.0 모델 견적받기</button>
+
+                        <div class="form_wrap" id="form_wrap-sec_con2">
+                            <!-- <p class="form_tit"></p> -->
+                            <div class="inner">
+
+
+                                <div class="loading_wrap">
+                                    <img src="img/limousine/loading.png" alt="방패">
+                                    <div class="loading_con">
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                    </div> <!--loading_con--->
+                                    <p>개인정보는 암호화되어 안전하게 처리됩니다.</p>
+
+                                </div> <!--loading_wrap--->
+
+
+
+                                <form method="post" action="apply.html" id="myModal1_con2" name="page_form">
+                                    <ul>
+
+                                        <li class="form_name">
+                                            <p>성함</p>
+                                            <p>입력하신 개인정보는 상담 외 다른 용도로 절대 사용되지 않습니다.</p>
+                                            <input type="text" name="name" maxlength="10" placeholder="성함" required/>
+                                        </li> <!----form_name------->
+
+                                        <li class="form_tel">
+                                            <p>연락처</p>
+                                            <div class="phone">
+                                                <select name="tel1"><option>010</option></select>
+                                                <div>-</div> 
+                                                <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                                <div>-</div>
+                                                <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                            </div>
+                                        </li> <!----form_tel------->
+
+
+                                        <li class="form_select01 region_wrap">
+                                            <p>지역</p>
+                                            <div class="select_box">
+                                                <select class="region1" name="option6[]" required>
+                                                    <option value="">지역</option>
+                                                    <option value="서울특별시">서울특별시</option>
+                                                    <option value="부산광역시">부산광역시</option>
+                                                    <option value="인천광역시">인천광역시</option>
+                                                    <option value="대구광역시">대구광역시</option>
+                                                    <option value="광주광역시">광주광역시</option>
+                                                    <option value="대전광역시">대전광역시</option>
+                                                    <option value="울산광역시">울산광역시</option>
+                                                    <option value="세종특별자치시">세종특별자치시</option>
+                                                    <option value="경기도">경기도</option>
+                                                    <option value="강원도">강원도</option>
+                                                    <option value="충청북도">충청북도</option>
+                                                    <option value="충청남도">충청남도</option>
+                                                    <option value="경상북도">경상북도</option>
+                                                    <option value="경상남도">경상남도</option>
+                                                    <option value="전라북도">전라북도</option>
+                                                    <option value="전라남도">전라남도</option>
+                                                    <option value="제주특별자치도">제주특별자치도</option>
+                                                </select>
+                                                <select class="region2" name="option6[]" required>
+                                                    <option value="">시/도/군</option>
+                                                </select>
+                                            </div>
+                                        </li> <!----form_select01------->
+
+                                        <li class="form_name">
+                                            <p>예산</p>
+                                            <p>예산이 부족하신 분들을 위해 예산대 조율이 가능합니다.</p>
+                                            <input type="text" name="option1" maxlength="10" placeholder="예산" required/>
+                                        </li> <!----form_name------->
+
+                              
+
+
+                                        <li class="form_policy">
+                                            <input id="policy_con2" type="checkbox" value="1" checked required> 
+                                            <label for="policy_con2">개인정보처리방침 동의</label>
+                                            <span id="show-Box_con2">[약관보기]</span>
+                                        </li>  <!----form_policy------->
+                                    </ul> <!---------ul--------->
+                        
+                                    <button type="submit">하이리무진 상담받기</button>
+                                </form> <!---------form--------->
+                            </div> <!---------inner--------->
+
+                            <!-- <p class="form_btm"></p> -->
+
+                        </div> <!---------form_wrap--------->
+
+
+                    </div> <!---main_btm---->
+                
+                </div> <!---main_con---->
+
+            </div>
+
+        </section>
+
+        <section class="con2 bg con3" data-padding-bottom="70em">
+            <img src="img/limousine/con3_bg.webp" alt="배경">
+            <div class="bg_inner">
+                <div class="con_tit"><img src="img/limousine/con3_tit02.webp" alt="하이리무진"></div>
+    
+                <div class="con2_con">
+                    <div class="con2_top swiper_con2top mySwiper">
+                        <div class="con2_topcon swiper-wrapper">
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con3_box01.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con3_box02.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con3_box03.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con3_box04.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con3_box05.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con3_box06.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con3_box07.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con3_box08.webp" alt="차량">
+                            </div>
+
+                        </div>  <!-----con3_contents----->
+                    </div> <!---con2_top---->
+
+                    <div class="con2_middle swiper_con2middle mySwiper">
+                        <div class="con2_topcon swiper-wrapper">
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con3_box09.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con3_box10.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con3_box11.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con3_box12.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con3_box13.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con3_box14.webp" alt="차량">
+                            </div>
+                            <div class="con2_topbox swiper-slide">
+                                <img src="img/limousine/con3_box15.webp" alt="차량">
+                            </div>
+
+                        </div>  <!-----con3_contents----->
+                    </div> <!---con2_top---->
+
+
+
+
+
+
+                </div>
+    
+                <video class="con_vdo" autoplay muted loop playsinline preload="auto" poster="img/limousine/con3_thum.webp">
+                    <source src="img/limousine/4.0.mp4" type="video/mp4">
+                </video>
+
+                <div class="main_con">
+                    <div class="main_btm">
+
+
+                        <button>4.0 모델 견적받기</button>
+
+                        <div class="form_wrap" id="form_wrap-sec_con3">
+                            <!-- <p class="form_tit"></p> -->
+                            <div class="inner">
+
+
+                                <div class="loading_wrap">
+                                    <img src="img/limousine/loading.png" alt="방패">
+                                    <div class="loading_con">
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                        <div class="loading_box"></div>
+                                    </div> <!--loading_con--->
+                                    <p>개인정보는 암호화되어 안전하게 처리됩니다.</p>
+
+                                </div> <!--loading_wrap--->
+
+
+
+                                <form method="post" action="apply.html" id="myModal1_top" name="page_form">
+                                    <ul>
+
+                                        <li class="form_name">
+                                            <p>성함</p>
+                                            <p>입력하신 개인정보는 상담 외 다른 용도로 절대 사용되지 않습니다.</p>
+                                            <input type="text" name="name" maxlength="10" placeholder="성함" required/>
+                                        </li> <!----form_name------->
+
+                                        <li class="form_tel">
+                                            <p>연락처</p>
+                                            <div class="phone">
+                                                <select name="tel1"><option>010</option></select>
+                                                <div>-</div> 
+                                                <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                                <div>-</div>
+                                                <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                            </div>
+                                        </li> <!----form_tel------->
+
+
+                                        <li class="form_select01 region_wrap">
+                                            <p>지역</p>
+                                            <div class="select_box">
+                                                <select class="region1" name="option6[]" required>
+                                                    <option value="">지역</option>
+                                                    <option value="서울특별시">서울특별시</option>
+                                                    <option value="부산광역시">부산광역시</option>
+                                                    <option value="인천광역시">인천광역시</option>
+                                                    <option value="대구광역시">대구광역시</option>
+                                                    <option value="광주광역시">광주광역시</option>
+                                                    <option value="대전광역시">대전광역시</option>
+                                                    <option value="울산광역시">울산광역시</option>
+                                                    <option value="세종특별자치시">세종특별자치시</option>
+                                                    <option value="경기도">경기도</option>
+                                                    <option value="강원도">강원도</option>
+                                                    <option value="충청북도">충청북도</option>
+                                                    <option value="충청남도">충청남도</option>
+                                                    <option value="경상북도">경상북도</option>
+                                                    <option value="경상남도">경상남도</option>
+                                                    <option value="전라북도">전라북도</option>
+                                                    <option value="전라남도">전라남도</option>
+                                                    <option value="제주특별자치도">제주특별자치도</option>
+                                                </select>
+                                                <select class="region2" name="option6[]" required>
+                                                    <option value="">시/도/군</option>
+                                                </select>
+                                            </div>
+                                        </li> <!----form_select01------->
+
+                                        <li class="form_name">
+                                            <p>예산</p>
+                                            <p>예산이 부족하신 분들을 위해 예산대 조율이 가능합니다.</p>
+                                            <input type="text" name="option1" maxlength="10" placeholder="예산" required/>
+                                        </li> <!----form_name------->
+
+                              
+
+
+                                        <li class="form_policy">
+                                            <input id="policy_con3" type="checkbox" value="1" checked required> 
+                                            <label for="policy_con3">개인정보처리방침 동의</label>
+                                            <span id="show-Box_con3">[약관보기]</span>
+                                        </li>  <!----form_policy------->
+                                    </ul> <!---------ul--------->
+                        
+                                    <button type="submit">하이리무진 상담받기</button>
+                                </form> <!---------form--------->
+                            </div> <!---------inner--------->
+
+                            <!-- <p class="form_btm"></p> -->
+
+                        </div> <!---------form_wrap--------->
+
+
+                    </div> <!---main_btm---->
+                
+                </div> <!---main_con---->
+
+            </div>
+
+        </section> <!---con2-3--->
+
+        <section class="con4 bg">
+            <img src="img/limousine/con4_bg.webp" alt="배경">
+            <div class="bg_inner">
+                <div class="con_tit"><img src="img/limousine/con4_tit.png" alt="품격"></div>
+
+                <div class="con4_con">
+                    <div class="con4_box"><img src="img/limousine/con4_t01.webp" alt="방음"></div>
+                    <div class="con4_box"><img src="img/limousine/con4_t02.webp" alt="안정"></div>
+                    <div class="con4_box"><img src="img/limousine/con4_t03.webp" alt="공진음"></div>
+                    <div class="con4_box"><img src="img/limousine/con4_t04.webp" alt="방진시트"></div>
+                </div>
+
+
+                <div class="con4_btm con2_top swiper_con2top mySwiper">
+                    <div class="con2_topcon swiper-wrapper">
+                        <div class="con2_topbox swiper-slide">
+                            <img src="img/limousine/con4_box01.webp" alt="차량">
+                        </div>
+                        <div class="con2_topbox swiper-slide">
+                            <img src="img/limousine/con4_box02.webp" alt="차량">
+                        </div>
+                        <div class="con2_topbox swiper-slide">
+                            <img src="img/limousine/con4_box03.webp" alt="차량">
+                        </div>
+                        <div class="con2_topbox swiper-slide">
+                            <img src="img/limousine/con4_box04.webp" alt="차량">
+                        </div>
+                        <div class="con2_topbox swiper-slide">
+                            <img src="img/limousine/con4_box05.webp" alt="차량">
+                        </div>
+                        <div class="con2_topbox swiper-slide">
+                            <img src="img/limousine/con4_box06.webp" alt="차량">
+                        </div>
+
+                    </div>  <!-----con2_topcon----->
+                </div> <!---con2_top---->
+            </div> <!-----bg_inner----->
+        </section> <!-----con4----->
+
+
+
+
+        <section class="con5">
+            <img src="img/limousine/con5_bg.webp" alt="배경">
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <section class="form_wrap" id="form_wrap-sec">
+            <!-- <p class="form_tit"></p> -->
+            <div class="inner">
+
+
+                <div class="loading_wrap">
+                    <img src="img/limousine/loading.png" alt="방패">
+                    <div class="loading_con">
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                    </div> <!--loading_con--->
+                    <p>개인정보는 암호화되어 안전하게 처리됩니다.</p>
+
+                </div> <!--loading_wrap--->
+
+
+
+                <form method="post" action="apply.html" id="myModal1" name="page_form">
+                    <ul>
+
+                        <li class="form_name">
+                            <p>성함</p>
+                            <p>입력하신 개인정보는 상담 외 다른 용도로 절대 사용되지 않습니다.</p>
+                            <input type="text" name="name" maxlength="10" placeholder="성함" required/>
+                        </li> <!----form_name------->
+
+                        <li class="form_tel">
+                            <p>연락처</p>
+                            <div class="phone">
+                                <select name="tel1"><option>010</option></select>
+                                <div>-</div> 
+                                <input type="text" name="tel2" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                <div>-</div>
+                                <input type="text" name="tel3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                            </div>
+                        </li> <!----form_tel------->
+
+
+                        <li class="form_select01 region_wrap">
+                            <p>지역</p>
+                            <div class="select_box">
+                                <select class="region1" name="option6[]" required>
+                                    <option value="">지역</option>
+                                    <option value="서울특별시">서울특별시</option>
+                                    <option value="부산광역시">부산광역시</option>
+                                    <option value="인천광역시">인천광역시</option>
+                                    <option value="대구광역시">대구광역시</option>
+                                    <option value="광주광역시">광주광역시</option>
+                                    <option value="대전광역시">대전광역시</option>
+                                    <option value="울산광역시">울산광역시</option>
+                                    <option value="세종특별자치시">세종특별자치시</option>
+                                    <option value="경기도">경기도</option>
+                                    <option value="강원도">강원도</option>
+                                    <option value="충청북도">충청북도</option>
+                                    <option value="충청남도">충청남도</option>
+                                    <option value="경상북도">경상북도</option>
+                                    <option value="경상남도">경상남도</option>
+                                    <option value="전라북도">전라북도</option>
+                                    <option value="전라남도">전라남도</option>
+                                    <option value="제주특별자치도">제주특별자치도</option>
+                                </select>
+                                <select class="region2" name="option6[]" required>
+                                    <option value="">시/도/군</option>
+                                </select>
+                            </div>
+                        </li> <!----form_select01------->
+
+                        <li class="form_name">
+                            <p>예산</p>
+                            <p>예산이 부족하신 분들을 위해 예산대 조율이 가능합니다.</p>
+                            <input type="text" name="option1" maxlength="10" placeholder="예산" required/>
+                        </li> <!----form_name------->
+
+                        <li class="form_policy">
+                            <input id="policy" type="checkbox" value="1" checked required> 
+                            <label for="policy">개인정보처리방침 동의</label>
+                            <span id="show-Box">[약관보기]</span>
+                        </li>  <!----form_policy------->
+                    </ul> <!---------ul--------->
+        
+                    <button type="submit">하이리무진 상담받기</button>
+                </form> <!---------form--------->
+            </div> <!---------inner--------->
+
+            <!-- <p class="form_btm"></p> -->
+
+        </section> <!---------form_wrap--------->
+
+
+
+
+
+
+        <script>
+            AOS.init({
+            once: false,          // 반복 실행
+            startEvent: 'load',   // 시작 타이밍
+            });
+        </script>
+
+
+
+
+        <script>
+            // 여러 개 요소 선택
+            const openBtns = document.querySelectorAll("#show-Box, #show-Box_top, #show-Box_con2, #show-Box_con3");
+
+            openBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const popup = window.open(
+                        'policy.html', // 조약 내용을 담은 실제 경로
+                        '개인정보이용동의',
+                        'width=800,height=600,scrollbars=yes'
+                    );      
+
+                    if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                        alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+                    }
+                });
+            });
+        </script>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const regionData = {
+                    '서울특별시': ['강남구', '강동구', '강북구', '강서구', '관악구', '광진구', '구로구', '금천구', '노원구', '도봉구', '동대문구', '동작구', '마포구', '서대문구', '서초구', '성동구', '성북구', '송파구', '양천구', '영등포구', '용산구', '은평구', '종로구', '중구', '중랑구'],
+                    '부산광역시': ['강서구', '금정구', '기장군', '남구', '동구', '동래구', '부산진구', '북구', '사상구', '사하구', '서구', '수영구', '연제구', '영도구', '중구', '해운대구'],
+                    '인천광역시': ['강화군', '계양구', '남동구', '동구', '미추홀구', '부평구', '서구', '연수구', '옹진군', '중구'],
+                    '대구광역시': ['남구', '달서구', '달성군', '동구', '북구', '서구', '수성구', '중구'],
+                    '광주광역시': ['광산구', '남구', '동구', '북구', '서구'],
+                    '대전광역시': ['대덕구', '동구', '서구', '유성구', '중구'],
+                    '울산광역시': ['남구', '동구', '북구', '울주군', '중구'],
+                    '세종특별자치시': ['세종시'],
+                    '경기도': ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시', '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시', '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시', '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시'],
+                    '강원도': ['강릉시', '고성군', '동해시', '삼척시', '속초시', '양구군', '양양군', '영월군', '원주시', '인제군', '정선군', '철원군', '춘천시', '태백시', '평창군', '홍천군', '화천군', '횡성군'],
+                    '충청북도': ['괴산군', '단양군', '보은군', '영동군', '옥천군', '음성군', '제천시', '진천군', '청주시', '충주시'],
+                    '충청남도': ['계룡시', '공주시', '금산군', '논산시', '당진시', '보령시', '부여군', '서산시', '서천군', '아산시', '예산군', '천안시', '청양군', '태안군', '홍성군'],
+                    '경상북도': ['경산시', '경주시', '고령군', '구미시', '군위군', '김천시', '문경시', '봉화군', '상주시', '성주군', '안동시', '영덕군', '영양군', '영주시', '영천시', '예천군', '울릉군', '울진군', '의성군', '청도군', '청송군', '칠곡군', '포항시'],
+                    '경상남도': ['거제시', '거창군', '고성군', '김해시', '남해군', '밀양시', '사천시', '산청군', '양산시', '의령군', '진주시', '창녕군', '창원시', '통영시', '하동군', '함안군', '함양군', '합천군'],
+                    '전라북도': ['고창군', '군산시', '김제시', '남원시', '무주군', '부안군', '순창군', '완주군', '익산시', '임실군', '장수군', '전주시', '정읍시', '진안군'],
+                    '전라남도': ['강진군', '고흥군', '곡성군', '광양시', '구례군', '나주시', '담양군', '목포시', '무안군', '보성군', '순천시', '신안군', '여수시', '영광군', '영암군', '완도군', '장성군', '장흥군', '진도군', '함평군', '해남군', '화순군'],
+                    '제주특별자치도': ['서귀포시', '제주시']
+                };
+
+                document.querySelectorAll('.region_wrap').forEach(wrap => {
+                    const region1 = wrap.querySelector('.region1');
+                    const region2 = wrap.querySelector('.region2');
+
+                    region1.addEventListener('change', function () {
+                        const selectedRegion = this.value;
+                        const subRegions = regionData[selectedRegion] || [];
+
+                        // 초기화
+                        region2.innerHTML = '<option value="">시/도/군</option>';
+
+                        // 하위 지역 추가
+                        subRegions.forEach(region => {
+                            const option = document.createElement('option');
+                            option.value = region;
+                            option.textContent = region;
+                            region2.appendChild(option);
+                        });
+                    });
+                });
+            });
+        </script>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const buttons = document.querySelectorAll(".main_btm > button");
+
+    buttons.forEach((btn) => {
+        // 버튼이 속한 가장 가까운 섹션 찾기
+        const parentSection = btn.closest(".main, .con1, .con2, .con3");
+
+        // 섹션 내 관련 요소 찾기
+        const formBox = parentSection.querySelector("#form_wrap-sec_top, #form_wrap-sec_con2, #form_wrap-sec_con3");
+        const mainTit = parentSection.querySelectorAll(".main_tit");
+
+        // 초기 상태: 폼 숨김
+        if (formBox) formBox.style.display = "none";
+
+        btn.addEventListener("click", function() {
+            // 폼이 현재 보이는지 여부 확인
+            const isVisible = formBox && formBox.style.display === "block";
+
+            if (isVisible) {
+                // ✅ 폼이 열려 있을 때 → 닫기
+                formBox.style.display = "none";
+                mainTit.forEach(tit => tit.style.display = "block");
+
+                // 버튼 스타일 원래대로 (선택사항)
+                btn.style.marginBottom = "";
+                btn.style.backgroundColor = "";
+                btn.style.color = "";
+                
+                // 섹션 패딩 초기화
+                parentSection.style.paddingTop = "";
+                parentSection.style.paddingBottom = "";
+            } else {
+                // ✅ 폼이 닫혀 있을 때 → 열기
+                mainTit.forEach(tit => tit.style.display = "none");
+
+                btn.style.display = "block";
+                btn.style.marginBottom = "1em";
+                btn.style.backgroundColor = "#fff";
+                btn.style.color = "#333";
+
+                if (formBox) formBox.style.display = "block";
+
+                if (parentSection.classList.contains("main")) {
+                    const paddingTop = parentSection.dataset.paddingTop || "50em";
+                    parentSection.style.paddingTop = paddingTop;
+                } else if (parentSection.classList.contains("con2") || parentSection.classList.contains("con3")) {
+                    const paddingBottom = parentSection.dataset.paddingBottom || "50em";
+                    parentSection.style.paddingBottom = paddingBottom;
+                }
+
+                formBox.scrollIntoView({ behavior: "smooth" });
+            }
+        });
+    });
+});
+</script>
+
+
+        
+
+        <!-- Swiper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script>
+            const Swiper_slide = new Swiper('.swiper_con2top', {
+            slidesPerView: 1.8,
+            spaceBetween: 5,
+            loop: true,
+            speed: 700,
+            allowTouchMove: true,
+            centeredSlides: false,
+            autoplay: {
+                delay: 2000,
+                disableOnInteraction: false,
+            },
+            });
+
+        </script>
+
+        <!-- Swiper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script>
+            const Swiper_slide_md = new Swiper('.swiper_con2middle', {
+            slidesPerView: 2.1,
+            spaceBetween: 5,
+            loop: true,
+            speed: 700,
+            allowTouchMove: true,
+            centeredSlides: false,
+            autoplay: {
+                delay: 2000,
+                disableOnInteraction: false,
+                reverseDirection: true, // ✅ 슬라이드 반대 방향으로 이동
+            },
+            });
+
+        </script>
+
+        <!-- Swiper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script>
+            const Swiper_slide_btm = new Swiper('.swiper_con2btm', {
+            slidesPerView: 1.8,
+            spaceBetween: 5,
+            loop: true,
+            speed: 700,
+            allowTouchMove: true,
+            centeredSlides: false,
+            autoplay: {
+                delay: 2000,
+                disableOnInteraction: false,
+            },
+            });
+
+        </script>
+
+
+
+    </body>
+</html>
