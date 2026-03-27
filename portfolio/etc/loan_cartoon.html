@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>정책공용-참여형</title>
+        <style>
+            html { scroll-behavior: smooth; }
+* { margin: 0; padding: 0; vertical-align: top; box-sizing: border-box; }
+body { max-width: 800px; min-width: 320px; margin: 0 auto; font-size: 18px; font-family: 'Paperozi'; font-weight: 500; }
+li { list-style: none; }
+a { text-decoration: none; color: #000; }
+img { max-width: 100%; border: none; }
+p { color: #fff; word-break: keep-all; }
+select { -webkit-appearance: none; appearance: none; color: #000; background-image: url(img/loan_cartoon/selct_arrow.png);
+background-repeat: no-repeat; background-position: center right 5px;}
+textarea {
+border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
+resize: none; box-sizing: border-box; -webkit-appearance: none; -moz-appearance: none; appearance: none;        
+}
+button { all: unset; cursor: pointer; padding: 0; margin: 0; font: inherit; color: inherit; }
+h1, h2, h3, h4, h5, h6, p { line-height: 120%; letter-spacing: -.05em; color: #fff; }
+
+
+
+/* form */
+.form_wrap .inner { padding: 5% 0; width: 90%; margin: 0 auto; }
+.form_wrap p { color: #000; font-size: 1.4em; }
+.form_tit { text-align: center; font-size: 2.2em !important; font-weight: bolder; 
+background: #0022A9; color: #ffff00 ; padding: .3em 0;
+}
+.form_wrap ul li { margin-bottom: 1em; }
+.form_wrap .form_policy { margin-bottom: 1em; display: flex; flex-wrap: wrap; align-items: center; }
+.form_wrap .form_policy input { margin-right: 5px; cursor: pointer; }
+.form_wrap .form_policy label { cursor: pointer; margin-right: 5px; }
+.form_wrap ul li p:first-child { margin-bottom: 5px; font-size: 1.5em; font-weight: 600; }
+.form_wrap ul li p:nth-child(2) { font-size: 1em; margin-bottom: .5em; color: #666; }
+.form_wrap ul li input, .form_wrap ul li select { padding: .9em .5em; border-radius: 5em; border: 1px solid #e5e5e5; background-color: #fff;
+box-shadow: 2px 2px 10px #0000002f;
+}
+.form_wrap ul li input[type="text"] { width: 100%; box-sizing: border-box; }
+.form_wrap .form_tel input, .form_wrap .form_tel select { width: 33.3% !important; }
+.form_wrap .form_select02 select { width: 100%; }
+.region_wrap .select_box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1%; }
+.form_wrap .form_text textarea { width: 100%; height: 80px; border-radius: 5em; }
+.form_wrap .form_policy, .form_wrap .form_policy a { font-size: 1em; color: #000; }
+.phone { display: flex; align-items: center; gap: 5px; }
+.form_wrap button { width: 100%; padding: .4em 0; color: #fff; background: linear-gradient(#666, #1b1b1b); text-align: center;
+border-radius: 5em; font-size: 2.5em; font-family: 'Paperozi'; font-weight: 700; border: none; cursor: pointer; }
+
+input[type="radio"] { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
+.radio_wrap { display: grid; grid-template-columns: repeat(3,1fr); gap: .5em; }
+.radio_box { width: 100%; display: flex; align-items: center; height: 40px; }
+.radio_box input[type="radio"] { width: 100%; position: absolute; left: 50%; transform: translateX(-50%); transition: .3s;
+padding: 0; height: 40px; z-index: -1; cursor: pointer; }
+.radio_box label { position: relative; width: 100%; text-align: center; line-height: 40px; z-index: 1;
+color: #666; cursor: pointer; }
+.radio_box input[type="radio"]:checked { background: #0022A9; }
+.radio_box input[type="radio"]:checked + span { color: #fff; }
+#show-Box { cursor: pointer; }
+.form_wrap input::placeholder { color: #c5c5c5; }
+.form_btm { width: 95%; margin: 0 auto; text-align: center; padding-top: 1em; font-weight: normal; line-height: 150%; }
+.form_wrap .no_choice { color: #999 !important; }
+
+
+
+.loading_wrap { text-align: center; margin-bottom: 1.5em; }
+.loading_wrap img { width: 13%; margin-bottom: 1em; }
+.loading_wrap p { font-size: 1.3em; }
+.loading_con { display: flex; justify-content: center; align-items: flex-end; gap: 0.2em; margin-bottom: 1em; }
+.loading_box { width: .5em; height: 1em; background: #333; animation: loadingFade 1s infinite ease-in-out; }
+
+/* 각 막대 애니메이션 딜레이 다르게 적용 */
+.loading_box:nth-child(1) { animation-delay: 0s; }
+.loading_box:nth-child(2) { animation-delay: 0.2s; }
+.loading_box:nth-child(3) { animation-delay: 0.4s; }
+.loading_box:nth-child(4) { animation-delay: 0.6s; }
+.loading_box:nth-child(5) { animation-delay: 0.7s; }
+.loading_box:nth-child(6) { animation-delay: .8s; }
+.loading_box:nth-child(7) { animation-delay: .9s; }
+
+@keyframes loadingFade {
+0%, 100% {
+opacity: 0.2; /* 옅음 */
+}
+50% {
+opacity: 1;   /* 진하게 */
+}
+}
+
+
+
+
+
+
+.vn_wrap { position: relative; width: 100%; height: 100vh; overflow: hidden; }
+.bg { position: absolute; width: 100%; height: 100%; background: url('img/loan_cartoon/main_bg.webp') bottom center/cover no-repeat; z-index: 0; }
+/* 캐릭터 */
+.character { width: 80%; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; }
+.character img { display: block; margin: 0 auto; object-fit: contain; }
+/* 대사 */
+.dialogue_box { position: absolute; bottom: 0; width: 100%; min-height: 260px;
+background: rgba(0,0,0,0.6); color: #fff; padding: 2.5em 1.5em; z-index: 2;
+opacity: 1; transition: opacity 0.3s ease;
+}
+#name { font-weight: bold; margin-bottom: 0.5em; }
+.dialogue_box p:first-child { font-size: 3em; }
+.dialogue_box p:last-child { font-size: 1.8em; }
+
+.dialogue_box.hide { opacity: 0; pointer-events: none; }
+
+
+/* 선택지 */
+.choices { position: absolute; bottom: 16em; width: 100%; text-align: center; z-index: 3;
+display: grid; grid-template-columns: repeat(2, 1fr); gap: .5em;
+}
+.choice_btn { display: block; padding: .3em; width: 95%; margin: 0 auto; background: #1b1b1b; color: #fff; cursor: pointer;
+font-size: 2em; font-weight: bolder; border: 2px solid #666;
+}
+.next_btn { position: absolute; bottom: 7.2em;  right: 0; z-index: 5; font-size: 2em; font-weight: bolder;
+padding: 10px 15px; background: #000; color: #fff; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s;
+}
+.next_btn.active { opacity: 1; pointer-events: auto; }
+
+#charImg { opacity: 1; transition: opacity 1s ease; }
+.fade-out { opacity: 0 !important; }
+
+.char_big { width: 70%; }
+.char_small, .char_mid03 { width: 70%; }
+.char_mid { width: 90%; }
+
+
+/* 폼제어 */
+.form_wrap.overlay { width: 90%; position: absolute; top: 5%; left: 50%; transform: translateX(-50%); border-radius: 1em;
+    box-shadow: 3px 3px 10px 6px #0000002a;
+background: rgba(212, 212, 212, 0.750); z-index: 10; opacity: 0; pointer-events: none; transition: 0.4s;
+}
+
+
+/* 활성화 */
+.form_wrap.overlay.active { opacity: 1; pointer-events: auto; }
+
+#text { white-space: pre-line; }
+
+
+.form_wrap button { animation: form_btn 1.5s infinite forwards; }
+
+@keyframes form_btn {
+0% { border-bottom: 7px solid #000; box-sizing: border-box; color: #FFFF00; margin-top: -7px; }
+50% { border-bottom: 7px solid #000; box-sizing: border-box; color: #FFFF00; margin-top: -7px; }
+50.01% { border-bottom: none; box-sizing: content-box; color: #fff; margin-top: 0; }
+100% { border-bottom: none; box-sizing: content-box; color: #fff; margin-top: 0; }
+}
+
+
+
+
+
+
+
+
+
+/* media screen */
+
+@media screen and (max-width: 600px) {
+body { font-size: 15px; }
+.dialogue_box { min-height: 217px; }
+}
+@media screen and (max-width: 480px) {
+body { font-size: 10px; }
+.radio_box span { font-size: 13px; }   
+.dialogue_box { min-height: 145px; }
+}
+
+
+
+
+        </style>
+    </head>
+
+    <body>
+        <div class="vn_wrap">
+
+            <!-- 배경 -->
+            <div class="bg"></div>
+            <!-- 캐릭터 -->
+            <div class="character">
+                <img id="charImg" src="img/loan_cartoon/char_serious.webp">
+            </div>
+            <!-- 대사 -->
+            <div class="dialogue_box">
+                <p id="name">컨설턴트</p>
+                <p id="text"></p>
+            </div>
+            <div class="next_btn" id="nextBtn">다음 →</div>
+            <!-- 선택지 -->
+            <div class="choices" id="choices"></div>
+    
+            <div class="form_wrap overlay" id="form_wrap-sec">
+    
+    
+                <div class="inner">
+    
+    
+    
+                    <div class="loading_wrap">
+                        <img src="img/loan_cartoon/loading.png" alt="방패">
+                        <div class="loading_con">
+                            <div class="loading_box"></div>
+                            <div class="loading_box"></div>
+                            <div class="loading_box"></div>
+                            <div class="loading_box"></div>
+                            <div class="loading_box"></div>
+                            <div class="loading_box"></div>
+                            <div class="loading_box"></div>
+                        </div> <!--loading_con--->
+                        <p>개인정보는 암호화되어 안전하게 처리됩니다.</p>
+    
+                    </div> <!--loading_wrap--->
+    
+    
+    
+    
+    
+                    <form method="post" action="apply.html" id="myModal1" name="page_form">
+                        <input type="hidden" name="option2" id="selectedIndustry">
+
+                        <ul>
+    
+                            <li class="form_name">
+                                <p>사업자명</p>
+                                <input type="text" name="option1" maxlength="10" placeholder="사업자명" required/>
+                            </li> <!----form_name------->
+    
+                            <li class="form_name">
+                                <p>대표자명</p>
+                                <input type="text" name="name" minlength="2" maxlength="10" placeholder="대표자명" required/>
+                            </li> <!----form_name------->
+    
+                            <li class="form_tel">
+                                <p>휴대폰번호</p>
+                                <div class="phone">
+                                    <select name="tel1"><option>010</option></select>
+                                    <input type="text" name="tel2" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                    <input type="text" name="tel3" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                </div>
+                            </li> <!----form_tel------->
+    
+                            <li class="form_select01 region_wrap">
+                                <p>지역</p>
+                                <div class="select_box">
+                                    <select id="region1" name="option6[]" required>
+                                        <option value="">지역</option>
+                                        <option value="서울특별시">서울특별시</option>
+                                        <option value="부산광역시">부산광역시</option>
+                                        <option value="인천광역시">인천광역시</option>
+                                        <option value="대구광역시">대구광역시</option>
+                                        <option value="광주광역시">광주광역시</option>
+                                        <option value="대전광역시">대전광역시</option>
+                                        <option value="울산광역시">울산광역시</option>
+                                        <option value="세종특별자치시">세종특별자치시</option>
+                                        <option value="경기도">경기도</option>
+                                        <option value="강원도">강원도</option>
+                                        <option value="충청북도">충청북도</option>
+                                        <option value="충청남도">충청남도</option>
+                                        <option value="경상북도">경상북도</option>
+                                        <option value="경상남도">경상남도</option>
+                                        <option value="전라북도">전라북도</option>
+                                        <option value="전라남도">전라남도</option>
+                                        <option value="제주특별자치도">제주특별자치도</option>
+                                    </select>
+                                    <select id="region2" name="option6[]" required>
+                                        <option value="">시/군/구</option>
+                                    </select>
+                                </div>
+                            </li> <!----form_select01------->
+    
+    
+                            <li class="form_name">
+                                <p>필요자금</p>
+                                <input type="text" name="option3" maxlength="10" placeholder="필수항목 아님"/>
+                            </li> <!----form_name------->
+    
+                            <li class="form_policy">
+                                <input id="policy" type="checkbox" value="1" checked required> 
+                                <label for="policy">개인정보처리방침 동의</label>
+                                <span id="show-Box">[약관보기]</span>
+                            </li>  <!----form_policy------->
+                        </ul> <!---------ul--------->
+            
+                        <button type="submit">지원하기</button>
+                    </form> <!---------form--------->
+                </div> <!---------inner--------->
+    
+    
+            </div> <!---------form_wrap--------->
+            
+        </div> <!---------vn_wrap--------->
+
+
+
+
+        <script>
+            // 팝업 창
+            const openPop = document.getElementById("show-Box");
+            openPop.addEventListener('click', () => {
+                const popup = window.open(
+                    'policy.html', // 조약 내용을 담은 실제 경로
+                    '개인정보이용동의',
+                    'width=800,height=600,scrollbars=yes'
+                );
+    
+                if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                    alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+                }
+            });
+        </script>
+
+        <script>
+            const regionData = {
+            '서울특별시': ['강남구', '강동구', '강북구', '강서구', '관악구', '광진구', '구로구', '금천구', '노원구', '도봉구', '동대문구', '동작구', '마포구', '서대문구', '서초구', '성동구', '성북구', '송파구', '양천구', '영등포구', '용산구', '은평구', '종로구', '중구', '중랑구'],
+            '부산광역시': ['강서구', '금정구', '기장군', '남구', '동구', '동래구', '부산진구', '북구', '사상구', '사하구', '서구', '수영구', '연제구', '영도구', '중구', '해운대구'],
+            '인천광역시': ['강화군', '계양구', '남동구', '동구', '미추홀구', '부평구', '서구', '연수구', '옹진군', '중구'],
+            '대구광역시': ['남구', '달서구', '달성군', '동구', '북구', '서구', '수성구', '중구'],
+            '광주광역시': ['광산구', '남구', '동구', '북구', '서구'],
+            '대전광역시': ['대덕구', '동구', '서구', '유성구', '중구'],
+            '울산광역시': ['남구', '동구', '북구', '울주군', '중구'],
+            '세종특별자치시': ['세종시'],
+            '경기도': ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시', '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시', '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시', '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시'],
+            '강원도': ['강릉시', '고성군', '동해시', '삼척시', '속초시', '양구군', '양양군', '영월군', '원주시', '인제군', '정선군', '철원군', '춘천시', '태백시', '평창군', '홍천군', '화천군', '횡성군'],
+            '충청북도': ['괴산군', '단양군', '보은군', '영동군', '옥천군', '음성군', '제천시', '진천군', '청주시', '충주시'],
+            '충청남도': ['계룡시', '공주시', '금산군', '논산시', '당진시', '보령시', '부여군', '서산시', '서천군', '아산시', '예산군', '천안시', '청양군', '태안군', '홍성군'],
+            '경상북도': ['경산시', '경주시', '고령군', '구미시', '군위군', '김천시', '문경시', '봉화군', '상주시', '성주군', '안동시', '영덕군', '영양군', '영주시', '영천시', '예천군', '울릉군', '울진군', '의성군', '청도군', '청송군', '칠곡군', '포항시'],
+            '경상남도': ['거제시', '거창군', '고성군', '김해시', '남해군', '밀양시', '사천시', '산청군', '양산시', '의령군', '진주시', '창녕군', '창원시', '통영시', '하동군', '함안군', '함양군', '합천군'],
+            '전라북도': ['고창군', '군산시', '김제시', '남원시', '무주군', '부안군', '순창군', '완주군', '익산시', '임실군', '장수군', '전주시', '정읍시', '진안군'],
+            '전라남도': ['강진군', '고흥군', '곡성군', '광양시', '구례군', '나주시', '담양군', '목포시', '무안군', '보성군', '순천시', '신안군', '여수시', '영광군', '영암군', '완도군', '장성군', '장흥군', '진도군', '함평군', '해남군', '화순군'],
+            '제주특별자치도': ['서귀포시', '제주시']
+            };
+
+            const region1 = document.getElementById('region1');
+            const region2 = document.getElementById('region2');
+
+            region1.addEventListener('change', function () {
+                const selectedRegion = this.value;
+                const subRegions = regionData[selectedRegion] || [];
+
+                // 초기화
+                region2.innerHTML = '<option value="">시/군/구</option>';
+
+                // 하위 지역 추가
+                subRegions.forEach(function (region) {
+                const option = document.createElement('option');
+                option.value = region;
+                option.textContent = region;
+                region2.appendChild(option);
+                });
+            });
+        </script>
+
+
+
+
+
+        <script>
+            const script = [
+                { text: "안녕하세요, 대표님.\n고금리 대출을 사용하고 계신다고요?", char: "img/loan_cartoon/char_serious.webp", class: "char_big" },
+
+                {
+                    text: "정부 정책자금은 알아보셨나요?",
+                    char: "img/loan_cartoon/char_point.webp",
+                    class: "char_small",
+                    choices: [
+                        { text: "몰랐음", next: 2 },
+                        { text: "알긴 했는데...", next: 2 }
+                    ]
+                },
+
+                { text: "괜찮아요! 정책자금은 조건은 계속 바뀌기 때문에, 전문가의 정확한 컨설팅이 필요합니다.", char: "img/loan_cartoon/char_mid01.webp", class: "char_mid03" },
+
+                {
+                    text: "대표님.\n 업종은 어떻게 되세요?",
+                    char: "img/loan_cartoon/char_mid02.webp",
+                    class: "char_mid",
+                    choices: [
+                        { text: "제조업", value: "제조업", next: 4 },
+                        { text: "도/소매업", value: "도,소매업", next: 4 },
+                        { text: "서비스업", value: "서비스업", next: 4 },
+                        { text: "요식업", value: "요식업", next: 4 },
+                        { text: "기타", value: "기타", next: 4 }
+                    ]
+                },
+
+                { text: "대표님 업종이면, 조건이 상당히 유리하겠네요!", char: "img/loan_cartoon/char_mid03.webp", class: "char_mid03" },
+                { text: "연 2~4% 초저금리 정책자금을\n저와 같이 확인해보시죠!", char: "img/loan_cartoon/char_mid.webp", class: "char_mid", end: true }
+            ];
+
+
+            let step = 0;
+            let typing = false;
+            let typingInterval;
+
+            const textEl = document.getElementById("text");
+            const charImg = document.getElementById("charImg");
+            const choicesEl = document.getElementById("choices");
+            const nextBtn = document.getElementById("nextBtn");
+            const dialogueBox = document.querySelector(".dialogue_box");
+
+            function typeText(text, cb) {
+                textEl.innerHTML = "";
+                let i = 0;
+                typing = true;
+
+                typingInterval = setInterval(() => {
+                    textEl.innerHTML += text[i];
+                    i++;
+
+                    if (i >= text.length) {
+                        clearInterval(typingInterval);
+                        typing = false;
+                        cb && cb();
+                    }
+                }, 30);
+            }
+
+            function render() {
+                const scene = script[step];
+
+                // 1. 페이드 아웃
+                charImg.classList.add("fade-out");
+
+                setTimeout(() => {
+
+                    // 2. 이미지 변경
+                    charImg.src = scene.char;
+
+                    // 3. 클래스 적용
+                    charImg.className = "fade-out";
+                    if (scene.class) {
+                        charImg.classList.add(scene.class);
+                    }
+
+                    // 4. 페이드 인
+                    setTimeout(() => {
+                        charImg.classList.remove("fade-out");
+                    }, 20);
+
+                }, 150);
+
+                choicesEl.innerHTML = "";
+                nextBtn.classList.remove("active");
+
+                typeText(scene.text, () => {
+                    if (scene.choices) {
+                        scene.choices.forEach(choice => {
+                            const btn = document.createElement("div");
+                            btn.className = "choice_btn";
+                            btn.innerText = choice.text;
+
+                            btn.onclick = () => {
+                                if (choice.value) {
+                                    document.getElementById("selectedIndustry").value = choice.value;
+                                }
+                                step = choice.next;
+                                render();
+                            };
+
+                            choicesEl.appendChild(btn);
+                        });
+                    } else {
+                        nextBtn.classList.add("active");
+                    }
+                });
+            }
+
+        nextBtn.addEventListener("click", () => {
+            const scene = script[step];
+
+            if (typing) {
+                clearInterval(typingInterval);
+                textEl.innerHTML = scene.text;
+                typing = false;
+
+                if (!scene.choices) {
+                    nextBtn.classList.add("active");
+                }
+                return;
+            }
+
+            if (scene.end) {
+                document.getElementById("form_wrap-sec").classList.add("active");
+
+                // 👉 dialogue 숨김
+                dialogueBox.classList.add("hide");
+
+                nextBtn.classList.remove("active");
+                nextBtn.style.display = "none";
+
+                return;
+            }
+
+            step++;
+            render();
+        });
+
+            render();
+        </script>
+
+
+
+    </body>
+</html>
