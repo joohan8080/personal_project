@@ -12,7 +12,7 @@ li { list-style: none; }
 a { text-decoration: none; color: #000; }
 img { max-width: 100%; border: none; }
 p { color: #fff; word-break: keep-all; }
-select { -webkit-appearance: none; appearance: none; color: #000; background-image: url(img/loan_cartoon/selct_arrow.png);
+select { -webkit-appearance: none; appearance: none; color: #000; background-image: url(img/selct_arrow.png);
 background-repeat: no-repeat; background-position: center right 5px;}
 textarea {
 border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
@@ -94,7 +94,7 @@ opacity: 1;   /* 진하게 */
 
 
 .vn_wrap { position: relative; width: 100%; height: 100vh; overflow: hidden; }
-.bg { position: absolute; width: 100%; height: 100%; background: url('img/loan_cartoon/main_bg.webp') bottom center/cover no-repeat; z-index: 0; }
+.bg { position: absolute; width: 100%; height: 100%; background: url('../img/main_bg.webp') bottom center/cover no-repeat; z-index: 0; }
 /* 캐릭터 */
 .character { width: 80%; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; }
 .character img { display: block; margin: 0 auto; object-fit: contain; }
@@ -122,12 +122,11 @@ padding: 10px 15px; background: #000; color: #fff; cursor: pointer; opacity: 0; 
 }
 .next_btn.active { opacity: 1; pointer-events: auto; }
 
-#charImg { opacity: 1; transition: opacity 1s ease; }
+#charImg { opacity: 1; transition: opacity 1s ease; width: 70%; }
 .fade-out { opacity: 0 !important; }
 
 .char_big { width: 70%; }
-.char_small, .char_mid03 { width: 70%; }
-.char_mid { width: 90%; }
+
 
 
 /* 폼제어 */
@@ -176,6 +175,7 @@ body { font-size: 10px; }
 
 
         </style>
+
     </head>
 
     <body>
