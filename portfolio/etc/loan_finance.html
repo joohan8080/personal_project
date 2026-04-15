@@ -3,13 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://land.withusmk.co.kr/assets/etc/file/web_fonts.css" type="text/css">
+        <link rel="stylesheet" href="css/web_fonts.css" type="text/css">
         <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
         <title>정책자금 금융앱형</title>
         <style>
-            :root {
+            
+:root {
 --main:#6C5CFF;
 --sub:#5146D8;
 --accent:#00E5A8;
@@ -25,7 +26,7 @@ li { list-style: none; }
 a { text-decoration: none; color: #fff; }
 img { max-width: 100%; border: none; }
 p { color: #fff; word-break: keep-all; }
-select { -webkit-appearance: none; appearance: none; color: #666; background-image: url('https://land.withusmk.co.kr/assets/etc/file/selct_arrow_white.png');
+select { -webkit-appearance: none; appearance: none; color: #666; background-image: url('img/selct_arrow_white.png');
 background-repeat: no-repeat; background-position: center right 5px; cursor: pointer; }
 textarea {
 border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
@@ -74,17 +75,7 @@ background: linear-gradient(0deg, #0b0f1a 0%, #ffffff00 50%);
 
 /* step3 */
 .loading_wrap { text-align: center; }
-.video_box {
-    position: relative;
-    width: 80%;
-    margin: 0 auto 1.5em auto;
 
-    /* 핵심: 투명 대체 배경 */
-    background: #0B0F1A;
-    border-radius: 1em;
-    overflow: hidden;
-}
-.video_box video { width: 100%; height: auto; display: block; background: transparent; }
 .sub_txt { color: #aaa; margin-top: .5em; }
 #step3 h2{ opacity: 1; transition: opacity 0.4s ease; }
 #step3 h2.fade-out{ opacity: 0; }
@@ -205,7 +196,7 @@ width: 90%; margin: 0 auto; background: #fff; color: #000; padding: .5em 0; bord
 .precheck_btns button:first-child { margin-bottom: .5em; }
 
 
-
+.video_box img { width: 90%; }
 
 
 /* all */
@@ -213,6 +204,19 @@ width: 90%; margin: 0 auto; background: #fff; color: #000; padding: .5em 0; bord
 .inner { width: 95%; margin: 0 auto; padding: 10% 0; }
 
 /* ani */
+.video_box img{
+animation: floatEffect 2s ease-in-out infinite alternate forwards;
+transform-origin: center;
+}
+
+/* 위아래 이동 + 스케일 + 투명도 */
+@keyframes floatEffect {
+0% { transform: translateY(0) scale(0.90); opacity: 0.6; }
+50% { transform: translateY(-12px) scale(1); opacity: .8; }
+100% { transform: translateY(0) scale(0.85); opacity: 0.2; }
+}
+
+
 
 /* media screen */
 @media screen and (max-width: 600px) {
@@ -327,9 +331,7 @@ body { font-size: 10px; }
                 <div class="inner loading_wrap">
 
                     <div class="video_box">
-                        <video autoplay muted loop playsinline poster webkit-playsinliner="img/finance/thum.webp">
-                            <source src="img/finance/vdo.webm" type="video/webm">
-                        </video>
+                        <img src="img/finance/thum.webp" alt="검토">
                     </div>
 
                     <h2>조건 분석중입니다...</h2>
@@ -548,8 +550,8 @@ body { font-size: 10px; }
             function startLoading(){
 
                 const texts = [
-                    "조건 분석중입니다...",
-                    "금리 비교 중...",
+                    "정책자금 분석중입니다...",
+                    "최저금리 계산 중...",
                     "정책자금 검토중..."
                 ];
 
@@ -570,13 +572,13 @@ body { font-size: 10px; }
                     }, 400);
                 };
 
-                setTimeout(()=> changeText(texts[1]), 2000);
-                setTimeout(()=> changeText(texts[2]), 4000);
+                setTimeout(()=> changeText(texts[1]), 1500);
+                setTimeout(()=> changeText(texts[2]), 3000);
 
                 setTimeout(()=>{
                     calc();
                     go(4);
-                }, 6000);
+                }, 4000);
             }
 
             function next(){
