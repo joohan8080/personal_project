@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/web_fonts.css" type="text/css">
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <title>정책자금 풀페이지형</title>
+        <style>
+            :root {
+            --main: #C9CCD6;
+            --sub: #7c818a;
+            --bg-dark: #0B0F1A;
+            --text-sub: #A0A6B5;
+            }
+            /* ===== RESET ===== */
+            *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+            html, body { height: 100%; overflow-x: hidden; }
+            html { -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+            body { margin: 0; font-size: 18px; font-family: 'Pretendard-Medium'; color: #fff;
+            background: radial-gradient(circle at 20% 20%, rgba(108,92,255,0.15) 0%, transparent 60%),
+            radial-gradient(circle at 80% 80%, rgba(0,229,168,0.12) 0%, transparent 60%),
+            linear-gradient(30deg, #0B0F1A 0%, #0A0E18 100%); 
+            letter-spacing: -.05em;
+            }
+
+            h1, h2, h3, h4, h5, h6 { font-family: 'Pretendard-Bold'; }
+
+
+            img { display:block; max-width:100%; }
+            ul, li { list-style:none; }
+            a { text-decoration:none; color:inherit; }
+            button { all:unset; cursor:pointer; }
+
+
+            /* ===== SHEET FORM ===== */
+            .sheet form { margin-top: 1em; }
+            .sheet ul { display: flex; flex-direction: column; gap: 0.8em; }
+
+
+            /* 공통 input */
+            .sheet input, .sheet select { width: 100%; padding: .8em; border-radius: 0.8em; border: 1px solid #2a3147; background: #0f1424;
+            color: #fff; font-size: 1em; transition: 0.2s;
+            background-image: url('img/selct_arrow_white.png');
+            background-repeat: no-repeat; background-position: center right 5px;
+            }
+
+            /* focus */
+            .sheet input:focus, .sheet select:focus { border-color: var(--main); box-shadow: 0 0 0 2px rgba(68,255,193,0.15); }
+            /* placeholder */
+            .sheet input::placeholder { color: #6b738f; }
+            /* 전화번호 */
+            .sheet .phone { display: flex; gap: 0.4em; }
+            .sheet .phone select { flex: 0 0 25%; }
+            .sheet .phone input { flex: 1; }
+            /* 지역 */
+            .sheet .select_box { display: flex; gap: 0.4em; }
+            .sheet .select_box select { flex: 1; }
+            /* ===== RADIO ===== */
+            .sheet .form_radio h3 { font-size: 1.3em; margin-bottom: .5em; color: #aaa; }
+            .sheet .radio_wrap { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.4em; }
+            .sheet .radio_box input { display: none; }
+            .sheet .radio_box span { display: flex; align-items: center; justify-content: center; padding: 0.8em 0; border-radius: 0.7em;
+            background: #0f1424; border: 1px solid #2a3147; font-size: 0.9em; transition: 0.2s; }
+            .sheet .radio_box input:checked + span { background: var(--main); color: #000; border-color: var(--main); font-weight: 700; }
+            /* ===== POLICY ===== */
+            .sheet .form_policy { display: flex; align-items: center; gap: 0.4em; font-size: 0.85em; color: #aaa; }
+            .sheet .form_policy input { width: 1em; height: 1em; }
+            .sheet #show-Box { color: var(--main); cursor: pointer; font-size: 0.85em; }
+            /* ===== SUBMIT ===== */
+            .sheet form button { margin-top: 0.8em; width: 100%; padding: .5em; border-radius: 0.8em; font-size: 1.2em;
+            font-weight: 700; text-align: center; background: linear-gradient(15deg,var(--sub), var(--main), #fff, var(--main), var(--sub)); color: #000;
+            }
+            /* ===== UX 보정 ===== */
+            /* iOS 줌 방지 */
+
+
+            /* ===== BOTTOM SHEET ===== */
+            .sheet { max-width: 800px; position: fixed; bottom: -100%; width: 100%; max-width: 800px; background: #1b1b1b;
+            border-radius: 2em 2em 0 0; padding: 2.5em 1.5em; transition: .4s ease; z-index: 3000; max-height: 90vh; overflow-y: auto;
+            box-shadow: 0 -6px 10px 5px #00000033;
+            }
+            .sheet.active { bottom: 0; }
+            .sheet h2 { font-size: 1.8em; margin-bottom: .5em; text-align: center; }
+            .sheet input { width: 100%; border-radius: .7em; border: 1px solid #333; background: #0f1424; color: #fff; }
+            .sheet button { width: 100%; padding: .5em; border-radius: .7em; text-align: center; font-size: 1.5em;
+            background: var(--main); color: #000; font-weight: 700; box-sizing: border-box;
+            }
+            /* ===== INPUT RESET (사파리 대응 포함) ===== */
+            input, textarea, select { font: inherit; color: inherit; appearance: none; -webkit-appearance: none; }
+            /* checkbox */
+            input[type="checkbox"]{ width:1em; height:1em; border:1.5px solid #999; border-radius:4px; background:#fff;
+            position:relative; padding: 0; margin-bottom: 0;
+            }
+            input[type="checkbox"]:checked{ background:var(--main); border-color:var(--main); }
+            input[type="checkbox"]:checked::after{
+            content:''; position:absolute; top: 50%; left: 50%; width:4px; height:8px;
+            border:solid #333; border-width:0 1.5px 1.5px 0; transform: translateX(-50%) translateY(-50%) rotate(45deg);
+            }
+            .precheck_modal { position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+            display: none; z-index: 5000; align-items: center; justify-content: center; }
+            .precheck_modal.active { display: flex; }
+            .precheck_inner { width: 85%; max-width: 500px; padding: 2em; border-radius: 1em; text-align: center; background: #111; border: 1px solid #333; }
+            .precheck_inner p { font-size: 1.4em; margin-bottom: 1em; color: var(--main); font-weight: 700; }
+            .precheck_btns button { display: block; width: 100%; padding: 0.9em; margin-bottom: 0.5em;
+            border-radius: 0.8em; font-size: 1.1em; text-align: center; background: #fff; color: #000; box-sizing: border-box;
+            }
+            /* form */
+
+
+
+
+
+
+            /* ===== 스크롤 구조 핵심 ===== */
+            .wrapper { height: 100vh; overflow: hidden; max-width: 800px; min-width: 320px; margin: 0 auto; }
+            .section { height: 100vh; scroll-snap-align: start; display:flex; flex-direction:column; justify-content: flex-start; align-items: center;
+            align-items:center; text-align:center; padding-top: 10%; box-sizing: border-box; 
+            }
+            .section h1 { font-size: 2.3em; margin-bottom: .5em; }
+            .section p { font-size: 1.5em; color: var(--text-sub); }
+            /* ===== CTA ===== */
+            .cta { max-width: 750px; position: fixed; bottom: 5%; left: 50%; transform: translateX(-50%); width: 90%;
+            padding: .5em 0; text-align: center; border-radius: 5em; font-size: 2em; font-weight: 500; color: #fff;
+            background: #ffffff2c; z-index: 1000; border: 1px solid #b6b6b6; box-shadow: 2px 2px 20px 2px #ffffff33;
+            backdrop-filter: blur(9px);
+            }
+
+
+            /* ===== DIM ===== */
+            .dim { position: fixed; inset: 0; background: rgba(0,0,0,0.6); opacity: 0; pointer-events: none; transition: .3s; z-index: 2000; }
+            .dim.active { opacity: 1; pointer-events: auto; }
+
+
+
+            /* con */
+
+            /* con1 */
+            .con_data { width: 97%; margin: 0 auto; display: flex; flex-direction: column; gap: 0.7em; }
+            .data_wrap { display: grid; grid-template-columns: repeat(2, 1fr); gap: .3em; }
+            .data_item { padding: 1em; border-radius: 1em; text-align: left; background: #00000069;
+            border: 1.5px solid rgba(255, 255, 255, 0.233); backdrop-filter: blur(5px); }
+            .data_item p { display: block; font-size: 1.4em; color: var(--main); margin-bottom: 0.3em; }
+            .data_item h2 { font-size: 2.3em; }
+            .data_item h2 em { font-style: normal; font-size: .7em; }
+
+            .main_b { position: absolute; bottom: 17%; text-align: center; }
+            .main_b p { color: #e9e9e9; }
+            .main_b img { width: 12%; opacity: .5; display: block; margin: 0 auto 1em auto;  }
+
+            /* con2 */
+            .con2_con { width: 97%; margin: 0 auto; }
+            .compare_wrap { width: 100%; display: flex; gap: .5em; margin-bottom: .5em; justify-content: center; }
+            .compare_item { padding: 1.2em; border-radius: 1em; text-align: left; backdrop-filter: blur(5px);
+            background: #0000006b; border: 1.5px solid rgba(255, 255, 255, 0.233); }
+            .compare_item p { font-size: 1.1em; color: var(--main); margin-bottom: 0.4em; }
+            .compare_item h2 { font-size: 2.4em; font-weight: 700; color: #fff; }
+            .compare_item .sub { font-size: 0.9em; color: var(--main); }
+            .compare_item:first-child p { font-size: 1em; }
+            .compare_item:first-child { width: 45%; }
+            .compare_item:last-child { width: 55%;  }
+            .compare_item:last-child p { font-size: 1.3em; }
+            .compare_item:last-child h2 { font-size: 2.7em; }
+
+            /* 위험 (은행) */
+            .compare_item.bad h2 { color: #929292; }
+            /* 절감 박스 */
+            .saving_box { padding: 1.3em; border-radius: 1.2em; background: #0000006b;
+            border: 1.5px solid rgba(255, 255, 255, 0.233); backdrop-filter: blur(5px);
+            }
+            .saving_box p { font-size: 1.3em; color: #A0A6B5; margin-bottom: 0.3em; }
+            .saving_box h2 { font-size: 2.8em; }
+            .condition_box { margin-bottom: .8em; padding: 1em; border-radius: 1em; background: #0000006b;
+            border: 1.5px solid rgba(255, 255, 255, 0.233); backdrop-filter: blur(5px); }
+            .condition_box p { font-size: 1.1em; color: var(--main); }
+            .condition_box h3 { font-size: 2em;  }
+
+            .notice { font-size: 1em !important; text-align: left; margin: .5em 0 0 1em; color: #ccc !important; }
+
+            .last .inner { width: 100%; }
+            .last > img { bottom: -15% !important; }
+            .last .con_tit { margin-bottom: 1.5em; }
+            /* splide */
+            .splide__pagination, .splide__arrows { display: none; } 
+            .splide1 { margin-bottom: 0; }
+            .splide__list { gap: 1.5em; }
+            .splide__list img { box-shadow: 2px 2px 5px #0000001c; border-radius: .5em; }
+            .splide__slide { padding: 1em 0; }
+
+
+            /* bar */
+            .bar div { width: 3em; height: 1px; background: #444; margin: 0 auto .3em auto;
+            transform: translateY(-1.5em); border-radius: 5em; }
+
+
+
+
+
+
+
+            /* all */
+            .section { position: relative; overflow: hidden; }
+            .section > img { position: absolute; width: 100%; bottom: 0; z-index: -1; pointer-events: none; }
+            .inner { width: 95%; margin: 0 auto; position: relative; z-index: 10; } 
+            .con_tit { margin-bottom: 3em; }
+            .con_tit h1 { font-size: 2.3em;  line-height: 1.3;  margin-bottom: 0.4em; }
+            .con_tit p { font-size: 1.5em; color: var(--text-sub); }
+
+
+
+
+
+
+
+            /* ani */
+            .ani { animation: secmg 1s infinite forwards alternate; }
+            @keyframes secmg { 
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(6px); opacity: .7; }
+
+            }
+
+            .main_b img { animation: main_b .5s infinite forwards alternate; }
+            @keyframes main_b { 
+            0% {  transform: translateY(0); opacity: .7; }
+            100% {  transform: translateY(-4px); opacity: .3; }
+            }
+
+            .cta { animation: cta .8s infinite forwards alternate; }
+            @keyframes cta { 
+            0% {  transform: translateY(3px) translateX(-50%); }
+            100% {  transform: translateY(-3px) translateX(-50%); }
+            }
+
+
+
+
+            /* ===== 반응형 ===== */
+            @media (max-width: 600px){
+            body{ font-size:15px; }
+
+            }
+
+            @media (max-width: 480px){
+            body{ font-size:13px; }
+
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="wrapper" id="wrapper">
+        
+            <div class="section">
+
+                <div class="inner">
+
+                    <div class="con_tit">
+                        <h1>
+                            정책자금으로<br>
+                            고금리 부담 낮추세요
+                        </h1>
+                        <p>최대 4배 이자 절감 · 평균 금리 2~4%</p>
+                    </div>
+
+                    <!-- 데이터 -->
+                    <div class="con_data">
+                        <div class="data_item">
+                            <p><span class="label">정책자금 공급 규모</span></p>
+                            <h2><span class="num">20</span><em>조 원 +</em></h2>
+                        </div>
+
+                        <div class="data_wrap">
+                            <div class="data_item">
+                                <p><span class="label">최근 1개월 조회</span></p>
+                                <h2><span class="num">3,927</span><em>건 +</em></h2>
+                                
+                            </div>
+                            <div class="data_item">
+                                <p><span class="label">조달 성공률</span></p>
+                                <h2><span class="num">98</span>.5<em>% +</em></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <img src="img/loan_fullpage/con1_box.webp" alt="아이콘" class="ani">
+
+                <div class="main_b">
+                    <img src="img/loan_fullpage/ico.png" alt="스크롤아이콘">
+                    <p>아래로 화면을 내려보세요!</p>
+                </div>
+
+            </div> <!-- ===== sections ===== -->
+
+                    
+            <div class="section">
+                <img src="img/loan_fullpage/con2_box.webp" alt="배경" class="ani">
+
+                <div class="inner">
+
+                    <div class="con_tit">
+                        <h1>
+                            같은 금액이라도<br>
+                            이자 차이는 이렇게 납니다
+                        </h1>
+                        <p>동일 대출 조건 기준</p>
+                    </div>
+
+                    <div class="con2_con">
+                        <!-- 조건 표시 -->
+                        <div class="condition_box">
+                            <p>대출금</p>
+                            <h3><span class="num" data-target="5000">5,000</span>만원</h3>
+                        </div>
+    
+                        <div class="compare_wrap">
+    
+                            <div class="compare_item bad">
+                                <p>은행 대출 (연 12%)</p>
+                                <h2><span class="num" data-target="50">50</span>만원</h2>
+                                <span class="sub">*월 이자</span>
+                            </div>
+    
+                            <div class="compare_item good">
+                                <p>정책자금 (연 3%)</p>
+                                <h2><span class="num" data-target="12">12</span>만원</h2>
+                                <span class="sub">*월 이자</span>
+                            </div>
+    
+                        </div>
+    
+                        <div class="saving_box">
+                            <p>매월 절감</p>
+                            <h2><span class="num" data-target="38">38</span>만원</h2>
+                        </div>
+                    </div>
+                    <p class="notice">*금리는 상품별 상이할 수 있습니다.</p>
+
+                </div>
+            </div> <!-- ===== sections ===== -->
+
+    
+            <div class="section last">
+                <img src="img/loan_fullpage/con3_box.webp" alt="사람">
+                <div class="inner">
+                    <div class="con_tit">
+                        <h1>지금 바로 확인하세요!</h1>
+                        <p>30초면 신청 가능합니다</p>
+                    </div>
+
+                    <div class="con3_con">
+                        <div class="splide splide1">
+                            <div class="splide__track">
+                                <ul class="splide__list">
+                                    <li class="splide__slide"><img src="img/loan_fullpage/main_box01.webp" alt="후기"></li>
+                                    <li class="splide__slide"><img src="img/loan_fullpage/main_box02.webp" alt="후기"></li>
+                                    <li class="splide__slide"><img src="img/loan_fullpage/main_box03.webp" alt="후기"></li>
+                                    <li class="splide__slide"><img src="img/loan_fullpage/main_box04.webp" alt="후기"></li>
+                                </ul>  <!-----splide__list------>
+                            </div> <!-----splide__track------>
+                        </div> <!-----splide1------>
+                        
+                        <div class="splide splide2">
+                            <div class="splide__track">
+                                <ul class="splide__list">
+                                    <li class="splide__slide"><img src="img/loan_fullpage/main_box05.webp" alt="후기"></li>
+                                    <li class="splide__slide"><img src="img/loan_fullpage/main_box06.webp" alt="후기"></li>
+                                    <li class="splide__slide"><img src="img/loan_fullpage/main_box07.webp" alt="후기"></li>
+                                    <li class="splide__slide"><img src="img/loan_fullpage/main_box08.webp" alt="후기"></li>
+
+                                </ul>  <!-----splide__list------>
+                            </div>  <!-----splide__track------>
+                        </div> <!-----splide2------>
+                    </div>
+                    
+
+                </div>
+            </div> <!-- ===== sections ===== -->
+    
+            <!-- CTA -->
+            <div class="cta" onclick="openPrecheck()">정책자금 조회하기</div>
+
+
+
+
+            <div class="precheck_modal" id="precheckModal">
+                <div class="precheck_inner">
+                    <p>Q. 사업자이신가요?</p>
+                    <div class="precheck_btns">
+                    <button onclick="confirmBusiness(true)">네</button>
+                    <button class="no" onclick="confirmBusiness(false)">아니오</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="precheck_modal" id="taxModal">
+                <div class="precheck_inner">
+                    <p>Q. 국세체납 또는 연체가 있나요?</p>
+                    <div class="precheck_btns">
+                        <button onclick="confirmTax(true)">예</button>
+                        <button class="no" onclick="confirmTax(false)">아니오</button>
+                    </div>
+                </div>
+            </div>
+            <!-- dim -->
+            <div class="dim" id="dim" onclick="closeSheet()"></div>
+        
+                <!-- bottom sheet -->
+            <div class="sheet" id="sheet">
+                <div class="bar">
+                    <div></div><div></div><div></div>
+                </div>
+                <h2>정책자금 무료상담 신청하기</h2>
+        
+            <form method="post" action="apply.html" id="myModal1" name="page_form">
+                <ul>
+
+
+                    <li class="form_name">
+                        <input type="text" name="name" minlength="2" maxlength="10" placeholder="사업자명" required/>
+                    </li> <!----form_name------->
+
+                    <li class="form_tel">
+                        <div class="phone">
+                            <select name="tel1"><option>010</option></select>
+                            <input type="text" name="tel2" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                            <input type="text" name="tel3" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                        </div>
+                    </li> <!----form_tel------->
+
+                    <li class="form_select01 region_wrap">
+                        <div class="select_box">
+                            <select id="region1" name="option6[]" required>
+                                <option value="">지역</option>
+                                <option value="서울특별시">서울특별시</option>
+                                <option value="부산광역시">부산광역시</option>
+                                <option value="인천광역시">인천광역시</option>
+                                <option value="대구광역시">대구광역시</option>
+                                <option value="광주광역시">광주광역시</option>
+                                <option value="대전광역시">대전광역시</option>
+                                <option value="울산광역시">울산광역시</option>
+                                <option value="세종특별자치시">세종특별자치시</option>
+                                <option value="경기도">경기도</option>
+                                <option value="강원도">강원도</option>
+                                <option value="충청북도">충청북도</option>
+                                <option value="충청남도">충청남도</option>
+                                <option value="경상북도">경상북도</option>
+                                <option value="경상남도">경상남도</option>
+                                <option value="전라북도">전라북도</option>
+                                <option value="전라남도">전라남도</option>
+                                <option value="제주특별자치도">제주특별자치도</option>
+                            </select>
+                            <select id="region2" name="option6[]" required>
+                                <option value="">시/군/구</option>
+                            </select>
+                        </div>
+                    </li> <!----form_select01------->
+
+                    <li class="form_radio">
+                        <h3>업종을 선택해주세요</h3>
+                        <div class="radio_wrap">
+                            <div class="radio_box">
+                                <label>
+                                    <input name="option1" type="radio" value="제조업" required> 
+                                    <span>제조업</span>
+                                </label>
+                            </div>
+                            <div class="radio_box">
+                                <label>
+                                    <input name="option1" type="radio" value="도,소매업" required>
+                                    <span>도,소매업</span>
+                                </label>
+                            </div>
+                            <div class="radio_box">
+                                <label>
+                                    <input name="option1" type="radio" value="서비스업" required> 
+                                    <span>서비스업</span>
+                                </label>
+                            </div>
+                            <div class="radio_box">
+                                <label>
+                                    <input name="option1" type="radio" value="요식업" required> 
+                                    <span>요식업</span>
+                                </label>
+                            </div>
+                            <div class="radio_box">
+                                <label>
+                                    <input name="option1" type="radio" value="기타" required> 
+                                    <span>기타</span>
+                                </label>
+                            </div>
+                        </div>
+                    </li>  <!----form_radio------->
+
+
+                    <li class="form_policy">
+                        <input id="policy" type="checkbox" value="1" checked required> 
+                        <label for="policy">개인정보처리방침 동의</label>
+                        <span id="show-Box">[약관보기]</span>
+                    </li>  <!----form_policy------->
+                </ul> <!---------ul--------->
+    
+                <button type="submit">정책자금 신청하기</button>
+            </form> <!---------form--------->
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+            function openSheet(){
+            document.getElementById('sheet').classList.add('active');
+            document.getElementById('dim').classList.add('active');
+            document.body.style.overflow='hidden';
+            }
+
+            function closeSheet(){
+            document.getElementById('sheet').classList.remove('active');
+            document.getElementById('dim').classList.remove('active');
+            document.body.style.overflow='';
+            }
+        </script>
+
+
+
+        <script>
+            const sections = document.querySelectorAll('.section');
+
+            let currentIndex = 0;
+            let isAnimating = false;
+
+            function moveTo(index) {
+            if (isAnimating) return;
+
+            if (index < 0) index = 0;
+            if (index > sections.length - 1) index = sections.length - 1;
+
+            isAnimating = true;
+            currentIndex = index;
+
+            sections[index].scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+
+            setTimeout(() => {
+                isAnimating = false;
+            }, 700);
+            }
+
+            // 휠 완전 제어
+            window.addEventListener('wheel', (e) => {
+            e.preventDefault(); // 기본 스크롤 제거
+
+            if (isAnimating) return;
+
+            if (e.deltaY > 0) {
+                moveTo(currentIndex + 1);
+            } else {
+                moveTo(currentIndex - 1);
+            }
+            }, { passive: false });
+
+            // 터치 (모바일)
+            let startY = 0;
+
+            window.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+            }, { passive: true });
+
+            window.addEventListener('touchend', (e) => {
+            const endY = e.changedTouches[0].clientY;
+            const diff = startY - endY;
+
+            if (Math.abs(diff) < 50) return;
+
+            if (diff > 0) {
+                moveTo(currentIndex + 1);
+            } else {
+                moveTo(currentIndex - 1);
+            }
+            });
+        </script>
+
+
+
+
+        <script>
+            function openPrecheck() {
+                document.getElementById("precheckModal").classList.add("active");
+                document.body.style.overflow = "hidden";
+            }
+
+            function confirmBusiness(isBusiness) {
+                const modal = document.getElementById("precheckModal");
+
+                if (!isBusiness) {
+                    alert("사업자만 신청 가능합니다.");
+                    return;
+                }
+
+                modal.classList.remove("active");
+                document.getElementById("taxModal").classList.add("active");
+            }
+
+            function confirmTax(hasDebt) {
+                const modal = document.getElementById("taxModal");
+
+                if (hasDebt) {
+                    alert("연체중이신 경우 신청이 불가합니다.");
+                    return;
+                }
+
+                modal.classList.remove("active");
+
+                // 👉 여기서 sheet 열기
+                document.getElementById('sheet').classList.add('active');
+                document.getElementById('dim').classList.add('active');
+            }
+
+            function initModalClose() {
+                const modals = document.querySelectorAll(".precheck_modal");
+
+                modals.forEach(modal => {
+                    modal.addEventListener("click", function () {
+                        modal.classList.remove("active");
+                        document.body.style.overflow = "";
+                    });
+
+                    const inner = modal.querySelector(".precheck_inner");
+
+                    inner.addEventListener("click", function (e) {
+                        e.stopPropagation();
+                    });
+                });
+            }
+            initModalClose();
+        </script>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                const $el = $(entry.target);
+                const target = Number($el.attr('data-target'));
+
+                if (!target) return;
+
+                setTimeout(() => {
+                    $el.prop('Counter', 0).stop().animate({
+                    Counter: target
+                    }, {
+                    duration: 1000,
+                    easing: 'swing',
+                    step: function (now) {
+                        $el.text(Math.ceil(now).toLocaleString());
+                    }
+                    });
+                }, 1000); // ← 여기서 1초 딜레이 설정 // 
+                }
+            });
+            }, { threshold: 0.5 });
+
+            // 초기 숫자값을 data-target 속성에 저장
+            $('.num').each((_, el) => {
+            const $el = $(el);
+            const target = Number($el.text().replace(/,/g, '').trim());
+            $el.attr('data-target', target);
+            observer.observe(el);
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+            AOS.init({
+            once: true,          // 반복 실행
+            startEvent: 'load',   // 시작 타이밍
+            });
+        </script>
+
+
+
+
+        <script>
+            // 팝업 창
+            const openPop = document.getElementById("show-Box");
+            openPop.addEventListener('click', () => {
+                const popup = window.open(
+                    'https://land.withusmk.co.kr/assets/etc/file/policy.html', // 조약 내용을 담은 실제 경로
+                    '개인정보이용동의',
+                    'width=800,height=600,scrollbars=yes'
+                );      
+
+                if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                    alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+                }
+            });
+        </script>
+
+
+        <script>
+            const regionData = {
+            '서울특별시': ['강남구', '강동구', '강북구', '강서구', '관악구', '광진구', '구로구', '금천구', '노원구', '도봉구', '동대문구', '동작구', '마포구', '서대문구', '서초구', '성동구', '성북구', '송파구', '양천구', '영등포구', '용산구', '은평구', '종로구', '중구', '중랑구'],
+            '부산광역시': ['강서구', '금정구', '기장군', '남구', '동구', '동래구', '부산진구', '북구', '사상구', '사하구', '서구', '수영구', '연제구', '영도구', '중구', '해운대구'],
+            '인천광역시': ['강화군', '계양구', '남동구', '동구', '미추홀구', '부평구', '서구', '연수구', '옹진군', '중구'],
+            '대구광역시': ['남구', '달서구', '달성군', '동구', '북구', '서구', '수성구', '중구'],
+            '광주광역시': ['광산구', '남구', '동구', '북구', '서구'],
+            '대전광역시': ['대덕구', '동구', '서구', '유성구', '중구'],
+            '울산광역시': ['남구', '동구', '북구', '울주군', '중구'],
+            '세종특별자치시': ['세종시'],
+            '경기도': ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시', '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시', '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시', '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시'],
+            '강원도': ['강릉시', '고성군', '동해시', '삼척시', '속초시', '양구군', '양양군', '영월군', '원주시', '인제군', '정선군', '철원군', '춘천시', '태백시', '평창군', '홍천군', '화천군', '횡성군'],
+            '충청북도': ['괴산군', '단양군', '보은군', '영동군', '옥천군', '음성군', '제천시', '진천군', '청주시', '충주시'],
+            '충청남도': ['계룡시', '공주시', '금산군', '논산시', '당진시', '보령시', '부여군', '서산시', '서천군', '아산시', '예산군', '천안시', '청양군', '태안군', '홍성군'],
+            '경상북도': ['경산시', '경주시', '고령군', '구미시', '군위군', '김천시', '문경시', '봉화군', '상주시', '성주군', '안동시', '영덕군', '영양군', '영주시', '영천시', '예천군', '울릉군', '울진군', '의성군', '청도군', '청송군', '칠곡군', '포항시'],
+            '경상남도': ['거제시', '거창군', '고성군', '김해시', '남해군', '밀양시', '사천시', '산청군', '양산시', '의령군', '진주시', '창녕군', '창원시', '통영시', '하동군', '함안군', '함양군', '합천군'],
+            '전라북도': ['고창군', '군산시', '김제시', '남원시', '무주군', '부안군', '순창군', '완주군', '익산시', '임실군', '장수군', '전주시', '정읍시', '진안군'],
+            '전라남도': ['강진군', '고흥군', '곡성군', '광양시', '구례군', '나주시', '담양군', '목포시', '무안군', '보성군', '순천시', '신안군', '여수시', '영광군', '영암군', '완도군', '장성군', '장흥군', '진도군', '함평군', '해남군', '화순군'],
+            '제주특별자치도': ['서귀포시', '제주시']
+            };
+
+            const region1 = document.getElementById('region1');
+            const region2 = document.getElementById('region2');
+
+            region1.addEventListener('change', function () {
+                const selectedRegion = this.value;
+                const subRegions = regionData[selectedRegion] || [];
+
+                // 초기화
+                region2.innerHTML = '<option value="">시/군/구</option>';
+
+                // 하위 지역 추가
+                subRegions.forEach(function (region) {
+                const option = document.createElement('option');
+                option.value = region;
+                option.textContent = region;
+                region2.appendChild(option);
+                });
+            });
+        </script>
+
+
+
+
+
+        <script>
+            //슬라이드 스크립트
+                    // 첫 번째 슬라이더 초기화 (왼쪽 방향)
+                    new Splide('.splide1', {
+                        type: 'loop',
+                        drag: false,
+                        focus: 'left',
+                        
+                        perPage: 2,
+                        autoScroll: {
+                            speed: .8,
+                            pauseOnHover: false,
+                            pauseOnFocus: false,
+                        },
+                    }).mount({
+                        AutoScroll: window.splide.Extensions.AutoScroll
+                    });
+
+                                // 두 번째 슬라이더 초기화 (오른쪽 방향)
+                    new Splide('.splide2', {
+                        type: 'loop',
+                        drag: false,
+                        focus: 'right',
+                        perPage: 2,
+                        autoScroll: {
+                            speed: -.8, // ← 음수로 바꾸면 반대 방향
+                            pauseOnHover: false,
+                            pauseOnFocus: false,
+                        },
+                    }).mount({
+                        AutoScroll: window.splide.Extensions.AutoScroll
+                    });
+
+        </script>
+
+
+
+
+
+    </body>
+</html>

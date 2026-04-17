@@ -89,8 +89,8 @@ url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Black.woff'
 
 .con ul { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1em; align-items: flex-start; }
 .con ul li { overflow: hidden; position: relative; }
-.img_wrap {display: block; width: 100%; overflow: hidden; }
-.con ul li img { object-fit: cover; transition: .5s; aspect-ratio: 3.5 / 5; filter: brightness(.8);  }
+.img_wrap { display: block; width: 100%; overflow: hidden; }
+.con ul li img { object-fit: cover;  object-position: top; transition: .5s; aspect-ratio: 3.5 / 5; filter: brightness(.8); }
 .con_box { position: absolute; width: 100%; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); }
 .con ul li h3 { font-size: 1.5em; margin-bottom: .1em; text-align: center; text-shadow: 2px 2px 5px #00000038; }
 .con ul li p { display: block; font-size: 1.2em; border: 1.5px solid #fff; padding: .2em 0; text-align: center; border-radius: 5em; width: 45%; transition: .5s;
