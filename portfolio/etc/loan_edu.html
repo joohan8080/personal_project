@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/web_fonts.css" type="text/css">
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <title>정책자금 교육형</title>
+
+        <style>
+                        
+            :root {
+            --main: #8015C7;
+            --sub: #9900ff;
+            --bg-dark: #0f1115;
+            --text-sub: #b5b5b5;
+            }
+
+
+            html { scroll-behavior: smooth; }
+            * { margin: 0; padding: 0; }
+            body { max-width: 800px; min-width: 320px; margin: 0 auto; font-size: 18px;
+            color: #333; font-family: 'Pretendard-Medium'; background-color: #dab5b6; font-weight: 500; word-break: keep-all; letter-spacing: -.05em; }
+            li { list-style: none; } 
+            a { text-decoration: none; color: #fff; }
+            img { max-width: 100%; border: none; }
+            p { color: #333; word-break: keep-all; }
+            select { -webkit-appearance: none; appearance: none; color: #666; background-image: url('img/selct_arrow.png');
+            background-repeat: no-repeat; background-position: center right 5px; cursor: pointer; }
+            textarea {
+            border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
+            resize: none; box-sizing: border-box; -webkit-appearance: none; -moz-appearance: none; appearance: none;        
+            }
+            button { all: unset; cursor: pointer; padding: 0; margin: 0; font: inherit; color: inherit; }
+
+            h1, h2, h3, h4, h5, h6 { font-family: 'Pretendard-Bold'; color: #333; }
+
+
+
+            .form_wrap { position: fixed; inset: 0; background: rgba(0,0,0,0.5); left: 50%; transform: translateX(-50%);
+            display: none; overflow-y: auto; padding: 5% 0; z-index: 9999; max-width: 800px; width: 100%; backdrop-filter: blur(5px);
+            }
+
+            .form_wrap.active { display: block; }
+            .form_wrap .inner { width: 90%; margin: 0 auto; background: #ffffffd2; border-radius: .5em; padding: 5% 0 10% 0; box-sizing: border-box; 
+            backdrop-filter: blur(5px);
+            }
+            .form_wrap form { padding: 0 5%; border-radius: .5em; overflow: visible; }
+
+
+            /* form */
+            .form_wrap p { color: #333; font-size: 1.4em; }
+            .form_tit { text-align: center; font-size: 2.2em !important; font-weight: bolder; 
+            background: #009c5e; color: #ffff00 ; padding: .3em 0;
+            }
+            .form_wrap ul li { margin-bottom: 1.5em; }
+            .form_wrap .form_policy { margin-bottom: 1.5em; display: flex; flex-wrap: wrap; align-items: center; }
+            .form_wrap .form_policy input { margin-right: 5px; cursor: pointer; }
+            .form_wrap .form_policy label { cursor: pointer; margin-right: 5px; }
+            .form_wrap ul li p:first-child { margin-bottom: .5em; font-size: 1.5em; font-weight: 600; color: #333; }
+            .form_wrap ul li p:nth-child(2) { font-size: 1em; margin-bottom: .5em; color: #666; }
+            .form_wrap ul li input, .form_wrap ul li select { padding: .9em .7em; border-radius: .5em; border: 1px solid #e5e5e5; background-color: #fff;
+            box-shadow: 2px 2px 10px #00000014;
+            }
+            .form_wrap ul li input[type="text"] { width: 100%; box-sizing: border-box; }
+            .form_wrap .form_tel input, .form_wrap .form_tel select { width: 33.3% !important; }
+            .form_wrap .form_select02 select { width: 100%; }
+            .region_wrap .select_box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1%; }
+            .form_wrap .form_text textarea { width: 100%; height: 80px; border-radius: 5em; }
+            .form_wrap .form_policy, .form_wrap .form_policy a { font-size: 1em; color: #333; font-weight: 200; }
+            .phone { display: flex; align-items: center; gap: 5px; }
+            .form_wrap button { width: 100%; padding: .4em 0; color: #fff; background: var(--sub); text-align: center;
+            border-radius: 5em; font-size: 2.5em; font-weight: 700; border: none; cursor: pointer; }
+
+            input[type="radio"] { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
+            .radio_wrap { display: grid; grid-template-columns: repeat(3,1fr); gap: .5em; }
+            .radio_box { width: 100%; display: flex; align-items: center; height: 40px; }
+            .radio_box input[type="radio"] { width: 100%; position: absolute; left: 50%; transform: translateX(-50%); transition: .3s;
+            padding: 0; height: 40px; z-index: -1; cursor: pointer; }
+            .radio_box label { position: relative; width: 100%; text-align: center; line-height: 40px; z-index: 1;
+            color: #666; cursor: pointer; }
+            .radio_box input[type="radio"]:checked { background: var(--sub); }
+            .radio_box input[type="radio"]:checked + span { color: #fff; }
+            #show-Box { cursor: pointer; }
+            .form_wrap input::placeholder { color: #666; }
+            .form_btm { width: 95%; margin: 0 auto; text-align: center; padding-top: 1em; font-weight: normal; line-height: 150%; }
+            .form_wrap .no_choice { color: #999 !important; }
+
+
+
+            .loading_wrap { text-align: center; margin-bottom: 1.5em; }
+            .loading_wrap img { width: 10%; margin-bottom: 1em; }
+            .loading_wrap p { font-size: 1.3em; font-weight: 300; }
+            .loading_con { display: flex; justify-content: center; align-items: flex-end; gap: 0.2em; margin-bottom: 1em; }
+            .loading_box { width: .5em; height: 1em; background: #f5f5f5; animation: loadingFade 1s infinite ease-in-out; }
+
+            /* 각 막대 애니메이션 딜레이 다르게 적용 */
+            .loading_box:nth-child(1) { animation-delay: 0s; }
+            .loading_box:nth-child(2) { animation-delay: 0.2s; }
+            .loading_box:nth-child(3) { animation-delay: 0.4s; }
+            .loading_box:nth-child(4) { animation-delay: 0.6s; }
+            .loading_box:nth-child(5) { animation-delay: 0.7s; }
+            .loading_box:nth-child(6) { animation-delay: .8s; }
+            .loading_box:nth-child(7) { animation-delay: .9s; }
+
+            @keyframes loadingFade {
+            0%, 100% {
+            opacity: 0.2; /* 옅음 */
+            }
+            50% {
+            opacity: 1;   /* 진하게 */
+            }
+            }
+
+
+            .close { font-size: 1.5em; font-weight: 700; color: #555; display: inline-block; margin-left: 91%; margin-top: -2%; }
+
+
+            /* main */
+
+            .wrap { min-height: 100vh; overflow: visible;  background: url(img/loan_edu/main_bg.webp) no-repeat center/cover scroll; }
+            .wrap .inner { width: 90%; margin: 0 auto; padding: 10% 0; }
+
+            .con_tit { margin-bottom: 17%; }
+            .con_tit h1 { font-size: 3.3em; line-height: 115%; }
+
+            .main_con { position: relative; width: 100%; height: 45em; margin-bottom: 15%; }
+            .main_box { padding: 1.5em; box-sizing: border-box; background: #ffffff70; backdrop-filter: blur(10px); display: inline-block;
+            border-radius: .8em; box-shadow: 2px 2px 10px #00000015; position: absolute;
+            }
+            .main_box img { width: 15%; margin-bottom: .3em; }
+            .main_box p { font-size: 1.7em; margin-bottom: .5em; }
+            .main_box button { font-size: 1.4em; font-family: 'Pretendard-Bold'; color: #fff; background: var(--main);
+            padding: .2em 1em; border-radius: 5em; }
+
+            .main_box:nth-child(1) { top: 0; left: 0; }
+            .main_box:nth-child(2) { top: 15%; right: 0; }
+            .main_box:nth-child(3) { bottom: 3%; left: 0; }
+
+
+            /* info */
+            .info_modal { 
+            max-width: 800px; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+            display: none; align-items: center; justify-content: center; z-index: 1000;
+            }
+            .info_modal.active { display: flex; width: 100%; left: 50%; transform: translateX(-50%); }
+            .info_inner { width: 90%; background: #ffffffcc; border-radius: 1em; padding: 2em 0; text-align: center;
+            position: relative; box-sizing: border-box; backdrop-filter: blur(5px);
+            }
+            .info_inner h2 { font-size: 2em; margin-bottom: .3em; }
+            .info_inner p { font-size: 1.4em; color: #333; }
+            .info_inner button { background: var(--main); color: #fff; padding: .5em 1.5em; border-radius: 5em; font-size: 2em; }
+            .info_close { position: absolute; top: 10px; right: 15px; font-size: 1.5em; cursor: pointer; }
+
+            .info_tit { margin-bottom: 2.5em; }
+
+            .info_img_2, .info_img_1  { width: 90%; margin-bottom: 2em; }
+
+
+
+
+
+            /* 버튼 */
+            .cta { text-align: center; }
+            .cta button, .form_wrap button { width: 80%; background: linear-gradient(90deg, #A341E4, #8D0EA7, #5A1B84); padding: .3em 0;
+            color: #fff; font-size: 2.5em; font-weight: 700; border-radius: 5em;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.123); transition: all 0.2s; }
+            .cta button span { font-size: 1.2em; font-weight: bolder; transform: translateY(-.05em); display: inline-block; font-family: 'Pretendard-Bold'; }
+
+            .cta p { font-size: 2.2em; margin-bottom: .5em; }
+            .cta p span { font-weight: 700; }
+
+            .form_wrap button { width: 100%; }
+
+
+
+            /* precheck_modal */
+            .precheck_modal {  position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: none;
+            z-index: 9999; align-items: center; justify-content: center; }
+
+            .precheck_modal.active { display: flex; }
+
+            .precheck_inner { width: 90%; border: 1.5px solid #414141;
+            background: #ffffffc2;
+            padding: 4.5em 0; border-radius: 1em; text-align: center; max-width: 700px;
+            backdrop-filter: blur(5px);
+            }
+            .precheck_inner p { font-size: 2em; font-weight: 600; margin-bottom: 1em; color: #333; }
+            .precheck_btns button { font-size: 2em; display: block; text-align: center; font-weight: 500;
+            width: 90%; margin: 0 auto; background: #fff; color: #333; padding: .5em 0; border-radius: 5em;
+            }
+            .precheck_btns button:first-child { margin-bottom: .5em; }
+
+
+
+
+            /* all */
+            .tcolor { color: var(--main); font-family: 'Pretendard-Bold'; }
+
+
+            /* ani */
+            .form_wrap button { animation: form_btn 2s infinite forwards; }
+
+            @keyframes form_btn {
+
+            0% { box-shadow: 0 7px 0 0 #630d9c; transform: translateY(-7px); box-sizing: border-box; color: #fff000; }
+            50% { box-shadow: 0 7px 0 0 #630d9c; transform: translateY(-7px); box-sizing: border-box; color: #fff000;  }
+            50.01% { box-shadow: none; transform: translateY(0); box-sizing: content-box; color: #fff;  }
+            100% { box-shadow: none; transform: translateY(0); box-sizing: content-box; color: #fff;  }
+
+            }
+
+
+            .cta button { animation: cta .5s infinite forwards alternate; }
+            @keyframes cta {
+            0% { transform: translateY(4px); }
+            100% { transform: translateY(0); }
+            }
+
+
+
+
+
+
+
+            /* media screen */
+            @media screen and (max-width: 600px) {
+            body { font-size: 15px; }
+            }
+            @media screen and (max-width: 480px) {
+            body { font-size: 10px; }
+            .radio_box span { font-size: 1.2em; } 
+            }
+
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <section class="wrap">
+            <div class="inner">
+       
+                <div class="con_tit">
+                    <h1>사장님!<br><span class="tcolor">고금리 대출</span>로 인해<br>많이 힘드신가요?</h1>
+                </div>
+                <div class="main_con">
+                    <div class="main_box" data-aos="zoom-in" data-aos-duration="300" data-aos-delay="200">
+                        <img src="img/loan_edu/icon.png" alt="물음표">
+                        <p><b class="tcolor">고금리 대출</b>,<br>어떻게 벗어날까?</p>
+                        <button onclick="openInfo(1)">자세히보기</button>
+                    </div>
+                    <div class="main_box" data-aos="zoom-in" data-aos-duration="300" data-aos-delay="400">
+                        <img src="img/loan_edu/icon.png" alt="물음표">
+                        <p><b class="tcolor">정책자금</b>은<br>어떻게 다를까?</p>
+                        <button onclick="openInfo(2)">이자 비교하기</button>
+                    </div>
+                    <div class="main_box" data-aos="zoom-in" data-aos-duration="300" data-aos-delay="600">
+                        <img src="img/loan_edu/icon.png" alt="물음표">
+                        <p>나는<br><b class="tcolor">대상자</b>일까?</p>
+                        <button onclick="openInfo(3)">자격 확인하기</button>
+                    </div>
+                </div>
+
+                    
+                <div class="cta">
+                    <p><b class="tcolor">“승인율 92%”</b><br><b>1분 입력</b>으로 내 금리 <b>바로 확인</b></p>
+                    <button onclick="openPrecheck()">무료 상담신청 »</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="precheck_modal" id="precheckModal">
+            <div class="precheck_inner">
+                <p>Q. 사업자이신가요?</p>
+                <div class="precheck_btns">
+                <button onclick="confirmBusiness(true)">네</button>
+                <button class="no" onclick="confirmBusiness(false)">아니오</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="precheck_modal" id="taxModal">
+            <div class="precheck_inner">
+                <p>Q. 국세체납 또는 연체가 있나요?</p>
+                <div class="precheck_btns">
+                    <button onclick="confirmTax(true)">예</button>
+                    <button class="no" onclick="confirmTax(false)">아니오</button>
+                </div>
+            </div>
+        </div>
+
+                        
+        <section class="form_wrap" id="form_wrap-sec">
+
+            <div class="inner">
+
+                <div class="close">✕</div>
+
+                <div class="loading_wrap">
+                    <img src="img/loan_edu/loading.png" alt="방패">
+                    <div class="loading_con">
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                        <div class="loading_box"></div>
+                    </div> <!--loading_con--->
+                    <p>개인정보는 암호화되어 안전하게 처리됩니다.</p>
+
+                </div> <!--loading_wrap--->
+
+
+
+
+
+                <form method="post" action="apply.html" id="myModal1" name="page_form">
+                    <ul>
+
+                        <li class="form_name">
+                            <p>사업자명</p>
+                            <input type="text" name="name" minlength="2" maxlength="10" placeholder="사업자명" required/>
+                        </li> <!----form_name------->
+
+
+                        <li class="form_tel">
+                            <p>휴대폰번호</p>
+                            <div class="phone">
+                                <select name="tel1"><option>010</option></select>
+                                <input type="text" name="tel2" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                <input type="text" name="tel3" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                            </div>
+                        </li> <!----form_tel------->
+
+                        <li class="form_select01 region_wrap">
+                            <p>지역</p>
+                            <div class="select_box">
+                                <select id="region1" name="option6[]" required>
+                                    <option value="">지역</option>
+                                    <option value="서울특별시">서울특별시</option>
+                                    <option value="부산광역시">부산광역시</option>
+                                    <option value="인천광역시">인천광역시</option>
+                                    <option value="대구광역시">대구광역시</option>
+                                    <option value="광주광역시">광주광역시</option>
+                                    <option value="대전광역시">대전광역시</option>
+                                    <option value="울산광역시">울산광역시</option>
+                                    <option value="세종특별자치시">세종특별자치시</option>
+                                    <option value="경기도">경기도</option>
+                                    <option value="강원도">강원도</option>
+                                    <option value="충청북도">충청북도</option>
+                                    <option value="충청남도">충청남도</option>
+                                    <option value="경상북도">경상북도</option>
+                                    <option value="경상남도">경상남도</option>
+                                    <option value="전라북도">전라북도</option>
+                                    <option value="전라남도">전라남도</option>
+                                    <option value="제주특별자치도">제주특별자치도</option>
+                                </select>
+                                <select id="region2" name="option6[]" required>
+                                    <option value="">시/군/구</option>
+                                </select>
+                            </div>
+                        </li> <!----form_select01------->
+
+                        <li class="form_radio">
+                            <p>업종</p>
+                            <div class="radio_wrap">
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option1" type="radio" value="제조업" required> 
+                                        <span>제조업</span>
+                                    </label>
+                                </div>
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option1" type="radio" value="도,소매업" required>
+                                        <span>도,소매업</span>
+                                    </label>
+                                </div>
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option1" type="radio" value="서비스업" required> 
+                                        <span>서비스업</span>
+                                    </label>
+                                </div>
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option1" type="radio" value="요식업" required> 
+                                        <span>요식업</span>
+                                    </label>
+                                </div>
+                                <div class="radio_box">
+                                    <label>
+                                        <input name="option1" type="radio" value="기타" required> 
+                                        <span>기타</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </li>  <!----form_radio------->
+
+                        <li class="form_policy">
+                            <input id="policy" type="checkbox" value="1" checked required> 
+                            <label for="policy">개인정보처리방침 동의</label>
+                            <span id="show-Box">[약관보기]</span>
+                        </li>  <!----form_policy------->
+                    </ul> <!---------ul--------->
+        
+                    <button type="submit">조건 확인하기</button>
+                </form> <!---------form--------->
+            </div> <!---------inner--------->
+
+        </section> <!---------form_wrap--------->
+                
+
+        <!-- 설명 모달 -->
+        <div class="info_modal" id="infoModal">
+            <div class="info_inner">
+                <div class="info_close">✕</div>
+                <div class="info_tit">
+                    <h2 id="infoTitle"></h2>
+                    <p id="infoDesc"></p>
+                </div>
+                
+                <div class="info_con"><img id="infoImg" src="img/loan_edu/modal01.webp" alt="돋보기"></div>
+
+                <button onclick="openPrecheck()">무료 상담신청 &rarr;</button>
+            </div>
+        </div>
+
+
+
+
+        <script>
+            AOS.init({
+            once: true,          // 반복 실행
+            startEvent: 'load',   // 시작 타이밍
+            });
+        </script>
+
+
+
+
+        <script>
+            function openPrecheck() {
+                document.getElementById("precheckModal").classList.add("active");
+                document.body.style.overflow = "hidden";
+            }
+
+            function confirmBusiness(isBusiness) {
+                const modal = document.getElementById("precheckModal");
+
+                if (!isBusiness) {
+                    alert("사업자만 신청 가능합니다.");
+                    return;
+                }
+
+                modal.classList.remove("active");
+
+                // 2단계 팝업 열기
+                document.getElementById("taxModal").classList.add("active");
+            }
+
+            function confirmTax(hasDebt) {
+                const modal = document.getElementById("taxModal");
+
+                if (hasDebt) {
+                    alert("연체중이신 경우 신청이 불가합니다.");
+                    return;
+                }
+
+                modal.classList.remove("active");
+
+                document.getElementById("form_wrap-sec").classList.add("active");
+                document.body.style.overflow = "hidden";
+            }
+
+            // precheck 바깥 클릭 닫기
+            document.getElementById("precheckModal").addEventListener("click", (e) => {
+                if (e.target.id === "precheckModal") {
+                    e.currentTarget.classList.remove("active");
+                    document.body.style.overflow = "";
+                }
+            });
+
+            document.getElementById("taxModal").addEventListener("click", (e) => {
+                if (e.target.id === "taxModal") {
+                    e.currentTarget.classList.remove("active");
+                    document.body.style.overflow = "";
+                }
+            });
+
+            // form 바깥 클릭 닫기
+            const formWrap = document.getElementById("form_wrap-sec");
+
+            formWrap.addEventListener("click", (e) => {
+                if (e.target === formWrap) {
+                    formWrap.classList.remove("active");
+                    document.body.style.overflow = "";
+                }
+            });
+
+            document.querySelectorAll(".close").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    document.getElementById("form_wrap-sec").classList.remove("active");
+                    document.body.style.overflow = "";
+                });
+            });
+            
+        </script>
+
+
+
+
+
+
+
+        <script>
+        // 팝업 창
+        const openPop = document.getElementById("show-Box");
+        openPop.addEventListener('click', () => {
+            const popup = window.open(
+                'policy.html', // 조약 내용을 담은 실제 경로
+                '개인정보이용동의',
+                'width=800,height=600,scrollbars=yes'
+            );      
+
+            if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+            }
+        });
+     </script>
+
+
+        <script>
+            const regionData = {
+            '서울특별시': ['강남구', '강동구', '강북구', '강서구', '관악구', '광진구', '구로구', '금천구', '노원구', '도봉구', '동대문구', '동작구', '마포구', '서대문구', '서초구', '성동구', '성북구', '송파구', '양천구', '영등포구', '용산구', '은평구', '종로구', '중구', '중랑구'],
+            '부산광역시': ['강서구', '금정구', '기장군', '남구', '동구', '동래구', '부산진구', '북구', '사상구', '사하구', '서구', '수영구', '연제구', '영도구', '중구', '해운대구'],
+            '인천광역시': ['강화군', '계양구', '남동구', '동구', '미추홀구', '부평구', '서구', '연수구', '옹진군', '중구'],
+            '대구광역시': ['남구', '달서구', '달성군', '동구', '북구', '서구', '수성구', '중구'],
+            '광주광역시': ['광산구', '남구', '동구', '북구', '서구'],
+            '대전광역시': ['대덕구', '동구', '서구', '유성구', '중구'],
+            '울산광역시': ['남구', '동구', '북구', '울주군', '중구'],
+            '세종특별자치시': ['세종시'],
+            '경기도': ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시', '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시', '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시', '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시'],
+            '강원도': ['강릉시', '고성군', '동해시', '삼척시', '속초시', '양구군', '양양군', '영월군', '원주시', '인제군', '정선군', '철원군', '춘천시', '태백시', '평창군', '홍천군', '화천군', '횡성군'],
+            '충청북도': ['괴산군', '단양군', '보은군', '영동군', '옥천군', '음성군', '제천시', '진천군', '청주시', '충주시'],
+            '충청남도': ['계룡시', '공주시', '금산군', '논산시', '당진시', '보령시', '부여군', '서산시', '서천군', '아산시', '예산군', '천안시', '청양군', '태안군', '홍성군'],
+            '경상북도': ['경산시', '경주시', '고령군', '구미시', '군위군', '김천시', '문경시', '봉화군', '상주시', '성주군', '안동시', '영덕군', '영양군', '영주시', '영천시', '예천군', '울릉군', '울진군', '의성군', '청도군', '청송군', '칠곡군', '포항시'],
+            '경상남도': ['거제시', '거창군', '고성군', '김해시', '남해군', '밀양시', '사천시', '산청군', '양산시', '의령군', '진주시', '창녕군', '창원시', '통영시', '하동군', '함안군', '함양군', '합천군'],
+            '전라북도': ['고창군', '군산시', '김제시', '남원시', '무주군', '부안군', '순창군', '완주군', '익산시', '임실군', '장수군', '전주시', '정읍시', '진안군'],
+            '전라남도': ['강진군', '고흥군', '곡성군', '광양시', '구례군', '나주시', '담양군', '목포시', '무안군', '보성군', '순천시', '신안군', '여수시', '영광군', '영암군', '완도군', '장성군', '장흥군', '진도군', '함평군', '해남군', '화순군'],
+            '제주특별자치도': ['서귀포시', '제주시']
+            };
+
+            const region1 = document.getElementById('region1');
+            const region2 = document.getElementById('region2');
+
+            region1.addEventListener('change', function () {
+                const selectedRegion = this.value;
+                const subRegions = regionData[selectedRegion] || [];
+
+                // 초기화
+                region2.innerHTML = '<option value="">시/군/구</option>';
+
+                // 하위 지역 추가
+                subRegions.forEach(function (region) {
+                const option = document.createElement('option');
+                option.value = region;
+                option.textContent = region;
+                region2.appendChild(option);
+                });
+            });
+        </script>
+
+
+        <script>
+            function openInfo(type) {
+                const modal = document.getElementById("infoModal");
+                const title = document.getElementById("infoTitle");
+                const desc = document.getElementById("infoDesc");
+                const img = document.getElementById("infoImg");
+
+                // 기존 클래스 제거 (핵심)
+                img.className = "";
+
+                if (type === 1) {
+                    title.innerText = "고금리 대출 탈출 방법";
+                    desc.innerText = "고금리 대출, 혼자 해결하려 하지 마세요.\n일반대출 금리보다 최대 4배 낮은\n정책자금으로 전환하세요!";
+                    img.src = "img/loan_edu/modal03.png";
+                    img.classList.add("info_img_1");
+                } 
+                else if (type === 2) {
+                    title.innerText = "정책자금 vs 은행대출";
+                    desc.innerText = "정책자금은 일반 대출 대비\n최대 3~4배 낮은 이자로 지원하고 있습니다.";
+                    img.src = "img/loan_edu/modal02.png";
+                    img.classList.add("info_img_2");
+                } 
+                else if (type === 3) {
+                    title.innerText = "정책자금 자격 조건";
+                    desc.innerHTML = "정책자금은 <b>사업자 대상</b>으로 <b>연체&체납이 없고</b><br><b>매출이 발생한 경우</b>, 신청 가능합니다.";
+                    img.src = "img/loan_edu/modal01.webp";
+                    img.classList.add("info_img_3");
+                }
+
+                modal.classList.add("active");
+                document.body.style.overflow = "hidden";
+            }
+
+            // 닫기
+            document.querySelector(".info_close").addEventListener("click", () => {
+                document.getElementById("infoModal").classList.remove("active");
+                document.body.style.overflow = "";
+            });
+
+            // 바깥 클릭 닫기
+            document.getElementById("infoModal").addEventListener("click", (e) => {
+                if (e.target.id === "infoModal") {
+                    e.currentTarget.classList.remove("active");
+                    document.body.style.overflow = "";
+                }
+            });
+        </script>
+
+
+
+
+
+
+
+    </body>
+
+
+
+</html>
