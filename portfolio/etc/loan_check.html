@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/web_fonts.css" type="text/css">
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <title>정책자금 (진단형)</title>
+        <style>
+            :root {
+--main: #406CDC;   
+--sub: #0048b4;    
+--accent: #00D1A0; 
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { max-width: 800px; min-width: 320px; margin: 0 auto; font-size: 18px; min-height: 100vh; background-color: #fff;
+color: #333; font-family: 'Pretendard-Medium'; font-weight: 500; word-break: keep-all; letter-spacing: -.05em; }
+li { list-style: none; } 
+a { text-decoration: none; color: #fff; }
+img { max-width: 100%; border: none; }
+p { color: #333; word-break: keep-all; letter-spacing: -.05em; line-height: 120%; }
+select { -webkit-appearance: none; appearance: none; color: #666; background-image: url('img/selct_arrow.png');
+background-repeat: no-repeat; background-position: center right 5px; cursor: pointer; }
+textarea {
+border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
+resize: none; box-sizing: border-box; -webkit-appearance: none; -moz-appearance: none; appearance: none;        
+}
+button { all: unset; cursor: pointer; padding: 0; margin: 0; font: inherit; color: inherit; }
+h1, h2, h3, h5, h6, button { font-family: 'Pretendard-Bold'; line-height: 130%; letter-spacing: -.05em; }
+h4 { font-family: 'Pretendard-Regular'; }
+
+.tcolor { color: var(--main); }
+
+
+/* form */
+/* ===== FORM WRAP ===== */
+
+.form_wrap .inner { box-sizing: border-box; width: 100%; margin: 0 auto; }
+.form_wrap .con_tit { margin-bottom: 2em; }
+
+/* ===== INPUT 공통 ===== */
+.form_wrap input, .form_wrap select, .options input { width: 100%; padding: 1em .5em; font-size: 1em; border-radius: 0.5em; 
+border: 1px solid #ddd; transition: 0.2s; }
+
+/* 포커스 */
+.form_wrap input:focus, .form_wrap select:focus { outline: none; border-color: var(--main); box-shadow: 0 0 0 3px rgba(128,21,199,0.1); }
+
+/* ===== NAME ===== */
+.form_name input { font-size: 1em; }
+
+/* ===== PHONE ===== */
+.phone { display: flex; gap: 0.3em; }
+.phone select { width: 25%; }
+.phone input { width: 37.5%; }
+/* ===== SELECT ===== */
+.select_box { display: flex; gap: 0.3em; }
+.select_box select { flex: 1; }
+
+/* ===== RADIO ===== */
+.form_radio h3 { margin: 0.8em 0 .3em 0; font-size: 1.5em; text-align: left; }
+.radio_wrap { display: flex; flex-wrap: wrap; gap: 0.3em; }
+.radio_box { flex: 1 1 48%; }
+.radio_box input { display: none; }
+.radio_box span { display: block; padding: 0.8em; border-radius: 0.6em; border: 1px solid #ddd; background: #fafafa;
+text-align: center; cursor: pointer; transition: 0.2s; font-size: 1.2em; }
+
+/* 선택 상태 */
+.radio_box input:checked + span { background: var(--sub); color: #fff; border-color: var(--main); }
+
+/* ===== POLICY ===== */
+.form_policy { display: flex; align-items: center; gap: 0.4em; font-size: 1em; margin: 1.5em 0 !important; }
+.form_policy input { width: 1em; height: 1em; }
+.form_policy label { color: #666; cursor: pointer; }
+#show-Box { color: #666; cursor: pointer;}
+/* ===== 버튼 ===== */
+.form_wrap button[type="submit"] { box-sizing: border-box; width: 100%; padding: .5em 0;
+font-size: 2em; border-radius: 0.7em; border: none; background: linear-gradient(135deg, #ff7a00, #ff3d00);
+color: #fff; cursor: pointer; transition: 0.2s; box-shadow: 0 0.3em 0.8em rgba(199, 101, 21, 0.25);
+}
+/* ===== 간격 ===== */
+.form_wrap li { margin-bottom: 1em; }
+/* ===== 상단 문구 ===== */
+.form_wrap .con_tit h2 { text-align: center; font-size: 2em; margin-bottom: .3em; }
+.form_t { display: flex; justify-content: center; gap: 0.3em; flex-wrap: wrap; margin-top: 0.5em; }
+.form_t p { background: var(--sub); padding: 0.3em 0.6em; border-radius: 0.4em; font-size: 1em; color: #fff; }
+
+
+/* ===== HEADER ===== */
+.header { display:flex; justify-content:space-between; align-items:center; padding:1.2em 1em;
+border-bottom: 1px solid #eee; font-family:'Pretendard-Bold'; position: relative;
+}
+.header span { font-size: 1.5em; }
+.header a { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
+/* ===== HERO ===== */
+.hero { padding: 10% 0; overflow: hidden; background: linear-gradient(95deg, #eff7ff, #fff); }
+.hero .con_tit { width: 93%; margin: 0 auto; }
+.hero .con_tit h4 { font-size: 1.2em; display: inline-block; background: #e9efff; color: var(--main); padding: .3em 1em; border-radius: 5em;
+margin-bottom: 1em; } 
+.hero > img { width: 70%; margin: -3% 0 0 30%; }
+.hero h1 { font-size: 2.3em; margin-bottom: .3em; }
+.hero .con_tit p { font-size: 1.3em; line-height: 150%; }
+.badges { display:flex; justify-content: space-between; align-items: center; background: #ffffff;
+width: 93%; margin: 0 auto; padding: 1.5em 0; border: 2px solid #e7e7e7; border-radius: 1em; margin-top: -5%;
+position: relative; }
+.badge { flex:1; text-align:center; }
+.badge p { font-size: 1.3em; font-family: 'Pretendard-Bold'; }
+.img_box { background: #f5f5f5; box-sizing: border-box; border-radius: 5em; width: 4em; height: 4em;
+margin: 0 auto 1em auto; display: flex; align-items: center;
+justify-content: center; }
+.img_box img { height: 2em; }
+
+
+
+/* ===== DIAGNOSIS ===== */
+.diagnosis { background:linear-gradient(135deg, var(--sub), var(--main)); color:#fff; 
+padding: 3em 1.5em 2.5em; border-radius: 2em 2em 0 0; box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.11); }
+.diagnosis .con_tit { margin-bottom: 2em; }
+.progress { width: 50%; position:relative; display:flex; justify-content:space-between; align-items:center; margin-top:1em; }
+.diagnosis .con_tit h4 { font-size: 1.3em; margin-bottom: .5em; display: inline-block; 
+border: 1px solid #fff; padding: .2em .8em; border-radius: 5em; }
+
+/* 가운데 선 */
+.progress::before { content:''; position:absolute; top:50%; left:0; width:100%; height:0.15em;
+background:#ffffff55; transform:translateY(-50%); z-index:1;
+}
+
+/* 활성 진행선 */
+.progress::after { content:''; position:absolute; top:50%; left:0; width:25%; height:0.15em;
+background:#fff; transform:translateY(-50%); z-index:1; width: var(--progress, 0%); transition: .3s;
+}
+/* 점 */
+.dot { width:0.8em; height:0.8em; border-radius:50%; background:#c2c2c2; position:relative; z-index:2;
+transition: .3s; }
+/* 활성 점 */
+.dot.active { background:#fff; }
+.diagnosis h2 { position: relative; font-size: 2.5em; margin-bottom: .3em; padding-left: .4em; }
+.diagnosis h2::before { content: ''; width: 3px; height: .8em; background: #fff; position: absolute; left: 0; top: 50%; transform: translateY(-50%); }
+.diagnosis p { color: #fff; font-size: 1.1em; }
+
+.dot.active { border: 2px solid #fff; background: #aec4ff; }
+
+/* ===== QUESTION ===== */
+.card { padding: 10% 1em; box-shadow:0 0.625em 1.875em rgba(0,0,0,0.06); border-radius:0 0 1em 1em; display: none; min-height: 40vh; }
+.card.active { display: block; }
+.card_t { margin-bottom: 2.5em; }
+.card_t p { display: inline-block; background: var(--main); color: #fff;
+padding: .3em .8em; border-radius: 5em; font-size: 1.2em; margin-bottom: .5em; }
+.q { font-size: 2em; }
+.options { display:grid; grid-template-columns:1fr 1fr; gap:0.625em; }
+.option { border: 1.5px solid #ddd; padding: 0.7em 0; border-radius:0.3em; text-align:center; font-size: 1.3em; }
+.option.active { border-color:var(--sub); background: var(--sub); color:#fff; }
+
+/* ===== BUTTON ===== */
+.next-btn { margin-top: 1.5em; background:var(--main); color:#fff; text-align:center; transition: .3s;
+padding:0.5em 0; border-radius:0.3em; font-family:'Pretendard-Bold'; font-size: 1.8em; }
+
+.next-btn.disabled { opacity: .5; }
+
+
+/* ===== RESULT ===== */
+.result { display:none; padding: 3em 1.25em 2em 1.25em; }
+.result > p { font-size: 1.3em; }
+.gauge { font-size: 2.5em; font-family:'Pretendard-Bold'; color:var(--main); margin-bottom:0.3em; }
+.result-box { background:#f8f9ff; padding: 1.5em 1em; border-radius: 0.75em; margin-top: 2em; }
+.result-box p { font-size: 1.2em; margin-bottom: .3em; }
+.result-box p:last-child { margin-bottom: 0; }
+
+.result-box p .tcolor { font-family: 'Pretendard-Bold'; }
+
+/* ===== CTA ===== */
+.form_wrap { padding:5% 4% 10% 4%;}
+
+.form_wrap button[type="submit"] {
+width:100%; padding: .5em 0;
+background: linear-gradient(135deg, #00b7ff, #0032bd); color:#fff; border-radius:0.3em;
+text-align:center; font-size: 1.8em; box-sizing: border-box;
+}
+
+/* footer */
+footer { text-align: center; padding: 2em 0; background: #eeeeee; }
+footer p { line-height: 150%; color: #999; }
+
+
+
+
+
+/* animation */
+.form_wrap button[type="submit"] { animation: submit 1.5s infinite; }
+@keyframes submit {
+0% { box-shadow: 0 6px 0 #002b8f; transform: translateY(-6px); }
+50% { box-shadow: 0 6px 0 #002b8f; transform: translateY(-6px);  }
+50.01% { box-shadow: none; transform: translateY(0); }
+100% { box-shadow: none; transform: translateY(0); }
+}
+.card { animation: fadeUp .25s ease; }
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+/* ===== LOADING ===== */
+.loading { text-align: center; padding: 8em 0; display: none; min-height: 50vh; }
+.loading p { margin-top: 2.5em; font-size: 1.5em; color: #666; }
+
+/* loader */
+.loader {
+--background: linear-gradient(135deg, #23C4F8, #275EFE); --shadow: rgba(39, 94, 254, 0.28);
+--text: #6C7486;  --page: rgba(255, 255, 255, 0.36);  --page-fold: rgba(255, 255, 255, 0.52);  --duration: 3s;
+width: clamp(110px, 28vw, 200px); height: auto; aspect-ratio: 10 / 7; position: relative; margin: 1.5em auto;
+}
+.loader:before, .loader:after { --r: -6deg; content: ""; position: absolute; bottom: 0.5em; width: 60%; top: 80%;
+box-shadow: 0 1em 0.75em var(--shadow); transform: rotate(var(--r));
+}
+.loader:before { left: 0.2em; }
+.loader:after { --r: 6deg; right: 0.2em; }
+.loader div { width: 100%; height: 100%; border-radius: 0.8em; position: relative; z-index: 1;
+perspective: 600px; box-shadow: 0 0.3em 0.5em var(--shadow); background-image: var(--background);
+}
+.loader div ul { margin: 0; padding: 0; list-style: none; position: relative; }
+.loader div ul li { --r: 180deg; --o: 0; --c: var(--page);
+position: absolute; top: 7%; left: 7%; width: 45%; transform-origin: 100% 50%;
+color: var(--c); opacity: var(--o); transform: rotateY(var(--r)); animation: var(--duration) ease infinite;
+}
+.loader div ul li svg { width: 100%; height: auto; display: block; }
+.loader div ul li:first-child { --r: 0deg; --o: 1; }
+.loader div ul li:last-child { --o: 1; }
+.loader div ul li:nth-child(2) { --c: var(--page-fold); animation-name: page-2; }
+.loader div ul li:nth-child(3) { --c: var(--page-fold); animation-name: page-3; }
+.loader div ul li:nth-child(4) { --c: var(--page-fold); animation-name: page-4; }
+.loader div ul li:nth-child(5) { --c: var(--page-fold); animation-name: page-5; }
+.loader span { display: block; left: 0; right: 0; top: 100%; margin-top: 20px; text-align: center; color: var(--text); }
+
+@keyframes page-2 {
+0% { transform: rotateY(180deg); opacity: 0; }
+20% { opacity: 1; }
+35%, 100% { opacity: 0; }
+50%, 100% { transform: rotateY(0deg); }
+}
+
+@keyframes page-3 {
+15% { transform: rotateY(180deg); opacity: 0; }
+35% { opacity: 1; }
+50%, 100% { opacity: 0; }
+65%, 100% { transform: rotateY(0deg); }
+}
+
+@keyframes page-4 {
+30% { transform: rotateY(180deg); opacity: 0; }
+50% { opacity: 1; }
+65%, 100% { opacity: 0; }
+80%, 100% { transform: rotateY(0deg); }
+}
+
+@keyframes page-5 {
+45% { transform: rotateY(180deg); opacity: 0; }
+65% { opacity: 1; }
+80%, 100% { opacity: 0; }
+95%, 100% { transform: rotateY(0deg); }
+}
+
+
+
+
+/* media */
+@media (max-width: 600px) {
+body { font-size: 15px; }
+}
+@media (max-width: 480px) {
+body { font-size: 12px; }
+}
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="header">
+            <span>정책자금 신청 가이드</span>
+            <span>☰</span>
+            <a href="#diagnosis"></a>
+        </div>
+
+        <div class="hero">
+            <div class="con_tit" data-aos="fade-up" data-aos-duration="300" data-aos-easing="ease-out-back" data-aos-delay="100">
+                <h4>2026 정책자금 진단</h4>
+                <h1>최대 2% 저금리 정책자금,<br><span class="tcolor">이자 얼마나 줄일 수 있을까?</span></h1>
+                <p>간단한 정보 입력으로<br>정책자금 적합도와 이자 절감 가능성을<br>확인해보세요.</p>
+            </div>
+
+            <img src="img/loan_check/main_per.webp" alt="진단" data-aos="fade-left" data-aos-duration="300" data-aos-easing="ease-out-back" data-aos-delay="200">
+
+            <div class="badges">
+                <div class="badge">
+                    <div class="img_box"><img src="img/loan_check/main_ico01.png" alt="저금리"></div>
+                    <p><span class="tcolor">최대 2%</span><br>저금리 적용</p>
+                </div>
+                <div class="badge">
+                    <div class="img_box"><img src="img/loan_check/main_ico02.png" alt="절감"></div>
+                    <p>이자 최대<br><span class="tcolor">4배 절감</span></p>
+                </div>
+                <div class="badge">
+                    <div class="img_box"><img src="img/loan_check/main_ico03.png" alt="분석"></div>
+                    <p><span class="tcolor">1분 내</span><br>적합도 분석</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 진단 -->
+        <div class="diagnosis" id="diagnosis" data-aos="fade-up" data-aos-duration="300" data-aos-easing="ease-out-back" data-aos-delay="300">
+            <div class="con_tit">
+                <h4>간편확인</h4>
+                <h2>정책자금 적합도 진단</h2>
+                <p>1분만 시간내서 저금리 정책자금 승인여부를 진단해보세요!</p>
+            </div>
+            <div class="progress">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="card active" data-step="1"  id="card">
+            <div class="card_t"><p>1/4</p><h2 class="q">사업자이신가요?</h2></div>
+
+            <div class="options">
+                <div class="option">네</div>
+                <div class="option">아니오</div>
+            </div>
+
+            <div class="next-btn">다음</div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="card" data-step="2">
+            <div class="card_t"><p>2/4</p><h2 class="q">국세·지방세 체납 또는 연체가 있습니까?</h2></div>
+
+            <div class="options">
+                <div class="option">있음</div>
+                <div class="option">없음</div>
+            </div>
+
+            <div class="next-btn">다음</div>
+        </div>
+
+        
+        <!-- STEP 3 -->
+        <div class="card" data-step="3">
+            <div class="card_t"><p>3/4</p><h2 class="q">작년 연 매출은 어떻게 되시나요?</h2></div>
+
+            <div class="options">
+                <div class="option">0원</div>
+                <div class="option">1천~5천</div>
+                <div class="option">5천~1억</div>
+                <div class="option">1억 이상</div>
+            </div>
+
+            <div class="next-btn">다음</div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="card" data-step="4">
+            <div class="card_t"><p>4/4</p><h2 class="q">업종을 선택해주세요</h2></div>
+
+            <div class="options">
+                <div class="option">제조업</div>
+                <div class="option">도/소매업</div>
+                <div class="option">서비스업</div>
+                <div class="option">요식업</div>
+                <div class="option">기타</div>
+            </div>
+
+            <div class="next-btn">결과 보기</div>
+        </div>
+
+
+        <!-- 로딩 -->
+        <div class="loading" id="loading">
+            <div class="loader">
+                <div>
+                    <ul>
+                        <li>
+                            <svg fill="currentColor" viewBox="0 0 90 120">
+                            <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                            </svg>
+                        </li>
+                        <li>
+                            <svg fill="currentColor" viewBox="0 0 90 120">
+                            <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                            </svg>
+                        </li>
+                        <li>
+                            <svg fill="currentColor" viewBox="0 0 90 120">
+                            <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                            </svg>
+                        </li>
+                        <li>
+                            <svg fill="currentColor" viewBox="0 0 90 120">
+                            <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                            </svg>
+                        </li>
+                        <li>
+                            <svg fill="currentColor" viewBox="0 0 90 120">
+                            <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                            </svg>
+                        </li>
+                        <li>
+                            <svg fill="currentColor" viewBox="0 0 90 120">
+                            <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                            </svg>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <p>조건을 분석 중 입니다...</p>
+        </div>
+
+        <!-- 결과 -->
+        <div class="result" id="result">
+            <div class="gauge">진단결과</div>
+            <p>현재 조건 기준<br><span class="tcolor">정책자금 승인 가능성이 높은 상태</span>로 분석됩니다.</p>
+
+            <div class="result-box">
+                <p>&#10003; 최대 <span class="tcolor">2%</span> 저금리 적용 예상</p>
+                <p>&#10003; 최대 <span class="tcolor">30억</span> 자금 확보 예상</p>
+                <p>&#10003; 승인 가능성 높은 편 <span class="tcolor">(상위 10%)</span></p>
+            </div>
+        </div>
+
+        <div class="form_wrap" id="cta" style="display:none;">
+            <div class="inner">
+
+                <div class="con_tit">
+                    <h2>지금 신청 시 <span class="tcolor">빠른 승인 가능</span></h2>
+                    <div class="form_t">
+                        <p>#조달 성공률 98%</p>
+                        <p>#상담 후 진행 결정 가능</p>
+                        <p>#개인정보 암호화 처리</p>
+                    </div>
+                </div>
+
+                <form method="post" action="apply.html" id="myModal1" name="page_form">
+                    <ul>
+                        <li><input type="hidden" name="option1" id="hiddenSales"></li>
+                        <li><input type="hidden" name="option2" id="hiddenBusiness"></li>
+
+
+                        <li class="form_name">
+                            <input type="text" name="name" minlength="2" maxlength="10" placeholder="사업자명" required/>
+                        </li> <!----form_name------->
+
+                        <li class="form_tel">
+                            <div class="phone">
+                                <select name="tel1"><option>010</option></select>
+                                <input type="text" name="tel2" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                <input type="text" name="tel3" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                            </div>
+                        </li> <!----form_tel------->
+
+                        <li class="form_select01 region_wrap">
+                            <div class="select_box">
+                                <select id="region1" name="option6[]" required>
+                                    <option value="">지역</option>
+                                    <option value="서울특별시">서울특별시</option>
+                                    <option value="부산광역시">부산광역시</option>
+                                    <option value="인천광역시">인천광역시</option>
+                                    <option value="대구광역시">대구광역시</option>
+                                    <option value="광주광역시">광주광역시</option>
+                                    <option value="대전광역시">대전광역시</option>
+                                    <option value="울산광역시">울산광역시</option>
+                                    <option value="세종특별자치시">세종특별자치시</option>
+                                    <option value="경기도">경기도</option>
+                                    <option value="강원도">강원도</option>
+                                    <option value="충청북도">충청북도</option>
+                                    <option value="충청남도">충청남도</option>
+                                    <option value="경상북도">경상북도</option>
+                                    <option value="경상남도">경상남도</option>
+                                    <option value="전라북도">전라북도</option>
+                                    <option value="전라남도">전라남도</option>
+                                    <option value="제주특별자치도">제주특별자치도</option>
+                                </select>
+                                <select id="region2" name="option6[]" required>
+                                    <option value="">시/군/구</option>
+                                </select>
+                            </div>
+                        </li> <!----form_select01------->
+
+
+
+                        <li class="form_policy">
+                            <input id="policy" type="checkbox" value="1" checked required> 
+                            <label for="policy">개인정보처리방침 동의</label>
+                            <span id="show-Box">[약관보기]</span>
+                        </li>  <!----form_policy------->
+                    </ul> <!---------ul--------->
+        
+                    <button type="submit">정책자금 신청하기</button>
+                </form> <!---------form--------->
+
+            </div>
+        </div>
+
+        <footer>
+            <p>
+                ※ 본 서비스는 정책자금 안내를 위한 정보 제공 페이지입니다.<br>
+                ※ 실제 승인 여부 및 조건은 심사 결과에 따라 달라질 수 있습니다.<br>
+                업체명: 정책자금 도우미
+            </p>
+        </footer>
+
+
+
+        <!-- script -->
+         
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+        <script>
+            AOS.init({ once: true });
+        </script>
+
+        <script>
+            // 팝업 창
+            const openPop = document.getElementById("show-Box");
+            openPop.addEventListener('click', () => {
+                const popup = window.open(
+                    'policy.html', // 조약 내용을 담은 실제 경로
+                    '개인정보이용동의',
+                    'width=800,height=600,scrollbars=yes'
+                );      
+
+                if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                    alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+                }
+            });
+        </script>
+
+        <script>
+            const regionData = {
+            '서울특별시': ['강남구', '강동구', '강북구', '강서구', '관악구', '광진구', '구로구', '금천구', '노원구', '도봉구', '동대문구', '동작구', '마포구', '서대문구', '서초구', '성동구', '성북구', '송파구', '양천구', '영등포구', '용산구', '은평구', '종로구', '중구', '중랑구'],
+            '부산광역시': ['강서구', '금정구', '기장군', '남구', '동구', '동래구', '부산진구', '북구', '사상구', '사하구', '서구', '수영구', '연제구', '영도구', '중구', '해운대구'],
+            '인천광역시': ['강화군', '계양구', '남동구', '동구', '미추홀구', '부평구', '서구', '연수구', '옹진군', '중구'],
+            '대구광역시': ['남구', '달서구', '달성군', '동구', '북구', '서구', '수성구', '중구'],
+            '광주광역시': ['광산구', '남구', '동구', '북구', '서구'],
+            '대전광역시': ['대덕구', '동구', '서구', '유성구', '중구'],
+            '울산광역시': ['남구', '동구', '북구', '울주군', '중구'],
+            '세종특별자치시': ['세종시'],
+            '경기도': ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시', '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시', '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시', '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시'],
+            '강원도': ['강릉시', '고성군', '동해시', '삼척시', '속초시', '양구군', '양양군', '영월군', '원주시', '인제군', '정선군', '철원군', '춘천시', '태백시', '평창군', '홍천군', '화천군', '횡성군'],
+            '충청북도': ['괴산군', '단양군', '보은군', '영동군', '옥천군', '음성군', '제천시', '진천군', '청주시', '충주시'],
+            '충청남도': ['계룡시', '공주시', '금산군', '논산시', '당진시', '보령시', '부여군', '서산시', '서천군', '아산시', '예산군', '천안시', '청양군', '태안군', '홍성군'],
+            '경상북도': ['경산시', '경주시', '고령군', '구미시', '군위군', '김천시', '문경시', '봉화군', '상주시', '성주군', '안동시', '영덕군', '영양군', '영주시', '영천시', '예천군', '울릉군', '울진군', '의성군', '청도군', '청송군', '칠곡군', '포항시'],
+            '경상남도': ['거제시', '거창군', '고성군', '김해시', '남해군', '밀양시', '사천시', '산청군', '양산시', '의령군', '진주시', '창녕군', '창원시', '통영시', '하동군', '함안군', '함양군', '합천군'],
+            '전라북도': ['고창군', '군산시', '김제시', '남원시', '무주군', '부안군', '순창군', '완주군', '익산시', '임실군', '장수군', '전주시', '정읍시', '진안군'],
+            '전라남도': ['강진군', '고흥군', '곡성군', '광양시', '구례군', '나주시', '담양군', '목포시', '무안군', '보성군', '순천시', '신안군', '여수시', '영광군', '영암군', '완도군', '장성군', '장흥군', '진도군', '함평군', '해남군', '화순군'],
+            '제주특별자치도': ['서귀포시', '제주시']
+            };
+
+            const region1 = document.getElementById('region1');
+            const region2 = document.getElementById('region2');
+
+            region1.addEventListener('change', function () {
+                const selectedRegion = this.value;
+                const subRegions = regionData[selectedRegion] || [];
+
+                // 초기화
+                region2.innerHTML = '<option value="">시/군/구</option>';
+
+                // 하위 지역 추가
+                subRegions.forEach(function (region) {
+                const option = document.createElement('option');
+                option.value = region;
+                option.textContent = region;
+                region2.appendChild(option);
+                });
+            });
+        </script>
+
+        <script>
+            let currentStep = 1;
+
+            const cards = document.querySelectorAll('.card');
+            const dots = document.querySelectorAll('.dot');
+            const progress = document.querySelector('.progress');
+
+            function updateProgress(step) {
+                dots.forEach((d, i) => {
+                    d.classList.toggle('active', i < step);
+                });
+
+                const percent = ((step - 1) / (dots.length - 1)) * 100;
+                progress.style.setProperty('--progress', percent + '%');
+            }
+
+            cards.forEach(card => {
+                const options = card.querySelectorAll('.option');
+                const nextBtn = card.querySelector('.next-btn');
+
+                let selected = false;
+
+                // 초기 비활성 스타일만 적용
+                nextBtn.classList.add('disabled');
+
+                options.forEach(opt => {
+                    opt.onclick = () => {
+
+                        const text = opt.innerText.trim();
+                        const step = card.dataset.step;
+
+                        // STEP 3 매출 저장
+                        if (step === "3") {
+                            document.getElementById('hiddenSales').value = text;
+                        }
+
+                        // STEP 4 업종 저장
+                        if (step === "4") {
+                            document.getElementById('hiddenBusiness').value = text;
+                        }
+
+                        // 예외 조건 처리
+                        if (
+                            (step === "1" && text === "아니오") ||
+                            (step === "2" && text === "있음") ||
+                            (step === "3" && text === "0원")
+                        ) {
+
+                            // 얼럿 메시지
+                            if (step === "1") alert('사업자만 신청 가능합니다');
+                            if (step === "2") alert('연체·체납 있는 경우 신청 불가합니다');
+                            if (step === "3") alert('매출이 없는 경우 신청 불가합니다');
+
+                            // 선택 초기화
+                            options.forEach(o => o.classList.remove('active'));
+
+                            selected = false;
+
+                            nextBtn.classList.add('disabled');
+
+                            return;
+                        }
+
+                        // 정상 선택
+                        options.forEach(o => o.classList.remove('active'));
+
+                        opt.classList.add('active');
+
+                        selected = true;
+
+                        nextBtn.classList.remove('disabled');
+                    };
+                });
+
+                nextBtn.onclick = () => {
+
+                    // 선택 안했을 때 기존 alert 유지
+                    if (!selected) {
+                        return alert('항목을 선택해주세요');
+                    }
+
+                    card.classList.remove('active');
+
+                    currentStep++;
+
+                    const next = document.querySelector(`.card[data-step="${currentStep}"]`);
+
+                    if (next) {
+
+                        next.classList.add('active');
+
+                        updateProgress(currentStep);
+
+                    } else {
+
+                        document.getElementById('loading').style.display = 'block';
+
+                        setTimeout(() => {
+
+                            document.getElementById('loading').style.display = 'none';
+
+                            document.getElementById('result').style.display = 'block';
+
+                            document.getElementById('cta').style.display = 'block';
+
+                        }, 2500);
+                    }
+                };
+            });
+
+            // 초기 상태
+            updateProgress(1);
+        </script>
+
+        
+
+    </body>
+</html>
