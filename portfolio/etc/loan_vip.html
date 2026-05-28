@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+        <link rel="stylesheet" href="css/web_fonts.css" type="text/css">
+        <title>정책자금 공용 (vip형)</title>
+        <style>
+            :root {
+--main: #b89354;   
+--sub: #0048b4;    
+--accent: #00D1A0; 
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { max-width: 800px; min-width: 320px; margin: 0 auto; font-size: 18px; min-height: 100vh; background-color: #000;
+color: #333; font-family: 'Pretendard-Light'; font-weight: 500; word-break: keep-all; letter-spacing: -.05em; }
+li { list-style: none; } 
+a { text-decoration: none; color: #333; }
+img { max-width: 100%; border: none; }
+p { color: #333; word-break: keep-all; letter-spacing: -.05em; }
+select { -webkit-appearance: none; appearance: none; color: #666; background-image: url('img/selct_arrow_white.png');
+background-repeat: no-repeat; background-position: center right .5em; cursor: pointer; }
+textarea {
+border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
+resize: none; box-sizing: border-box; -webkit-appearance: none; -moz-appearance: none; appearance: none;        
+}
+button { all: unset; cursor: pointer; padding: 0; margin: 0; font: inherit; color: inherit; }
+h1, h2, h3, h4, h5, h6, button { font-family: 'Pretendard-Bold'; line-height: 130%; letter-spacing: -.05em; }
+.tcolor { color: var(--main); font-family: 'Pretendard-Bold'; }
+
+/* section */
+
+.vip_wrap{ background:#080808; color:#fff; padding-bottom: 15%; }
+.vip_hero{ position:relative; padding: 3em 1.5em 5em; 
+background: url('img/loan_vip/main_bg.webp');
+background-size:cover; background-position:center; border-radius:0 0 2em 2em; overflow:hidden;
+}
+
+.hero_overlay{ position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,.2), #080808); }
+.vip_top{ position:relative; z-index:2; display:flex; justify-content:space-between; align-items:center; margin-bottom:4em; }
+.vip_logo{ font-size:1.3em; letter-spacing: .2em; color:#d4b06a; font-family:'PyeongtaekSunset'; font-weight: 300; }
+.vip_badge{ border:1px solid rgba(212,176,106,.5); padding:.5em 1em; border-radius:5em; font-size:.8em; color:#d4b06a; }
+.vip_txt{ position:relative; z-index:2; }
+.vip_txt .mini{ color:#b89354; font-size: 1.2em; margin-bottom:1em; }
+.vip_txt h1{ font-size: 2.8em; line-height:1.3; margin-bottom:.5em; }
+.vip_txt h1 span{ color:#d4b06a; }
+.vip_txt .sub{ font-size:1.2em; line-height:1.5; color:rgba(255,255,255,.7); }
+
+.hero_card_wrap{ position:relative; z-index:2; display:flex; align-items:center; margin-top: 3em;
+padding: 2em 0; background:rgba(255,255,255,.05); backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,.08); border-radius: .5em; overflow:hidden; }
+.hero_card{ flex:1; text-align:center; position:relative; }
+
+/* 가운데 구분선 */
+.hero_card:not(:last-child)::after{ content:''; position:absolute; top:50%; right:0; width:1px; height:70%; background:rgba(255,255,255,.12);
+transform:translateY(-50%); }
+.hero_card strong{ display:block; color:#c9a869; margin-bottom: .3em; font-size: 1.4em; }
+.hero_card h3{ font-size: 2.3em; margin-bottom:.15em; }
+.hero_card p{ font-size: 1.2em; color:rgba(255,255,255,.6); }
+
+.hero_card span { font-size: 2em; background: var(--main); width: 2em; height: 2em; line-height: 2em; border-radius: 5em;
+display: block; margin: 0 auto .5em; }
+
+.vip_section{ padding: 10% 0 0; overflow: hidden; }
+.section_tit{ margin-bottom:2em; }
+.section_tit p{ color:#b89354; font-size: 1.2em; letter-spacing:.08em; margin-bottom:.5em; }
+.section_tit h2{ font-size: 2.5em; }
+.vip_section .section_tit { padding-left: 1.5em; }
+
+.vip_section > p { text-align: center; margin-top: 3.5em; color: #ccc; font-size: 1.5em; }
+
+.benefit_grid{ display:flex; flex-direction:column; gap: 1.5em; }
+.benefit_box{ display:flex; align-items:center; gap:1em; padding:1.5em; background:#111; width: 93%; margin: 0 auto;
+border:1px solid rgba(255,255,255,.05); border-radius: .5em; }
+.benefit_box .icon{ width:3em; height:3em; border-radius:50%; display:flex; align-items:center; justify-content:center;
+background:rgba(212, 177, 106, 0.15); color:#d4b06a; font-size:1.5em; flex-shrink:0; }
+.benefit_box h3{ font-size: 1.8em; margin-bottom:.2em; }
+.benefit_box p{ font-size: 1.2em; color:rgba(255,255,255,.55); }
+
+.score_wrap { padding-top: 5%; }
+.score_circle{ --current-degree:0deg; --target-degree:330deg; position:relative; width:13em; height:13em;
+margin:2em auto; border-radius:50%; display:flex; align-items:center; justify-content:center;
+background: conic-gradient( #574011 0deg, var(--main) var(--current-degree), #2a2a2a var(--current-degree), #2a2a2a 360deg );
+}
+.score_circle .inner em { font-style: normal; }
+
+/* 내부 원 */
+.score_circle::after{ content:''; position:absolute; width:9em; height:9em; border-radius:50%; background:#0d0d0d; }
+/* 내부 텍스트 */
+.score_circle .inner{ position:relative; z-index:2; width:9em; height:9em; border-radius:50%; background:#0d0d0d; display:flex;
+align-items:center; justify-content:center; flex-direction:column; }
+
+.score_box { background: url('img/loan_vip/score_bg.webp') center/cover no-repeat;
+padding: 10% 0; width: 90%; margin: 0 auto;  border:1px solid rgba(255,255,255,.09); border-radius: .5em; }
+.score_top { text-align: center; }
+.score_top p{ color:#b89354; margin-bottom:.5em; font-size: 1.2em; }
+.score_top h2{ font-size:2.5em; }
+
+.score_circle strong { font-size:3em; color:#d4b06a; font-family: 'Pretendard-Bold'; }
+.score_circle span{ color:#777; }
+.score_txt p { font-size: 1.3em; color:#ddd; text-align: center; }
+.score_box a { color: #fff; display: block; background: linear-gradient(#444, #0020); width: 60%;
+margin: 1em auto 0; padding: .4em 0; border-radius: .3em; border: 1px solid #555555;
+font-size: 1.7em; font-family:'Pretendard-Bold'; text-align: center; }
+
+.cta_inner{ margin: 10% 1.5em; padding:3em 1.5em; border-radius:1em; background:linear-gradient(145deg,#c89d52,#e2c07b); color:#111; }
+.cta_txt > p{ font-size: 1.2em; margin-bottom:.7em; }
+.cta_txt h2{ font-size: 2.5em; line-height:1.35; margin-bottom: .5em; }
+.form_t { margin-bottom: 2em; display: flex; flex-wrap: wrap; gap: .5em; }
+.form_t p { background: #1b1b1b; color: #fff; padding: .3em .5em; border-radius: .5em; font-size: 1.2em; }
+
+.vip_cta button{ width: 100%; height: 3em; border-radius: 1em; background:#111; color:#fff; display:flex; align-items:center;
+justify-content:center; font-size: 1.8em; font-family:'Pretendard-Bold'; }
+/* 은은한 골드 글로우 */
+/* form */
+/* 초기 숨김 */
+.step_wrap, .form_wrap{ display:none; opacity:0; transform:translateY(30px); transition:.5s; }
+
+/* 활성화 */
+.step_wrap.active, .form_wrap.active { display:block; opacity:1; transform:translateY(0); }
+
+/* step card */
+/* step 전체 */
+.step_wrap{ margin-top:2em; }
+
+/* 카드 */
+.card{ display:none; padding:2em 1.5em; background:#111; border:1px solid rgba(255,255,255,.08);
+border-radius:1.2em; box-shadow:0 10px 30px rgba(0,0,0,.25); }
+.card.active { display:block; }
+
+/* 상단 */
+.card_t { margin-bottom:2em; }
+.card_t p { font-size: 1.3em; color:#c9a869; margin-bottom:.6em; font-family:'Pretendard-Bold'; }
+.card_t .q { font-size: 1.8em; line-height:1.4; color:#fff; }
+/* 옵션 */
+.options { display:grid; grid-template-columns: repeat(2, 1fr); gap:.8em; }
+/* 버튼형 옵션 */
+.option{ height: 3.5em; display:flex; align-items:center; justify-content:center; border-radius:.8em;
+background:#1a1a1a; border:1px solid #2a2a2a; color:#fff; font-size:1.4em; transition:.25s; cursor:pointer; }
+.option:hover { border-color:#d4b06a; background:#222; }
+/* 선택 상태 */
+.option.active { background:linear-gradient(145deg,#d4b06a,#8f6a2b); border-color:#d4b06a;
+color:#111; font-family:'Pretendard-Bold'; transform:scale(1.02); }
+/* 다음 버튼 */
+.next-btn { margin-top: 1.5em; height:3.4em; border-radius:.8em; display:flex; align-items:center;
+justify-content:center; font-size:1.5em; font-family:'Pretendard-Bold'; background:#d4b06a; color:#111; transition:.25s; cursor:pointer; }
+.form_policy { display: flex; gap: .3em; color: #ccc; align-items: center; margin-bottom: 2em !important; }
+.form_policy input { width: 1em !important; height: 1em; margin-bottom: 0 !important; }
+/* 비활성 */
+.next-btn.disabled { opacity:.35; pointer-events:none; }
+
+.select_box { display: grid; grid-template-columns: repeat(2, 1fr); gap: .5em; }
+.phone { display: grid; grid-template-columns: .5fr 1fr 1fr; gap: .5em; }
+.card { display:none; animation:fadeUp .4s ease; }
+.card.active { display:block; }
+
+.form_wrap { margin-top:2em; }
+.final_form{ background:#111111; padding: 2em; border-radius: 1em; box-shadow: 0 0 15px #0000007e; }
+.final_form input, .final_form select{ width:100%; background-color:#1a1a1a; border:1px solid #333;
+border-radius:.5em; color:#fff; padding: 1em .5em; font-size:1.2em; }
+.final_form button{ margin-top:1em; background: linear-gradient(145deg, #dfba82, var(--main)); color:#111; font-size:1.8em; font-family:'Pretendard-Bold'; }
+.form_wrap ul li { margin-bottom: 1em; }
+
+
+
+.review { overflow: hidden; }
+/* 슬라이더 */
+.swiper { overflow: visible; padding: 4em 0 0; }
+.swiper-slide { width: 85%; margin: 0 auto; text-align: center; transition: transform .3s, filter .3s; filter: brightness(.6); }
+/* 비활성 슬라이드 */
+.swiper-slide img { width: 80%; display: block; margin: 0 auto;  }
+/* 중앙 활성 슬라이드 */
+.swiper-slide-active { filter: brightness(1); z-index: 10; }
+.swiper-slide-active img {  box-shadow: 0 0 20px rgba(0, 0, 0, 0.808); }
+/* 중앙 활성 이미지 */
+.swiper-slide-active img { transform: perspective(100px) rotateX(0deg) rotateY(0deg) scale(1.1); }
+/* 왼쪽 슬라이드 */
+.swiper-slide-prev img { transform: perspective(100px) rotateX(0deg) rotateY(5deg) scale(0.95); }
+/* 오른쪽 슬라이드 */
+.swiper-slide-next img { transform: perspective(100px) rotateX(0deg) rotateY(-5deg) scale(0.95); }
+
+
+
+/* 애니메이션용 */
+
+.form_wrap, .card { animation:fadeUp .4s ease; }
+@keyframes fadeUp{
+from { opacity:0; transform:translateY(20px); }
+to { opacity:1; transform:translateY(0); }
+}
+
+.start_btn span { animation: start_btn .8s infinite forwards alternate; display: inline-block; }
+@keyframes start_btn{
+from { transform: translateX(3px); opacity: 1; }
+to { transform: translateX(-3px); opacity: .8; }
+}
+
+@property --current-degree{ syntax:'<angle>'; inherits:false; initial-value:0deg; }
+.score_circle.active{ animation:scoreFill 1.8s ease forwards; }
+@keyframes scoreFill{ 
+from{ --current-degree:0deg; }
+to{ --current-degree:var(--target-degree); }
+}
+
+
+
+/* media */
+@media (max-width: 600px) {
+body { font-size: 15px; }
+}
+@media (max-width: 480px) {
+body { font-size: 10px; }
+}
+        </style>
+    </head>
+
+    <body>
+        <section class="vip_wrap">
+
+            <!-- HERO -->
+            <div class="vip_hero">
+                <div class="hero_overlay"></div>
+
+                <div class="vip_top">
+                    <div class="vip_logo"><span>VIP POLICY FUND</span></div>
+                    <div class="vip_badge">PRIVATE CONSULTING</div>
+                </div>
+
+                <div class="vip_txt">
+                    <p class="mini">프라이빗 정책자금 센터</p>
+                    <h1>당신의 사업을 위한<br><span>저금리 정책자금 전략</span></h1>
+                    <p class="sub">전담 매니저가 직접 분석하여<br>최적의 정책자금 솔루션을 제공합니다.</p>
+                </div>
+
+                <div class="hero_card_wrap">
+
+                    <div class="hero_card">
+                        <span>%</span>
+                        <strong>예상 금리</strong>
+                        <h3>연 2%~4%</h3>
+                        <p>시중 대비 낮은 금리</p>
+                    </div>
+
+                    <div class="hero_card">
+                        <span>&#8599;</span>
+                        <strong>예상 한도</strong>
+                        <h3>최대 30억+</h3>
+                        <p>사업 규모별 확인 가능</p>
+                    </div>
+
+                </div>
+                
+            </div>
+
+
+            <!-- SCORE -->
+            <section class="vip_section score_wrap">
+
+                <div class="score_box">
+
+                    <div class="score_top">
+                        <p>BUSINESS SCORE</p>
+                        <h2>자금 조달 성공률</h2>
+                    </div>
+
+                    <div class="score_circle">
+                        <div class="inner">
+                            <strong><em class="num">97</em>%</strong>
+                            <span>/ 100</span>
+                        </div>
+                    </div>
+
+                    <div class="score_txt"><p>정책자금 + 받을 수 있는 지원금을<br>책임지고 <span class="tcolor">모두 찾아드립니다.</span></p></div>
+
+                    <a href="#vip_cta">지금바로 신청하기</a>
+
+                </div>
+
+            </section>
+
+
+            <!-- VIP BENEFIT -->
+            <section class="vip_section">
+
+                <div class="section_tit">
+                    <p>VIP BENEFIT</p>
+                    <h2>프리미엄 상담 혜택</h2>
+                </div>
+
+                <div class="benefit_grid">
+
+                    <div class="benefit_box">
+                        <div class="icon">%</div>
+
+                        <div class="txt">
+                            <h3>우대 금리 적용</h3>
+                            <p>사업 조건별 금리 최적화</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit_box">
+                        <div class="icon">&#8361;</div>
+
+                        <div class="txt">
+                            <h3>맞춤 자금 설계</h3>
+                            <p>운영·시설·대환자금 분석</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit_box">
+                        <div class="icon">&#10003;</div>
+
+                        <div class="txt">
+                            <h3>승인 전략 제공</h3>
+                            <p>업종·매출 기반 컨설팅</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <section id="vip_cta" class="vip_cta">
+
+                <div class="cta_inner">
+
+                    <div class="cta_wrap">
+                        <div class="cta_txt">
+                            <p>VIP PRIVATE CONSULTING</p>
+                            <h2>지금 바로<br>정책자금 상담 신청하기</h2>
+                            <div class="form_t">
+                                <p>#신용점수 영향 없음</p>
+                                <p>#상담 후 진행 결정 가능</p>
+                                <p>#개인정보 암호화 처리</p>
+                            </div>
+                        </div>
+
+
+        
+                        <button type="button" class="start_btn">무료 상담 신청 &nbsp;<span>&#10140;</span></button>
+                    </div>
+    
+            
+                    <div class="step_wrap">
+    
+                        <!-- STEP 1 -->
+                        <div class="card active" data-step="1">
+                            <div class="card_t">
+                                <p>1/5</p>
+                                <h2 class="q">사업자이신가요?</h2>
+                            </div>
+    
+                            <div class="options">
+                                <div class="option">네</div>
+                                <div class="option">아니오</div>
+                            </div>
+    
+                            <div class="next-btn disabled">다음</div>
+                        </div>
+    
+                        <!-- STEP 2 -->
+                        <div class="card" data-step="2">
+                            <div class="card_t">
+                                <p>2/5</p>
+                                <h2 class="q">국세·지방세 체납 또는 연체가 있습니까?</h2>
+                            </div>
+    
+                            <div class="options">
+                                <div class="option">있음</div>
+                                <div class="option">없음</div>
+                            </div>
+    
+                            <div class="next-btn disabled">다음</div>
+                        </div>
+    
+                        <!-- STEP 3 -->
+                        <div class="card" data-step="3">
+                            <div class="card_t">
+                                <p>3/5</p>
+                                <h2 class="q">작년 매출은 어떻게 되시나요?</h2>
+                            </div>
+    
+                            <div class="options">
+                                <div class="option">0원</div>
+                                <div class="option">1천~5천</div>
+                                <div class="option">5천~1억</div>
+                                <div class="option">1억 이상</div>
+                            </div>
+    
+                            <div class="next-btn disabled">다음</div>
+                        </div>
+    
+                        <!-- STEP 4 -->
+                        <div class="card" data-step="4">
+                            <div class="card_t">
+                                <p>4/5</p>
+                                <h2 class="q">업종을 선택해주세요</h2>
+                            </div>
+    
+                            <div class="options">
+                                <div class="option">제조업</div>
+                                <div class="option">도/소매업</div>
+                                <div class="option">서비스업</div>
+                                <div class="option">요식업</div>
+                                <div class="option">기타</div>
+                            </div>
+    
+                            <div class="next-btn disabled">완료</div>
+                        </div>
+    
+                    </div>
+    
+                    <div class="form_wrap">
+                        <form method="post" action="apply.html" id="myModal1" name="page_form" class="final_form">
+    
+                            <div class="card_t">
+                                <p>5/5</p>
+                                <h2 class="q">성함·연락처·지역을 입력해주세요.</h2>
+                            </div>
+    
+                            <input type="hidden" name="option1" id="sales">
+                            <input type="hidden" name="option2" id="business_type">
+    
+    
+                            <ul>
+    
+                                <li class="form_name">
+                                    <input type="text" name="name" minlength="2" maxlength="10" placeholder="사업자명" required/>
+                                </li> <!----form_name------->
+    
+                                <li class="form_tel">
+                                    <div class="phone">
+                                        <select name="tel1"><option>010</option></select>
+                                        <input type="text" name="tel2" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                        <input type="text" name="tel3" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                    </div>
+                                </li> <!----form_tel------->
+    
+                                <li class="form_select01 region_wrap">
+                                    <div class="select_box">
+                                        <select id="region1" name="option6[]" required>
+                                            <option value="">지역</option>
+                                            <option value="서울특별시">서울특별시</option>
+                                            <option value="부산광역시">부산광역시</option>
+                                            <option value="인천광역시">인천광역시</option>
+                                            <option value="대구광역시">대구광역시</option>
+                                            <option value="광주광역시">광주광역시</option>
+                                            <option value="대전광역시">대전광역시</option>
+                                            <option value="울산광역시">울산광역시</option>
+                                            <option value="세종특별자치시">세종특별자치시</option>
+                                            <option value="경기도">경기도</option>
+                                            <option value="강원도">강원도</option>
+                                            <option value="충청북도">충청북도</option>
+                                            <option value="충청남도">충청남도</option>
+                                            <option value="경상북도">경상북도</option>
+                                            <option value="경상남도">경상남도</option>
+                                            <option value="전라북도">전라북도</option>
+                                            <option value="전라남도">전라남도</option>
+                                            <option value="제주특별자치도">제주특별자치도</option>
+                                        </select>
+                                        <select id="region2" name="option6[]" required>
+                                            <option value="">시/군/구</option>
+                                        </select>
+                                    </div>
+                                </li> <!----form_select01------->
+    
+    
+                                <li class="form_policy">
+                                    <input type="checkbox" id="agree" required checked>
+                                    <label for="agree">개인정보 수집 및 이용 동의</label>
+                                    <span id="show-Box">[약관보기]</span>
+                                </li>
+    
+                                <li><button type="submit">무료 상담 신청하기</button></li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+
+
+
+            </section>
+
+            
+
+            <!-- CONSULTANT -->
+            <section class="vip_section review">
+
+                <div class="section_tit">
+                    <p>VIP REVIEW</p>
+                    <h2>승인 리뷰</h2>
+                </div>
+
+                <div class="contents_wrap swiper mySwiper">
+                    <div class="con swiper-wrapper">
+                        <div class="con_box swiper-slide">
+                            <img src="img/loan_vip/doc01.webp" alt="카드">
+                        </div>
+                        <div class="con_box swiper-slide">
+                            <img src="img/loan_vip/doc02.webp" alt="카드">
+                        </div>
+                        <div class="con_box swiper-slide">
+                            <img src="img/loan_vip/doc03.webp" alt="카드">
+                        </div>
+                        <div class="con_box swiper-slide">
+                            <img src="img/loan_vip/doc04.webp" alt="카드">
+                        </div>
+
+                    </div>  <!-----contents----->
+                </div>  <!-----contents_wrap----->
+
+                <p>사업 조건에 맞는 <span class="tcolor">정책자금</span> 상담을 시작해보세요.</p>
+            </section>
+
+
+
+        </section>
+
+
+
+
+
+        <!-- script -->
+        <script>
+            // 팝업 창
+            const openPop = document.getElementById("show-Box");
+            openPop.addEventListener('click', () => {
+                const popup = window.open(
+                    'policy.html', // 조약 내용을 담은 실제 경로
+                    '개인정보이용동의',
+                    'width=800,height=600,scrollbars=yes'
+                );      
+
+                if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                    alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+                }
+            });
+        </script>
+
+        <script>
+            const regionData = {
+            '서울특별시': ['강남구', '강동구', '강북구', '강서구', '관악구', '광진구', '구로구', '금천구', '노원구', '도봉구', '동대문구', '동작구', '마포구', '서대문구', '서초구', '성동구', '성북구', '송파구', '양천구', '영등포구', '용산구', '은평구', '종로구', '중구', '중랑구'],
+            '부산광역시': ['강서구', '금정구', '기장군', '남구', '동구', '동래구', '부산진구', '북구', '사상구', '사하구', '서구', '수영구', '연제구', '영도구', '중구', '해운대구'],
+            '인천광역시': ['강화군', '계양구', '남동구', '동구', '미추홀구', '부평구', '서구', '연수구', '옹진군', '중구'],
+            '대구광역시': ['남구', '달서구', '달성군', '동구', '북구', '서구', '수성구', '중구'],
+            '광주광역시': ['광산구', '남구', '동구', '북구', '서구'],
+            '대전광역시': ['대덕구', '동구', '서구', '유성구', '중구'],
+            '울산광역시': ['남구', '동구', '북구', '울주군', '중구'],
+            '세종특별자치시': ['세종시'],
+            '경기도': ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시', '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시', '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시', '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시'],
+            '강원도': ['강릉시', '고성군', '동해시', '삼척시', '속초시', '양구군', '양양군', '영월군', '원주시', '인제군', '정선군', '철원군', '춘천시', '태백시', '평창군', '홍천군', '화천군', '횡성군'],
+            '충청북도': ['괴산군', '단양군', '보은군', '영동군', '옥천군', '음성군', '제천시', '진천군', '청주시', '충주시'],
+            '충청남도': ['계룡시', '공주시', '금산군', '논산시', '당진시', '보령시', '부여군', '서산시', '서천군', '아산시', '예산군', '천안시', '청양군', '태안군', '홍성군'],
+            '경상북도': ['경산시', '경주시', '고령군', '구미시', '군위군', '김천시', '문경시', '봉화군', '상주시', '성주군', '안동시', '영덕군', '영양군', '영주시', '영천시', '예천군', '울릉군', '울진군', '의성군', '청도군', '청송군', '칠곡군', '포항시'],
+            '경상남도': ['거제시', '거창군', '고성군', '김해시', '남해군', '밀양시', '사천시', '산청군', '양산시', '의령군', '진주시', '창녕군', '창원시', '통영시', '하동군', '함안군', '함양군', '합천군'],
+            '전라북도': ['고창군', '군산시', '김제시', '남원시', '무주군', '부안군', '순창군', '완주군', '익산시', '임실군', '장수군', '전주시', '정읍시', '진안군'],
+            '전라남도': ['강진군', '고흥군', '곡성군', '광양시', '구례군', '나주시', '담양군', '목포시', '무안군', '보성군', '순천시', '신안군', '여수시', '영광군', '영암군', '완도군', '장성군', '장흥군', '진도군', '함평군', '해남군', '화순군'],
+            '제주특별자치도': ['서귀포시', '제주시']
+            };
+
+            const region1 = document.getElementById('region1');
+            const region2 = document.getElementById('region2');
+
+            region1.addEventListener('change', function () {
+                const selectedRegion = this.value;
+                const subRegions = regionData[selectedRegion] || [];
+
+                // 초기화
+                region2.innerHTML = '<option value="">시/군/구</option>';
+
+                // 하위 지역 추가
+                subRegions.forEach(function (region) {
+                const option = document.createElement('option');
+                option.value = region;
+                option.textContent = region;
+                region2.appendChild(option);
+                });
+            });
+        </script>
+
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+        <script>
+            $(function () {
+                const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                    const $el = $(entry.target);
+                    const target = Number($el.attr('data-target'));
+
+                    if (!target) return;
+
+                    setTimeout(() => {
+                        $el.prop('Counter', 0).stop().animate({
+                        Counter: target
+                        }, {
+                        duration: 1000,
+                        easing: 'swing',
+                        step: function (now) {
+                            $el.text(Math.ceil(now).toLocaleString());
+                        }
+                        });
+                    }, 500); // ← 여기서 1초 딜레이 설정 // 
+                    }
+                });
+                }, { threshold: 0.5 });
+
+                // 초기 숫자값을 data-target 속성에 저장
+                $('.num').each((_, el) => {
+                const $el = $(el);
+                const target = Number($el.text().replace(/,/g, '').trim());
+                $el.attr('data-target', target);
+                observer.observe(el);
+                });
+            });
+        </script>
+
+
+
+
+        <!-- Swiper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script>
+            new Swiper('.mySwiper', {
+                effect: 'coverflow',
+                centeredSlides: true,
+                slidesPerView: 'auto',
+                speed: 500,
+                allowTouchMove: true,
+                loop: true,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false
+                },
+                grabCursor: true,
+                coverflowEffect: {
+                    rotate: 0,
+                    stretch: 200,   // ← 겹침 간격 (중요)
+                    depth: 200,     // ← 입체감
+                    modifier: 1,
+                    slideShadows: false,
+                }
+            });
+        </script>
+
+
+
+
+        <script>
+            const scoreCircle = document.querySelector('.score_circle');
+
+            const scoreObserver = new IntersectionObserver((entries)=>{
+
+            entries.forEach(entry=>{
+
+            if(entry.isIntersecting){
+
+            scoreCircle.classList.add('active');
+
+            scoreObserver.unobserve(scoreCircle);
+
+            }
+
+            });
+
+            },{
+            threshold:0.5
+            });
+
+            scoreObserver.observe(scoreCircle);
+        </script>
+
+
+        <script>
+            let currentStep = 1;
+
+            const cards = document.querySelectorAll('.card');
+
+            cards.forEach(card => {
+
+                const options = card.querySelectorAll('.option');
+                const nextBtn = card.querySelector('.next-btn');
+
+                let selected = false;
+
+                options.forEach(opt => {
+
+                    opt.addEventListener('click', () => {
+
+                        const text = opt.innerText.trim();
+                        const step = card.dataset.step;
+
+                        // hidden 값 저장
+                        if(step === "3"){
+                            document.getElementById('sales').value = text;
+                        }
+
+                        if(step === "4"){
+                            document.getElementById('business_type').value = text;
+                        }
+
+                        // 예외 조건
+                        if (
+                            (step === "1" && text === "아니오") ||
+                            (step === "2" && text === "있음") ||
+                            (step === "3" && text === "0원")
+                        ) {
+
+                            if (step === "1") {
+                                alert('사업자만 신청 가능합니다');
+                            }
+
+                            if (step === "2") {
+                                alert('연체·체납 있는 경우 신청 불가합니다');
+                            }
+
+                            if (step === "3") {
+                                alert('매출이 없는 경우 신청 불가합니다');
+                            }
+
+                            return;
+                        }
+
+                        options.forEach(o => o.classList.remove('active'));
+
+                        opt.classList.add('active');
+
+                        selected = true;
+
+                        nextBtn.classList.remove('disabled');
+                    });
+                });
+
+                nextBtn.addEventListener('click', () => {
+
+                    if (!selected) {
+                        alert('항목을 선택해주세요');
+                        return;
+                    }
+
+                    card.classList.remove('active');
+
+                    currentStep++;
+
+                    const nextCard = document.querySelector(`.card[data-step="${currentStep}"]`);
+
+                    if (nextCard) {
+
+                        nextCard.classList.add('active');
+
+                    } else {
+
+                        document.querySelector('.step_wrap').classList.remove('active');
+
+                        formWrap.classList.add('active');
+
+                        formWrap.scrollIntoView({
+                            behavior:'smooth',
+                            block:'start'
+                        });
+
+                    }
+                    
+                });
+                
+            });
+
+            
+        </script>
+
+
+
+
+        <script>
+            const startBtn = document.querySelector('.start_btn');
+            const stepWrap = document.querySelector('.step_wrap');
+            const formWrap = document.querySelector('.form_wrap');
+
+            startBtn.addEventListener('click', () => {
+
+                // 버튼 숨김
+                startBtn.style.display = 'none';
+
+                // step 노출
+                stepWrap.classList.add('active');
+
+                // 스크롤 이동
+                stepWrap.scrollIntoView({
+                    behavior:'smooth',
+                    block:'start'
+                });
+
+            });
+        </script>
+        
+    </body>
+</html>

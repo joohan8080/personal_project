@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/web_fonts.css" type="text/css">
+        <title>개인회생 공용 (채무진단리포트)</title>
+        <style>
+            :root {
+--main: #52E8F0;
+--sub: #00c2cc;
+--accent: #4d18df;
+--dark: #070716;
+--light: #F5F7FF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { max-width: 800px; min-width: 320px; margin: 0 auto; font-size: 18px; min-height: 100vh; background:#0b1020;
+color: #fff; font-family: 'Pretendard-Medium'; font-weight: 500; word-break: keep-all; letter-spacing: -.05em;}
+li { list-style: none; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; object-fit: contain; }
+button { all: unset; cursor: pointer; }
+select { -webkit-appearance: none; appearance: none; color: #222; 
+background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%237A3DFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 1em center;
+}
+h1,h2,h3,h4,h5,h6 { font-family: 'Pretendard-Bold'; line-height: 130%; letter-spacing: -.05em; }
+.inner { padding: 0 2.5%; overflow: hidden; }
+.tcolor { color: var(--main); font-family: 'Pretendard-Bold'; }
+
+
+
+
+
+/* form */
+.form_wrap { background: rgba(255,255,255,.04); border-radius: 1.5em; padding: 3em 1.5em; border: 1px solid #242424; margin-top: 2.5em; }
+.form_tit { text-align: center; margin-bottom: 2em; }
+.form_tit h2 { font-size: 3em; margin-bottom: .3em; }
+.form_tit p { font-size: 1.2em; color: #b9b9b9; }
+.form_wrap ul li { margin-bottom: 1.3em; }
+.form_wrap ul li p { font-size: 1.15em; margin-bottom: .8em; color: #fff; }
+.form_wrap input, .form_wrap select, .form_wrap textarea { width: 100%; background-color: transparent; border: 1px solid #2b2b2b;
+border-radius: .6em; padding: 1em; color: #fff; font-size: 1em; font-family: inherit; }
+
+.phone { display: flex; gap: .5em; }
+.phone select { width: 30%; }
+.phone input { width: 35%; }
+.radio_wrap { display: grid; grid-template-columns: repeat(2, 1fr); gap: .5em; }
+.radio_box:last-child { grid-column: 1 / -1; }
+.radio_box { width: 100%; }
+.radio_box label { display: block; }
+.radio_box input { display: none; }
+.radio_box span { display: block; background: transparent; border: 1px solid #666; text-align: center;
+padding: 1em 0; border-radius: .6em; color: #fff; transition: .3s; font-size: 1.3em; }
+.radio_box input:checked + span { background: var(--accent); color: #fff; }
+.form_policy { display: flex; align-items: center; gap: .5em; margin-top: .5em; }
+.form_policy input { width: 1em; height: 1em; }
+.form_policy label, .form_policy span { font-size: 1em; color: #e9e9e9; }
+.form_policy span { color: #e9e9e9; cursor: pointer; }
+.submit_btn { display: block; width: 100%; margin-top: 1em; background: linear-gradient(to right, #8af9ff, var(--sub)); color: #333; text-align: center;
+padding: 1em 0; border-radius: .6em; font-size: 1.8em; font-family: 'Pretendard-Bold'; box-shadow: 0 10px 30px #b6000030; }
+
+.loading_wrap { text-align: center; margin-bottom: 1.5em; }
+.loading_wrap img { width: 14%; margin: 1em auto; }
+.loading_wrap p { font-size: 1.3em; }
+.loading_con { display: flex; justify-content: center; align-items: flex-end; gap: .3em; margin-bottom: 1em; }
+.loading_box { width: .5em; height: 1em; background: #666; animation: loadingFade 1s infinite ease-in-out; }
+
+/* 각 막대 애니메이션 딜레이 다르게 적용 */
+.loading_box:nth-child(1) { animation-delay: 0s; }
+.loading_box:nth-child(2) { animation-delay: 0.2s; }
+.loading_box:nth-child(3) { animation-delay: 0.4s; }
+.loading_box:nth-child(4) { animation-delay: 0.6s; }
+.loading_box:nth-child(5) { animation-delay: 0.7s; }
+.loading_box:nth-child(6) { animation-delay: .8s; }
+.loading_box:nth-child(7) { animation-delay: .9s; }
+
+@keyframes loadingFade {
+0%, 100% {
+opacity: 0.2; /* 옅음 */
+}
+50% {
+opacity: 1;   /* 진하게 */
+}
+}
+
+
+
+
+
+
+/* section */
+.hero { width: 100%; position:relative; overflow:hidden; padding:10% 3% 0; }
+.bg_blur { position:absolute; top:-12em; right:-6em; width:28em; height:28em; border-radius:50%; 
+background:linear-gradient(135deg,#4f7cff,#7f5bff); filter:blur(9em); opacity:.5; }
+.hero_inner { position:relative; z-index:20; margin:0 auto; }
+.hero_inner .con_tit { position: relative; z-index: 100; }
+.badge { display:inline-flex; align-items:center; justify-content:center; padding:.7em 1.3em; 
+border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.08); backdrop-filter:blur(1.2em);
+border-radius:999px; font-size:.8em; margin-bottom:1.5em; }
+.hero h1 { font-size:2.8em; line-height:1.4; font-weight:800; margin-bottom:.45em; letter-spacing:-.05em; }
+.hero p { font-size:1.5em; line-height: 1.4; }
+.hero_card{ position:relative; padding:3em 2em 4em; border-radius:2em; background:#000; border:1px solid rgba(150,255,240,.9);
+box-shadow: 0 0 .5em rgba(150,255,240,.8), 0 0 2em rgba(150,255,240,.25), inset 0 0 1.5em rgba(150,255,240,.08);
+margin-bottom:2em; overflow:hidden;
+}
+.hero_card::after{ content:''; position:absolute; left:50%; bottom:-0.1em; transform:translateX(-50%) rotate(45deg);
+width:1.2em; height:1.2em; background:#000; border-right:1px solid rgba(150,255,240,.9);
+border-bottom:1px solid rgba(150,255,240,.9); box-shadow: 0 0 .5em rgba(150,255,240,.5); }
+.hero_inner > img { width: 65%; opacity: .5; display: block; margin-top: -80%; margin-left: 45%; position: relative; z-index:0; }
+.main_btn{ margin-top: 1em; border-radius:2em; background: linear-gradient(to right, #8af9ff, var(--sub)); color:#333; font-size:1.5em; font-weight:700;
+display: inline-block; padding: .6em 2em; }
+
+
+.main_ph{ width: 75%; margin-top: -23%; margin-left: 45%; position: relative; }
+
+.ph_img{ position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; transform: scale(.98); 
+transition: opacity .4s ease, transform .4s ease, visibility .4s; }
+.ph_img.active{ opacity: 1; visibility: visible; transform: scale(1); position: relative; z-index: 2; }
+.ph_toggle{ position: absolute; bottom: 26.7%; left: 62.5%; transform: translateX(-50%) translateY(-5px); 
+z-index: 20; display: flex; gap: .3em; border: 1px solid rgba(255,255,255,.5); border-radius: 999px;
+background: rgba(255,255,255,.08); backdrop-filter: blur(50px); }
+.ph_btn{ all: unset; cursor: pointer; padding: .6em 1.5em; border-radius: 999px; 
+color: rgba(255,255,255,.7); font-size: .85em; transition: .3s; }
+.ph_btn.active{ background: #fff; color: #333; }
+
+.hero_count{ position:absolute; left:3%; bottom:20%; z-index:-1; width:55%; display:flex; flex-direction:column; gap:1em; }
+.hero_count li{ display:flex; align-items:center; gap:1em; padding:1.1em 0 1.1em 1.1em; 
+border-radius:1.5em; background: linear-gradient( 180deg, rgba(255,255,255,.05), rgba(255,255,255,.02) ); 
+border:1px solid rgba(120,220,255,.12); backdrop-filter:blur(1em);
+box-shadow: 0 0 2em rgba(0,180,255,.06), inset 0 0 1em rgba(255,255,255,.02); }
+.count_icon{ width:3.5em; height:3.5em; border-radius:50%; display:flex; align-items:center; 
+justify-content:center; flex-shrink:0; 
+background: radial-gradient( circle at 30% 30%, rgba(82,232,240,.25), rgba(82,232,240,.03) );
+border:1px solid rgba(82,232,240,.18); box-shadow: 0 0 1.5em rgba(82,232,240,.15); }
+.count_icon img{ width:1.5em; }
+.count_txt{ flex:1; }
+.count_txt strong{ display:block; font-size:1.7em; line-height:1; color:#ff4747; font-family:'Pretendard-Bold'; margin-bottom:.2em; }
+.count_txt span{ font-size:1.2em; color:rgba(255,255,255,.72); }
+.num { font-style: normal; }
+
+
+
+
+
+
+/* qualify */
+.qualify_sec{ position:relative; padding:15% 3%; overflow:hidden; }
+.qualify_bg{ position:absolute; inset:0; 
+background: radial-gradient(circle at 20% 70%, rgba(0,140,255,.18), transparent 35%),
+radial-gradient(circle at 80% 30%, rgba(140,0,255,.12), transparent 30%), radial-gradient(circle at 90% 100%, rgba(0,70,255,.2), transparent 25%); }
+.qualify_tit{ position:relative; z-index:2; text-align:center; margin-bottom:5em; }
+.qualify_tit span{ display:inline-flex; align-items:center; justify-content:center; padding:.7em 1.4em; 
+border-radius:999px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); 
+color:var(--main); font-size:1.1em; margin-bottom:1.5em; }
+.qualify_tit h2{ font-size:3em; line-height:1.3; margin-bottom:.45em; }
+.qualify_list{ position:relative; z-index:2; display:flex; flex-direction:column; gap:2.5em; }
+.qualify_list li{ position:relative; padding:3em 1em; border-radius:2.5em; 
+background: linear-gradient( 180deg, rgba(255,255,255,.05), rgba(255,255,255,.02) ); 
+border:1px solid rgba(255,255,255,.06); text-align:center; overflow:hidden; }
+.qualify_list li::before{ content:''; position:absolute; top:-30%; left:-10%; width:18em; height:18em; 
+border-radius:50%; background:rgba(82,232,240,.06); filter:blur(5em); }
+.icon_box{ position:relative; z-index:2; width:9em; height:9em; 
+margin:0 auto 2em; display:flex; align-items:center; justify-content:center; }
+.icon_box img{ width:100%; object-fit:contain; filter: drop-shadow(0 0 1.5em rgba(255,255,255,.08)); }
+.txt_box{ position:relative; z-index:2; }
+.txt_box h3{ font-size:2.2em; line-height:1.35; margin-bottom:.5em; }
+.txt_box p{ font-size:1.5em; line-height:1.4; color:rgba(255,255,255,.7); }
+
+.graph_value { --value: 0deg; }
+.graph_txt strong { opacity: 0; }
+.graph.active .graph_value { animation: fillGraph 1.8s cubic-bezier(.4, 0, .2, 1) forwards; }
+.graph.active .graph_cap { animation: capRotate 1.8s cubic-bezier(.4, 0, .2, 1) forwards; }
+.graph.active .graph_txt strong { animation: countUp .6s ease forwards 1.4s; }
+
+.card_top{ display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; margin-bottom:2.5em; }
+.card_top span{ font-size:1em; color:#fff; font-family:'Pretendard-Bold'; margin-bottom:.8em; }
+.card_top strong{ font-size:2.8em; line-height:1.1; font-family:'Pretendard-ExtraBold'; color:#fff; text-shadow: 0 0 .2em rgba(255,255,255,.5); }
+.graph{ position:relative; width:100%; max-width:18em; aspect-ratio:1/1; margin:0 auto; display:flex; align-items:center; justify-content:center; }
+/* outer ring */
+.graph_core { position:relative; width:100%; height:100%; border-radius:50%; background:#111; }
+/* progress */
+.graph { position: relative; width: 220px; height: 220px; }
+/* 시작 캡 */
+.graph_value { --value: 0deg; --thickness: 20px; --cap-size: 20px; position: absolute; inset: 0;
+border-radius: 50%; background: conic-gradient( from 0deg, #6ee7ff 0deg, #8cf5ec 180deg, #4de1c1 var(--value), #2e2e2e var(--value), #2e2e2e 360deg ); }
+/* 가운데 비우기 */
+.graph_value::before{ content:''; position:absolute; inset: var(--thickness); border-radius:50%; background:#111; z-index:1; }
+/* 2. 시작 캡 */
+.graph_value::after { content: ''; position: absolute; width: var(--cap-size); height: var(--cap-size); border-radius: 50%;
+background: #6ee7ff; top: 50%; left: 50%; z-index: 2;
+transform: translate(-50%, -50%) rotate(0deg) translateY(calc(-110px + (var(--thickness) / 2))); 
+}
+/* 3. 끝 캡: rotate(254deg) → rotate(344deg) */
+.graph_cap { position: absolute; width: 20px; height: 20px; border-radius: 50%;
+background: #4de1c1; top: 50%; left: 50%; z-index: 2; transform: translate(-50%, -50%) rotate(0deg) translateY(-100px); 
+box-shadow: 0 0 12px rgba(77,225,193,.5); }
+/* inner cut */
+.graph_inner{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+width:72%; height:72%; border-radius:50%; background:#0b1020; }
+
+
+
+/* text */
+.graph_txt{ position:absolute; text-align:center; z-index:2; }
+.graph_txt span{ font-size:1.2em; color: var(--sub); font-weight:700; }
+.graph_txt strong{ font-size:3.8em; line-height:1; }
+.graph_txt em{ font-size:.45em; font-style:normal; }
+.graph_sec{ position:relative; padding: 15% 3%; overflow:hidden; }
+.graph_bg{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:30em; height:30em;
+border-radius:50%; background:linear-gradient(135deg,#00d0ff,#00ffc8); filter:blur(10em); opacity:.12; }
+.graph_top{ position:relative; z-index:2; text-align:center; margin-bottom:3em; }
+.graph_top p:first-child{ display:inline-flex; align-items:center; justify-content:center; padding:.5em 1.3em;
+border-radius:999px; background:rgba(82,232,240,.08); border:1px solid rgba(82,232,240,.18); color:var(--main); font-size:1.1em; margin-bottom:1.5em; }
+.graph_top h2{ font-size:2.7em; line-height:1.3; margin-bottom:.5em; }
+.graph_top h2 em{ color:var(--main); font-style:normal; }
+.graph_top p{ font-size:1.25em; line-height:1.5; color:rgba(255,255,255,.72); }
+.graph{ position:relative; z-index:2; margin:0 auto; }
+.graph::before{ content:''; position:absolute; inset:-1.5em; border-radius:50%; border:1px solid rgba(255,255,255,.04); }
+.graph::after{ content:''; position:absolute; inset:-3em; border-radius:50%; border:1px dashed rgba(255,255,255,.05); }
+.graph_info{ position:relative; z-index:2; display:flex; flex-direction:column; gap:1em; margin-top:3em; }
+.graph_info li{ display:flex; align-items:center; gap:1em; padding:1.3em; border-radius:1.5em;
+background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); backdrop-filter:blur(1em); }
+.graph_info .icon{ width:4.5em; height:4.5em; border-radius:1.2em; display:flex; align-items:center; 
+justify-content:center; background:linear-gradient( 135deg, rgba(82,232,240,.18), rgba(82,232,240,.05) );
+border:1px solid rgba(82,232,240,.12); flex-shrink:0; }
+.graph_info .icon img{ width:2em; }
+.graph_info .txt{ flex:1; }
+.graph_info strong{ display:block; font-size:1.5em; margin-bottom:.2em; font-family:'Pretendard-Bold'; }
+.graph_info span{ font-size:1.2em; color:rgba(255,255,255,.58); line-height:1.4; }
+
+
+
+
+
+@property --value { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+
+@keyframes fillGraph {
+from { --value: 0deg; }
+to { --value: 344deg; }
+}
+
+@keyframes capRotate {
+from { transform: translate(-50%, -50%) rotate(0deg) translateY(-100px); }
+to { transform: translate(-50%, -50%) rotate(344deg) translateY(-100px); }
+}
+
+@keyframes countUp {
+from { opacity: 0; transform: translateY(.3em); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+
+
+/* responsive */
+
+@media(max-width:600px){
+body { font-size:15px; }
+}
+
+@media(max-width:480px){
+body { font-size:12px; }
+}
+        </style>
+    </head>
+
+    <body>
+        <section class="hero">
+            <div class="bg_blur"></div>
+
+            <div class="hero_inner">
+                <div class="con_tit">
+                    <div class="badge"><p>채무 진단 리포트</p></div>
+                    <h1><span class="tcolor">개인회생,</span><br>나도 가능한지<br>먼저 확인해보세요</h1>
+                    <p>연체 · 추심 · 압류 진행 중이어도<br>개인회생 가능 여부를 <span class="tcolor">확인해보세요</span></p>
+                    <a href="#form_wrap" class="main_btn">상담신청 바로가기 →</a>
+                </div>
+                <img src="img/law_report/main_img.webp" alt="행성">
+            </div>
+
+
+            <ul class="hero_count">
+
+                <li data-aos="zoom-in" data-aos-duration="500" data-aos-delay="300">
+                    <div class="count_icon">
+                        <img src="img/law_report/count01.png" alt="상담">
+                    </div>
+
+                    <div class="count_txt">
+                        <strong><em class="num">9,842</em>명</strong>
+                        <span>누적 상담</span>
+                    </div>
+                </li>
+
+
+                <li data-aos="zoom-in" data-aos-duration="500" data-aos-delay="500">
+                    <div class="count_icon">
+                        <img src="img/law_report/count02.png" alt="성공">
+                    </div>
+
+                    <div class="count_txt">
+                        <strong><em class="num">7,214</em>건</strong>
+                        <span>개인회생 성공</span>
+                    </div>
+                </li>
+
+
+                <li data-aos="zoom-in" data-aos-duration="500" data-aos-delay="700">
+                    <div class="count_icon">
+                        <img src="img/law_report/count03.png" alt="만족도">
+                    </div>
+
+                    <div class="count_txt">
+                        <strong>4.9 / 5</strong>
+                        <span>고객 만족도</span>
+                    </div>
+                </li>
+
+            </ul>
+
+            <div class="main_ph" data-aos="zoom-in" data-aos-duration="300" data-aos-delay="100">
+                <div class="ph_toggle">
+                    <button class="ph_btn active" data-target="before">Before</button>
+                    <button class="ph_btn" data-target="after">After</button>
+                </div>
+
+                <img src="img/law_report/ph_b.webp" alt="before" class="ph_img active" id="before">
+                <img src="img/law_report/ph_a.webp" alt="after" class="ph_img" id="after">
+            </div>
+        </section>
+
+
+        <section class="qualify_sec">
+
+            <div class="qualify_bg"></div>
+
+            <div class="qualify_tit">
+                <span>개인회생 신청 자격</span>
+                <h2>개인회생 가능 여부,<br>간단히 확인해보세요</h2>
+            </div>
+
+
+            <ul class="qualify_list">
+
+                <li>
+                    <div class="icon_box">
+                        <img src="img/law_report/qualify01.png" alt="소득">
+                    </div>
+
+                    <div class="txt_box">
+                        <h3>소득이 <span class="tcolor">있나요?</span></h3>
+
+                        <p>4대 보험 여부와 관계없이<br>꾸준한 소득이 있다면 가능</p>
+                    </div>
+                </li>
+
+
+                <li>
+                    <div class="icon_box">
+                        <img src="img/law_report/qualify02.png" alt="채무">
+                    </div>
+
+                    <div class="txt_box">
+                        <h3>채무가 <span class="tcolor">2천만 원 이상</span>인가요?</h3>
+                        <p>카드값 · 대출 · 사채 포함<br>채무가 2천만 원 이상이라면 가능</p>
+                    </div>
+                </li>
+
+
+                <li>
+                    <div class="icon_box">
+                        <img src="img/law_report/qualify03.png" alt="재산">
+                    </div>
+
+                    <div class="txt_box">
+                        <h3>채무가 재산보다 <span class="tcolor">많나요?</span></h3>
+                        <p>보유 중인 차량 · 예금 등<br>재산보다 채무가 많다면 가능</p>
+                    </div>
+                </li>
+
+            </ul>
+
+
+            
+
+        </section>
+
+
+
+
+
+
+        <section class="graph_sec">
+
+            <div class="graph_bg"></div>
+
+            <div class="graph_top">
+                <p>합리적인 선택</p>
+                <h2>지금 내 상황,<br><span class="tcolor">한눈에</span> 확인하세요</h2>
+                <p>현재 채무 상황을 기준으로<br>예상 탕감 가능성을 확인해보세요</p>
+            </div>
+
+            <div class="graph">
+                <div class="graph_core">
+                    <div class="graph_value"></div>
+                    <div class="graph_cap"></div>
+                    <div class="graph_inner"></div>
+                </div>
+
+                <div class="graph_txt">
+                    <span style="margin-bottom: .5em; display: inline-block;">최대 탕감률</span><br>
+                    <strong>93<em>%</em></strong>
+                    <p style="margin-top: .5em;">최대</p>
+                </div>
+            </div>
+
+            <ul class="graph_info">
+                <li>
+                    <div class="icon">
+                        <img src="img/law_report/info01.png" alt="익명">
+                    </div>
+
+                    <div class="txt">
+                        <strong class="tcolor">안전한 익명 상담</strong>
+                        <span>개인정보 노출 없이 진행 가능</span>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="icon">
+                        <img src="img/law_report/info02.png" alt="진단">
+                    </div>
+
+                    <div class="txt">
+                        <strong class="tcolor">빠른 가능성 진단</strong>
+                        <span>1분 입력으로 빠른 가능성 확인</span>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="icon">
+                        <img src="img/law_report/info03.png" alt="가이드">
+                    </div>
+
+                    <div class="txt">
+                        <strong class="tcolor">맞춤 해결 가이드</strong>
+                        <span>상황별 개인회생 진행 방향 안내</span>
+                    </div>
+                </li>
+            </ul>
+
+
+
+
+            <div class="form_wrap" id="form_wrap">
+
+                <div class="form_tit">
+
+                    <div class="loading_wrap">
+                        <img src="img/law_report/loading.png" alt="방패">
+                        <div class="loading_con">
+                            <div class="loading_box"></div>
+                            <div class="loading_box"></div>
+                            <div class="loading_box"></div>
+                            <div class="loading_box"></div>
+                            <div class="loading_box"></div>
+                            <div class="loading_box"></div>
+                            <div class="loading_box"></div>
+                        </div> <!--loading_con--->
+                        <p>개인정보는 암호화되어 안전하게 처리됩니다.</p>
+
+                    </div> <!--loading_wrap--->
+
+                </div>
+
+                <form method="post" action="apply.html" id="myModal1" name="page_form">
+
+                    <ul>
+
+                        <li><input type="text" name="name" minlength="2" maxlength="10" placeholder="이름 입력" required></li>
+
+                        <li>
+                            <div class="phone">
+                                <select name="tel1"><option>010</option></select>
+                                <input type="text" name="tel2" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                <input type="text" name="tel3" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                            </div>
+                        </li>
+
+                        <li>
+                            <p>현재 채무 금액을 선택해주세요</p>
+
+                            <div class="radio_wrap">
+
+                                <div class="radio_box">
+                                    <label>
+                                        <input type="radio" name="option1" value="2천~5천만 원" required>
+                                        <span>2천~5천만 원</span>
+                                    </label>
+                                </div>
+
+                                <div class="radio_box">
+                                    <label>
+                                        <input type="radio" name="option1" value="5천~1억 원" required>
+                                        <span>5천~1억 원</span>
+                                    </label>
+                                </div>
+
+                                <div class="radio_box">
+                                    <label>
+                                        <input type="radio" name="option1" value="1억 원 이상" required>
+                                        <span>1억 원 이상</span>
+                                    </label>
+                                </div>
+
+
+                            </div>
+                        </li>
+
+
+                        <li class="form_policy">
+                            <input type="checkbox" id="policy" checked required>
+                            <label for="policy">개인정보처리방침 동의</label>
+                            <span id="show-Box">[약관보기]</span>
+                        </li>
+
+                    </ul>
+
+                    <button class="submit_btn" type="submit">개인회생 가능 여부 확인하기</button>
+
+                </form>
+
+            </div>
+
+
+        </section>
+
+
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+
+        <script>
+            AOS.init({ once: true });
+        </script>
+
+
+
+
+
+        <script>
+            // 팝업 창
+            const openPop = document.getElementById("show-Box");
+            openPop.addEventListener('click', () => {
+                const popup = window.open(
+                    'policy.html', // 조약 내용을 담은 실제 경로
+                    '개인정보이용동의',
+                    'width=800,height=600,scrollbars=yes'
+                );      
+
+                if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                    alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+                }
+            });
+        </script>
+
+
+
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(function () {
+                const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                    const $el = $(entry.target);
+                    const target = Number($el.attr('data-target'));
+
+                    if (!target) return;
+
+                    setTimeout(() => {
+                        $el.prop('Counter', 0).stop().animate({
+                        Counter: target
+                        }, {
+                        duration: 1000,
+                        easing: 'swing',
+                        step: function (now) {
+                            $el.text(Math.ceil(now).toLocaleString());
+                        }
+                        });
+                    }, 1000); // ← 여기서 1초 딜레이 설정 // 
+                    }
+                });
+                }, { threshold: 0.5 });
+
+                // 초기 숫자값을 data-target 속성에 저장
+                $('.num').each((_, el) => {
+                const $el = $(el);
+                const target = Number($el.text().replace(/,/g, '').trim());
+                $el.attr('data-target', target);
+                observer.observe(el);
+                });
+            });
+        </script>
+
+        <script>
+            const graph = document.querySelector('.graph');
+
+            const graphObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+                        graph.classList.add('active');
+                    }
+
+                });
+            }, {
+                threshold: 0.4
+            });
+
+            graphObserver.observe(graph);
+        </script>
+
+
+        <script>
+            const phBtns = document.querySelectorAll('.ph_btn');
+            const phImgs = document.querySelectorAll('.ph_img');
+
+            phBtns.forEach(btn => {
+
+                btn.addEventListener('click', () => {
+
+                    const target = btn.dataset.target;
+
+                    phBtns.forEach(el => el.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    phImgs.forEach(img => {
+                        img.classList.remove('active');
+                    });
+
+                    document.getElementById(target).classList.add('active');
+
+                });
+
+            });
+        </script>
+
+
+
+
+    </body>
+
+
+    
+</html>

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/web_fonts.css" type="text/css">
+        <title>개인회생 공용 (다큐형)</title>
+        <style>
+            :root { --main: #b60000; --sub: #ff2b2b; }
+
+html { scroll-behavior: smooth; }
+* { margin: 0; padding: 0; vertical-align: top; box-sizing: border-box; }
+body { max-width: 800px; min-width: 320px; margin: 0 auto; font-size: 18px; font-family: 'Pretendard-Medium';
+background: #050505; color: #fff; letter-spacing: -.05em; }
+li { list-style: none; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; border: none; object-fit: cover; display: block; }
+select { -webkit-appearance: none; appearance: none; color: #666; background-image: url('img/selct_arrow_white.png');
+background-repeat: no-repeat; background-position: center right 5px; cursor: pointer; }
+textarea {
+border: 1px solid #efefef; outline: none; font-family: inherit; font-size: inherit; color: #333;
+resize: none; box-sizing: border-box; -webkit-appearance: none; -moz-appearance: none; appearance: none;        
+}
+p { word-break: keep-all; line-height: 140%; letter-spacing: -.03em; }
+button { all: unset; cursor: pointer; }
+section { position: relative; }
+.inner { width: 94%; margin: 0 auto; }
+.t_red { color: var(--main); }
+.con_tit { margin-bottom: 3em; }
+.con_tit .mini { display: block; font-size: 1.1em; color: var(--sub); margin-bottom: .8em;  }
+.con_tit h2 { font-size: 3em; line-height: 125%; margin-bottom: .5em; }
+.con_tit p { font-size: 1.4em; color: #bdbdbd; line-height: 155%; }
+
+h1, h2, h3, h4, h5, h6 { font-family: 'Pretendard-Bold'; }
+
+/* top */
+
+.top_visual { overflow: hidden; background: url('img/law_docu/main_bg.webp') center right -50px / cover no-repeat; }
+
+
+.top_logo { padding: 1.5em 0; display: flex; justify-content: space-between; align-items: center; }
+.top_logo h1 { font-size: 2em; color: var(--main); }
+.top_logo p { font-size: 1.3em; }
+.visual_txt { position: relative; z-index: 2; padding-top: 3em; }
+.visual_txt .cate { display: inline-block; padding: .5em 1em; border: 1px solid var(--sub);
+border-radius: 5em; font-size: 1em; margin-bottom: 1.5em; color: var(--sub); }
+.visual_txt h2 { font-size: 3em; line-height: 125%; margin-bottom: .4em;}
+.visual_txt p { font-size: 1.2em; color: #d0d0d0; line-height: 140%; margin-bottom: 2em; }
+.visual_btn_wrap { display: flex; align-items: center; gap: .5em; margin-bottom: 10%; }
+.visual_btn_wrap a { width: 100%; text-align: center; padding: 1em 0; border-radius: .6em; font-size: 1.3em; }
+.visual_btn_wrap a:first-child { background: var(--main); }
+.visual_btn_wrap a:last-child { border: 1.5px solid #555; }
+
+/* stat */
+
+.stat_sec { background: #0b0b0b; border-top: 1px solid #1f1f1f; border-bottom: 1px solid #1f1f1f; }
+.stat_wrap { display: grid; grid-template-columns: repeat(2, 1fr); }
+.stat_box { padding: 1.5em 0; text-align: center; border-right: 1px solid #1f1f1f; border-bottom: 1px solid #1f1f1f; }
+.stat_box:nth-child(2), .stat_box:nth-child(4) { border-right: 0;}
+.stat_box:nth-child(3), .stat_box:nth-child(4) { border-bottom: 0; }
+.stat_box h3 { font-size: 2.2em; color: var(--sub); margin-bottom: .3em; }
+.stat_box p { font-size: 1.1em; color: #aaa; }
+
+/* section */
+
+.story_sec, .process_sec, .review_sec, .form_sec { padding: 10% 0; }
+
+/* story */
+
+.story_grid { display: flex; flex-direction: column; gap: 1.2em; }
+.story_box { background: #111; border-radius: 1.2em; overflow: hidden; border: 1.5px solid #3a3a3a; position: relative; }
+.story_box img { aspect-ratio: 1 / .35; width: 100%; }
+.story_txt { padding: 1.5em; border-top: 1px solid #2a2a2a; }
+.story_txt h3 { font-size: 1.5em; margin-bottom: .5em; line-height: 135%; }
+.story_txt p { color: #b7b7b7; font-size: 1.2em; margin-bottom: 1em; }
+.story_info { display: flex; flex-direction: column; align-items: flex-start; gap: .4em; }
+.story_info span { font-size: 1.3em; color: #8f8f8f; }
+.story_info strong { font-size: 2em; color: var(--sub); }
+
+/* process */
+
+.process_sec { background: #0d0d0d; overflow: hidden; }
+.process_wrap { display: flex; flex-direction: column; gap: 1.5em; }
+.process_box { background: linear-gradient(to right, #222, #171717); border-radius: 1em; padding: 2.5em 1.5em; 
+border: 1px solid #232323; }
+.process_box span { display: inline-block; margin-bottom: 1em; font-family: 'Pretendard-Bold';
+background: var(--main); padding: .1em 1em; font-size: 1.2em; border-radius: 5em; }
+.process_box h3 { font-size: 2.3em; margin-bottom: .3em; }
+.process_box p { color: #bdbdbd; font-size: 1.15em; line-height: 160%; }
+.process_box img { width: 22%; margin-bottom: 1em; box-shadow: 0 3px 15px #ff000020; border-radius: 50%; }
+
+/* review */
+.review_sec { padding-bottom: 0; }
+.review_box { background: #101010; border-radius: 1em; padding: 1.5em; border: 1px solid #1f1f1f; }
+.review_top { display: flex; align-items: flex-start; gap: 1em; margin-bottom: 1em; }
+.review_top img { width: 5em; height: 5em; border-radius: 50%; }
+.review_top div h4 { font-size: 1.4em; margin-bottom: .3em; }
+.review_top div p { font-size: 1em; color: #9c9c9c; }
+.review_box strong { display: block; font-size: 1.6em; margin-bottom: .6em; }
+.review_box p { color: #c2c2c2; font-size: 1.1em; line-height: 165%; }
+
+.review_sec .inner > h2 { text-align: center; margin-top: 2em; font-size: 2em; }
+
+.review_sec .swiper { overflow: hidden; height: 23em; position: relative; } 
+.review_sec .swiper-slide { height: auto !important; transform: scale(.8); transition: .3s; opacity: 0.1; }
+.review_sec .swiper-slide-prev { opacity: 0; }
+.review_sec .swiper-slide-next { transform: scale(.9) translateY(5%); opacity: .4; }
+.review_sec .swiper-slide-active { transform: scale(1); opacity: 1; }
+.review_sec .swiper, .swiper-wrapper { touch-action: auto !important; }
+.review_sec .swiper:after {  background: linear-gradient(to top, #000000, transparent);
+content: ""; position: absolute; bottom: 0; width: 100%; height: 4.5em; z-index: 100; }
+
+
+
+/* form */
+
+.form_sec { background: #080808; padding-bottom: 0; }
+.form_wrap { background: #121212; border-radius: 1.5em; padding: 3em 1.5em; border: 1px solid #242424; }
+.form_tit { text-align: center; margin-bottom: 2em; }
+.form_tit h2 { font-size: 3em; margin-bottom: .3em; }
+.form_tit p { font-size: 1.2em; color: #b9b9b9; }
+.form_wrap ul li { margin-bottom: 1.3em; }
+.form_wrap ul li p { font-size: 1.15em; margin-bottom: .5em; color: #fff; }
+.form_wrap input, .form_wrap select, .form_wrap textarea { width: 100%; background-color: #1a1a1a; border: 1px solid #2b2b2b;
+border-radius: .6em; padding: 1em; color: #fff; font-size: 1em; font-family: inherit; }
+
+.phone { display: flex; gap: .5em; }
+.phone select { width: 30%; }
+.phone input { width: 35%; }
+.radio_wrap { display: grid; grid-template-columns: repeat(2, 1fr); gap: .5em; }
+.radio_box:last-child { grid-column: 1 / -1; }
+.radio_box { width: 100%; }
+.radio_box label { display: block; }
+.radio_box input { display: none; }
+.radio_box span { display: block; background: #1c1c1c; border: 1px solid #2d2d2d; text-align: center;
+padding: 1em 0; border-radius: .6em; color: #b8b8b8; transition: .3s; font-size: 1.3em; }
+.radio_box input:checked + span { background: var(--sub); border-color: var(--main); color: #fff; }
+.form_policy { display: flex; align-items: center; gap: .5em; margin-top: .5em; }
+.form_policy input { width: 1em; height: 1em; }
+.form_policy label, .form_policy span { font-size: 1em; color: #a7a7a7; }
+.form_policy span { color: #999; cursor: pointer; }
+.submit_btn { display: block; width: 100%; margin-top: 1em; background: var(--main); color: #fff; text-align: center;
+padding: 1em 0; border-radius: .6em; font-size: 1.8em; font-family: 'Pretendard-Bold'; box-shadow: 0 10px 30px #b6000030; }
+
+.loading_wrap { text-align: center; margin-bottom: 1.5em; }
+.loading_wrap img { width: 14%; margin: 1em auto; }
+.loading_wrap p { font-size: 1.3em; }
+.loading_con { display: flex; justify-content: center; align-items: flex-end; gap: .5em; margin-bottom: 1em; }
+.loading_box { width: .7em; height: 1.5em; background: #333; animation: loadingFade 1s infinite ease-in-out; }
+
+/* 각 막대 애니메이션 딜레이 다르게 적용 */
+.loading_box:nth-child(1) { animation-delay: 0s; }
+.loading_box:nth-child(2) { animation-delay: 0.2s; }
+.loading_box:nth-child(3) { animation-delay: 0.4s; }
+.loading_box:nth-child(4) { animation-delay: 0.6s; }
+.loading_box:nth-child(5) { animation-delay: 0.7s; }
+.loading_box:nth-child(6) { animation-delay: .8s; }
+.loading_box:nth-child(7) { animation-delay: .9s; }
+
+@keyframes loadingFade {
+0%, 100% {
+opacity: 0.2; /* 옅음 */
+}
+50% {
+opacity: 1;   /* 진하게 */
+}
+}
+
+
+
+
+
+
+
+
+
+
+/* footer */
+.footer { padding: 3em 0; border-top: 1px solid #1b1b1b; background: #050505; margin-top: 10%; }
+.footer h3 { color: var(--main); font-size: 1.8em; margin-bottom: .3em; }
+.footer p { color: #8d8d8d; font-size: 1em; line-height: 180%; }
+
+/* pc only */
+
+/* media screen */
+
+@media screen and (max-width: 600px) {
+body { font-size: 15px; }
+
+
+}
+
+
+
+@media screen and (max-width: 480px) {
+body { font-size: 10px; }
+ 
+
+
+}
+
+
+
+        </style>
+    </head>
+
+    <body>
+
+        <section class="top_visual">
+            <div class="inner" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="100">
+
+                <div class="top_logo">
+                    <h1>법무법인 빚탕감</h1>
+                    <p>2026 채무탕감 프로젝트</p>
+                </div>
+
+                <div class="visual_txt">
+                    <span class="cate">LAWFIRM REAL STORY</span>
+
+                    <h2>빚의 끝에서,<br>다시 시작한 사람들</h2>
+
+                    <p>감당할 수 없는 채무,<br>끝이 보이지 않았던 시간.<br>개인회생으로 새로운 삶을 시작했습니다.</p>
+
+                    <div class="visual_btn_wrap">
+                        <a href="#form_sec">무료 상담 신청</a>
+                        <a href="#story_sec">사례 보기</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="stat_sec">
+            <div class="stat_wrap">
+
+                <div class="stat_box">
+                    <h3><span class="num">9,842</span>명</h3>
+                    <p>누적 상담</p>
+                </div>
+
+                <div class="stat_box">
+                    <h3><span class="num">7,214</span>건</h3>
+                    <p>개인회생 성공</p>
+                </div>
+
+                <div class="stat_box">
+                    <h3>최대 <span class="num">97</span>%</h3>
+                    <p>원금 감면</p>
+                </div>
+
+                <div class="stat_box">
+                    <h3>4.9 / 5</h3>
+                    <p>고객 만족도</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="story_sec" id="story_sec">
+            <div class="inner">
+
+                <div class="con_tit">
+                    <span class="mini">EPISODE</span>
+                    <h2>끝이 보이지 않았던<br>채무의 시간</h2>
+                    <p>반복되는 연체와 독촉,<br>혼자 감당하기 어려웠던 현실.</p>
+                </div>
+
+                <div class="story_grid">
+
+                    <div class="story_box">
+                        <img src="img/law_docu/story_box01.webp" alt="사례">
+
+                        <div class="story_txt">
+                            <h3>30대 직장인 사례</h3>
+                            <p>카드값과 대출 이자로 인해 매달 생활비조차 부족했던 상황.</p>
+                            <div class="story_info">
+                                <span>채무금액 8,000만원</span>
+                                <strong>원금 89% 감면</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="story_box">
+                        <img src="img/law_docu/story_box02.webp" alt="사례">
+
+                        <div class="story_txt">
+                            <h3>40대 자영업자 사례</h3>
+                            <p>코로나 이후 급격히 늘어난 채무로 폐업 위기까지 겪었던 상황.</p>
+                            <div class="story_info">
+                                <span>채무금액 1억 2천만원</span>
+                                <strong>월 변제금 91% 감소</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+
+        <section class="process_sec">
+            <div class="inner">
+
+                <div class="con_tit">
+                    <span class="mini">CHECK POINT</span>
+
+                    <h2>개인회생 신청 조건을<br>확인해보세요</h2>
+                    <p>아래 항목에 해당되지 않는 경우<br>개인회생 진행이 어려울 수 있습니다.</p>
+                </div>
+
+                <div class="process_wrap">
+
+                    <div class="process_box">
+                        <span>01</span>
+                        <img src="img/law_docu/check_icon01.png" alt="아이콘">
+                        <h3>재산보다 채무가 많은 경우</h3>
+                        <p>보유 재산보다 빚이 많다면 개인회생 진행 가능 대상에 해당될 수 있습니다.</p>
+                    </div>
+
+                    <div class="process_box">
+                        <span>02</span>
+                        <img src="img/law_docu/check_icon02.png" alt="아이콘">
+                        <h3>채무금액 2,000만원 이상</h3>
+                        <p>카드값·대출·사채 등 과도한 채무 부담이 있는 경우</p>
+                    </div>
+
+                    <div class="process_box">
+                        <span>03</span>
+                        <img src="img/law_docu/check_icon03.png" alt="아이콘">
+                        <h3>기존 면책 이후 5년 경과</h3>
+
+                        <p>이전 개인회생·파산 면책 이후 일정 기간이 지났다면 재진행 가능</p>
+                    </div>
+
+                    <div class="process_box">
+                        <span>04</span>
+                        <img src="img/law_docu/check_icon04.png" alt="아이콘">
+                        <h3>직종 관계없이 소득이 있는 경우</h3>
+                        <p>일정 수준의 소득이 있다면 신청 가능</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        
+        <section class="form_sec" id="form_sec">
+            <div class="inner">
+
+                <div class="form_wrap">
+
+                    <div class="form_tit">
+                        <h2>무료 상담 신청</h2>
+
+                        <div class="loading_wrap">
+                            <img src="img/law_docu/loading.png" alt="방패">
+                            <div class="loading_con">
+                                <div class="loading_box"></div>
+                                <div class="loading_box"></div>
+                                <div class="loading_box"></div>
+                                <div class="loading_box"></div>
+                                <div class="loading_box"></div>
+                                <div class="loading_box"></div>
+                                <div class="loading_box"></div>
+                            </div> <!--loading_con--->
+                            <p>개인정보는 암호화되어 안전하게 처리됩니다.</p>
+
+                        </div> <!--loading_wrap--->
+
+                    </div>
+
+                    <form method="post" action="apply.html" id="myModal1" name="page_form">
+
+                        <ul>
+
+                            <li><input type="text" name="name" minlength="2" maxlength="10" placeholder="이름 입력" required></li>
+
+                            <li>
+                                <div class="phone">
+                                    <select name="tel1"><option>010</option></select>
+                                    <input type="text" name="tel2" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                    <input type="text" name="tel3" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4" placeholder="연락처" required/>
+                                </div>
+                            </li>
+
+                            <li>
+                                <p>현재 채무 금액을 선택해주세요</p>
+
+                                <div class="radio_wrap">
+
+                                    <div class="radio_box">
+                                        <label>
+                                            <input type="radio" name="option1" value="2천~5천만 원" required>
+                                            <span>2천~5천만 원</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="radio_box">
+                                        <label>
+                                            <input type="radio" name="option1" value="5천~1억 원" required>
+                                            <span>5천~1억 원</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="radio_box">
+                                        <label>
+                                            <input type="radio" name="option1" value="1억 원 이상" required>
+                                            <span>1억 원 이상</span>
+                                        </label>
+                                    </div>
+
+
+                                </div>
+                            </li>
+
+
+                            <li class="form_policy">
+                                <input type="checkbox" id="policy" checked>
+                                <label for="policy">개인정보처리방침 동의</label>
+                                <span id="show-Box">[약관보기]</span>
+                            </li>
+
+                        </ul>
+
+                        <button class="submit_btn" type="submit">무료 상담 신청하기</button>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </section>
+
+
+
+        <section class="review_sec">
+            <div class="inner">
+
+                <div class="con_tit">
+                    <span class="mini">REVIEW</span>
+                    <h2>다시 일상을 되찾은<br>고객님의 실제 후기</h2>
+                </div>
+
+                <div class="swiper mySwiper review_slider">
+                    <div class="review_wrap swiper-wrapper">
+    
+                        <div class="review_box swiper-slide">
+    
+                            <div class="review_top">
+                                <img src="img/law_docu/review_per01.png" alt="후기">
+    
+                                <div>
+                                    <h4>30대 직장인 김OO님</h4>
+                                    <p>원금 92% 감면</p>
+                                </div>
+                            </div>
+                            <strong>“독촉 전화 없이 숨통이 트였습니다.”</strong>
+                            <p>처음엔 개인회생 자체가 두려웠지만, 상담 후 현실적으로 해결할 수 있다는 확신이 들었습니다.</p>
+                        </div>
+    
+                        <div class="review_box swiper-slide">
+                            <div class="review_top">
+                                <img src="img/law_docu/review_per02.png" alt="후기">
+    
+                                <div>
+                                    <h4>40대 주부 박OO님</h4>
+                                    <p>월 변제금 89% 감소</p>
+                                </div>
+                            </div>
+                            <strong>“지금은 다시 평범한 일상을 보내고 있습니다.”</strong>
+                            <p>혼자 끌어안고 있었다면 더 힘들었을 겁니다. 상담부터 접수까지 꼼꼼하게 도와주셨습니다.</p>
+                        </div>
+    
+    
+                        <div class="review_box swiper-slide">
+                            <div class="review_top">
+                                <img src="img/law_docu/review_per03.png" alt="후기">
+    
+                                <div>
+                                    <h4>50대 자영업자 이OO님</h4>
+                                    <p>채무 1억 1천만원 조정</p>
+                                </div>
+                            </div>
+                            <strong>“폐업까지 고민했는데 다시 버틸 수 있게 됐습니다.”</strong>
+                            <p>매달 대출 이자만 갚다가 한계가 왔었습니다. 상담 후 현실적인 방향을 찾을 수 있었습니다.</p>
+                        </div>
+    
+                        <div class="review_box swiper-slide">
+                            <div class="review_top">
+                                <img src="img/law_docu/review_per04.png" alt="후기">
+    
+                                <div>
+                                    <h4>30대 프리랜서 정OO님</h4>
+                                    <p>월 변제금 91% 감소</p>
+                                </div>
+                            </div>
+                            <strong>“계속 피하던 문제를 이제야 해결했습니다.”</strong>
+                            <p>혼자 해결하려고 버티다가 더 힘들어졌었습니다. 진행 과정도 생각보다 체계적으로 도와주셨습니다.</p>
+                        </div>
+    
+                    </div>
+                </div>
+
+
+                <h2>지금 개인회생 신청하시고,<br>채무에서 벗어나세요</h2>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="inner">
+                <h3>DEBT FREE</h3>
+                <p>상호명 : 법무법인 빚탕감</p>
+            </div>
+        </footer>
+
+
+
+
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+
+        <script>
+            AOS.init({ once: true });
+        </script>
+
+
+
+
+
+        <script>
+            // 팝업 창
+            const openPop = document.getElementById("show-Box");
+            openPop.addEventListener('click', () => {
+                const popup = window.open(
+                    'policy.html', // 조약 내용을 담은 실제 경로
+                    '개인정보이용동의',
+                    'width=800,height=600,scrollbars=yes'
+                );      
+
+                if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                    alert('팝업 차단이 감지되었습니다! 팝업 허용을 설정해주세요.');
+                }
+            });
+        </script>
+
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(function () {
+                const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                    const $el = $(entry.target);
+                    const target = Number($el.attr('data-target'));
+
+                    if (!target) return;
+
+                    setTimeout(() => {
+                        $el.prop('Counter', 0).stop().animate({
+                        Counter: target
+                        }, {
+                        duration: 1000,
+                        easing: 'swing',
+                        step: function (now) {
+                            $el.text(Math.ceil(now).toLocaleString());
+                        }
+                        });
+                    }, 1000); // ← 여기서 1초 딜레이 설정 // 
+                    }
+                });
+                }, { threshold: 0.5 });
+
+                // 초기 숫자값을 data-target 속성에 저장
+                $('.num').each((_, el) => {
+                const $el = $(el);
+                const target = Number($el.text().replace(/,/g, '').trim());
+                $el.attr('data-target', target);
+                observer.observe(el);
+                });
+            });
+        </script>
+
+
+
+        <!-- Swiper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+        <!-- Initialize Swiper -->
+        <script>
+            var swiper = new Swiper(".review_slider", {
+                direction: "vertical",
+                slidesPerView: 1.5,
+                spaceBetween: 0,
+                loop: true,
+                allowTouchMove: false,
+                centeredSlides: false,
+                autoplay: { delay: 3000, disableOnInteraction: false },
+            });
+        </script>
+
+
+
+
+
+
+
+    </body>
+</html>
